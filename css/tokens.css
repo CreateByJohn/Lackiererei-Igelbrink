@@ -48,6 +48,10 @@
   --accent-glow:rgba(232,98,46,.55);
   --accent-glow-fade:rgba(232,98,46,0);
 
+  /* Formular-Fehler */
+  --error:#b42318;
+  --error-soft:#fdecea;
+
   /* Entwurfs-Hinweis (gelb) */
   --note:#fff4d6;
   --note-fg:#5a4300;
@@ -72,6 +76,8 @@
   --logo-tile-bg:#e9edf3;                 /* Grundfläche unter dem unscharfen Logo */
   --glass-logo:rgba(255,255,255,.5);      /* Glasfläche auf den Partner-Kacheln */
   --glass-logo-line:rgba(255,255,255,.75);
+  --glass-text:rgba(255,255,255,.8);      /* weißere Glasfläche, wenn Fließtext darauf steht (ECOcert-Kachel) */
+  --backdrop:rgba(14,22,42,.62);          /* Hintergrund hinter dem Kontaktformular */
   --shine:rgba(255,255,255,.38);
   --overlay:rgba(14,22,42,.92);
   --overlay-fade:rgba(14,22,42,0);
@@ -140,6 +146,12 @@
   --section-gap-s:clamp(24px,4vw,48px);
   --zone-gap:clamp(28px,4.5vw,60px);   /* kompakter Abstand zwischen Abschnitten mit .sec-head */
   --divider-w:1160px;                  /* Breite der Trennlinie im Abschnitts-Kopf */
-  --hero-pull:84px;                    /* Hero rückt unter die schwebende Navigation */
-  --hero-top:140px;                    /* Innenabstand oben, damit der Hero-Text unter der Navigation beginnt */
+  --hdr:78px;                          /* Höhe .site-header samt oberem Rand; js/main.js misst den echten Wert (Startwert nur bis dahin) */
+  --hero-top-gap:clamp(32px,6vh,64px); /* Luft zwischen Navigation und Hero-Text, zusätzlich zu --hdr */
+
+  /* Leistungs-Karten, Bento, Kontaktformular */
+  --glass-tile-h:clamp(240px,19vw,262px);   /* feste Höhe der Glas-Kachel auf dem Kartenbild */
+  --seal-w:480px;                           /* maximale Breite des ECOcert-Schilds */
+  --logo-h:clamp(44px,6vw,76px);            /* einheitliche Logo-Höhe auf den Partner-Kacheln */
+  --dialog-w:680px;
 }
