@@ -83,9 +83,11 @@
 
   <section class="hero">
     <div class="hero__frame">
-      <!-- Platzhalter: Für das echte Foto nur src (und ggf. width/height) austauschen -->
-      <img class="hero__img" src="assets/img/hero-platzhalter.svg" width="2400" height="1350" fetchpriority="high"
-           alt="Klassischer Mercedes in der Lackierkabine von Lackiertechnik Igelbrink">
+      <picture>
+        <source type="image/webp" srcset="assets/img/hero-lackierpistole-800.webp 800w, assets/img/hero-lackierpistole-1400.webp 1400w, assets/img/hero-lackierpistole-2400.webp 2400w" sizes="100vw">
+        <img class="hero__img" src="assets/img/hero-lackierpistole-1600.jpg" width="2400" height="1600" fetchpriority="high"
+             alt="Lackierer mit Spritzpistole über frisch lackierten Karosserieteilen in der Lackierkabine">
+      </picture>
       <canvas class="hero__cover" aria-hidden="true"></canvas>
       <canvas class="hero__mist" aria-hidden="true"></canvas>
       <img class="hero__gun" src="assets/img/spraygun.svg" width="800" height="620" decoding="async" alt="" aria-hidden="true">
