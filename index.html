@@ -63,14 +63,16 @@
         <ul class="submenu">
           <li><a href="#">Über uns</a></li>
           <li><a href="#">Qualität</a></li>
-          <li><a href="#zertifikat">Partner</a></li>
+          <li><a href="#partner">Partner</a></li>
         </ul>
       </li>
       <li><a href="#">Karriere</a></li>
       <li><a href="#kontakt">Kontakt</a></li>
+      <!-- Nur im mobilen Menü sichtbar, wenn der Button in der Pille ausgeblendet ist -->
+      <li class="menu__cta"><button class="btn btn--small" type="button" data-open-contact aria-haspopup="dialog" aria-controls="kontaktformular">Online-Termin</button></li>
     </ul>
     <div class="nav-actions">
-      <a class="btn btn--small" href="#termin">Online-Termin</a>
+      <button class="btn btn--small" type="button" data-open-contact aria-haspopup="dialog" aria-controls="kontaktformular">Online-Termin</button>
       <button class="burger" id="burger" type="button" aria-expanded="false" aria-controls="menu">Menü</button>
     </div>
   </nav>
@@ -81,16 +83,14 @@
 
   <section class="hero">
     <div class="hero__frame">
-      <picture class="hero__img">
-        <source type="image/webp" srcset="assets/img/igelbrink-hero-1200.webp 1200w, assets/img/igelbrink-hero-2400.webp 2400w" sizes="100vw">
-        <img src="Igelbrink-Hero-ohne-Logo-2400.jpg" width="2400" height="1138" fetchpriority="high"
-             alt="Klassischer Mercedes in der Lackierkabine von Lackiertechnik Igelbrink">
-      </picture>
+      <!-- Platzhalter: Für das echte Foto nur src (und ggf. width/height) austauschen -->
+      <img class="hero__img" src="assets/img/hero-platzhalter.svg" width="2400" height="1350" fetchpriority="high"
+           alt="Klassischer Mercedes in der Lackierkabine von Lackiertechnik Igelbrink">
       <div class="hero__body">
         <div class="hero__text">
           <h1>Herzlich willkommen bei Lackiertechnik Igelbrink</h1>
           <p class="hero__lead">Lackiertechnik Igelbrink – Ihre Fachwerkstatt für Lackierung, Karosserie- und Unfallinstandsetzung in Dülmen.</p>
-          <a class="btn" href="#termin">Online-Termin</a>
+          <button class="btn" type="button" data-open-contact aria-haspopup="dialog" aria-controls="kontaktformular">Online-Termin</button>
         </div>
         <div class="chip"><strong id="chip-classic">Classic Cars Spezialist</strong><a class="more more--glass" href="#" aria-describedby="chip-classic">Mehr erfahren</a></div>
       </div>
@@ -264,18 +264,36 @@
       <p class="eyebrow">Qualität</p>
       <h2 id="zertifikat-title">Zertifiziert und gut vernetzt</h2>
     </div>
-    <div class="bento">
-      <div class="bt bt--eco">
+    <!-- ECOcert-Kachel im Glas-Look über die volle Breite: Schild unscharf als Hintergrund, darüber Glasfläche mit scharfem Schild und Text -->
+    <div class="bt bt--glass bt--eco">
+      <picture class="bt__blur" aria-hidden="true">
+        <source type="image/webp" srcset="assets/img/ecocert100-werkstattschild-400.webp">
+        <img src="assets/img/ecocert100-werkstattschild-400.jpg" width="400" height="300" loading="lazy" decoding="async" alt="">
+      </picture>
+      <div class="glass-in">
         <picture>
-          <source type="image/webp" srcset="assets/img/ecocert100-werkstattschild-400.webp">
-          <img class="bt__seal" src="assets/img/ecocert100-werkstattschild-400.jpg" width="400" height="300" loading="lazy" decoding="async" alt="ECOcert100 Werkstattschild">
+          <source type="image/webp" srcset="assets/img/ecocert100-werkstattschild-400.webp 400w, assets/img/ecocert100-werkstattschild-960.webp 960w" sizes="(max-width: 560px) calc(100vw - 80px), 480px">
+          <img class="bt__seal" src="assets/img/ecocert100-werkstattschild-960.jpg" srcset="assets/img/ecocert100-werkstattschild-400.jpg 400w, assets/img/ecocert100-werkstattschild-960.jpg 960w" sizes="(max-width: 560px) calc(100vw - 80px), 480px"
+               width="960" height="720" loading="lazy" decoding="async" alt="ECOcert100 Werkstattschild">
         </picture>
-        <h3 class="bt__title" id="eco-title">Wir sind zertifizierter ECOcert100 Betrieb:</h3>
-        <p>Mit ECOcert100 wird das Ziel verfolgt, die Qualitäts- und Nachhaltigkeitsstandards von Lackierbetrieben zu ermitteln und zu bewerten. Mit dem ECOcert100-Zertifikat können wir uns gegenüber unseren Kunden, Versicherungen oder Automobilherstellern als umweltfreundlicher und nachhaltiger Partner positionieren.</p>
-        <a class="more" href="#" aria-describedby="eco-title">Mehr erfahren</a>
+        <div class="bt__text">
+          <h3 class="bt__title" id="eco-title">Wir sind zertifizierter ECOcert100 Betrieb:</h3>
+          <p>Mit ECOcert100 wird das Ziel verfolgt, die Qualitäts- und Nachhaltigkeitsstandards von Lackierbetrieben zu ermitteln und zu bewerten. Mit dem ECOcert100-Zertifikat können wir uns gegenüber unseren Kunden, Versicherungen oder Automobilherstellern als umweltfreundlicher und nachhaltiger Partner positionieren.</p>
+          <a class="more" href="#" aria-describedby="eco-title">Mehr erfahren</a>
+        </div>
       </div>
-      <h3 class="bento__label">Unsere Partner...</h3>
-      <div class="bt bt--logo bt--gla">
+    </div>
+  </section>
+
+  <section class="zone" id="partner" aria-labelledby="partner-title">
+    <!-- SEC-HEAD: Symbol | Augenbraue | Überschrift -->
+    <div class="sec-head">
+      <div class="sec-head__divider" aria-hidden="true"><span class="sec-head__ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="5" r="2.5"/><circle cx="5" cy="18.5" r="2.5"/><circle cx="19" cy="18.5" r="2.5"/><path d="M10.8 7.2 6.2 16.3"/><path d="M13.2 7.2l4.6 9.1"/><path d="M7.5 18.5h9"/></svg></span></div>
+      <p class="eyebrow">Partner</p>
+      <h2 id="partner-title">Unsere Partner...</h2>
+    </div>
+    <div class="bento">
+      <div class="bt bt--glass bt--logo bt--gla">
         <picture class="bt__blur" aria-hidden="true">
           <source type="image/webp" srcset="assets/img/partner-glasurit.webp">
           <img src="assets/img/partner-glasurit.png" width="200" height="200" loading="lazy" decoding="async" alt="">
@@ -287,7 +305,7 @@
           </picture>
         </span>
       </div>
-      <div class="bt bt--logo bt--hbc">
+      <div class="bt bt--glass bt--logo bt--hbc">
         <picture class="bt__blur" aria-hidden="true">
           <source type="image/webp" srcset="assets/img/partner-hbc-system.webp">
           <img src="assets/img/partner-hbc-system.png" width="600" height="230" loading="lazy" decoding="async" alt="">
@@ -299,7 +317,7 @@
           </picture>
         </span>
       </div>
-      <div class="bt bt--logo bt--tmx">
+      <div class="bt bt--glass bt--logo bt--tmx">
         <picture class="bt__blur" aria-hidden="true">
           <source type="image/webp" srcset="assets/img/partner-timemax.webp">
           <img src="assets/img/partner-timemax.png" width="600" height="200" loading="lazy" decoding="async" alt="">
@@ -311,7 +329,7 @@
           </picture>
         </span>
       </div>
-      <div class="bt bt--logo bt--dek">
+      <div class="bt bt--glass bt--logo bt--dek">
         <picture class="bt__blur" aria-hidden="true">
           <source type="image/webp" srcset="assets/img/dekra-siegel.webp">
           <img src="assets/img/dekra-siegel.png" width="300" height="300" loading="lazy" decoding="async" alt="">
@@ -368,7 +386,7 @@
         <p><span aria-hidden="true">👉</span> <b>Lackiertechnik Igelbrink – Ihre Lackiererei und Unfallwerkstatt in Dülmen.</b></p>
         <p>Kontaktieren Sie uns jetzt – wir kümmern uns um Ihren Schaden schnell, zuverlässig und unkompliziert.</p>
       </div>
-      <a class="btn" href="#">Online-Termin</a>
+      <button class="btn" type="button" data-open-contact aria-haspopup="dialog" aria-controls="kontaktformular">Online-Termin</button>
     </div>
   </section>
 </main>
@@ -418,6 +436,67 @@
   </div>
 </footer>
 <!-- /FOOTER -->
+
+<!-- KONTAKTFORMULAR: öffnet über alle Elemente mit data-open-contact (siehe js/main.js) -->
+<dialog class="contact" id="kontaktformular" aria-labelledby="kontakt-title">
+  <div class="contact__inner">
+    <button class="contact__close" type="button" data-close-contact aria-label="Formular schließen"></button>
+    <p class="eyebrow">Anfrage</p>
+    <h2 class="contact__title" id="kontakt-title">Anfrage stellen</h2>
+    <p class="contact__lead">Schildern Sie uns kurz Ihr Anliegen. Wir melden uns bei Ihnen.</p>
+    <p class="contact__hint">Pflichtangaben: Name, Anliegen und Telefon oder E-Mail.</p>
+
+    <form class="form" id="kontakt-form" action="#" method="post">
+      <!-- TODO: Formular-Versand anbinden (serverseitig, mit Spam-Schutz) -->
+      <div class="field field--full">
+        <label for="kf-name">Name</label>
+        <input id="kf-name" name="name" type="text" autocomplete="name" required>
+      </div>
+      <div class="field">
+        <label for="kf-tel">Telefon</label>
+        <input id="kf-tel" name="telefon" type="tel" inputmode="tel" autocomplete="tel" aria-describedby="kf-kanal-hint kf-kanal-error">
+      </div>
+      <div class="field">
+        <label for="kf-mail">E-Mail</label>
+        <input id="kf-mail" name="email" type="email" autocomplete="email" aria-describedby="kf-kanal-hint kf-kanal-error">
+      </div>
+      <p class="field--full field__hint" id="kf-kanal-hint">Telefon oder E-Mail – eines von beiden reicht.</p>
+      <p class="field--full field__error" id="kf-kanal-error" hidden>Bitte geben Sie eine Telefonnummer oder eine E-Mail-Adresse an.</p>
+      <div class="field">
+        <label for="kf-fahrzeug">Fahrzeug (Marke und Modell)</label>
+        <input id="kf-fahrzeug" name="fahrzeug" type="text" autocomplete="off">
+      </div>
+      <div class="field">
+        <label for="kf-anliegen">Anliegen</label>
+        <span class="field__select">
+          <select id="kf-anliegen" name="anliegen" autocomplete="off" required>
+            <option value="">Bitte wählen</option>
+            <option>PKW- Unfallinstandsetzung</option>
+            <option>Wohnwagen- und Wohnmobil Instandsetzung</option>
+            <option>Oldtimer- und Youngtimer- Restauration</option>
+            <option>Unterbodenschutz und Hohlraumkonservierung</option>
+            <option>Sonstiges</option>
+          </select>
+        </span>
+      </div>
+      <div class="field">
+        <label for="kf-termin">Wunschtermin (freiwillig)</label>
+        <input id="kf-termin" name="wunschtermin" type="date" autocomplete="off">
+      </div>
+      <div class="field field--full">
+        <label for="kf-nachricht">Nachricht</label>
+        <textarea id="kf-nachricht" name="nachricht" rows="5" autocomplete="off"></textarea>
+      </div>
+      <div class="field field--full field--check">
+        <input id="kf-datenschutz" name="datenschutz" type="checkbox" required>
+        <label for="kf-datenschutz">Ich bin einverstanden, dass meine Angaben zur Bearbeitung meiner Anfrage gespeichert und verwendet werden. Mehr dazu in der <a href="#">Datenschutzerklärung</a>.</label>
+      </div>
+      <div class="field--full form__actions">
+        <button class="btn" type="submit">Anfrage senden</button>
+      </div>
+    </form>
+  </div>
+</dialog>
 
 <script src="js/main.js" defer></script>
 </body>
