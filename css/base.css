@@ -1,0 +1,34 @@
+/* Reset, Typografie, Layout-Grundlagen */
+
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--f-body);font-size:17px;line-height:1.6;padding-inline:var(--gutter);overflow-wrap:break-word;overflow-x:clip}
+img{display:block;max-width:100%;height:auto}
+
+h1,h2,h3,h4{font-family:var(--f-display);font-weight:700;line-height:1.08;margin:0;text-wrap:balance;letter-spacing:.005em}
+h1{font-size:clamp(2.5rem,6vw,4.6rem)}
+h2{font-size:clamp(1.9rem,3.8vw,2.8rem)}
+h3{font-size:1.5rem}
+p{margin:0}
+a{color:inherit}
+
+.wrap{max-width:var(--wrap);margin-inline:auto}
+section{padding-block:var(--section-gap)}
+/* Abschnitt mit Kopf-Baustein .sec-head: bewusst kompakter Abstand */
+.zone{position:relative;padding-block:var(--zone-gap)}
+
+/* Seiteninhalt liegt über dem Footer, damit dieser beim Scrollen freigelegt werden kann.
+   Der Wrapper reicht bis an den Fensterrand, damit der Footer nicht in den Seitenrändern durchscheint. */
+.page{position:relative;z-index:1;background:var(--bg);margin-inline:calc(var(--gutter) * -1);padding-inline:var(--gutter);padding-bottom:var(--section-gap)}
+
+/* Abstands-Helfer */
+.pt-0{padding-top:0}
+.pt-s{padding-top:var(--section-gap-s)}
+.pb-s{padding-bottom:var(--section-gap-s)}
+
+/* Fokus und Skip-Link */
+:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
+.skip{position:absolute;left:-999px;top:8px;background:var(--surface);color:var(--fg);padding:8px 12px;border-radius:var(--radius-sm);box-shadow:var(--sh-2);z-index:30}
+.skip:focus{left:var(--gutter)}
+
+.visually-hidden{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}

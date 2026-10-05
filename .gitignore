@@ -1,0 +1,15 @@
+.DS_Store
+screenshots/
+assets:image/
+*.md
+components.html
+entwurf-v2-referenz.html
+entwurf-v3-referenz.html
+igelbrink-startseite-entwurf.html
+Igelbrink-Footer.jpeg
+Igelbrink-Hero.jpg
+Igelbrink-Hero-ohne-Logo.jpg
+assets/img/igelbrink-hero-480.webp
+assets/img/igelbrink-hero-780.webp
+assets/img/betrieb-aussenansicht-*.jpg
+assets/img/classic-cars-ferrari-*.jpg

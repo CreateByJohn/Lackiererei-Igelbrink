@@ -1,0 +1,283 @@
+/* Komponenten: Header/Navigation, Buttons, Hero mit Vollbild, Leistungsband, Abschnitts-Kopf,
+   Fließtext, Hinweiskasten, Klappkarten, Bento-Raster, Kundenstimmen, Termin-Band, Footer.
+   Hover-, Übergangs- und Scroll-Effekte stehen in effects.css. */
+
+/* ---------- Header und Navigation ---------- */
+.site-header{position:sticky;top:calc(env(safe-area-inset-top,0px) + 10px);z-index:20;max-width:var(--wrap);margin:12px auto 0}
+.site-nav{position:relative;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:8px 10px 8px 20px;
+  background:var(--nav-glass);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);border:1px solid var(--line-nav);border-radius:var(--radius-pill);box-shadow:var(--sh-2)}
+.brand{display:block;flex:none}
+.brand img{height:44px;width:auto}
+
+.menu{display:flex;gap:2px;list-style:none;margin:0;padding:0;font-weight:500;font-size:.88rem;text-transform:uppercase;letter-spacing:.02em}
+.menu>li{position:relative}
+.menu a{display:block;text-decoration:none;padding:10px;border-radius:var(--radius-pill);white-space:nowrap}
+.submenu{display:none;position:absolute;left:0;top:calc(100% + 6px);min-width:280px;list-style:none;margin:0;padding:8px;
+  background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-row);box-shadow:var(--sh-3);text-transform:none;font-size:.97rem;letter-spacing:0}
+.submenu::before{content:"";position:absolute;left:0;right:0;top:-8px;height:8px}  /* Brücke, damit das Untermenü beim Hinüberfahren offen bleibt */
+.submenu a{white-space:normal;border-radius:var(--radius-sm)}
+.menu li:hover>.submenu,.menu li:focus-within>.submenu{display:block}
+
+.nav-actions{display:flex;gap:10px;align-items:center}
+.burger{display:none;font:600 .95rem var(--f-body);background:transparent;border:2px solid var(--fg);color:var(--fg);border-radius:var(--radius-pill);padding:9px 16px;cursor:pointer}
+
+/* ---------- Buttons ---------- */
+.btn{position:relative;overflow:hidden;isolation:isolate;display:inline-flex;align-items:center;justify-content:center;gap:12px;
+  font:600 1.02rem/1 var(--f-body);letter-spacing:.01em;text-decoration:none;white-space:nowrap;padding:17px 30px;border-radius:var(--radius-pill);border:0;
+  background:var(--grad-accent);color:var(--on-accent);box-shadow:var(--sh-btn);cursor:pointer}
+.btn::before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(105deg,transparent 30%,var(--shine) 50%,transparent 70%);transform:translateX(-120%)}
+.btn::after{content:"";width:.6em;height:.6em;border-top:2.5px solid currentColor;border-right:2.5px solid currentColor;transform:rotate(45deg) translate(-2px,2px);margin-left:-2px}
+.btn--small{padding:13px 22px;font-size:.96rem}
+
+/* Textlink mit Pfeil */
+.more{align-self:flex-start;display:inline-flex;align-items:center;gap:10px;font-weight:600;text-decoration:none;color:var(--accent-strong);
+  padding:11px 20px;border-radius:var(--radius-pill);background:var(--accent-soft)}
+.more::after{content:"";width:.5em;height:.5em;border-top:2.5px solid currentColor;border-right:2.5px solid currentColor;transform:rotate(45deg)}
+/* Variante auf Fotos und Glas */
+.more--glass{color:var(--on-image);background:linear-gradient(var(--glass),var(--glass)),var(--glass-tint);box-shadow:inset 0 0 0 1px var(--glass-line)}
+
+/* ---------- Hero ----------
+   Vollflächig von Rand zu Rand, ohne Radius. Rückt nach oben unter die schwebende Navigation.
+   body hat overflow-x:clip, damit 100vw (inkl. Scrollbalken) kein horizontales Scrollen auslöst. */
+.hero{padding:0;margin-top:calc(var(--hero-pull) * -1)}
+.hero__lead{font-size:clamp(1.05rem,1.6vw,1.25rem);margin:20px 0 30px;max-width:36em}
+
+.hero__frame{position:relative;overflow:hidden;display:flex;align-items:flex-end;width:100vw;margin-left:calc(50% - 50vw);
+  min-height:clamp(580px,92vh,900px);background:var(--navy)}
+.hero__img,.hero__img img{position:absolute;inset:0;width:100%;height:100%}
+.hero__img img{object-fit:cover;object-position:50% 58%}
+.hero__frame::after{content:"";position:absolute;inset:0;background:var(--grad-hero)}
+.hero__body{position:relative;z-index:1;width:100%;max-width:var(--wrap);margin-inline:auto;padding:var(--hero-top) var(--gutter) clamp(40px,7vw,96px);
+  display:flex;flex-wrap:wrap;gap:28px;align-items:flex-end;justify-content:space-between}
+.hero__text{max-width:640px;min-width:0;color:var(--on-image)}
+.hero__text .hero__lead{color:var(--on-image-muted)}
+
+/* Glas-Pille auf Fotos */
+.chip{display:flex;flex-wrap:wrap;align-items:center;gap:12px 16px;padding:14px 14px 14px 22px;border-radius:var(--radius-pill);color:var(--on-image);
+  background:var(--glass-chip);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);box-shadow:inset 0 0 0 1px var(--glass-line-chip)}
+.chip strong{font-family:var(--f-display);font-size:1.35rem;font-weight:700;letter-spacing:.01em}
+
+/* ---------- Leistungsband (Hintergrundbild, Punkte untereinander) ---------- */
+.band{position:relative;overflow:hidden;isolation:isolate;display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.3fr);gap:clamp(24px,5vw,72px);align-items:center;
+  padding:clamp(28px,5vw,72px);border-radius:var(--radius-lg);color:var(--on-image);box-shadow:var(--sh-3);background:var(--navy)}
+.band__img,.band__img img{position:absolute;inset:0;width:100%;height:100%;z-index:-2}
+.band__img img{object-fit:cover;object-position:60% 40%}
+.band::before{content:"";position:absolute;inset:0;z-index:-1;background:var(--grad-band)}
+.band h2{font-size:clamp(2rem,4.2vw,3.2rem);text-transform:uppercase;letter-spacing:.02em}
+.band__rule{width:64px;height:4px;margin-top:22px;border-radius:var(--radius-xs);background:var(--grad-accent-bar)}
+
+.stack{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.stack li{position:relative;padding:15px 20px 15px 48px;border-radius:var(--radius-row);font-weight:500;font-size:1.05rem;
+  background:var(--glass-row);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);box-shadow:inset 0 0 0 1px var(--glass-line-row)}
+.stack li::before{content:"–";position:absolute;left:20px;top:50%;translate:0 -50%;color:var(--accent-2);font-weight:700}
+
+/* ---------- Abschnitts-Kopf .sec-head ----------
+   Wiederverwendbar auf allen Seiten. Parameter: Symbol (Inline-SVG in .sec-head__ico), Augenbraue (.eyebrow), Überschrift (h2).
+   Feine Trennlinie bis --divider-w, blendet zu den Rändern aus; in der Mitte ein runder weißer Knopf mit Symbol. */
+.sec-head{display:grid;justify-items:center;gap:10px;margin-bottom:clamp(24px,3.2vw,40px);text-align:center}
+.sec-head__divider{display:flex;align-items:center;gap:22px;width:min(100%,var(--divider-w));margin-bottom:10px;color:var(--accent)}
+.sec-head__divider::before,.sec-head__divider::after{content:"";flex:1;height:1px}
+.sec-head__divider::before{background:var(--grad-rule-in)}
+.sec-head__divider::after{background:var(--grad-rule-out)}
+.sec-head__ico{display:grid;place-items:center;flex:none;width:60px;height:60px;border-radius:50%;background:var(--surface);box-shadow:var(--sh-ico)}
+.sec-head__ico svg{width:28px;height:28px}
+.sec-head h2{font-size:clamp(2.1rem,4.4vw,3.4rem)}
+
+/* Augenbraue: kleine orange Zeile mit Strichen links und rechts */
+.eyebrow{display:inline-flex;align-items:center;gap:12px;margin:0;font-weight:600;font-size:.85rem;letter-spacing:.16em;text-transform:uppercase;color:var(--accent-strong)}
+.eyebrow::before,.eyebrow::after{content:"";width:28px;height:2px;border-radius:var(--radius-2xs);background:currentColor;opacity:.6}
+
+/* ---------- Fließtext mit Hinweiskasten ---------- */
+.split{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:clamp(24px,5vw,64px);align-items:start}
+.prose{position:relative;padding-left:clamp(0px,2.4vw,28px)}
+.prose::before{content:"";position:absolute;left:0;top:6px;bottom:6px;width:4px;border-radius:var(--radius-xs);background:linear-gradient(to bottom,var(--accent),var(--accent-fade));display:none}
+.prose p{font-size:1.1rem;line-height:1.75;color:var(--fg-soft);max-width:62ch}
+.prose p+p{margin-top:20px}
+.prose p:first-of-type{font-family:var(--f-display);font-weight:500;font-size:clamp(1.5rem,2.6vw,2rem);line-height:1.22;color:var(--fg)}
+
+/* Hinweiskasten */
+.callout{position:relative;overflow:hidden;background:var(--grad-navy);color:var(--on-navy);border-radius:var(--radius);padding:clamp(24px,3vw,38px);box-shadow:var(--sh-3)}
+.callout::after{content:"";position:absolute;right:-60px;bottom:-60px;width:180px;height:180px;border-radius:50%;background:radial-gradient(circle,var(--accent-glow),var(--accent-glow-fade) 70%);pointer-events:none}
+.callout h3{font-size:1.8rem;margin-bottom:14px}
+.callout p{color:var(--on-navy-muted)}
+.callout p+p{margin-top:14px}
+
+/* ---------- Leistungs-Karten (Klappkarte) ----------
+   Zeilen: Bild | Beschreibung (0fr geschlossen, 1fr offen) | Liste.
+   JS setzt .is-open, aria-expanded und aria-label am Button. */
+.cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px;align-items:start}
+.svc{display:grid;grid-template-rows:auto 0fr auto;gap:0;min-width:0}
+.svc.is-open{grid-template-rows:auto 1fr auto;gap:12px}
+
+.svc__media{position:relative;overflow:hidden;width:100%;aspect-ratio:4/5;max-height:560px;cursor:pointer;
+  border-radius:var(--radius) var(--radius) 0 0;background:var(--grad-ph);box-shadow:var(--sh-2)}
+.svc.is-open .svc__media{border-radius:var(--radius)}
+.svc__img,.svc__img img{position:absolute;inset:0;width:100%;height:100%}
+.svc__img img{object-fit:cover}
+.svc__media::after{content:"";position:absolute;inset:0;background:var(--grad-svc);pointer-events:none}
+
+/* Glas-Kachel auf dem Bild */
+.glass-tile{position:absolute;left:14px;right:14px;bottom:14px;z-index:1;display:flex;flex-direction:column;align-items:center;gap:10px;
+  padding:40px 22px 22px;border-radius:var(--radius-tile);text-align:center;color:var(--on-image);
+  background:linear-gradient(var(--glass-chip),var(--glass-chip)),var(--glass-tint);-webkit-backdrop-filter:blur(14px) saturate(1.2);backdrop-filter:blur(14px) saturate(1.2);box-shadow:var(--sh-glass)}
+.glass-tile__ico{position:absolute;top:-24px;left:50%;translate:-50% 0;display:grid;place-items:center;width:48px;height:48px;
+  border-radius:var(--radius-row);background:var(--surface);color:var(--accent);box-shadow:var(--sh-2)}
+.glass-tile__ico svg{width:24px;height:24px}
+.glass-tile h3{font-size:1.55rem}
+.glass-tile p{color:var(--on-glass-muted);font-size:.98rem}
+.glass-tile .more{align-self:center;margin-top:4px}
+
+/* Runder "+"-Button, dreht sich beim Öffnen zum "×" */
+.svc__toggle{position:absolute;top:14px;right:14px;z-index:2;display:grid;place-items:center;width:46px;height:46px;border:0;border-radius:50%;
+  background:var(--toggle-bg);box-shadow:var(--sh-2);cursor:pointer}
+.svc__toggle::before,.svc__toggle::after{content:"";position:absolute;width:16px;height:2.5px;border-radius:var(--radius-2xs);background:var(--accent)}
+.svc__toggle::after{rotate:90deg}
+.svc.is-open .svc__toggle{transform:rotate(135deg)}
+
+/* Beschreibung: geschlossen unsichtbar, auch für Screenreader */
+.svc__more{min-height:0;overflow:hidden;visibility:hidden}
+.svc.is-open .svc__more{visibility:visible}
+.svc__more-pad{display:grid;gap:14px;padding:22px 24px;border-radius:var(--radius);background:var(--accent-soft);color:var(--fg-soft);opacity:0;translate:0 -14px}
+.svc.is-open .svc__more-pad{opacity:1;translate:0 0}
+.svc__more-pad p{font-size:1rem;line-height:1.65}
+
+.svc__list{display:grid;gap:14px;padding:22px 22px 24px;background:var(--surface);border-radius:0 0 var(--radius) var(--radius);box-shadow:var(--sh-2)}
+.svc.is-open .svc__list{border-radius:var(--radius)}
+.svc__list h4{font:600 .9rem var(--f-body);text-transform:uppercase;letter-spacing:.06em;color:var(--fg)}
+
+/* Häkchen-Liste */
+.checks{list-style:none;margin:0;padding:0;display:grid;gap:8px;font-size:.96rem}
+.checks li{position:relative;min-width:0;padding:3px 0 3px 34px}
+.checks li::before{content:"";position:absolute;left:0;top:4px;width:22px;height:22px;border-radius:50%;background:var(--accent-soft)}
+.checks li::after{content:"";position:absolute;left:8px;top:8px;width:5px;height:9px;border-right:2.5px solid var(--accent);border-bottom:2.5px solid var(--accent);transform:rotate(40deg)}
+
+/* ---------- Bento-Raster (Zertifikat, Partner) ---------- */
+.bento{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px;
+  grid-template-areas:"eco eco lab lab" "eco eco gla dek" "eco eco hbc dek" "eco eco tmx dek"}
+.bt{position:relative;overflow:hidden;min-width:0;background:var(--surface);border-radius:var(--radius);box-shadow:var(--sh-2)}
+
+.bt--eco{grid-area:eco;display:flex;flex-direction:column;gap:18px;padding:clamp(24px,3vw,40px)}
+.bt__seal{width:min(100%,360px);border-radius:var(--radius-row);box-shadow:var(--sh-3);rotate:-2deg}
+.bt--eco .bt__title{font-size:clamp(1.9rem,3.2vw,2.6rem)}
+.bt--eco p{color:var(--muted)}
+.bt--eco .more{margin-top:auto}
+
+.bento__label{grid-area:lab;align-self:end;padding:0 4px;font-size:1.25rem;text-transform:uppercase;letter-spacing:.08em}
+
+/* Partner-Kachel im Glas-Look:
+   .bt__blur  = dasselbe Logo stark unscharf und vergrößert als farbiger Hintergrund,
+   .glass-in  = halbtransparente weiße Glasfläche mit dem scharfen Logo.
+   multiply blendet die weißen Logo-Hintergründe in die Glasfläche aus. */
+.bt--logo{display:grid;place-items:center;min-height:132px;padding:22px;background:var(--logo-tile-bg);isolation:isolate}
+.bt__blur,.bt__blur img{position:absolute;inset:-25%;width:150%;height:150%;max-width:none}
+.bt__blur{z-index:-1;pointer-events:none}
+.bt__blur img{inset:0;width:100%;height:100%;object-fit:cover;filter:blur(28px) saturate(1.6);opacity:.85}
+.glass-in{display:grid;place-items:center;width:100%;height:100%;min-height:88px;padding:16px 20px;border-radius:var(--radius-tile);
+  background:var(--glass-logo);-webkit-backdrop-filter:blur(12px) saturate(1.2);backdrop-filter:blur(12px) saturate(1.2);box-shadow:var(--sh-glass-logo)}
+.glass-in img{max-height:64px;max-width:100%;width:auto;height:auto;object-fit:contain;mix-blend-mode:multiply}
+.bt--gla{grid-area:gla}
+.bt--hbc{grid-area:hbc}
+.bt--tmx{grid-area:tmx}
+.bt--dek{grid-area:dek}
+.bt--dek .glass-in img{max-height:240px}
+
+/* ---------- Kundenstimmen (Google Bewertung) ----------
+   Dunkle Übersichtskachel + Bewertungskarten. Solange keine echten Daten angebunden sind: Skelett-Platzhalter. */
+.reviews{display:grid;grid-template-columns:minmax(0,1fr) repeat(3,minmax(0,1.2fr));gap:16px;align-items:stretch}
+.rv{display:flex;flex-direction:column;gap:14px;min-width:0;padding:24px;background:var(--surface);border-radius:var(--radius);box-shadow:var(--sh-2)}
+.rv--sum{justify-content:center;background:var(--grad-review);color:var(--on-navy)}
+.rv--sum strong{font-family:var(--f-display);font-size:1.7rem;font-weight:700}
+.rv--sum .stars svg{width:28px;height:28px;color:var(--star-on-dark)}
+.rv .stars svg{width:22px;height:22px}
+.rv__who{display:flex;align-items:center;gap:12px}
+.rv__avatar{flex:none;width:42px;height:42px;border-radius:50%;background:var(--avatar)}
+.sk-lines{display:grid;gap:9px}
+.rv__who .sk-lines{flex:1}
+.sk{display:block;height:10px;border-radius:6px;background:var(--grad-sk)}
+.sk--60{width:60%}
+.sk--35{width:35%}
+.sk--80{width:80%}
+.sk--55{width:55%}
+
+.stars{display:flex;gap:4px}
+.stars svg{width:28px;height:28px;color:var(--star-empty)}
+
+/* Gelber Platzhalter-Hinweis (bleibt sichtbar, bis echte Inhalte vorliegen) */
+.draft-note{max-width:100%;padding:8px 12px;border-radius:var(--radius-sm);background:var(--note);color:var(--note-fg);font-size:.85rem;font-weight:600}
+.draft-note--small{align-self:flex-start;margin-top:auto;padding:6px 10px;font-size:.78rem}
+
+/* ---------- Termin-Band ---------- */
+.cta{position:relative;overflow:hidden;display:grid;grid-template-columns:minmax(0,1.3fr) auto;gap:20px 40px;align-items:center;
+  background:var(--grad-cta);color:var(--on-navy);border-radius:var(--radius-lg);padding:clamp(28px,5vw,56px);box-shadow:var(--sh-3)}
+.cta h2{margin-bottom:14px}
+.cta p{color:var(--on-navy-muted)}
+.cta p+p{margin-top:8px}
+.cta .btn{font-size:1.1rem;padding:18px 32px}
+
+/* ---------- Footer (Bild rechts, blendet nach links aus) ---------- */
+.site-footer{position:relative;overflow:hidden;margin-inline:calc(var(--gutter) * -1);padding:clamp(48px,6vw,80px) var(--gutter) 28px;
+  background:var(--grad-footer);color:var(--on-navy-muted);border-radius:var(--radius-xl) var(--radius-xl) 0 0;font-size:.98rem}
+.site-footer__img{position:absolute;top:0;right:0;bottom:0;width:min(58%,820px);-webkit-mask-image:var(--mask-fade-left);mask-image:var(--mask-fade-left)}
+.site-footer__img img{width:100%;height:100%;object-fit:cover;object-position:60% 40%;filter:saturate(.85) brightness(.75)}
+.site-footer__img::after{content:"";position:absolute;inset:0;background:var(--grad-footer-tint)}
+.site-footer__inner{position:relative;z-index:1;max-width:var(--wrap);margin-inline:auto;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:32px}
+.site-footer__logo{grid-column:1/-1;display:flex;flex-wrap:wrap;gap:16px;align-items:center;justify-content:space-between;margin-bottom:8px}
+.site-footer__logo span{display:inline-block;padding:10px 16px;border-radius:var(--radius-row);background:var(--surface);box-shadow:var(--sh-2)}
+.site-footer__logo img{height:42px;width:auto}
+.footer-title{color:var(--on-navy);font-size:1.05rem;margin-bottom:10px;text-transform:uppercase;letter-spacing:.1em}
+.site-footer a{text-decoration:none}
+.site-footer ul{list-style:none;margin:0;padding:0;display:grid;gap:6px}
+.site-footer .social{display:flex;flex-wrap:wrap;gap:10px}
+.social a{color:var(--on-navy);display:inline-flex;align-items:center;padding:9px 16px;border-radius:var(--radius-pill);box-shadow:inset 0 0 0 1px var(--footer-pill-line)}
+.legal{grid-column:1/-1;display:flex;flex-wrap:wrap;gap:8px 22px;justify-content:space-between;margin-top:12px;padding-top:18px;border-top:1px solid var(--footer-line);font-size:.88rem}
+.site-footer .legal ul{display:flex;flex-wrap:wrap;gap:6px 18px}
+
+/* Footer wird auf großen Bildschirmen beim Scrollen freigelegt:
+   Er steht fest am unteren Rand hinter dem Inhalt (.page, z-index 1, eigener Hintergrund).
+   .page bekommt unten Platz in Höhe des Footers; die Höhe misst js/main.js per ResizeObserver (--fh).
+   Bewusst kein position:sticky – das hing beim Hochscrollen nach. */
+@media (min-width:980px) and (min-height:760px){
+  .site-footer{position:fixed;left:0;right:0;bottom:0;z-index:0;margin-inline:0}
+  .page{margin-bottom:var(--fh,0px)}
+}
+
+/* ---------- Responsive ---------- */
+@media (min-width:640px){.prose::before{display:block}}
+
+/* Schmale Desktop-Breiten: Menü etwas enger, damit nichts überläuft */
+@media (min-width:1061px) and (max-width:1180px){
+  .site-nav{gap:10px;padding-left:16px}
+  .menu>li>a{padding-inline:7px}
+}
+
+@media (max-width:1060px){
+  .burger{display:inline-block}
+  .menu{display:none;position:absolute;left:0;right:0;top:calc(100% + 8px);flex-direction:column;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:10px;box-shadow:var(--sh-3);
+    max-height:calc(100dvh - 120px);overflow-y:auto}
+  .menu.is-open{display:flex}
+  .submenu{display:block;position:static;box-shadow:none;border:0;padding:0 0 0 14px;min-width:0}
+  .submenu::before{content:none}
+  .site-nav{border-radius:26px}
+}
+
+@media (max-width:980px){
+  .cards{grid-template-columns:minmax(0,1fr);max-width:620px;margin-inline:auto}
+  .svc__media{aspect-ratio:4/3}
+  .hero__frame::after{background:var(--grad-hero-narrow)}
+  .split,.band,.cta{grid-template-columns:minmax(0,1fr)}
+  .bento{grid-template-columns:repeat(2,minmax(0,1fr));grid-template-areas:"eco eco" "lab lab" "gla dek" "hbc dek" "tmx dek"}
+  .reviews{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .site-footer__inner{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .site-footer__img{width:100%;-webkit-mask-image:var(--mask-fade-down);mask-image:var(--mask-fade-down);opacity:.6}
+}
+
+@media (max-width:560px){
+  .brand img{height:36px}
+  .nav-actions .btn{display:none}
+  .hero__text .btn,.cta .btn{width:100%}
+  .chip{border-radius:var(--radius-lg)}
+  .svc__media{aspect-ratio:4/5}
+  .bento{grid-template-columns:minmax(0,1fr);grid-template-areas:"eco" "lab" "gla" "hbc" "tmx" "dek"}
+  .reviews{grid-template-columns:minmax(0,1fr)}
+  .site-footer__inner{grid-template-columns:minmax(0,1fr)}
+}

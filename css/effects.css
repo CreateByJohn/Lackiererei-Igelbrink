@@ -1,0 +1,101 @@
+/* Hover-, Übergangs- und Scroll-Effekte.
+   Die Klassen .is-hover / .is-active erzwingen Zustände nur für die Musterseite components.html. */
+
+/* ---------- Übergänge ---------- */
+.menu a{transition:background .2s var(--ease),color .2s var(--ease)}
+.btn{transition:transform .25s var(--ease),box-shadow .25s var(--ease)}
+.btn::before{transition:transform .7s var(--ease)}
+.btn::after{transition:transform .3s var(--ease)}
+.more{transition:background .25s var(--ease),color .25s var(--ease),transform .25s var(--ease),box-shadow .25s var(--ease)}
+.more::after{transition:transform .3s var(--ease)}
+.stack li{transition:background .3s var(--ease),color .3s var(--ease),transform .3s var(--ease),box-shadow .3s var(--ease)}
+.stack li::before{transition:transform .3s var(--ease),color .3s var(--ease)}
+.svc{transition:grid-template-rows var(--t-split) var(--ease),gap var(--t-split) var(--ease)}
+.svc__media{transition:border-radius var(--t-split) var(--ease),box-shadow .4s var(--ease)}
+.svc__img img{transition:transform .9s var(--ease)}
+.glass-tile{transition:transform .4s var(--ease)}
+.svc__toggle{transition:transform .45s var(--ease),background .25s var(--ease)}
+.svc__toggle::before,.svc__toggle::after{transition:background .25s var(--ease)}
+.svc__more{transition:visibility 0s linear var(--t-split)}          /* erst nach dem Zuklappen verstecken */
+.svc.is-open .svc__more{transition-delay:0s}
+.svc__more-pad{transition:opacity .35s var(--ease),translate .45s var(--ease)}
+.svc.is-open .svc__more-pad{transition-delay:.18s}
+.svc__list{transition:border-radius var(--t-split) var(--ease)}
+.checks li{transition:transform .25s var(--ease)}
+.checks li::before{transition:background .25s var(--ease)}
+.checks li::after{transition:border-color .25s var(--ease)}
+.bt{transition:transform .35s var(--ease),box-shadow .35s var(--ease)}
+.bt__seal{transition:rotate .5s var(--ease),scale .5s var(--ease)}
+.glass-in{transition:transform .4s var(--ease)}
+.sec-head__ico{transition:transform .5s var(--ease)}
+.rv{transition:transform .35s var(--ease),box-shadow .35s var(--ease)}
+.site-footer a{transition:color .2s var(--ease),background .25s var(--ease)}
+
+/* ---------- Navigation ---------- */
+.menu>li>a:hover{background:var(--accent-soft);color:var(--accent-strong)}
+.submenu a:hover{background:var(--accent-soft)}
+
+/* ---------- Buttons ---------- */
+.btn:hover,.btn.is-hover{transform:translateY(-3px);box-shadow:var(--sh-btn-hover)}
+.btn:hover::before,.btn.is-hover::before{transform:translateX(120%)}
+.btn:hover::after,.btn.is-hover::after{transform:rotate(45deg) translate(1px,-1px) scale(1.1)}
+.btn:active,.btn.is-active{transform:translateY(-1px) scale(.98);box-shadow:var(--sh-btn-active)}
+
+.more:hover,.more.is-hover{background:var(--accent-strong);color:var(--white);transform:translateY(-2px);box-shadow:var(--sh-more-hover)}
+.more:hover::after,.more.is-hover::after{transform:rotate(45deg) translate(3px,-3px)}
+.more:active,.more.is-active{transform:translateY(0) scale(.98)}
+.more--glass:hover,.more--glass.is-hover{background:var(--white);color:var(--accent-strong)}
+
+/* ---------- Leistungsband ---------- */
+.stack li:hover,.stack li.is-hover{background:var(--white);color:var(--fg);transform:translateX(6px);box-shadow:var(--sh-row-hover)}
+.stack li:hover::before,.stack li.is-hover::before{transform:translateX(3px);color:var(--accent)}
+
+/* ---------- Klappkarten ---------- */
+.svc:hover .svc__media,.svc.is-hover .svc__media{box-shadow:var(--sh-3)}
+.svc:hover .svc__img img,.svc.is-hover .svc__img img{transform:scale(1.06)}
+.svc:hover .glass-tile,.svc.is-hover .glass-tile{transform:translateY(-4px)}
+.svc__toggle:hover{background:var(--accent)}
+.svc__toggle:hover::before,.svc__toggle:hover::after{background:var(--white)}
+.checks li:hover{transform:translateX(4px)}
+.checks li:hover::before{background:var(--accent)}
+.checks li:hover::after{border-color:var(--white)}
+
+/* ---------- Abschnitts-Kopf: Symbol dreht sich leicht ---------- */
+.sec-head:hover .sec-head__ico,.sec-head.is-hover .sec-head__ico{transform:rotate(-12deg) scale(1.06)}
+
+/* ---------- Bento: nur anheben und stärkerer Schatten, kein Farbeffekt ---------- */
+.bt:hover,.bt.is-hover{transform:translateY(-4px);box-shadow:var(--sh-3)}
+.bt--eco:hover .bt__seal,.bt--eco.is-hover .bt__seal{rotate:0deg;scale:1.03}
+.bt--logo:hover .glass-in,.bt--logo.is-hover .glass-in{transform:translateY(-3px)}
+
+/* ---------- Kundenstimmen ---------- */
+.rv:hover,.rv.is-hover{transform:translateY(-4px);box-shadow:var(--sh-3)}
+
+/* ---------- Footer ---------- */
+.site-footer a:hover{color:var(--white)}
+.social a:hover{background:var(--white);color:var(--navy)}
+
+/* ---------- Einblenden beim Scrollen ----------
+   Ruhezustand bleibt sichtbar, nur der Einstieg wird animiert.
+   Nur mit Browser-Unterstützung und nur ohne Wunsch nach reduzierter Bewegung. */
+@media (prefers-reduced-motion:no-preference){
+  @supports ((animation-timeline:view()) and (animation-range:entry)){
+    @keyframes rise{from{translate:0 40px}}
+    .svc,.band,.prose,.callout,.bt,.rv,.cta,.stack li{animation:rise auto var(--ease) backwards;animation-timeline:view();animation-range:entry 0% entry 55%}
+  }
+}
+
+/* ---------- Reduzierte Bewegung ----------
+   Keine Übergänge, keine Animationen, keine Bewegung beim Hover. Farbwechsel als Rückmeldung bleiben. */
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{transition-duration:.01ms!important;transition-delay:0s!important;animation:none!important}
+  .btn:hover,.btn.is-hover,.btn:active,.btn.is-active,.more:hover,.more.is-hover,.more:active,
+  .stack li:hover,.checks li:hover,.bt:hover,.bt.is-hover,.rv:hover,.rv.is-hover,.svc:hover .glass-tile,.svc.is-hover .glass-tile,
+  .sec-head:hover .sec-head__ico,.sec-head.is-hover .sec-head__ico,.bt--logo:hover .glass-in,.bt--logo.is-hover .glass-in{transform:none}
+  .btn:hover::after,.btn.is-hover::after{transform:rotate(45deg) translate(-2px,2px)}
+  .more:hover::after,.more.is-hover::after{transform:rotate(45deg)}
+  .stack li:hover::before,.stack li.is-hover::before{transform:none}
+  .svc:hover .svc__img img,.svc.is-hover .svc__img img{transform:none}
+  .bt--eco:hover .bt__seal,.bt--eco.is-hover .bt__seal{rotate:-2deg;scale:none}
+  .svc__more-pad{translate:none}
+}

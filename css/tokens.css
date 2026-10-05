@@ -1,0 +1,145 @@
+/* Design-Tokens: Schriften, Farben, Schatten, Radien, Bewegung.
+   Nur heller Modus. Komponenten verwenden ausschließlich diese Variablen. */
+
+@font-face{font-family:"Barlow";font-style:normal;font-weight:400;font-display:swap;src:url("../assets/fonts/barlow-latin-400-normal.woff2") format("woff2")}
+@font-face{font-family:"Barlow";font-style:normal;font-weight:500;font-display:swap;src:url("../assets/fonts/barlow-latin-500-normal.woff2") format("woff2")}
+@font-face{font-family:"Barlow";font-style:normal;font-weight:600;font-display:swap;src:url("../assets/fonts/barlow-latin-600-normal.woff2") format("woff2")}
+@font-face{font-family:"Barlow Condensed";font-style:normal;font-weight:500;font-display:swap;src:url("../assets/fonts/barlow-condensed-latin-500-normal.woff2") format("woff2")}
+@font-face{font-family:"Barlow Condensed";font-style:normal;font-weight:600;font-display:swap;src:url("../assets/fonts/barlow-condensed-latin-600-normal.woff2") format("woff2")}
+@font-face{font-family:"Barlow Condensed";font-style:normal;font-weight:700;font-display:swap;src:url("../assets/fonts/barlow-condensed-latin-700-normal.woff2") format("woff2")}
+
+:root{
+  color-scheme:light;
+
+  /* Schriften */
+  --f-display:"Barlow Condensed","Arial Narrow",Arial,sans-serif;
+  --f-body:"Barlow",system-ui,-apple-system,"Segoe UI",Arial,sans-serif;
+
+  /* Flächen und Text */
+  --bg:#f4f6f9;
+  --surface:#ffffff;
+  --fg:#14203a;
+  --fg-soft:#2b3752;
+  --muted:#4a566e;
+  --line:#d9dfe9;
+  --line-nav:rgba(217,223,233,.8);
+  --white:#ffffff;
+
+  /* Dunkle Bänder */
+  --navy:#1b2a4a;
+  --navy-light:#2f4676;
+  --navy-deep:#16233f;
+  --navy-mid:#223660;
+  --on-navy:#f2f5fa;
+  --on-navy-muted:#d3dbea;
+
+  /* Text auf Fotos und Glas */
+  --on-image:#ffffff;
+  --on-image-muted:#e3e8f2;
+  --on-glass-muted:#eef1f7;
+
+  /* Akzent */
+  --accent:#cf4a1c;
+  --accent-strong:#b23d12;   /* Akzent für kleine Schrift auf hellen Flächen (WCAG AA) */
+  --accent-2:#e8622e;
+  --on-accent:#ffffff;
+  --accent-soft:#fbe6dc;
+  --accent-fade:rgba(207,74,28,0);
+  --accent-glow:rgba(232,98,46,.55);
+  --accent-glow-fade:rgba(232,98,46,0);
+
+  /* Entwurfs-Hinweis (gelb) */
+  --note:#fff4d6;
+  --note-fg:#5a4300;
+
+  /* Bewertungssterne und Skelett-Platzhalter (Kundenstimmen) */
+  --star-empty:#c9d0dc;
+  --star-on-dark:rgba(255,255,255,.35);
+  --sk-1:#e9edf3;
+  --sk-2:#f3f5f9;
+  --avatar:#e3e8f0;
+
+  /* Glas und Overlays */
+  --nav-glass:rgba(255,255,255,.9);
+  --glass:rgba(255,255,255,.16);
+  --glass-chip:rgba(255,255,255,.14);
+  --glass-row:rgba(255,255,255,.08);
+  --glass-line:rgba(255,255,255,.45);
+  --glass-line-chip:rgba(255,255,255,.35);
+  --glass-line-row:rgba(255,255,255,.16);
+  --glass-tint:rgba(14,22,42,.5);       /* dunkle Tönung unter Glas-Kacheln auf Fotos (Kontrast) */
+  --toggle-bg:rgba(255,255,255,.92);
+  --logo-tile-bg:#e9edf3;                 /* Grundfläche unter dem unscharfen Logo */
+  --glass-logo:rgba(255,255,255,.5);      /* Glasfläche auf den Partner-Kacheln */
+  --glass-logo-line:rgba(255,255,255,.75);
+  --shine:rgba(255,255,255,.38);
+  --overlay:rgba(14,22,42,.92);
+  --overlay-fade:rgba(14,22,42,0);
+  --footer-line:rgba(255,255,255,.14);
+  --footer-pill-line:rgba(255,255,255,.28);
+
+  /* Bild-Platzhalter (Ladefläche hinter Fotos) */
+  --ph1:#c7d0e0;
+  --ph2:#9fb0cc;
+
+  /* Verläufe */
+  --grad-accent:linear-gradient(135deg,var(--accent),var(--accent-strong));
+  --grad-accent-bar:linear-gradient(90deg,var(--accent-2),var(--accent));
+  --grad-ph:linear-gradient(135deg,var(--ph1),var(--ph2));
+  --grad-hero:linear-gradient(90deg,rgba(14,22,42,.86) 0%,rgba(14,22,42,.62) 42%,rgba(14,22,42,.12) 75%),
+              linear-gradient(0deg,rgba(14,22,42,.6) 0%,rgba(14,22,42,0) 45%);
+  --grad-hero-narrow:linear-gradient(90deg,rgba(14,22,42,.86) 0%,rgba(14,22,42,.72) 60%,rgba(14,22,42,.5) 100%),
+              linear-gradient(0deg,rgba(14,22,42,.6) 0%,rgba(14,22,42,0) 45%);   /* Text läuft hier über die ganze Bildbreite */
+  --grad-band:linear-gradient(100deg,rgba(14,22,42,.94) 0%,rgba(14,22,42,.84) 45%,rgba(27,42,74,.8) 100%);
+  --grad-svc:linear-gradient(0deg,rgba(14,22,42,.72) 0%,rgba(14,22,42,.1) 55%,rgba(14,22,42,0) 100%);
+  --grad-navy:radial-gradient(120% 90% at 100% 0%,var(--navy-light) 0%,var(--navy) 55%);
+  --grad-cta:radial-gradient(90% 140% at 100% 0%,var(--navy-light) 0%,var(--navy) 60%);
+  --grad-footer:linear-gradient(160deg,var(--navy-deep) 0%,var(--navy) 55%,var(--navy-mid) 100%);
+  --grad-review:radial-gradient(120% 100% at 0% 0%,var(--navy-light) 0%,var(--navy) 60%);
+  --grad-sk:linear-gradient(90deg,var(--sk-1),var(--sk-2),var(--sk-1));
+  --grad-rule-in:linear-gradient(90deg,transparent,var(--line) 18%);      /* Trennlinie im Abschnitts-Kopf, links */
+  --grad-rule-out:linear-gradient(90deg,var(--line) 82%,transparent);     /* rechts */
+  --grad-footer-tint:linear-gradient(0deg,rgba(27,42,74,.78),rgba(27,42,74,.38));
+  --mask-fade-left:linear-gradient(90deg,transparent 0%,rgba(0,0,0,.35) 35%,#000 80%);
+  --mask-fade-down:linear-gradient(180deg,#000 0%,rgba(0,0,0,.25) 45%,transparent 75%);
+
+  /* Schatten */
+  --sh-1:0 1px 2px rgba(20,32,58,.06),0 2px 6px rgba(20,32,58,.05);
+  --sh-2:0 2px 4px rgba(20,32,58,.05),0 8px 20px rgba(20,32,58,.08),0 18px 40px rgba(20,32,58,.06);
+  --sh-3:0 4px 8px rgba(20,32,58,.06),0 16px 36px rgba(20,32,58,.14),0 32px 64px rgba(20,32,58,.10);
+  --sh-menu:0 12px 28px rgba(20,32,58,.14);
+  --sh-btn:0 1px 0 rgba(255,255,255,.35) inset,0 2px 4px rgba(207,74,28,.25),0 10px 22px -6px rgba(207,74,28,.55);
+  --sh-btn-hover:0 1px 0 rgba(255,255,255,.35) inset,0 4px 8px rgba(207,74,28,.25),0 18px 32px -8px rgba(207,74,28,.65);
+  --sh-btn-active:0 1px 0 rgba(255,255,255,.35) inset,0 2px 6px rgba(207,74,28,.4);
+  --sh-more-hover:0 10px 20px -8px rgba(207,74,28,.6);
+  --sh-glass:inset 0 0 0 1px var(--glass-line-chip),0 12px 30px -12px rgba(0,0,0,.5);
+  --sh-row-hover:0 12px 28px -10px rgba(0,0,0,.45);
+  --sh-glass-logo:inset 0 0 0 1px var(--glass-logo-line),0 12px 28px -14px rgba(20,32,58,.45);
+  --sh-ico:var(--sh-2),inset 0 0 0 1px var(--line);
+
+  /* Radien */
+  --radius:20px;
+  --radius-lg:28px;          /* große Bild- und Bandflächen */
+  --radius-xl:36px;          /* obere Ecken des Footers */
+  --radius-tile:16px;
+  --radius-row:14px;
+  --radius-md:12px;
+  --radius-sm:8px;
+  --radius-xs:4px;
+  --radius-2xs:2px;
+  --radius-pill:999px;
+
+  /* Bewegung */
+  --ease:cubic-bezier(.2,.7,.2,1);
+  --t-split:.55s;            /* Aufklappen der Leistungs-Karten */
+
+  /* Layout */
+  --wrap:1200px;
+  --gutter:16px;
+  --section-gap:clamp(36px,6vw,80px);
+  --section-gap-s:clamp(24px,4vw,48px);
+  --zone-gap:clamp(28px,4.5vw,60px);   /* kompakter Abstand zwischen Abschnitten mit .sec-head */
+  --divider-w:1160px;                  /* Breite der Trennlinie im Abschnitts-Kopf */
+  --hero-pull:84px;                    /* Hero rückt unter die schwebende Navigation */
+  --hero-top:140px;                    /* Innenabstand oben, damit der Hero-Text unter der Navigation beginnt */
+}
