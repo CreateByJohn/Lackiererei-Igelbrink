@@ -1,0 +1,171 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 620" width="800" height="620">
+  <defs>
+    <!-- Metall Körper: Licht von oben -->
+    <linearGradient id="metal" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#f4f6f8"/>
+      <stop offset="0.12" stop-color="#cfd5db"/>
+      <stop offset="0.45" stop-color="#7d8791"/>
+      <stop offset="0.75" stop-color="#4a525b"/>
+      <stop offset="1" stop-color="#2b3036"/>
+    </linearGradient>
+    <linearGradient id="metalDark" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#9aa3ad"/>
+      <stop offset="0.4" stop-color="#555d66"/>
+      <stop offset="1" stop-color="#1f2328"/>
+    </linearGradient>
+    <linearGradient id="chrome" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffffff"/>
+      <stop offset="0.25" stop-color="#d9dee3"/>
+      <stop offset="0.5" stop-color="#8e98a2"/>
+      <stop offset="0.55" stop-color="#5c656e"/>
+      <stop offset="0.8" stop-color="#b9c1c9"/>
+      <stop offset="1" stop-color="#6b747d"/>
+    </linearGradient>
+    <!-- Griff schwarz-grau, Gummi -->
+    <linearGradient id="grip" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#16191c"/>
+      <stop offset="0.35" stop-color="#4b525a"/>
+      <stop offset="0.55" stop-color="#2c3238"/>
+      <stop offset="1" stop-color="#0f1113"/>
+    </linearGradient>
+    <!-- Farbbecher orange -->
+    <linearGradient id="cup" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#b53a05"/>
+      <stop offset="0.25" stop-color="#ff8a3d"/>
+      <stop offset="0.45" stop-color="#ff6a13"/>
+      <stop offset="1" stop-color="#8f2c02"/>
+    </linearGradient>
+    <linearGradient id="cupLid" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#4b525a"/>
+      <stop offset="0.4" stop-color="#2d3238"/>
+      <stop offset="1" stop-color="#14171a"/>
+    </linearGradient>
+    <linearGradient id="trigger" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#e9edf0"/>
+      <stop offset="0.5" stop-color="#9aa3ad"/>
+      <stop offset="1" stop-color="#4a525b"/>
+    </linearGradient>
+    <radialGradient id="knob" cx="0.35" cy="0.3" r="0.8">
+      <stop offset="0" stop-color="#ffb27a"/>
+      <stop offset="0.5" stop-color="#ff6a13"/>
+      <stop offset="1" stop-color="#8f2c02"/>
+    </radialGradient>
+    <radialGradient id="shadowGrad" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#000" stop-opacity="0.35"/>
+      <stop offset="1" stop-color="#000" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="soft" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="2"/>
+    </filter>
+    <filter id="blur6" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="6"/>
+    </filter>
+    <filter id="dropshadow" x="-20%" y="-20%" width="150%" height="150%">
+      <feDropShadow dx="10" dy="16" stdDeviation="10" flood-color="#000" flood-opacity="0.35"/>
+    </filter>
+    <clipPath id="barrelClip">
+      <path d="M210 240 Q210 214 238 212 L560 212 Q576 212 576 228 L576 286 Q576 302 560 302 L238 302 Q210 300 210 274 Z"/>
+    </clipPath>
+  </defs>
+
+  <g filter="url(#dropshadow)">
+
+    <!-- Luftanschluss unten am Griff -->
+    <rect x="262" y="520" width="70" height="26" rx="5" fill="url(#chrome)"/>
+    <rect x="270" y="544" width="54" height="30" rx="4" fill="url(#metalDark)"/>
+    <rect x="270" y="548" width="54" height="3" fill="#000" opacity="0.35"/>
+    <rect x="270" y="556" width="54" height="3" fill="#000" opacity="0.35"/>
+    <rect x="270" y="564" width="54" height="3" fill="#000" opacity="0.35"/>
+
+    <!-- Griff -->
+    <path d="M300 296 L394 296 Q404 296 402 308 L368 500 Q364 524 340 524 L292 524 Q272 524 276 504 L296 316 Q298 296 300 296 Z" fill="url(#grip)"/>
+    <!-- Griff Rillen -->
+    <g stroke="#000" stroke-opacity="0.45" stroke-width="3" stroke-linecap="round">
+      <line x1="298" y1="350" x2="372" y2="350"/>
+      <line x1="294" y1="378" x2="368" y2="378"/>
+      <line x1="290" y1="406" x2="364" y2="406"/>
+      <line x1="286" y1="434" x2="360" y2="434"/>
+      <line x1="283" y1="462" x2="357" y2="462"/>
+      <line x1="280" y1="490" x2="352" y2="490"/>
+    </g>
+    <g stroke="#fff" stroke-opacity="0.12" stroke-width="2" stroke-linecap="round">
+      <line x1="298" y1="353" x2="372" y2="353"/>
+      <line x1="294" y1="381" x2="368" y2="381"/>
+      <line x1="290" y1="409" x2="364" y2="409"/>
+      <line x1="286" y1="437" x2="360" y2="437"/>
+      <line x1="283" y1="465" x2="357" y2="465"/>
+      <line x1="280" y1="493" x2="352" y2="493"/>
+    </g>
+    <!-- Glanzlicht Griff -->
+    <path d="M318 312 L338 312 L312 500 L296 500 Z" fill="#fff" opacity="0.08"/>
+
+    <!-- Abzug -->
+    <path d="M424 300 Q452 300 454 330 Q454 372 436 392 Q428 400 420 394 Q412 386 420 372 Q432 346 424 322 Z" fill="url(#trigger)"/>
+    <path d="M428 306 Q444 308 444 330 L440 344" stroke="#fff" stroke-opacity="0.7" stroke-width="3" fill="none" stroke-linecap="round"/>
+    <!-- Abzugsbügel -->
+    <path d="M404 304 L470 304 L470 316 L408 316 Z" fill="url(#metalDark)"/>
+
+    <!-- Nadelfeder / Hinterteil Knauf -->
+    <rect x="160" y="236" width="56" height="42" rx="8" fill="url(#chrome)"/>
+    <g stroke="#000" stroke-opacity="0.3" stroke-width="2">
+      <line x1="172" y1="238" x2="172" y2="276"/>
+      <line x1="184" y1="238" x2="184" y2="276"/>
+      <line x1="196" y1="238" x2="196" y2="276"/>
+    </g>
+    <rect x="140" y="246" width="28" height="22" rx="6" fill="url(#knob)"/>
+    <ellipse cx="148" cy="251" rx="6" ry="3" fill="#fff" opacity="0.5"/>
+
+    <!-- Hauptkörper -->
+    <path d="M210 240 Q210 214 238 212 L560 212 Q576 212 576 228 L576 286 Q576 302 560 302 L238 302 Q210 300 210 274 Z" fill="url(#metal)"/>
+    <g clip-path="url(#barrelClip)">
+      <!-- Glanzstreifen oben -->
+      <rect x="200" y="218" width="390" height="9" fill="#fff" opacity="0.65" filter="url(#soft)"/>
+      <!-- sanfter Reflex unten -->
+      <rect x="200" y="286" width="390" height="6" fill="#9fb6c8" opacity="0.35" filter="url(#soft)"/>
+      <!-- Trennfugen -->
+      <rect x="340" y="212" width="3" height="90" fill="#000" opacity="0.35"/>
+      <rect x="343" y="212" width="2" height="90" fill="#fff" opacity="0.35"/>
+      <rect x="500" y="212" width="3" height="90" fill="#000" opacity="0.35"/>
+      <rect x="503" y="212" width="2" height="90" fill="#fff" opacity="0.35"/>
+      <!-- Typenschild -->
+      <rect x="372" y="244" width="100" height="26" rx="4" fill="#1f2328" opacity="0.65"/>
+      <rect x="378" y="252" width="56" height="4" rx="2" fill="#ff6a13" opacity="0.9"/>
+      <rect x="378" y="260" width="84" height="3" rx="1.5" fill="#d9dee3" opacity="0.55"/>
+    </g>
+
+    <!-- Kupplung für Becher auf dem Körper -->
+    <rect x="364" y="190" width="64" height="28" rx="5" fill="url(#chrome)"/>
+    <rect x="358" y="214" width="76" height="8" rx="3" fill="url(#metalDark)"/>
+
+    <!-- Farbbecher -->
+    <path d="M326 188 L466 188 Q480 188 478 202 L462 176 Q458 120 440 108 L352 108 Q334 120 330 176 Z" fill="none"/>
+    <path d="M338 192 L456 192 Q466 192 464 182 L452 118 Q450 104 434 104 L360 104 Q344 104 342 118 L330 182 Q328 192 338 192 Z" fill="url(#cup)"/>
+    <!-- Becher Glanz -->
+    <path d="M356 112 L372 112 L350 184 L340 184 Z" fill="#fff" opacity="0.38"/>
+    <path d="M438 112 L446 118 L458 180 L452 184 Z" fill="#000" opacity="0.18"/>
+    <!-- Farbstand-Linie -->
+    <path d="M346 150 L452 150" stroke="#fff" stroke-opacity="0.25" stroke-width="2" stroke-dasharray="5 5"/>
+    <!-- Deckel -->
+    <rect x="344" y="88" width="104" height="20" rx="8" fill="url(#cupLid)"/>
+    <rect x="352" y="91" width="88" height="4" rx="2" fill="#fff" opacity="0.28"/>
+    <rect x="384" y="76" width="24" height="14" rx="4" fill="url(#metalDark)"/>
+    <circle cx="396" cy="80" r="2.2" fill="#000" opacity="0.6"/>
+
+    <!-- Vorderteil: Düsenkörper -->
+    <path d="M576 226 L618 232 Q626 233 626 242 L626 272 Q626 281 618 282 L576 288 Z" fill="url(#chrome)"/>
+    <rect x="576" y="238" width="3" height="40" fill="#000" opacity="0.35"/>
+    <!-- Luftkappe mit Hörnern -->
+    <path d="M626 230 L662 224 Q672 222 674 232 L674 238 L638 244 L626 244 Z" fill="url(#metal)"/>
+    <path d="M626 270 L638 270 L674 276 L674 282 Q672 292 662 290 L626 284 Z" fill="url(#metal)"/>
+    <!-- Düsenspitze -->
+    <rect x="626" y="246" width="40" height="22" rx="4" fill="url(#metalDark)"/>
+    <rect x="662" y="251" width="14" height="12" rx="2" fill="url(#chrome)"/>
+    <ellipse cx="676" cy="257" rx="3" ry="4.5" fill="#0c0e10"/>
+    <!-- Glanzlichter Düse -->
+    <rect x="582" y="232" width="40" height="5" rx="2.5" fill="#fff" opacity="0.75" filter="url(#soft)"/>
+    <rect x="628" y="228" width="40" height="3" rx="1.5" fill="#fff" opacity="0.5"/>
+
+    <!-- Flüssigkeitsanschluss zum Becher -->
+    <rect x="398" y="218" width="12" height="8" fill="#000" opacity="0.2"/>
+  </g>
+</svg>
