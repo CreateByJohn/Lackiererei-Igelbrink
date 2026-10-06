@@ -1,0 +1,29 @@
+BILDER DER WEBSITE (assets/img)
+================================
+
+Hier liegen NUR Bilder, die die Website wirklich lädt.
+Originale und aussortierte Dateien liegen im Ordner "bilder-originale"
+(wird nie eingebunden und steht in der .gitignore).
+
+BENENNUNG
+  NN-bereich-motiv-BREITE.endung      z. B. 02-hero-startseite-1600.jpg
+
+  NN      laufende Nummer in Reihenfolge der Seite (01 ... 13).
+          Neues Bild = nächste freie Nummer (14, 15 ...). Nummern ändern sich nie.
+  BREITE  Breite in Pixeln, wenn es mehrere Größen gibt (800, 1400, 2400 ...).
+  Formate WebP (modern, klein) plus JPG bzw. PNG als Fallback.
+
+BILD AUSTAUSCHEN
+  1. bilder-uebersicht.html öffnen (http://localhost:8000/bilder-uebersicht.html)
+     und die Karte des Bildes suchen: dort stehen Soll-Format und alle Dateien.
+  2. Alle Dateien dieser Karte mit EXAKT demselben Namen ersetzen.
+  3. Seite hart neu laden (Cmd + Shift + R).
+  4. Alt-Text prüfen: steht in index.html direkt am <img> (Zeilennummer in der Karte).
+  5. Hat das neue Bild ein anderes Seitenverhältnis, width/height am <img> in
+     index.html anpassen (die Übersicht zeigt eine Warnung).
+
+ALT-TEXT UND METADATEN
+  - Alt-Text: nur in index.html (alt="..."), nicht in der Bilddatei.
+  - Dekorative Bilder (Hintergründe, unscharfe Doppelungen) haben bewusst alt="".
+  - EXIF/IPTC in den Web-Dateien nicht nötig (Kameradaten, GPS besser entfernen).
+    Urheber-/Lizenzangaben gehören in die Originale in bilder-originale.

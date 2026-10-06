@@ -5,7 +5,8 @@
 /* ---------- Header und Navigation ---------- */
 .site-header{position:sticky;top:calc(env(safe-area-inset-top,0px) + 10px);z-index:20;max-width:var(--wrap);margin:12px auto 0}
 .site-nav{position:relative;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:8px 10px 8px 20px;
-  background:var(--nav-glass);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);border:1px solid var(--line-nav);border-radius:var(--radius-pill);box-shadow:var(--sh-2)}
+  background:var(--nav-glass-shine),var(--nav-glass);-webkit-backdrop-filter:var(--nav-blur);backdrop-filter:var(--nav-blur);
+  border:1px solid var(--nav-glass-line);border-radius:var(--radius-pill);box-shadow:inset 0 1px 0 rgba(255,255,255,.6),var(--sh-2)}
 .brand{display:block;flex:none}
 .brand img{height:44px;width:auto}
 
@@ -13,7 +14,8 @@
 .menu>li{position:relative}
 .menu a{display:block;text-decoration:none;padding:10px;border-radius:var(--radius-pill);white-space:nowrap}
 .submenu{display:none;position:absolute;left:0;top:calc(100% + 6px);min-width:280px;list-style:none;margin:0;padding:8px;
-  background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-row);box-shadow:var(--sh-3);text-transform:none;font-size:.97rem;letter-spacing:0}
+  background:var(--submenu-glass);-webkit-backdrop-filter:var(--nav-blur);backdrop-filter:var(--nav-blur);
+  border:1px solid var(--nav-glass-line);border-radius:var(--radius-row);box-shadow:var(--sh-3);text-transform:none;font-size:.97rem;letter-spacing:0}
 .submenu::before{content:"";position:absolute;left:0;right:0;top:-8px;height:8px}  /* Brücke, damit das Untermenü beim Hinüberfahren offen bleibt */
 .submenu a{white-space:normal;border-radius:var(--radius-sm)}
 .menu li:hover>.submenu,.menu li:focus-within>.submenu{display:block}
@@ -29,25 +31,23 @@
 .btn::after{content:"";width:.6em;height:.6em;border-top:2.5px solid currentColor;border-right:2.5px solid currentColor;transform:rotate(45deg) translate(-2px,2px);margin-left:-2px}
 .btn--small{padding:13px 22px;font-size:.96rem}
 
-/* Textlink mit Pfeil */
-.more{align-self:flex-start;display:inline-flex;align-items:center;gap:10px;font-weight:600;text-decoration:none;color:var(--accent-strong);
-  padding:11px 20px;border-radius:var(--radius-pill);background:var(--accent-soft)}
-.more::after{content:"";width:.5em;height:.5em;border-top:2.5px solid currentColor;border-right:2.5px solid currentColor;transform:rotate(45deg)}
-/* Variante auf Fotos und Glas */
-.more--glass{color:var(--on-image);background:linear-gradient(var(--glass),var(--glass)),var(--glass-tint);box-shadow:inset 0 0 0 1px var(--glass-line)}
+/* Glas-Button: gleiche Form wie .btn (Pfeil, Glanz, Anheben), aber Glas statt Orange. Orange bleibt den Haupt-Aktionen vorbehalten. */
+.btn--glass{color:var(--on-image);background:var(--glass-chip);box-shadow:inset 0 0 0 1px var(--glass-line);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px)}
+/* Variante auf hellen Flächen */
+.btn--glass-light{color:var(--fg);background:var(--glass-btn-light);box-shadow:inset 0 0 0 1px var(--glass-btn-light-line),inset 0 1px 0 rgba(255,255,255,.7)}
 
 /* ---------- Hero ----------
-   Füllt die erste Bildschirmseite: von Rand zu Rand, ohne Radius, Oberkante bei y = 0, Unterkante bei 100svh.
-   Rückt um --hdr (Höhe .site-header samt oberem Rand, per JS gemessen) unter die schwebende Navigation.
-   body hat overflow-x:clip, damit 100vw (inkl. Scrollbalken) kein horizontales Scrollen auslöst. */
+   Füllt den ganzen ersten Bildschirm, von Rand zu Rand und ohne runde Ecken.
+   Er rutscht um die Höhe der Navigation (--hdr, misst js/main.js) nach oben, also unter die schwebende Pille.
+   100vw ist inklusive Scrollbalken etwas zu breit; body schneidet den Überstand ab (overflow-x:clip in base.css). */
 .hero{padding:0;margin-top:calc(var(--hdr) * -1)}
 .hero__lead{font-size:clamp(1.05rem,1.6vw,1.25rem);margin:20px 0 30px;max-width:36em}
 
 .hero__frame{position:relative;overflow:hidden;display:flex;align-items:flex-end;width:100vw;margin-left:calc(50% - 50vw);
   min-height:100vh;min-height:100svh;background:var(--navy)}
 .hero__img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 58%}
-/* Spray-Intro (js/hero-spray.js). Ebenen von unten: Foto, Deck-Canvas, Verlauf ::after, Partikel-Canvas, Pistole, Text.
-   Die Deck-Canvas ist ohne JS transparent, das Foto bleibt also sichtbar. */
+/* Spray-Intro (js/hero-spray.js). Ebenen von unten nach oben: Foto, dunkle Deckfläche, Verlauf, Sprühnebel, Spritzpistole, Text.
+   Ohne JavaScript bleibt die Deckfläche leer, das Foto ist dann sofort zu sehen. */
 .hero__cover,.hero__mist{position:absolute;inset:0;width:100%;height:100%;display:block;pointer-events:none}
 .hero__mist{z-index:1}
 .hero__gun{position:absolute;left:0;top:0;z-index:2;display:none;width:clamp(150px,20vw,320px);height:auto;max-width:none;
@@ -76,7 +76,9 @@
 .stack{list-style:none;margin:0;padding:0;display:grid;gap:10px}
 .stack li{position:relative;padding:15px 20px 15px 48px;border-radius:var(--radius-row);font-weight:500;font-size:1.05rem;
   background:var(--glass-row);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);box-shadow:inset 0 0 0 1px var(--glass-line-row)}
-.stack li::before{content:"–";position:absolute;left:20px;top:50%;translate:0 -50%;color:var(--accent-2);font-weight:700}
+/* Orangener Strich vor jedem Listenpunkt (auch in der Karriere-Liste) */
+.stack li::before,.job__list li::before{content:"–";position:absolute;left:0;color:var(--accent-2);font-weight:700}
+.stack li::before{left:20px;top:50%;translate:0 -50%}
 
 /* ---------- Abschnitts-Kopf .sec-head ----------
    Wiederverwendbar auf allen Seiten. Parameter: Symbol (Inline-SVG in .sec-head__ico), Augenbraue (.eyebrow), Überschrift (h2).
@@ -110,32 +112,32 @@
 .callout p+p{margin-top:14px}
 
 /* ---------- Leistungs-Karten (Klappkarte) ----------
-   Zeilen: Bild | Beschreibung (0fr geschlossen, 1fr offen) | Liste.
-   Ab 981 px teilen sich alle Karten per Subgrid dieselben drei Zeilen: gleich hohe Bilder, Beschreibungen und Listen.
-   Die Beschreibungszeile ist gemeinsam, deshalb klappen dort alle Karten zusammen auf (.cards.is-open).
-   Unter 981 px steht jede Karte für sich und klappt einzeln auf (.svc.is-open, siehe Responsive).
-   JS setzt .is-open, aria-expanded und aria-label an den Buttons. */
-.cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));grid-template-rows:auto 0fr auto;gap:0 22px;align-items:stretch}
-.cards.is-open{grid-template-rows:auto 1fr auto;row-gap:12px}
-.svc{display:grid;grid-row:span 3;grid-template-rows:subgrid;min-width:0}
+   Drei Zeilen: Bild | Beschreibung | Liste. Die Beschreibung ist geschlossen 0 hoch und wächst beim Öffnen auf.
+   Jede Karte klappt einzeln auf (.svc.is-open). Die Karten stehen oben bündig,
+   damit eine offene Karte die anderen nicht mit in die Länge zieht.
+   js/main.js schaltet .is-open und gleicht die Höhen von Glas-Kacheln und Listen an. */
+.cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px;align-items:start}
+.svc{display:grid;grid-template-rows:auto 0fr auto;row-gap:0;min-width:0}
+.svc.is-open{grid-template-rows:auto 1fr auto;row-gap:12px}
 
-.svc__media{position:relative;overflow:hidden;width:100%;aspect-ratio:4/5;max-height:560px;cursor:pointer;
+.svc__media{position:relative;overflow:hidden;width:100%;aspect-ratio:3/4;max-height:600px;cursor:pointer;
   border-radius:var(--radius) var(--radius) 0 0;background:var(--grad-ph);box-shadow:var(--sh-2)}
 .svc.is-open .svc__media{border-radius:var(--radius)}
 .svc__img,.svc__img img{position:absolute;inset:0;width:100%;height:100%}
 .svc__img img{object-fit:cover}
 .svc__media::after{content:"";position:absolute;inset:0;background:var(--grad-svc);pointer-events:none}
 
-/* Glas-Kachel auf dem Bild */
-.glass-tile{position:absolute;left:14px;right:14px;bottom:14px;z-index:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;gap:10px;
-  height:var(--glass-tile-h);padding:40px 22px 22px;border-radius:var(--radius-tile);text-align:center;color:var(--on-image);
-  background:linear-gradient(var(--glass-chip),var(--glass-chip)),var(--glass-tint);-webkit-backdrop-filter:blur(14px) saturate(1.2);backdrop-filter:blur(14px) saturate(1.2);box-shadow:var(--sh-glass)}
+/* Glas-Kachel auf dem Bild: kompakt und recht durchsichtig, damit mehr vom Foto sichtbar bleibt.
+   Der Textschatten hält die weiße Schrift auch auf hellen Bildstellen lesbar. */
+.glass-tile{position:absolute;left:14px;right:14px;bottom:14px;z-index:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;gap:8px;
+  padding:32px 20px 18px;border-radius:var(--radius-tile);text-align:center;color:var(--on-image);text-shadow:0 1px 10px rgba(14,22,42,.55);
+  background:linear-gradient(var(--glass-row),var(--glass-row)),var(--glass-tile-tint);-webkit-backdrop-filter:blur(8px) saturate(1.3);backdrop-filter:blur(8px) saturate(1.3);box-shadow:var(--sh-glass)}
 .glass-tile__ico{position:absolute;top:-24px;left:50%;translate:-50% 0;display:grid;place-items:center;width:48px;height:48px;
   border-radius:var(--radius-row);background:var(--surface);color:var(--accent);box-shadow:var(--sh-2)}
 .glass-tile__ico svg{width:24px;height:24px}
-.glass-tile h3{font-size:1.55rem}
+.glass-tile h3{font-size:1.45rem}
 .glass-tile p{color:var(--on-glass-muted);font-size:.98rem}
-.glass-tile .more{align-self:center;margin-top:auto}   /* sitzt immer unten; ohne Link bleibt der Platz leer */
+.glass-tile .btn{align-self:center;margin-top:auto;text-shadow:none}   /* sitzt immer unten; ohne Link bleibt der Platz leer */
 
 /* Runder "+"-Button, dreht sich beim Öffnen zum "×" */
 .svc__toggle{position:absolute;top:14px;right:14px;z-index:2;display:grid;place-items:center;width:46px;height:46px;border:0;border-radius:50%;
@@ -162,14 +164,13 @@
 .checks li::after{content:"";position:absolute;left:8px;top:8px;width:5px;height:9px;border-right:2.5px solid var(--accent);border-bottom:2.5px solid var(--accent);transform:rotate(40deg)}
 
 /* ---------- Glas-Kacheln (Zertifikat, Partner) ----------
-   .bt--glass: .bt__blur  = dasselbe Bild stark unscharf und vergrößert als farbiger Hintergrund,
-               .glass-in  = halbtransparente weiße Glasfläche mit dem scharfen Bild.
-   Bei Logos blendet multiply die weißen Logo-Hintergründe in die Glasfläche aus. */
+   .bt__blur = dasselbe Bild noch einmal, stark unscharf und vergrößert, als farbiger Hintergrund.
+   .glass-in = halbtransparente weiße Glasfläche, darauf das scharfe Bild.
+   mix-blend-mode:multiply soll den weißen Hintergrund der Logo-Dateien ausblenden. */
 .bt{position:relative;overflow:hidden;min-width:0;background:var(--surface);border-radius:var(--radius);box-shadow:var(--sh-2)}
 .bt--glass{display:grid;padding:22px;background:var(--logo-tile-bg);isolation:isolate}
-.bt__blur,.bt__blur img{position:absolute;inset:-25%;width:150%;height:150%;max-width:none}
-.bt__blur{z-index:-1;pointer-events:none}
-.bt__blur img{inset:0;width:100%;height:100%;object-fit:cover;filter:blur(28px) saturate(1.6);opacity:.85}
+.bt__blur{position:absolute;inset:-25%;z-index:-1;pointer-events:none}   /* ragt über die Kachel hinaus, damit kein heller Rand der Unschärfe sichtbar wird */
+.bt__blur img{position:absolute;inset:0;width:100%;height:100%;max-width:none;object-fit:cover;filter:blur(28px) saturate(1.6);opacity:.85}
 .glass-in{display:grid;place-items:center;width:100%;height:100%;min-height:88px;padding:16px 20px;border-radius:var(--radius-tile);
   background:var(--glass-logo);-webkit-backdrop-filter:blur(12px) saturate(1.2);backdrop-filter:blur(12px) saturate(1.2);box-shadow:var(--sh-glass-logo)}
 .glass-in img{height:var(--logo-h);max-width:100%;width:auto;object-fit:contain;mix-blend-mode:multiply}
@@ -180,6 +181,7 @@
 .bt--eco .bt__seal{width:100%;height:auto;object-fit:cover;mix-blend-mode:normal;border-radius:var(--radius-row);box-shadow:var(--sh-3);rotate:-2deg}
 .bt--eco .glass-in>picture{display:block;width:100%;max-width:var(--seal-w)}
 .bt__text{display:flex;flex-direction:column;align-items:flex-start;gap:18px}
+.bt__text .btn{align-self:flex-start}
 .bt--eco .bt__title{font-size:clamp(1.9rem,3.2vw,2.6rem)}
 .bt--eco p{color:var(--fg-soft)}
 
@@ -189,7 +191,10 @@
 .bt--gla{grid-area:gla}
 .bt--hbc{grid-area:hbc}
 .bt--tmx{grid-area:tmx}
-.bt--dek{grid-area:dek}
+.bt--dek{grid-area:dek;padding:12px}
+/* DEKRA: rundes Siegel (transparent freigestellt), größer als die Logos und mit eigenem Schatten */
+.bt--dek .glass-in{padding:6px}
+.bt--dek .glass-in img{height:calc(var(--logo-h) + 46px);max-height:100%;width:auto;aspect-ratio:1;mix-blend-mode:normal;filter:drop-shadow(0 6px 14px rgba(20,32,58,.25))}
 
 /* ---------- Kundenstimmen (Google Bewertung) ----------
    Dunkle Übersichtskachel + Bewertungskarten. Solange keine echten Daten angebunden sind: Skelett-Platzhalter. */
@@ -219,10 +224,26 @@
 /* ---------- Termin-Band ---------- */
 .cta{position:relative;overflow:hidden;display:grid;grid-template-columns:minmax(0,1.3fr) auto;gap:20px 40px;align-items:center;
   background:var(--grad-cta);color:var(--on-navy);border-radius:var(--radius-lg);padding:clamp(28px,5vw,56px);box-shadow:var(--sh-3)}
-.cta h2{margin-bottom:14px}
+.cta__text h2{margin-bottom:14px}
 .cta p{color:var(--on-navy-muted)}
-.cta p+p{margin-top:8px}
+.cta__text p+p{margin-top:8px}
 .cta .btn{font-size:1.1rem;padding:18px 32px}
+.cta .eyebrow--on-dark{color:var(--accent-2)}   /* mit .cta davor, sonst gewinnt die graue Farbe aus ".cta p" */
+
+/* Karriere im Termin-Band: über die volle Breite, mit Trennlinie oben */
+.job{grid-column:1/-1;display:grid;gap:18px;margin-top:clamp(12px,2vw,24px);padding-top:clamp(24px,3.5vw,40px);border-top:1px solid var(--footer-line)}
+.job .eyebrow{justify-self:start}
+.job__title{font-size:clamp(1.6rem,3vw,2.2rem)}
+.job__cols{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.job__col{display:grid;align-content:start;gap:12px;padding:20px 22px;border-radius:var(--radius-row);background:var(--glass-row);box-shadow:inset 0 0 0 1px var(--glass-line-row)}
+.job__col h3{font-size:1.3rem;color:var(--on-navy)}
+.job__list{list-style:none;margin:0;padding:0;display:grid;gap:8px;color:var(--on-navy-muted)}
+.job__list li{position:relative;padding-left:24px}
+.job__apply{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px 28px}
+.job__contact{display:grid;gap:4px}
+.cta .job__contact b{color:var(--on-navy)}
+.job__contact a{color:var(--on-navy);text-decoration:underline;text-underline-offset:3px}
+.job__links{display:flex;flex-wrap:wrap;gap:4px 20px}
 
 /* ---------- Kontaktformular (natives <dialog>, öffnet per showModal) ---------- */
 .contact{width:min(var(--dialog-w),100% - 2 * var(--gutter));max-width:none;max-height:calc(100dvh - 2 * var(--gutter));padding:0;border:0;
@@ -251,7 +272,7 @@ html:has(.contact[open]){overflow:hidden}   /* Seite dahinter scrollt nicht mit 
 .field input:focus-visible,.field select:focus-visible,.field textarea:focus-visible{border-color:var(--accent);outline:3px solid var(--accent);outline-offset:1px}
 .field input:user-invalid,.field select:user-invalid,.field textarea:user-invalid,.field [aria-invalid="true"]{border-color:var(--error);background:var(--error-soft)}
 
-/* Auswahlfeld mit eigenem Pfeil (wie beim Textlink) */
+/* Auswahlfeld mit eigenem Pfeil */
 .field__select{position:relative;display:block}
 .field__select select{appearance:none;-webkit-appearance:none;padding-right:44px;cursor:pointer}
 .field__select::after{content:"";position:absolute;right:18px;top:50%;width:.5em;height:.5em;border-right:2.5px solid var(--accent);border-bottom:2.5px solid var(--accent);
@@ -288,10 +309,9 @@ html:has(.contact[open]){overflow:hidden}   /* Seite dahinter scrollt nicht mit 
 .legal{grid-column:1/-1;display:flex;flex-wrap:wrap;gap:8px 22px;justify-content:space-between;margin-top:12px;padding-top:18px;border-top:1px solid var(--footer-line);font-size:.88rem}
 .site-footer .legal ul{display:flex;flex-wrap:wrap;gap:6px 18px}
 
-/* Footer wird auf großen Bildschirmen beim Scrollen freigelegt:
-   Er steht fest am unteren Rand hinter dem Inhalt (.page, z-index 1, eigener Hintergrund).
-   .page bekommt unten Platz in Höhe des Footers; die Höhe misst js/main.js per ResizeObserver (--fh).
-   Bewusst kein position:sticky – das hing beim Hochscrollen nach. */
+/* Großer Bildschirm: Der Footer liegt fest hinter dem Inhalt und wird am Seitenende "aufgedeckt".
+   .page liegt darüber und lässt unten so viel Platz frei, wie der Footer hoch ist (--fh, misst js/main.js).
+   Bewusst kein position:sticky, das ruckelte beim Hochscrollen. */
 @media (min-width:980px) and (min-height:760px){
   .site-footer{position:fixed;left:0;right:0;bottom:0;z-index:0;margin-inline:0}
   .page{margin-bottom:var(--fh,0px)}
@@ -306,7 +326,7 @@ html:has(.contact[open]){overflow:hidden}   /* Seite dahinter scrollt nicht mit 
   .menu>li>a{padding-inline:7px}
 }
 
-/* Drei schmale Karten nebeneinander: Glas-Kachel-Text etwas kleiner, damit er in die feste Kachelhöhe passt */
+/* Drei schmale Karten nebeneinander: Glas-Kachel-Text etwas kleiner, damit die Kacheln kompakt bleiben */
 @media (min-width:981px) and (max-width:1099px){
   .glass-tile{padding-inline:16px}
   .glass-tile h3{font-size:1.35rem}
@@ -324,13 +344,11 @@ html:has(.contact[open]){overflow:hidden}   /* Seite dahinter scrollt nicht mit 
 }
 
 @media (max-width:980px){
-  /* Karten einzeln untereinander, jede mit eigenen Zeilen */
-  .cards,.cards.is-open{grid-template-columns:minmax(0,1fr);grid-template-rows:none;row-gap:22px;max-width:620px;margin-inline:auto}
-  .svc{grid-row:auto;grid-template-rows:auto 0fr auto;row-gap:0}
-  .svc.is-open{grid-template-rows:auto 1fr auto;row-gap:12px}
+  /* Karten einzeln untereinander */
+  .cards{grid-template-columns:minmax(0,1fr);max-width:620px;margin-inline:auto}
   .svc__media{aspect-ratio:4/3}
   .hero__frame::after{background:var(--grad-hero-narrow)}
-  .split,.band,.cta{grid-template-columns:minmax(0,1fr)}
+  .split,.band,.cta,.job__cols{grid-template-columns:minmax(0,1fr)}
   .bt--eco .glass-in{grid-template-columns:minmax(0,1fr);justify-items:start}
   .bento{grid-template-columns:repeat(2,minmax(0,1fr));grid-template-areas:"gla hbc" "tmx dek"}
   .reviews{grid-template-columns:repeat(2,minmax(0,1fr))}
@@ -344,6 +362,7 @@ html:has(.contact[open]){overflow:hidden}   /* Seite dahinter scrollt nicht mit 
   .menu__cta{display:block;padding-top:8px}
   .menu__cta .btn{width:100%;text-transform:none;letter-spacing:.01em}
   .hero__text .btn,.cta .btn{width:100%}
+  .job__apply{flex-direction:column;align-items:stretch}
   .chip{border-radius:var(--radius-lg)}
   .svc__media{aspect-ratio:4/5}
   .bento{grid-template-columns:minmax(0,1fr);grid-template-areas:"gla" "hbc" "tmx" "dek"}

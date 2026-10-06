@@ -6,7 +6,7 @@
 <meta name="color-scheme" content="light">
 <title>Startseite Fahrzeuglackierung Unfallinstandsetzung Karosseriearbeiten Dülmen Oldtimer Restauration</title>
 <meta name="description" content="Lackiertechnik Igelbrink – Ihre Fachwerkstatt für Lackierung, Karosserie- und Unfallinstandsetzung in Dülmen.">
-<link rel="icon" type="image/png" href="assets/img/favicon.png">
+<link rel="icon" type="image/png" href="assets/img/13-favicon.png">
 <link rel="preload" href="assets/fonts/barlow-condensed-latin-700-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/barlow-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="css/tokens.css">
@@ -42,12 +42,15 @@
 
 <a class="skip" href="#inhalt">Zum Inhalt springen</a>
 
+<!-- Wiederverwendbare Symbole: einmal definiert, per <use href="#…"> eingesetzt -->
+<svg hidden><symbol id="stern" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2.5l2.9 6 6.6.8-4.9 4.6 1.3 6.5L12 17.2l-5.9 3.2 1.3-6.5L2.5 9.3l6.6-.8L12 2.5z"/></symbol></svg>
+
 <div class="page">
 
 <!-- HEADER -->
 <header class="site-header">
   <nav class="site-nav" aria-label="Hauptnavigation">
-    <a class="brand" href="#"><img src="igelbrink-Logo.png" width="1062" height="354" alt="Lackiertechnik Igelbrink"></a>
+    <a class="brand" href="#"><img src="assets/img/01-logo-lackiertechnik-igelbrink.png" width="1062" height="354" alt="Lackiertechnik Igelbrink"></a>
     <ul class="menu" id="menu">
       <li><a href="#">Classic Car Spezialist</a></li>
       <li><a href="#leistungen">Service</a>
@@ -66,7 +69,7 @@
           <li><a href="#partner">Partner</a></li>
         </ul>
       </li>
-      <li><a href="#">Karriere</a></li>
+      <li><a href="#karriere">Karriere</a></li>
       <li><a href="#kontakt">Kontakt</a></li>
       <!-- Nur im mobilen Menü sichtbar, wenn der Button in der Pille ausgeblendet ist -->
       <li class="menu__cta"><button class="btn btn--small" type="button" data-open-contact aria-haspopup="dialog" aria-controls="kontaktformular">Online-Termin</button></li>
@@ -83,19 +86,21 @@
 
   <section class="hero">
     <div class="hero__frame">
-      <!-- Platzhalter: Für das echte Foto nur src (und ggf. width/height) austauschen -->
-      <img class="hero__img" src="assets/img/hero-platzhalter.svg" width="2400" height="1350" fetchpriority="high"
-           alt="Klassischer Mercedes in der Lackierkabine von Lackiertechnik Igelbrink">
+      <picture>
+        <source type="image/webp" srcset="assets/img/02-hero-startseite-800.webp 800w, assets/img/02-hero-startseite-1400.webp 1400w, assets/img/02-hero-startseite-2400.webp 2400w" sizes="100vw">
+        <img class="hero__img" src="assets/img/02-hero-startseite-1600.jpg" width="2400" height="1600" fetchpriority="high"
+             alt="Lackierer mit Spritzpistole über frisch lackierten Karosserieteilen in der Lackierkabine">
+      </picture>
       <canvas class="hero__cover" aria-hidden="true"></canvas>
       <canvas class="hero__mist" aria-hidden="true"></canvas>
-      <img class="hero__gun" src="assets/img/spraygun.svg" width="800" height="620" decoding="async" alt="" aria-hidden="true">
+      <img class="hero__gun" src="assets/img/02-hero-spraygun.svg" width="800" height="620" decoding="async" alt="" aria-hidden="true">
       <div class="hero__body">
         <div class="hero__text">
           <h1>Herzlich willkommen bei Lackiertechnik Igelbrink</h1>
           <p class="hero__lead">Lackiertechnik Igelbrink – Ihre Fachwerkstatt für Lackierung, Karosserie- und Unfallinstandsetzung in Dülmen.</p>
           <button class="btn" type="button" data-open-contact aria-haspopup="dialog" aria-controls="kontaktformular">Online-Termin</button>
         </div>
-        <div class="chip"><strong id="chip-classic">Classic Cars Spezialist</strong><a class="more more--glass" href="#" aria-describedby="chip-classic">Mehr erfahren</a></div>
+        <div class="chip"><strong id="chip-classic">Classic Cars Spezialist</strong><a class="btn btn--glass btn--small" href="#" aria-describedby="chip-classic">Mehr erfahren</a></div>
       </div>
     </div>
   </section>
@@ -103,8 +108,8 @@
   <section class="pt-s">
     <div class="band">
       <picture class="band__img">
-        <source type="image/webp" srcset="assets/img/lackierkabine-lackierer-800.webp 800w, assets/img/lackierkabine-lackierer-1600.webp 1600w" sizes="(max-width: 1232px) calc(100vw - 32px), 1200px">
-        <img src="assets/img/lackierkabine-lackierer-1600.jpg" width="1600" height="1200" decoding="async" alt="">
+        <source type="image/webp" srcset="assets/img/03-leistungen-lackierkabine-800.webp 800w, assets/img/03-leistungen-lackierkabine-1600.webp 1600w" sizes="(max-width: 1232px) calc(100vw - 32px), 1200px">
+        <img src="assets/img/03-leistungen-lackierkabine-1600.jpg" width="1600" height="1200" decoding="async" alt="">
       </picture>
       <div>
         <h2>Unsere Leistungen im Überblick:</h2>
@@ -156,8 +161,8 @@
       <article class="svc">
         <div class="svc__media">
           <picture class="svc__img">
-            <source type="image/webp" srcset="assets/img/unfallschaden-bmw-heck-600.webp 600w, assets/img/unfallschaden-bmw-heck-1200.webp 1200w" sizes="(max-width: 980px) 620px, 640px">
-            <img src="assets/img/unfallschaden-bmw-heck-600.jpg" srcset="assets/img/unfallschaden-bmw-heck-600.jpg 600w, assets/img/unfallschaden-bmw-heck-1200.jpg 1200w" sizes="(max-width: 980px) 620px, 640px"
+            <source type="image/webp" srcset="assets/img/04-schwerpunkte-unfallinstandsetzung-600.webp 600w, assets/img/04-schwerpunkte-unfallinstandsetzung-1200.webp 1200w" sizes="(max-width: 980px) min(620px, calc(100vw - 32px)), min(386px, calc((100vw - 76px) / 3))">
+            <img src="assets/img/04-schwerpunkte-unfallinstandsetzung-600.jpg" srcset="assets/img/04-schwerpunkte-unfallinstandsetzung-600.jpg 600w, assets/img/04-schwerpunkte-unfallinstandsetzung-1200.jpg 1200w" sizes="(max-width: 980px) min(620px, calc(100vw - 32px)), min(386px, calc((100vw - 76px) / 3))"
                  width="600" height="450" loading="lazy" decoding="async"
                  alt="Unfallschaden am Heck eines BMW in der Werkstatt">
           </picture>
@@ -190,8 +195,8 @@
       <article class="svc">
         <div class="svc__media">
           <picture class="svc__img">
-            <source type="image/webp" srcset="assets/img/wohnmobil-see-600.webp 600w, assets/img/wohnmobil-see-1080.webp 1080w" sizes="(max-width: 980px) 620px, 640px">
-            <img src="assets/img/wohnmobil-see-600.jpg" srcset="assets/img/wohnmobil-see-600.jpg 600w, assets/img/wohnmobil-see-1080.jpg 1080w" sizes="(max-width: 980px) 620px, 640px"
+            <source type="image/webp" srcset="assets/img/05-schwerpunkte-wohnmobil-600.webp 600w, assets/img/05-schwerpunkte-wohnmobil-1080.webp 1080w" sizes="(max-width: 980px) min(620px, calc(100vw - 32px)), min(386px, calc((100vw - 76px) / 3))">
+            <img src="assets/img/05-schwerpunkte-wohnmobil-600.jpg" srcset="assets/img/05-schwerpunkte-wohnmobil-600.jpg 600w, assets/img/05-schwerpunkte-wohnmobil-1080.jpg 1080w" sizes="(max-width: 980px) min(620px, calc(100vw - 32px)), min(386px, calc((100vw - 76px) / 3))"
                  width="600" height="600" loading="lazy" decoding="async"
                  alt="Wohnmobil an einem See">
           </picture>
@@ -200,7 +205,7 @@
             <span class="glass-tile__ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17V7a2 2 0 0 1 2-2h11l5 6v6H3z"/><path d="M16 5v6h5"/><path d="M7 9h5"/><circle cx="7" cy="17" r="2"/><circle cx="17" cy="17" r="2"/></svg></span>
             <h3 id="svc-title-2">Wohnwagen- und Wohnmobil Instandsetzung</h3>
             <p>Ihr Profi für Wohnwagen- und Wohnmobil-Instandsetzung</p>
-              <a class="more more--glass" href="#" aria-describedby="svc-title-2">Mehr erfahren</a>
+            <a class="btn btn--glass btn--small" href="#" aria-describedby="svc-title-2">Mehr erfahren</a>
           </div>
         </div>
         <div class="svc__more" id="svc-more-2">
@@ -225,8 +230,8 @@
       <article class="svc">
         <div class="svc__media">
           <picture class="svc__img">
-            <source type="image/webp" srcset="assets/img/oldtimer-mercedes-w123-600.webp 600w, assets/img/oldtimer-mercedes-w123-1200.webp 1200w" sizes="(max-width: 980px) 620px, 640px">
-            <img src="assets/img/oldtimer-mercedes-w123-600.jpg" srcset="assets/img/oldtimer-mercedes-w123-600.jpg 600w, assets/img/oldtimer-mercedes-w123-1200.jpg 1200w" sizes="(max-width: 980px) 620px, 640px"
+            <source type="image/webp" srcset="assets/img/06-schwerpunkte-oldtimer-600.webp 600w, assets/img/06-schwerpunkte-oldtimer-1200.webp 1200w" sizes="(max-width: 980px) min(620px, calc(100vw - 32px)), min(386px, calc((100vw - 76px) / 3))">
+            <img src="assets/img/06-schwerpunkte-oldtimer-600.jpg" srcset="assets/img/06-schwerpunkte-oldtimer-600.jpg 600w, assets/img/06-schwerpunkte-oldtimer-1200.jpg 1200w" sizes="(max-width: 980px) min(620px, calc(100vw - 32px)), min(386px, calc((100vw - 76px) / 3))"
                  width="600" height="450" loading="lazy" decoding="async"
                  alt="Mercedes W123 während der Restaurierung">
           </picture>
@@ -235,7 +240,7 @@
             <span class="glass-tile__ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l2.6 5.3 5.9.9-4.3 4.1 1 5.8L12 16.4 6.8 19.1l1-5.8L3.5 9.2l5.9-.9L12 3z"/></svg></span>
             <h3 id="svc-title-3">Oldtimer Spezialist:</h3>
             <p>Klassiker verdienen besonderen Respekt – und die richtige Werkstatt.</p>
-              <a class="more more--glass" href="#" aria-describedby="svc-title-3">Mehr erfahren</a>
+            <a class="btn btn--glass btn--small" href="#" aria-describedby="svc-title-3">Mehr erfahren</a>
           </div>
         </div>
         <div class="svc__more" id="svc-more-3">
@@ -270,19 +275,19 @@
     <!-- ECOcert-Kachel im Glas-Look über die volle Breite: Schild unscharf als Hintergrund, darüber Glasfläche mit scharfem Schild und Text -->
     <div class="bt bt--glass bt--eco">
       <picture class="bt__blur" aria-hidden="true">
-        <source type="image/webp" srcset="assets/img/ecocert100-werkstattschild-400.webp">
-        <img src="assets/img/ecocert100-werkstattschild-400.jpg" width="400" height="300" loading="lazy" decoding="async" alt="">
+        <source type="image/webp" srcset="assets/img/07-qualitaet-ecocert100-werkstattschild-400.webp">
+        <img src="assets/img/07-qualitaet-ecocert100-werkstattschild-400.jpg" width="400" height="300" loading="lazy" decoding="async" alt="">
       </picture>
       <div class="glass-in">
         <picture>
-          <source type="image/webp" srcset="assets/img/ecocert100-werkstattschild-400.webp 400w, assets/img/ecocert100-werkstattschild-960.webp 960w" sizes="(max-width: 560px) calc(100vw - 80px), 480px">
-          <img class="bt__seal" src="assets/img/ecocert100-werkstattschild-960.jpg" srcset="assets/img/ecocert100-werkstattschild-400.jpg 400w, assets/img/ecocert100-werkstattschild-960.jpg 960w" sizes="(max-width: 560px) calc(100vw - 80px), 480px"
+          <source type="image/webp" srcset="assets/img/07-qualitaet-ecocert100-werkstattschild-400.webp 400w, assets/img/07-qualitaet-ecocert100-werkstattschild-960.webp 960w" sizes="(max-width: 560px) calc(100vw - 80px), 480px">
+          <img class="bt__seal" src="assets/img/07-qualitaet-ecocert100-werkstattschild-960.jpg" srcset="assets/img/07-qualitaet-ecocert100-werkstattschild-400.jpg 400w, assets/img/07-qualitaet-ecocert100-werkstattschild-960.jpg 960w" sizes="(max-width: 560px) calc(100vw - 80px), 480px"
                width="960" height="720" loading="lazy" decoding="async" alt="ECOcert100 Werkstattschild">
         </picture>
         <div class="bt__text">
           <h3 class="bt__title" id="eco-title">Wir sind zertifizierter ECOcert100 Betrieb:</h3>
           <p>Mit ECOcert100 wird das Ziel verfolgt, die Qualitäts- und Nachhaltigkeitsstandards von Lackierbetrieben zu ermitteln und zu bewerten. Mit dem ECOcert100-Zertifikat können wir uns gegenüber unseren Kunden, Versicherungen oder Automobilherstellern als umweltfreundlicher und nachhaltiger Partner positionieren.</p>
-          <a class="more" href="#" aria-describedby="eco-title">Mehr erfahren</a>
+          <a class="btn btn--glass btn--glass-light" href="#" aria-describedby="eco-title">Mehr erfahren</a>
         </div>
       </div>
     </div>
@@ -298,49 +303,49 @@
     <div class="bento">
       <div class="bt bt--glass bt--logo bt--gla">
         <picture class="bt__blur" aria-hidden="true">
-          <source type="image/webp" srcset="assets/img/partner-glasurit.webp">
-          <img src="assets/img/partner-glasurit.png" width="200" height="200" loading="lazy" decoding="async" alt="">
+          <source type="image/webp" srcset="assets/img/08-partner-glasurit.webp">
+          <img src="assets/img/08-partner-glasurit.png" width="200" height="200" loading="lazy" decoding="async" alt="">
         </picture>
         <span class="glass-in">
           <picture>
-            <source type="image/webp" srcset="assets/img/partner-glasurit.webp">
-            <img src="assets/img/partner-glasurit.png" width="200" height="200" loading="lazy" decoding="async" alt="Glasurit">
+            <source type="image/webp" srcset="assets/img/08-partner-glasurit.webp">
+            <img src="assets/img/08-partner-glasurit.png" width="200" height="200" loading="lazy" decoding="async" alt="Glasurit">
           </picture>
         </span>
       </div>
       <div class="bt bt--glass bt--logo bt--hbc">
         <picture class="bt__blur" aria-hidden="true">
-          <source type="image/webp" srcset="assets/img/partner-hbc-system.webp">
-          <img src="assets/img/partner-hbc-system.png" width="600" height="230" loading="lazy" decoding="async" alt="">
+          <source type="image/webp" srcset="assets/img/09-partner-hbc-system.webp">
+          <img src="assets/img/09-partner-hbc-system.png" width="600" height="230" loading="lazy" decoding="async" alt="">
         </picture>
         <span class="glass-in">
           <picture>
-            <source type="image/webp" srcset="assets/img/partner-hbc-system.webp">
-            <img src="assets/img/partner-hbc-system.png" width="600" height="230" loading="lazy" decoding="async" alt="HBC-System">
+            <source type="image/webp" srcset="assets/img/09-partner-hbc-system.webp">
+            <img src="assets/img/09-partner-hbc-system.png" width="600" height="230" loading="lazy" decoding="async" alt="HBC-System">
           </picture>
         </span>
       </div>
       <div class="bt bt--glass bt--logo bt--tmx">
         <picture class="bt__blur" aria-hidden="true">
-          <source type="image/webp" srcset="assets/img/partner-timemax.webp">
-          <img src="assets/img/partner-timemax.png" width="600" height="200" loading="lazy" decoding="async" alt="">
+          <source type="image/webp" srcset="assets/img/10-partner-timemax.webp">
+          <img src="assets/img/10-partner-timemax.png" width="600" height="200" loading="lazy" decoding="async" alt="">
         </picture>
         <span class="glass-in">
           <picture>
-            <source type="image/webp" srcset="assets/img/partner-timemax.webp">
-            <img src="assets/img/partner-timemax.png" width="600" height="200" loading="lazy" decoding="async" alt="Timemax">
+            <source type="image/webp" srcset="assets/img/10-partner-timemax.webp">
+            <img src="assets/img/10-partner-timemax.png" width="600" height="200" loading="lazy" decoding="async" alt="Timemax">
           </picture>
         </span>
       </div>
       <div class="bt bt--glass bt--logo bt--dek">
         <picture class="bt__blur" aria-hidden="true">
-          <source type="image/webp" srcset="assets/img/dekra-siegel.webp">
-          <img src="assets/img/dekra-siegel.png" width="300" height="300" loading="lazy" decoding="async" alt="">
+          <source type="image/webp" srcset="assets/img/11-partner-dekra-siegel.webp">
+          <img src="assets/img/11-partner-dekra-siegel.png" width="600" height="600" loading="lazy" decoding="async" alt="">
         </picture>
         <span class="glass-in">
           <picture>
-            <source type="image/webp" srcset="assets/img/dekra-siegel.webp">
-            <img src="assets/img/dekra-siegel.png" width="300" height="300" loading="lazy" decoding="async" alt="DEKRA Siegel">
+            <source type="image/webp" srcset="assets/img/11-partner-dekra-siegel.webp">
+            <img src="assets/img/11-partner-dekra-siegel.png" width="600" height="600" loading="lazy" decoding="async" alt="DEKRA geprüft – Werkstattprüfung für Karosserie- und Lackierfachbetriebe">
           </picture>
         </span>
       </div>
@@ -357,25 +362,25 @@
     <!-- TODO: Google-Bewertungen einbinden (Google Business Profile API, serverseitig) -->
     <div class="reviews">
       <div class="rv rv--sum">
-        <div class="stars" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.5l2.9 6 6.6.8-4.9 4.6 1.3 6.5L12 17.2l-5.9 3.2 1.3-6.5L2.5 9.3l6.6-.8L12 2.5z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.5l2.9 6 6.6.8-4.9 4.6 1.3 6.5L12 17.2l-5.9 3.2 1.3-6.5L2.5 9.3l6.6-.8L12 2.5z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.5l2.9 6 6.6.8-4.9 4.6 1.3 6.5L12 17.2l-5.9 3.2 1.3-6.5L2.5 9.3l6.6-.8L12 2.5z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.5l2.9 6 6.6.8-4.9 4.6 1.3 6.5L12 17.2l-5.9 3.2 1.3-6.5L2.5 9.3l6.6-.8L12 2.5z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.5l2.9 6 6.6.8-4.9 4.6 1.3 6.5L12 17.2l-5.9 3.2 1.3-6.5L2.5 9.3l6.6-.8L12 2.5z"/></svg></div>
+        <div class="stars" aria-hidden="true"><svg viewBox="0 0 24 24"><use href="#stern"/></svg><svg viewBox="0 0 24 24"><use href="#stern"/></svg><svg viewBox="0 0 24 24"><use href="#stern"/></svg><svg viewBox="0 0 24 24"><use href="#stern"/></svg><svg viewBox="0 0 24 24"><use href="#stern"/></svg></div>
         <strong>Google Bewertung</strong>
         <span class="draft-note draft-note--small">Platzhalter: Sternwertung, Anzahl und Link zum Google-Profil</span>
       </div>
       <article class="rv">
         <div class="rv__who" aria-hidden="true"><span class="rv__avatar"></span><span class="sk-lines"><span class="sk sk--60"></span><span class="sk sk--35"></span></span></div>
-        <div class="stars" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.5l2.9 6 6.6.8-4.9 4.6 1.3 6.5L12 17.2l-5.9 3.2 1.3-6.5L2.5 9.3l6.6-.8L12 2.5z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.5l2.9 6 6.6.8-4.9 4.6 1.3 6.5L12 17.2l-5.9 3.2 1.3-6.5L2.5 9.3l6.6-.8L12 2.5z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.5l2.9 6 6.6.8-4.9 4.6 1.3 6.5L12 17.2l-5.9 3.2 1.3-6.5L2.5 9.3l6.6-.8L12 2.5z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.5l2.9 6 6.6.8-4.9 4.6 1.3 6.5L12 17.2l-5.9 3.2 1.3-6.5L2.5 9.3l6.6-.8L12 2.5z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.5l2.9 6 6.6.8-4.9 4.6 1.3 6.5L12 17.2l-5.9 3.2 1.3-6.5L2.5 9.3l6.6-.8L12 2.5z"/></svg></div>
+        <div class="stars" aria-hidden="true"><svg viewBox="0 0 24 24"><use href="#stern"/></svg><svg viewBox="0 0 24 24"><use href="#stern"/></svg><svg viewBox="0 0 24 24"><use href="#stern"/></svg><svg viewBox="0 0 24 24"><use href="#stern"/></svg><svg viewBox="0 0 24 24"><use href="#stern"/></svg></div>
         <div class="sk-lines" aria-hidden="true"><span class="sk"></span><span class="sk"></span><span class="sk sk--80"></span><span class="sk sk--55"></span></div>
         <span class="draft-note draft-note--small">Platzhalter für eine echte Google-Bewertung</span>
       </article>
       <article class="rv">
         <div class="rv__who" aria-hidden="true"><span class="rv__avatar"></span><span class="sk-lines"><span class="sk sk--60"></span><span class="sk sk--35"></span></span></div>
-        <div class="stars" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.5l2.9 6 6.6.8-4.9 4.6 1.3 6.5L12 17.2l-5.9 3.2 1.3-6.5L2.5 9.3l6.6-.8L12 2.5z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.5l2.9 6 6.6.8-4.9 4.6 1.3 6.5L12 17.2l-5.9 3.2 1.3-6.5L2.5 9.3l6.6-.8L12 2.5z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.5l2.9 6 6.6.8-4.9 4.6 1.3 6.5L12 17.2l-5.9 3.2 1.3-6.5L2.5 9.3l6.6-.8L12 2.5z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.5l2.9 6 6.6.8-4.9 4.6 1.3 6.5L12 17.2l-5.9 3.2 1.3-6.5L2.5 9.3l6.6-.8L12 2.5z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.5l2.9 6 6.6.8-4.9 4.6 1.3 6.5L12 17.2l-5.9 3.2 1.3-6.5L2.5 9.3l6.6-.8L12 2.5z"/></svg></div>
+        <div class="stars" aria-hidden="true"><svg viewBox="0 0 24 24"><use href="#stern"/></svg><svg viewBox="0 0 24 24"><use href="#stern"/></svg><svg viewBox="0 0 24 24"><use href="#stern"/></svg><svg viewBox="0 0 24 24"><use href="#stern"/></svg><svg viewBox="0 0 24 24"><use href="#stern"/></svg></div>
         <div class="sk-lines" aria-hidden="true"><span class="sk"></span><span class="sk"></span><span class="sk sk--80"></span><span class="sk sk--55"></span></div>
         <span class="draft-note draft-note--small">Platzhalter für eine echte Google-Bewertung</span>
       </article>
       <article class="rv">
         <div class="rv__who" aria-hidden="true"><span class="rv__avatar"></span><span class="sk-lines"><span class="sk sk--60"></span><span class="sk sk--35"></span></span></div>
-        <div class="stars" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.5l2.9 6 6.6.8-4.9 4.6 1.3 6.5L12 17.2l-5.9 3.2 1.3-6.5L2.5 9.3l6.6-.8L12 2.5z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.5l2.9 6 6.6.8-4.9 4.6 1.3 6.5L12 17.2l-5.9 3.2 1.3-6.5L2.5 9.3l6.6-.8L12 2.5z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.5l2.9 6 6.6.8-4.9 4.6 1.3 6.5L12 17.2l-5.9 3.2 1.3-6.5L2.5 9.3l6.6-.8L12 2.5z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.5l2.9 6 6.6.8-4.9 4.6 1.3 6.5L12 17.2l-5.9 3.2 1.3-6.5L2.5 9.3l6.6-.8L12 2.5z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.5l2.9 6 6.6.8-4.9 4.6 1.3 6.5L12 17.2l-5.9 3.2 1.3-6.5L2.5 9.3l6.6-.8L12 2.5z"/></svg></div>
+        <div class="stars" aria-hidden="true"><svg viewBox="0 0 24 24"><use href="#stern"/></svg><svg viewBox="0 0 24 24"><use href="#stern"/></svg><svg viewBox="0 0 24 24"><use href="#stern"/></svg><svg viewBox="0 0 24 24"><use href="#stern"/></svg><svg viewBox="0 0 24 24"><use href="#stern"/></svg></div>
         <div class="sk-lines" aria-hidden="true"><span class="sk"></span><span class="sk"></span><span class="sk sk--80"></span><span class="sk sk--55"></span></div>
         <span class="draft-note draft-note--small">Platzhalter für eine echte Google-Bewertung</span>
       </article>
@@ -384,12 +389,45 @@
 
   <section id="termin" class="pt-0 pb-s">
     <div class="cta">
-      <div>
+      <div class="cta__text">
         <h2>Jetzt Termin vereinbaren!</h2>
         <p><span aria-hidden="true">👉</span> <b>Lackiertechnik Igelbrink – Ihre Lackiererei und Unfallwerkstatt in Dülmen.</b></p>
         <p>Kontaktieren Sie uns jetzt – wir kümmern uns um Ihren Schaden schnell, zuverlässig und unkompliziert.</p>
       </div>
       <button class="btn" type="button" data-open-contact aria-haspopup="dialog" aria-controls="kontaktformular">Online-Termin</button>
+
+      <!-- KARRIERE: Stellenanzeige über die volle Breite des Termin-Bands -->
+      <div class="job" id="karriere">
+        <p class="eyebrow eyebrow--on-dark">Karriere</p>
+        <h2 class="job__title" id="karriere-title">Wir suchen Verstärkung: Fahrzeuglackierer/-in (m/w/d)</h2>
+        <p>Du hast deine Ausbildung im Bereich Fahrzeuglackierung abgeschlossen, arbeitest sorgfältig und hast Freude am Handwerk? Dann bewirb dich bei uns in Dülmen.</p>
+        <div class="job__cols">
+          <div class="job__col">
+            <h3>Das bringst du mit</h3>
+            <ul class="job__list">
+              <li>Abgeschlossene Ausbildung im Bereich Fahrzeuglackierung</li>
+              <li>Sorgfältige und professionelle Arbeitsweise</li>
+              <li>Motivation, Zuverlässigkeit und Freude am Handwerk</li>
+            </ul>
+          </div>
+          <div class="job__col">
+            <h3>Das bieten wir dir</h3>
+            <ul class="job__list">
+              <li>Familiäres Arbeitsumfeld und ein Team, das zusammenhält</li>
+              <li>Abwechslungsreiche Aufgaben und eigenverantwortliches Arbeiten</li>
+              <li>Faire Bezahlung und langfristige Jobsicherheit</li>
+              <li>Moderne Technik, hochwertige Arbeitsmittel und regelmäßige Fortbildungen</li>
+            </ul>
+          </div>
+        </div>
+        <div class="job__apply">
+          <div class="job__contact">
+            <p>Deine Ansprechpartnerin: <b>Frau E. Gerlach-Igelbrink</b></p>
+            <p class="job__links"><a href="tel:+4917645875781">+49 17645875781</a> <a href="mailto:info@lackiertechnik-igelbrink.de">info@lackiertechnik-igelbrink.de</a></p>
+          </div>
+          <a class="btn btn--glass" href="mailto:info@lackiertechnik-igelbrink.de?subject=Bewerbung%20als%20Fahrzeuglackierer%2Fin" aria-describedby="karriere-title">Jetzt bewerben</a>
+        </div>
+      </div>
     </div>
   </section>
 </main>
@@ -399,12 +437,12 @@
 <footer class="site-footer" id="kontakt">
   <div class="site-footer__img" aria-hidden="true">
     <picture>
-      <source type="image/webp" srcset="assets/img/igelbrink-footer-400.webp 400w, assets/img/igelbrink-footer-675.webp 675w" sizes="(max-width: 980px) 100vw, min(58vw, 820px)">
-      <img src="Igelbrink-Footer-ohne-Text.jpg" width="675" height="675" loading="lazy" decoding="async" alt="">
+      <source type="image/webp" srcset="assets/img/12-footer-politur-400.webp 400w, assets/img/12-footer-politur-675.webp 675w" sizes="(max-width: 980px) 100vw, min(58vw, 820px)">
+      <img src="assets/img/12-footer-politur-675.jpg" width="675" height="675" loading="lazy" decoding="async" alt="">
     </picture>
   </div>
   <div class="site-footer__inner">
-    <div class="site-footer__logo"><span><img src="igelbrink-Logo.png" width="1062" height="354" loading="lazy" decoding="async" alt="Lackiertechnik Igelbrink"></span></div>
+    <div class="site-footer__logo"><span><img src="assets/img/01-logo-lackiertechnik-igelbrink.png" width="1062" height="354" loading="lazy" decoding="async" alt="Lackiertechnik Igelbrink"></span></div>
     <div>
       <h2 class="footer-title">Öffnungszeiten:</h2>
       <p>Montag – Freitag:<br>08:00 – 17:00 Uhr<br>oder nach Vereinbarung<br>Samstag:<br>nach Vereinbarung</p>
