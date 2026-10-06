@@ -42,6 +42,9 @@
 
 <a class="skip" href="#inhalt">Zum Inhalt springen</a>
 
+<!-- Wiederverwendbare Symbole: einmal definiert, per <use href="#…"> eingesetzt -->
+<svg hidden><symbol id="stern" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2.5l2.9 6 6.6.8-4.9 4.6 1.3 6.5L12 17.2l-5.9 3.2 1.3-6.5L2.5 9.3l6.6-.8L12 2.5z"/></symbol></svg>
+
 <div class="page">
 
 <!-- HEADER -->
@@ -158,8 +161,8 @@
       <article class="svc">
         <div class="svc__media">
           <picture class="svc__img">
-            <source type="image/webp" srcset="assets/img/04-schwerpunkte-unfallinstandsetzung-600.webp 600w, assets/img/04-schwerpunkte-unfallinstandsetzung-1200.webp 1200w" sizes="(max-width: 980px) 620px, 640px">
-            <img src="assets/img/04-schwerpunkte-unfallinstandsetzung-600.jpg" srcset="assets/img/04-schwerpunkte-unfallinstandsetzung-600.jpg 600w, assets/img/04-schwerpunkte-unfallinstandsetzung-1200.jpg 1200w" sizes="(max-width: 980px) 620px, 640px"
+            <source type="image/webp" srcset="assets/img/04-schwerpunkte-unfallinstandsetzung-600.webp 600w, assets/img/04-schwerpunkte-unfallinstandsetzung-1200.webp 1200w" sizes="(max-width: 980px) min(620px, calc(100vw - 32px)), min(386px, calc((100vw - 76px) / 3))">
+            <img src="assets/img/04-schwerpunkte-unfallinstandsetzung-600.jpg" srcset="assets/img/04-schwerpunkte-unfallinstandsetzung-600.jpg 600w, assets/img/04-schwerpunkte-unfallinstandsetzung-1200.jpg 1200w" sizes="(max-width: 980px) min(620px, calc(100vw - 32px)), min(386px, calc((100vw - 76px) / 3))"
                  width="600" height="450" loading="lazy" decoding="async"
                  alt="Unfallschaden am Heck eines BMW in der Werkstatt">
           </picture>
@@ -192,8 +195,8 @@
       <article class="svc">
         <div class="svc__media">
           <picture class="svc__img">
-            <source type="image/webp" srcset="assets/img/05-schwerpunkte-wohnmobil-600.webp 600w, assets/img/05-schwerpunkte-wohnmobil-1080.webp 1080w" sizes="(max-width: 980px) 620px, 640px">
-            <img src="assets/img/05-schwerpunkte-wohnmobil-600.jpg" srcset="assets/img/05-schwerpunkte-wohnmobil-600.jpg 600w, assets/img/05-schwerpunkte-wohnmobil-1080.jpg 1080w" sizes="(max-width: 980px) 620px, 640px"
+            <source type="image/webp" srcset="assets/img/05-schwerpunkte-wohnmobil-600.webp 600w, assets/img/05-schwerpunkte-wohnmobil-1080.webp 1080w" sizes="(max-width: 980px) min(620px, calc(100vw - 32px)), min(386px, calc((100vw - 76px) / 3))">
+            <img src="assets/img/05-schwerpunkte-wohnmobil-600.jpg" srcset="assets/img/05-schwerpunkte-wohnmobil-600.jpg 600w, assets/img/05-schwerpunkte-wohnmobil-1080.jpg 1080w" sizes="(max-width: 980px) min(620px, calc(100vw - 32px)), min(386px, calc((100vw - 76px) / 3))"
                  width="600" height="600" loading="lazy" decoding="async"
                  alt="Wohnmobil an einem See">
           </picture>
@@ -227,8 +230,8 @@
       <article class="svc">
         <div class="svc__media">
           <picture class="svc__img">
-            <source type="image/webp" srcset="assets/img/06-schwerpunkte-oldtimer-600.webp 600w, assets/img/06-schwerpunkte-oldtimer-1200.webp 1200w" sizes="(max-width: 980px) 620px, 640px">
-            <img src="assets/img/06-schwerpunkte-oldtimer-600.jpg" srcset="assets/img/06-schwerpunkte-oldtimer-600.jpg 600w, assets/img/06-schwerpunkte-oldtimer-1200.jpg 1200w" sizes="(max-width: 980px) 620px, 640px"
+            <source type="image/webp" srcset="assets/img/06-schwerpunkte-oldtimer-600.webp 600w, assets/img/06-schwerpunkte-oldtimer-1200.webp 1200w" sizes="(max-width: 980px) min(620px, calc(100vw - 32px)), min(386px, calc((100vw - 76px) / 3))">
+            <img src="assets/img/06-schwerpunkte-oldtimer-600.jpg" srcset="assets/img/06-schwerpunkte-oldtimer-600.jpg 600w, assets/img/06-schwerpunkte-oldtimer-1200.jpg 1200w" sizes="(max-width: 980px) min(620px, calc(100vw - 32px)), min(386px, calc((100vw - 76px) / 3))"
                  width="600" height="450" loading="lazy" decoding="async"
                  alt="Mercedes W123 während der Restaurierung">
           </picture>
@@ -359,25 +362,25 @@
     <!-- TODO: Google-Bewertungen einbinden (Google Business Profile API, serverseitig) -->
     <div class="reviews">
       <div class="rv rv--sum">
-        <div class="stars" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.5l2.9 6 6.6.8-4.9 4.6 1.3 6.5L12 17.2l-5.9 3.2 1.3-6.5L2.5 9.3l6.6-.8L12 2.5z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.5l2.9 6 6.6.8-4.9 4.6 1.3 6.5L12 17.2l-5.9 3.2 1.3-6.5L2.5 9.3l6.6-.8L12 2.5z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.5l2.9 6 6.6.8-4.9 4.6 1.3 6.5L12 17.2l-5.9 3.2 1.3-6.5L2.5 9.3l6.6-.8L12 2.5z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.5l2.9 6 6.6.8-4.9 4.6 1.3 6.5L12 17.2l-5.9 3.2 1.3-6.5L2.5 9.3l6.6-.8L12 2.5z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.5l2.9 6 6.6.8-4.9 4.6 1.3 6.5L12 17.2l-5.9 3.2 1.3-6.5L2.5 9.3l6.6-.8L12 2.5z"/></svg></div>
+        <div class="stars" aria-hidden="true"><svg viewBox="0 0 24 24"><use href="#stern"/></svg><svg viewBox="0 0 24 24"><use href="#stern"/></svg><svg viewBox="0 0 24 24"><use href="#stern"/></svg><svg viewBox="0 0 24 24"><use href="#stern"/></svg><svg viewBox="0 0 24 24"><use href="#stern"/></svg></div>
         <strong>Google Bewertung</strong>
         <span class="draft-note draft-note--small">Platzhalter: Sternwertung, Anzahl und Link zum Google-Profil</span>
       </div>
       <article class="rv">
         <div class="rv__who" aria-hidden="true"><span class="rv__avatar"></span><span class="sk-lines"><span class="sk sk--60"></span><span class="sk sk--35"></span></span></div>
-        <div class="stars" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.5l2.9 6 6.6.8-4.9 4.6 1.3 6.5L12 17.2l-5.9 3.2 1.3-6.5L2.5 9.3l6.6-.8L12 2.5z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.5l2.9 6 6.6.8-4.9 4.6 1.3 6.5L12 17.2l-5.9 3.2 1.3-6.5L2.5 9.3l6.6-.8L12 2.5z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.5l2.9 6 6.6.8-4.9 4.6 1.3 6.5L12 17.2l-5.9 3.2 1.3-6.5L2.5 9.3l6.6-.8L12 2.5z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.5l2.9 6 6.6.8-4.9 4.6 1.3 6.5L12 17.2l-5.9 3.2 1.3-6.5L2.5 9.3l6.6-.8L12 2.5z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.5l2.9 6 6.6.8-4.9 4.6 1.3 6.5L12 17.2l-5.9 3.2 1.3-6.5L2.5 9.3l6.6-.8L12 2.5z"/></svg></div>
+        <div class="stars" aria-hidden="true"><svg viewBox="0 0 24 24"><use href="#stern"/></svg><svg viewBox="0 0 24 24"><use href="#stern"/></svg><svg viewBox="0 0 24 24"><use href="#stern"/></svg><svg viewBox="0 0 24 24"><use href="#stern"/></svg><svg viewBox="0 0 24 24"><use href="#stern"/></svg></div>
         <div class="sk-lines" aria-hidden="true"><span class="sk"></span><span class="sk"></span><span class="sk sk--80"></span><span class="sk sk--55"></span></div>
         <span class="draft-note draft-note--small">Platzhalter für eine echte Google-Bewertung</span>
       </article>
       <article class="rv">
         <div class="rv__who" aria-hidden="true"><span class="rv__avatar"></span><span class="sk-lines"><span class="sk sk--60"></span><span class="sk sk--35"></span></span></div>
-        <div class="stars" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.5l2.9 6 6.6.8-4.9 4.6 1.3 6.5L12 17.2l-5.9 3.2 1.3-6.5L2.5 9.3l6.6-.8L12 2.5z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.5l2.9 6 6.6.8-4.9 4.6 1.3 6.5L12 17.2l-5.9 3.2 1.3-6.5L2.5 9.3l6.6-.8L12 2.5z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.5l2.9 6 6.6.8-4.9 4.6 1.3 6.5L12 17.2l-5.9 3.2 1.3-6.5L2.5 9.3l6.6-.8L12 2.5z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.5l2.9 6 6.6.8-4.9 4.6 1.3 6.5L12 17.2l-5.9 3.2 1.3-6.5L2.5 9.3l6.6-.8L12 2.5z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.5l2.9 6 6.6.8-4.9 4.6 1.3 6.5L12 17.2l-5.9 3.2 1.3-6.5L2.5 9.3l6.6-.8L12 2.5z"/></svg></div>
+        <div class="stars" aria-hidden="true"><svg viewBox="0 0 24 24"><use href="#stern"/></svg><svg viewBox="0 0 24 24"><use href="#stern"/></svg><svg viewBox="0 0 24 24"><use href="#stern"/></svg><svg viewBox="0 0 24 24"><use href="#stern"/></svg><svg viewBox="0 0 24 24"><use href="#stern"/></svg></div>
         <div class="sk-lines" aria-hidden="true"><span class="sk"></span><span class="sk"></span><span class="sk sk--80"></span><span class="sk sk--55"></span></div>
         <span class="draft-note draft-note--small">Platzhalter für eine echte Google-Bewertung</span>
       </article>
       <article class="rv">
         <div class="rv__who" aria-hidden="true"><span class="rv__avatar"></span><span class="sk-lines"><span class="sk sk--60"></span><span class="sk sk--35"></span></span></div>
-        <div class="stars" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.5l2.9 6 6.6.8-4.9 4.6 1.3 6.5L12 17.2l-5.9 3.2 1.3-6.5L2.5 9.3l6.6-.8L12 2.5z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.5l2.9 6 6.6.8-4.9 4.6 1.3 6.5L12 17.2l-5.9 3.2 1.3-6.5L2.5 9.3l6.6-.8L12 2.5z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.5l2.9 6 6.6.8-4.9 4.6 1.3 6.5L12 17.2l-5.9 3.2 1.3-6.5L2.5 9.3l6.6-.8L12 2.5z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.5l2.9 6 6.6.8-4.9 4.6 1.3 6.5L12 17.2l-5.9 3.2 1.3-6.5L2.5 9.3l6.6-.8L12 2.5z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.5l2.9 6 6.6.8-4.9 4.6 1.3 6.5L12 17.2l-5.9 3.2 1.3-6.5L2.5 9.3l6.6-.8L12 2.5z"/></svg></div>
+        <div class="stars" aria-hidden="true"><svg viewBox="0 0 24 24"><use href="#stern"/></svg><svg viewBox="0 0 24 24"><use href="#stern"/></svg><svg viewBox="0 0 24 24"><use href="#stern"/></svg><svg viewBox="0 0 24 24"><use href="#stern"/></svg><svg viewBox="0 0 24 24"><use href="#stern"/></svg></div>
         <div class="sk-lines" aria-hidden="true"><span class="sk"></span><span class="sk"></span><span class="sk sk--80"></span><span class="sk sk--55"></span></div>
         <span class="draft-note draft-note--small">Platzhalter für eine echte Google-Bewertung</span>
       </article>
@@ -386,7 +389,7 @@
 
   <section id="termin" class="pt-0 pb-s">
     <div class="cta">
-      <div>
+      <div class="cta__text">
         <h2>Jetzt Termin vereinbaren!</h2>
         <p><span aria-hidden="true">👉</span> <b>Lackiertechnik Igelbrink – Ihre Lackiererei und Unfallwerkstatt in Dülmen.</b></p>
         <p>Kontaktieren Sie uns jetzt – wir kümmern uns um Ihren Schaden schnell, zuverlässig und unkompliziert.</p>

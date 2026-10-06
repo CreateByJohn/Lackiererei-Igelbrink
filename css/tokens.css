@@ -5,7 +5,6 @@
 @font-face{font-family:"Barlow";font-style:normal;font-weight:500;font-display:swap;src:url("../assets/fonts/barlow-latin-500-normal.woff2") format("woff2")}
 @font-face{font-family:"Barlow";font-style:normal;font-weight:600;font-display:swap;src:url("../assets/fonts/barlow-latin-600-normal.woff2") format("woff2")}
 @font-face{font-family:"Barlow Condensed";font-style:normal;font-weight:500;font-display:swap;src:url("../assets/fonts/barlow-condensed-latin-500-normal.woff2") format("woff2")}
-@font-face{font-family:"Barlow Condensed";font-style:normal;font-weight:600;font-display:swap;src:url("../assets/fonts/barlow-condensed-latin-600-normal.woff2") format("woff2")}
 @font-face{font-family:"Barlow Condensed";font-style:normal;font-weight:700;font-display:swap;src:url("../assets/fonts/barlow-condensed-latin-700-normal.woff2") format("woff2")}
 
 :root{
@@ -22,7 +21,6 @@
   --fg-soft:#2b3752;
   --muted:#4a566e;
   --line:#d9dfe9;
-  --line-nav:rgba(217,223,233,.8);
   --white:#ffffff;
 
   /* Dunkle Bänder */
@@ -67,6 +65,7 @@
   --nav-glass:rgba(255,255,255,.58);     /* Navigationspille: nimmt die Farbe des Hintergrunds auf */
   --nav-glass-line:rgba(255,255,255,.55);
   --nav-glass-shine:linear-gradient(180deg,rgba(255,255,255,.35),rgba(255,255,255,0) 60%);
+  --nav-blur:blur(24px) saturate(1.8);   /* Unschärfe hinter Pille und Untermenü */
   --submenu-glass:rgba(255,255,255,.9);   /* Untermenü fast deckend: die Unschärfe wirkt in der Pille nicht noch einmal */
   --nav-hover:radial-gradient(120% 140% at 50% 120%,rgba(232,98,46,.30),rgba(232,98,46,.08) 70%);   /* orangener Glas-Schimmer (Menü, Glas-Buttons) */
   --nav-hover-line:rgba(232,98,46,.38);
@@ -89,8 +88,6 @@
   --glass-text:rgba(255,255,255,.8);      /* weißere Glasfläche, wenn Fließtext darauf steht (ECOcert-Kachel) */
   --backdrop:rgba(14,22,42,.62);          /* Hintergrund hinter dem Kontaktformular */
   --shine:rgba(255,255,255,.38);
-  --overlay:rgba(14,22,42,.92);
-  --overlay-fade:rgba(14,22,42,0);
   --footer-line:rgba(255,255,255,.14);
   --footer-pill-line:rgba(255,255,255,.28);
 
@@ -123,7 +120,6 @@
   --sh-1:0 1px 2px rgba(20,32,58,.06),0 2px 6px rgba(20,32,58,.05);
   --sh-2:0 2px 4px rgba(20,32,58,.05),0 8px 20px rgba(20,32,58,.08),0 18px 40px rgba(20,32,58,.06);
   --sh-3:0 4px 8px rgba(20,32,58,.06),0 16px 36px rgba(20,32,58,.14),0 32px 64px rgba(20,32,58,.10);
-  --sh-menu:0 12px 28px rgba(20,32,58,.14);
   --sh-btn:0 1px 0 rgba(255,255,255,.35) inset,0 2px 4px rgba(207,74,28,.25),0 10px 22px -6px rgba(207,74,28,.55);
   --sh-btn-hover:0 1px 0 rgba(255,255,255,.35) inset,0 4px 8px rgba(207,74,28,.25),0 18px 32px -8px rgba(207,74,28,.65);
   --sh-btn-active:0 1px 0 rgba(255,255,255,.35) inset,0 2px 6px rgba(207,74,28,.4);
@@ -159,7 +155,6 @@
   --hero-top-gap:clamp(32px,6vh,64px); /* Luft zwischen Navigation und Hero-Text, zusätzlich zu --hdr */
 
   /* Leistungs-Karten, Bento, Kontaktformular */
-  --glass-tile-h:auto;                      /* Höhe der Glas-Kachel; js/main.js gleicht die drei Kacheln an */
   --seal-w:480px;                           /* maximale Breite des ECOcert-Schilds */
   --logo-h:clamp(44px,6vw,76px);            /* einheitliche Logo-Höhe auf den Partner-Kacheln */
   --dialog-w:680px;

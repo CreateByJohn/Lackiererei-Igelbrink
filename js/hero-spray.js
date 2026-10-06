@@ -23,13 +23,14 @@
   var TOTAL = (ROWS - 1) * SEG + STROKE + EXIT;
   var NOZ = { x: 0.951, y: 0.348 };     // Düsenspitze im SVG (Anteil von Breite/Höhe)
   var GUN_RATIO = 620 / 800;            // Höhe/Breite der SVG
+  var SPREAD = 0.028;                   // Breite des Sprühnebels als Anteil der Hero-Breite
   var TAU = Math.PI * 2;
 
   var W = 0, H = 0, gunW = 0, gunH = 0, maxParts = 900;
   var parts = [], raf = 0, t0 = 0, last = 0;
   var state = 'wait';                   // wait -> run -> done
 
-  // Canvas auf Hero-Größe × devicePixelRatio (max. 1,5) bringen; leert beide Canvas
+  // Canvas auf Hero-Größe bringen. Auf scharfen Displays mit bis zu 1,5-facher Auflösung; leert beide Canvas
   function size() {
     var r = frame.getBoundingClientRect();
     var dpr = Math.min(window.devicePixelRatio || 1, 1.5);
@@ -51,11 +52,11 @@
   }
 
   function ease(t) { return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2; }
-  function gauss() { return (Math.random() + Math.random() + Math.random() - 1.5) / 0.75; } // ~N(0,1)
+  function gauss() { return (Math.random() + Math.random() + Math.random() - 1.5) / 0.75; } // Zufallswert um 0, meist zwischen -2 und 2 (Glockenkurve)
   function rowY(i) { return H / ROWS * (i + 0.5); }                                         // Mitte der Zeile i
   function left() { return -gunW * 0.15; }                                                  // Düse knapp links vom Bild
-  function right() { return W * (1 + 0.028 * 3.2); }                                        // weit genug, dass die Zeile bis zum Rand frei wird
-  function leftOut() { return -W * 0.028 * 3.2; }                                           // Gegenstück zu right() für den Strich R -> L
+  function right() { return W * (1 + SPREAD * 3.2); }                                       // weit genug, dass die Zeile bis zum Rand frei wird
+  function leftOut() { return -W * SPREAD * 3.2; }                                          // Gegenstück zu right() für den Strich R -> L
 
   // Strich je Zeile: Start, Ende, Richtung (1 = nach rechts, -1 = nach links)
   function stroke(i) {
@@ -87,7 +88,7 @@
     gun.style.transform = 'translate3d(' + tx + 'px,' + (y - gunH * NOZ.y) + 'px,0) rotate(' + (-3 * n.dir) + 'deg) scaleX(' + n.dir + ')';
   }
 
-  // Deckfläche an der Düse körnig aufsprühen (destination-out löscht dort die Deckfarbe)
+  // An der Düse die Deckfläche körnig wegradieren (destination-out = zeichnen löscht statt zu malen)
   function spray(n, dt, sig, sy) {
     var y0 = H / ROWS * n.row, y1 = H / ROWS * (n.row + 1);
     var count = Math.round(dt * (H / 900) * 22 + 36);
@@ -164,13 +165,13 @@
     var n = nozzle(t);
     var wob = Math.sin(t / 180) * H * 0.004;
     placeGun(n, n.y + wob);
-    if (n.spraying) spray(n, dt, W * 0.028, H * 0.012);
+    if (n.spraying) spray(n, dt, W * SPREAD, H * 0.012);
     drawParts(dt);
     if (t < TOTAL) raf = requestAnimationFrame(tick);
     else finish();
   }
 
-  // Ende: Foto komplett frei, beide Canvas leer, Pistole weg, kein rAF mehr
+  // Ende: Foto komplett frei, beide Canvas leer, Pistole weg, Animation gestoppt
   function finish() {
     cancelAnimationFrame(raf);
     raf = 0;

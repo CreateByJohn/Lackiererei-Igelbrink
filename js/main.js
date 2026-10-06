@@ -36,11 +36,11 @@
 
 // Klappkarten: Klick auf das Bild oder den "+"-Button teilt die Karte und zeigt ihre Beschreibung.
 // Jede Karte klappt einzeln auf, auf allen Breiten. Ein Klick auf einen Link in der Glas-Kachel klappt nicht auf.
-// Da die Karten kein gemeinsames Raster mehr haben, gleicht equalize() die Höhen von Glas-Kacheln und Listen an.
+// Die Karten sind voneinander unabhängig; equalize() sorgt dafür, dass Glas-Kacheln und Listen trotzdem gleich hoch sind.
 (function () {
   var grid = document.querySelector('.cards');
   if (!grid) return;
-  var cards = Array.prototype.slice.call(grid.querySelectorAll('.svc'));
+  var cards = grid.querySelectorAll('.svc');
   var wide = window.matchMedia('(min-width: 981px)');
 
   function setCard(card, open) {
@@ -61,10 +61,11 @@
     });
   });
 
-  // Setzt min-height aller passenden Elemente auf das höchste. Erst zurücksetzen, dann messen.
-  // Ist active falsch, bleibt es beim Zurücksetzen (z. B. Listen, wenn die Karten untereinander stehen).
+  // Macht alle passenden Elemente so hoch wie das höchste (über min-height).
+  // Vorher zurücksetzen, sonst misst man die alte, angeglichene Höhe.
+  // Mit active = false wird nur zurückgesetzt (z. B. Listen, wenn die Karten untereinander stehen).
   function equalize(selector, active) {
-    var els = Array.prototype.slice.call(grid.querySelectorAll(selector));
+    var els = grid.querySelectorAll(selector);
     els.forEach(function (el) { el.style.minHeight = ''; });
     if (!active) return;
     var max = 0;
@@ -78,59 +79,39 @@
     equalize('.svc__list', wide.matches);
   }
 
-  update();
-  if (document.fonts && document.fonts.ready) document.fonts.ready.then(update);
-  // Nur bei Breitenänderung neu messen: Das Aufklappen ändert nur die Höhe von .cards.
-  if ('ResizeObserver' in window) {
-    var lastWidth = 0;
-    new ResizeObserver(function (entries) {
-      var w = Math.round(entries[0].contentRect.width);
-      if (w === lastWidth) return;
-      lastWidth = w;
-      update();
-    }).observe(grid);
-  } else {
-    window.addEventListener('resize', update);
-  }
+  // Neu messen, sobald die Schriften geladen sind (Text wird dadurch oft höher)
+  // und wenn sich die Breite ändert. Das Aufklappen ändert nur die Höhe, dann wird nicht gemessen.
+  // Der ResizeObserver misst außerdem sofort einmal beim Start.
+  document.fonts.ready.then(update);
+  var lastWidth = 0;
+  new ResizeObserver(function (entries) {
+    var w = Math.round(entries[0].contentRect.width);
+    if (w === lastWidth) return;
+    lastWidth = w;
+    update();
+  }).observe(grid);
 })();
 
-// Header-Höhe samt oberem Rand als --hdr am <html>. Der Hero rückt genau um diesen Wert
-// unter die schwebende Navigation (Oberkante bei y = 0) und beginnt seinen Text darunter.
+// Höhen von Header und Footer als CSS-Variablen am <html>, damit das CSS damit rechnen kann.
+// --hdr: Header samt Abstand oben. Um so viel rutscht der Hero unter die schwebende Navigation.
+// --fh:  Footer-Höhe. Auf großen Bildschirmen liegt der Footer hinter dem Inhalt, .page lässt unten so viel Platz frei.
+// Der ResizeObserver misst sofort einmal und danach bei jeder Größenänderung neu.
 (function () {
-  var header = document.querySelector('.site-header');
-  if (!header) return;
   var root = document.documentElement;
 
-  function measure() {
-    var top = parseFloat(getComputedStyle(header).marginTop) || 0;
-    root.style.setProperty('--hdr', (header.offsetHeight + top) + 'px');
+  function watch(el, name, height) {
+    if (!el) return;
+    new ResizeObserver(function () {
+      root.style.setProperty(name, height(el) + 'px');
+    }).observe(el);
   }
 
-  measure();
-  if ('ResizeObserver' in window) {
-    new ResizeObserver(measure).observe(header);
-  } else {
-    window.addEventListener('resize', measure);
-  }
-})();
-
-// Footer freilegen: Die Footer-Höhe steht als --fh am <html>. Ab 980 × 760 px ist der Footer
-// position:fixed hinter dem Inhalt, und .page bekommt unten genau diesen Platz (siehe components.css).
-(function () {
-  var footer = document.querySelector('.site-footer');
-  if (!footer) return;
-  var root = document.documentElement;
-
-  function measure() {
-    root.style.setProperty('--fh', footer.offsetHeight + 'px');
-  }
-
-  measure();
-  if ('ResizeObserver' in window) {
-    new ResizeObserver(measure).observe(footer);
-  } else {
-    window.addEventListener('resize', measure);
-  }
+  watch(document.querySelector('.site-header'), '--hdr', function (el) {
+    return el.offsetHeight + (parseFloat(getComputedStyle(el).marginTop) || 0);
+  });
+  watch(document.querySelector('.site-footer'), '--fh', function (el) {
+    return el.offsetHeight;
+  });
 })();
 
 // Kontaktformular: alle Elemente mit data-open-contact öffnen das <dialog> per showModal().
