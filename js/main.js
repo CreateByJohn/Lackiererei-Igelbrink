@@ -34,14 +34,14 @@
   });
 })();
 
-// Klappkarten: Klick auf das Bild oder den "+"-Button teilt die Karte und zeigt die Beschreibung.
-// Ab 981 px teilen sich die Karten die Beschreibungszeile (Subgrid), deshalb klappen dort alle gemeinsam auf.
-// Darunter klappt jede Karte einzeln. Ein Klick auf einen Link in der Glas-Kachel klappt nicht auf.
+// Klappkarten: Klick auf das Bild oder den "+"-Button teilt die Karte und zeigt ihre Beschreibung.
+// Jede Karte klappt einzeln auf, auf allen Breiten. Ein Klick auf einen Link in der Glas-Kachel klappt nicht auf.
+// Da die Karten kein gemeinsames Raster mehr haben, gleicht equalize() die Höhen von Glas-Kacheln und Listen an.
 (function () {
   var grid = document.querySelector('.cards');
   if (!grid) return;
   var cards = Array.prototype.slice.call(grid.querySelectorAll('.svc'));
-  var shared = window.matchMedia('(min-width: 981px)');
+  var wide = window.matchMedia('(min-width: 981px)');
 
   function setCard(card, open) {
     var btn = card.querySelector('.svc__toggle');
@@ -51,26 +51,47 @@
     btn.setAttribute('aria-label', open ? 'Beschreibung ausblenden' : 'Beschreibung einblenden');
   }
 
-  function setAll(open) {
-    grid.classList.toggle('is-open', open);
-    cards.forEach(function (card) { setCard(card, open); });
-  }
-
   cards.forEach(function (card) {
     var media = card.querySelector('.svc__media');
     if (!media) return;
     // Der Button liegt im Bildbereich, sein Klick (auch per Tastatur) landet ebenfalls hier.
     media.addEventListener('click', function (e) {
       if (e.target.closest('a')) return;
-      if (shared.matches) setAll(!grid.classList.contains('is-open'));
-      else setCard(card, !card.classList.contains('is-open'));
+      setCard(card, !card.classList.contains('is-open'));
     });
   });
 
-  // Beim Wechsel zwischen den Breiten alles schließen, damit Raster und Buttons übereinstimmen.
-  function reset() { setAll(false); }
-  if (shared.addEventListener) shared.addEventListener('change', reset);
-  else shared.addListener(reset);
+  // Setzt min-height aller passenden Elemente auf das höchste. Erst zurücksetzen, dann messen.
+  // Ist active falsch, bleibt es beim Zurücksetzen (z. B. Listen, wenn die Karten untereinander stehen).
+  function equalize(selector, active) {
+    var els = Array.prototype.slice.call(grid.querySelectorAll(selector));
+    els.forEach(function (el) { el.style.minHeight = ''; });
+    if (!active) return;
+    var max = 0;
+    els.forEach(function (el) { max = Math.max(max, el.getBoundingClientRect().height); });
+    els.forEach(function (el) { el.style.minHeight = max + 'px'; });
+  }
+
+  // Kacheln immer gleich hoch, Listen nur nebeneinander (ab 981 px).
+  function update() {
+    equalize('.glass-tile', true);
+    equalize('.svc__list', wide.matches);
+  }
+
+  update();
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(update);
+  // Nur bei Breitenänderung neu messen: Das Aufklappen ändert nur die Höhe von .cards.
+  if ('ResizeObserver' in window) {
+    var lastWidth = 0;
+    new ResizeObserver(function (entries) {
+      var w = Math.round(entries[0].contentRect.width);
+      if (w === lastWidth) return;
+      lastWidth = w;
+      update();
+    }).observe(grid);
+  } else {
+    window.addEventListener('resize', update);
+  }
 })();
 
 // Header-Höhe samt oberem Rand als --hdr am <html>. Der Hero rückt genau um diesen Wert

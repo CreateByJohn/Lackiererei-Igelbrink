@@ -1,6 +1,6 @@
 .DS_Store
 screenshots/
-assets:image/
+bilder-originale/
 *.md
 components.html
 entwurf-v2-referenz.html

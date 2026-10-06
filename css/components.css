@@ -5,7 +5,8 @@
 /* ---------- Header und Navigation ---------- */
 .site-header{position:sticky;top:calc(env(safe-area-inset-top,0px) + 10px);z-index:20;max-width:var(--wrap);margin:12px auto 0}
 .site-nav{position:relative;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:8px 10px 8px 20px;
-  background:var(--nav-glass);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);border:1px solid var(--line-nav);border-radius:var(--radius-pill);box-shadow:var(--sh-2)}
+  background:var(--nav-glass-shine),var(--nav-glass);-webkit-backdrop-filter:blur(24px) saturate(1.8);backdrop-filter:blur(24px) saturate(1.8);
+  border:1px solid var(--nav-glass-line);border-radius:var(--radius-pill);box-shadow:inset 0 1px 0 rgba(255,255,255,.6),var(--sh-2)}
 .brand{display:block;flex:none}
 .brand img{height:44px;width:auto}
 
@@ -13,7 +14,8 @@
 .menu>li{position:relative}
 .menu a{display:block;text-decoration:none;padding:10px;border-radius:var(--radius-pill);white-space:nowrap}
 .submenu{display:none;position:absolute;left:0;top:calc(100% + 6px);min-width:280px;list-style:none;margin:0;padding:8px;
-  background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-row);box-shadow:var(--sh-3);text-transform:none;font-size:.97rem;letter-spacing:0}
+  background:var(--submenu-glass);-webkit-backdrop-filter:blur(24px) saturate(1.8);backdrop-filter:blur(24px) saturate(1.8);
+  border:1px solid var(--nav-glass-line);border-radius:var(--radius-row);box-shadow:var(--sh-3);text-transform:none;font-size:.97rem;letter-spacing:0}
 .submenu::before{content:"";position:absolute;left:0;right:0;top:-8px;height:8px}  /* Brücke, damit das Untermenü beim Hinüberfahren offen bleibt */
 .submenu a{white-space:normal;border-radius:var(--radius-sm)}
 .menu li:hover>.submenu,.menu li:focus-within>.submenu{display:block}
@@ -29,12 +31,10 @@
 .btn::after{content:"";width:.6em;height:.6em;border-top:2.5px solid currentColor;border-right:2.5px solid currentColor;transform:rotate(45deg) translate(-2px,2px);margin-left:-2px}
 .btn--small{padding:13px 22px;font-size:.96rem}
 
-/* Textlink mit Pfeil */
-.more{align-self:flex-start;display:inline-flex;align-items:center;gap:10px;font-weight:600;text-decoration:none;color:var(--accent-strong);
-  padding:11px 20px;border-radius:var(--radius-pill);background:var(--accent-soft)}
-.more::after{content:"";width:.5em;height:.5em;border-top:2.5px solid currentColor;border-right:2.5px solid currentColor;transform:rotate(45deg)}
-/* Variante auf Fotos und Glas */
-.more--glass{color:var(--on-image);background:linear-gradient(var(--glass),var(--glass)),var(--glass-tint);box-shadow:inset 0 0 0 1px var(--glass-line)}
+/* Glas-Button: gleiche Form wie .btn (Pfeil, Glanz, Anheben), aber Glas statt Orange. Orange bleibt den Haupt-Aktionen vorbehalten. */
+.btn--glass{color:var(--on-image);background:var(--glass-chip);box-shadow:inset 0 0 0 1px var(--glass-line);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px)}
+/* Variante auf hellen Flächen */
+.btn--glass-light{color:var(--fg);background:var(--glass-btn-light);box-shadow:inset 0 0 0 1px var(--glass-btn-light-line),inset 0 1px 0 rgba(255,255,255,.7)}
 
 /* ---------- Hero ----------
    Füllt die erste Bildschirmseite: von Rand zu Rand, ohne Radius, Oberkante bei y = 0, Unterkante bei 100svh.
@@ -111,31 +111,32 @@
 
 /* ---------- Leistungs-Karten (Klappkarte) ----------
    Zeilen: Bild | Beschreibung (0fr geschlossen, 1fr offen) | Liste.
-   Ab 981 px teilen sich alle Karten per Subgrid dieselben drei Zeilen: gleich hohe Bilder, Beschreibungen und Listen.
-   Die Beschreibungszeile ist gemeinsam, deshalb klappen dort alle Karten zusammen auf (.cards.is-open).
-   Unter 981 px steht jede Karte für sich und klappt einzeln auf (.svc.is-open, siehe Responsive).
+   Jede Karte klappt einzeln auf (.svc.is-open), auf allen Breiten. Die Karten stehen oben bündig,
+   damit eine offene Karte die anderen nicht mitstreckt.
+   Gleich hohe Glas-Kacheln und Listen: js/main.js setzt min-height auf den höchsten Wert.
    JS setzt .is-open, aria-expanded und aria-label an den Buttons. */
-.cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));grid-template-rows:auto 0fr auto;gap:0 22px;align-items:stretch}
-.cards.is-open{grid-template-rows:auto 1fr auto;row-gap:12px}
-.svc{display:grid;grid-row:span 3;grid-template-rows:subgrid;min-width:0}
+.cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px;align-items:start}
+.svc{display:grid;grid-template-rows:auto 0fr auto;row-gap:0;min-width:0}
+.svc.is-open{grid-template-rows:auto 1fr auto;row-gap:12px}
 
-.svc__media{position:relative;overflow:hidden;width:100%;aspect-ratio:4/5;max-height:560px;cursor:pointer;
+.svc__media{position:relative;overflow:hidden;width:100%;aspect-ratio:3/4;max-height:600px;cursor:pointer;
   border-radius:var(--radius) var(--radius) 0 0;background:var(--grad-ph);box-shadow:var(--sh-2)}
 .svc.is-open .svc__media{border-radius:var(--radius)}
 .svc__img,.svc__img img{position:absolute;inset:0;width:100%;height:100%}
 .svc__img img{object-fit:cover}
 .svc__media::after{content:"";position:absolute;inset:0;background:var(--grad-svc);pointer-events:none}
 
-/* Glas-Kachel auf dem Bild */
-.glass-tile{position:absolute;left:14px;right:14px;bottom:14px;z-index:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;gap:10px;
-  height:var(--glass-tile-h);padding:40px 22px 22px;border-radius:var(--radius-tile);text-align:center;color:var(--on-image);
-  background:linear-gradient(var(--glass-chip),var(--glass-chip)),var(--glass-tint);-webkit-backdrop-filter:blur(14px) saturate(1.2);backdrop-filter:blur(14px) saturate(1.2);box-shadow:var(--sh-glass)}
+/* Glas-Kachel auf dem Bild: kompakt und recht durchsichtig, damit mehr vom Foto sichtbar bleibt.
+   Der Textschatten hält die weiße Schrift auch auf hellen Bildstellen lesbar. */
+.glass-tile{position:absolute;left:14px;right:14px;bottom:14px;z-index:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;gap:8px;
+  height:var(--glass-tile-h);padding:32px 20px 18px;border-radius:var(--radius-tile);text-align:center;color:var(--on-image);text-shadow:0 1px 10px rgba(14,22,42,.55);
+  background:linear-gradient(var(--glass-row),var(--glass-row)),var(--glass-tile-tint);-webkit-backdrop-filter:blur(8px) saturate(1.3);backdrop-filter:blur(8px) saturate(1.3);box-shadow:var(--sh-glass)}
 .glass-tile__ico{position:absolute;top:-24px;left:50%;translate:-50% 0;display:grid;place-items:center;width:48px;height:48px;
   border-radius:var(--radius-row);background:var(--surface);color:var(--accent);box-shadow:var(--sh-2)}
 .glass-tile__ico svg{width:24px;height:24px}
-.glass-tile h3{font-size:1.55rem}
+.glass-tile h3{font-size:1.45rem}
 .glass-tile p{color:var(--on-glass-muted);font-size:.98rem}
-.glass-tile .more{align-self:center;margin-top:auto}   /* sitzt immer unten; ohne Link bleibt der Platz leer */
+.glass-tile .btn{align-self:center;margin-top:auto;text-shadow:none}   /* sitzt immer unten; ohne Link bleibt der Platz leer */
 
 /* Runder "+"-Button, dreht sich beim Öffnen zum "×" */
 .svc__toggle{position:absolute;top:14px;right:14px;z-index:2;display:grid;place-items:center;width:46px;height:46px;border:0;border-radius:50%;
@@ -180,6 +181,7 @@
 .bt--eco .bt__seal{width:100%;height:auto;object-fit:cover;mix-blend-mode:normal;border-radius:var(--radius-row);box-shadow:var(--sh-3);rotate:-2deg}
 .bt--eco .glass-in>picture{display:block;width:100%;max-width:var(--seal-w)}
 .bt__text{display:flex;flex-direction:column;align-items:flex-start;gap:18px}
+.bt__text .btn{align-self:flex-start}
 .bt--eco .bt__title{font-size:clamp(1.9rem,3.2vw,2.6rem)}
 .bt--eco p{color:var(--fg-soft)}
 
@@ -189,7 +191,10 @@
 .bt--gla{grid-area:gla}
 .bt--hbc{grid-area:hbc}
 .bt--tmx{grid-area:tmx}
-.bt--dek{grid-area:dek}
+.bt--dek{grid-area:dek;padding:12px}
+/* DEKRA: rundes Siegel (transparent freigestellt), größer als die Logos und mit eigenem Schatten */
+.bt--dek .glass-in{padding:6px}
+.bt--dek .glass-in img{height:calc(var(--logo-h) + 46px);max-height:100%;width:auto;aspect-ratio:1;mix-blend-mode:normal;filter:drop-shadow(0 6px 14px rgba(20,32,58,.25))}
 
 /* ---------- Kundenstimmen (Google Bewertung) ----------
    Dunkle Übersichtskachel + Bewertungskarten. Solange keine echten Daten angebunden sind: Skelett-Platzhalter. */
@@ -223,6 +228,24 @@
 .cta p{color:var(--on-navy-muted)}
 .cta p+p{margin-top:8px}
 .cta .btn{font-size:1.1rem;padding:18px 32px}
+.cta .eyebrow--on-dark{color:var(--accent-2)}   /* .cta p würde sonst gewinnen */
+
+/* Karriere im Termin-Band: über die volle Breite, mit Trennlinie oben */
+.job{grid-column:1/-1;display:grid;gap:18px;margin-top:clamp(12px,2vw,24px);padding-top:clamp(24px,3.5vw,40px);border-top:1px solid var(--footer-line)}
+.job .eyebrow{justify-self:start}
+.cta .job__title{margin-bottom:0;font-size:clamp(1.6rem,3vw,2.2rem)}
+.job__cols{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.job__col{display:grid;align-content:start;gap:12px;padding:20px 22px;border-radius:var(--radius-row);background:var(--glass-row);box-shadow:inset 0 0 0 1px var(--glass-line-row)}
+.job__col h3{font-size:1.3rem;color:var(--on-navy)}
+.job__list{list-style:none;margin:0;padding:0;display:grid;gap:8px;color:var(--on-navy-muted)}
+.job__list li{position:relative;padding-left:24px}
+.job__list li::before{content:"–";position:absolute;left:0;color:var(--accent-2);font-weight:700}
+.job__apply{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px 28px}
+.job__contact{display:grid;gap:4px}
+.cta .job__contact p{margin:0}
+.cta .job__contact b{color:var(--on-navy)}
+.job__contact a{color:var(--on-navy);text-decoration:underline;text-underline-offset:3px}
+.job__links{display:flex;flex-wrap:wrap;gap:4px 20px}
 
 /* ---------- Kontaktformular (natives <dialog>, öffnet per showModal) ---------- */
 .contact{width:min(var(--dialog-w),100% - 2 * var(--gutter));max-width:none;max-height:calc(100dvh - 2 * var(--gutter));padding:0;border:0;
@@ -306,7 +329,7 @@ html:has(.contact[open]){overflow:hidden}   /* Seite dahinter scrollt nicht mit 
   .menu>li>a{padding-inline:7px}
 }
 
-/* Drei schmale Karten nebeneinander: Glas-Kachel-Text etwas kleiner, damit er in die feste Kachelhöhe passt */
+/* Drei schmale Karten nebeneinander: Glas-Kachel-Text etwas kleiner, damit die Kacheln kompakt bleiben */
 @media (min-width:981px) and (max-width:1099px){
   .glass-tile{padding-inline:16px}
   .glass-tile h3{font-size:1.35rem}
@@ -324,13 +347,11 @@ html:has(.contact[open]){overflow:hidden}   /* Seite dahinter scrollt nicht mit 
 }
 
 @media (max-width:980px){
-  /* Karten einzeln untereinander, jede mit eigenen Zeilen */
-  .cards,.cards.is-open{grid-template-columns:minmax(0,1fr);grid-template-rows:none;row-gap:22px;max-width:620px;margin-inline:auto}
-  .svc{grid-row:auto;grid-template-rows:auto 0fr auto;row-gap:0}
-  .svc.is-open{grid-template-rows:auto 1fr auto;row-gap:12px}
+  /* Karten einzeln untereinander */
+  .cards{grid-template-columns:minmax(0,1fr);max-width:620px;margin-inline:auto}
   .svc__media{aspect-ratio:4/3}
   .hero__frame::after{background:var(--grad-hero-narrow)}
-  .split,.band,.cta{grid-template-columns:minmax(0,1fr)}
+  .split,.band,.cta,.job__cols{grid-template-columns:minmax(0,1fr)}
   .bt--eco .glass-in{grid-template-columns:minmax(0,1fr);justify-items:start}
   .bento{grid-template-columns:repeat(2,minmax(0,1fr));grid-template-areas:"gla hbc" "tmx dek"}
   .reviews{grid-template-columns:repeat(2,minmax(0,1fr))}
@@ -344,6 +365,7 @@ html:has(.contact[open]){overflow:hidden}   /* Seite dahinter scrollt nicht mit 
   .menu__cta{display:block;padding-top:8px}
   .menu__cta .btn{width:100%;text-transform:none;letter-spacing:.01em}
   .hero__text .btn,.cta .btn{width:100%}
+  .job__apply{flex-direction:column;align-items:stretch}
   .chip{border-radius:var(--radius-lg)}
   .svc__media{aspect-ratio:4/5}
   .bento{grid-template-columns:minmax(0,1fr);grid-template-areas:"gla" "hbc" "tmx" "dek"}
