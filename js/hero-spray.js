@@ -149,7 +149,8 @@
     for (var j = parts.length - 1; j >= 0; j--) {
       var q = parts[j];
       q.life += dt;
-      if (q.life >= q.max) { parts.splice(j, 1); continue; }
+      // Abgelaufene Partikel entfernen: mit dem letzten tauschen und kürzen (schneller als splice mitten im Array)
+      if (q.life >= q.max) { parts[j] = parts[parts.length - 1]; parts.pop(); continue; }
       q.x += q.vx * dt; q.y += q.vy * dt; q.vy += 0.0004 * dt;   // leichte Schwerkraft
       var al = 1 - q.life / q.max;
       al = al * al * (q.still ? 0.5 : 0.85);
@@ -171,7 +172,8 @@
     else finish();
   }
 
-  // Ende: Foto komplett frei, beide Canvas leer, Pistole weg, Animation gestoppt
+  // Ende: Foto komplett frei, Pistole weg, Animation gestoppt.
+  // Die Canvas werden ausgeblendet, damit der Browser sie beim Scrollen nicht weiter mitrechnet.
   function finish() {
     cancelAnimationFrame(raf);
     raf = 0;
@@ -179,6 +181,8 @@
     cx.clearRect(0, 0, W, H);
     mx.clearRect(0, 0, W, H);
     gun.style.display = 'none';
+    cover.style.display = 'none';
+    mist.style.display = 'none';
     state = 'done';
   }
 
@@ -214,6 +218,12 @@
     if (state === 'wait') start();
   });
 
+  // Hero nicht mehr zu sehen (weggescrollt): Intro sofort beenden, damit es nicht unsichtbar weiterrechnet
+  // und das Scrollen bremst. Wer zurückscrollt, sieht direkt das Foto.
+  new IntersectionObserver(function (entries) {
+    if (!entries[0].isIntersecting && state !== 'done') finish();
+  }).observe(frame);
+
   // Größenänderung: laufendes Intro neu starten, nach dem Ende bleibt das Foto frei
   var rt, lastW = W, lastH = H;
   window.addEventListener('resize', function () {
@@ -224,7 +234,6 @@
       lastW = r.width; lastH = r.height;
       if (state === 'run') start();
       else if (state === 'wait') { size(); paintCover(); }
-      else size();
     }, 150);
   });
 })();

@@ -1,33 +1,40 @@
 /* Hover-, Übergangs- und Scroll-Effekte. */
 
-/* ---------- Übergänge ---------- */
-.menu a{transition:background .2s var(--ease),color .2s var(--ease),box-shadow .2s var(--ease)}
-.btn{transition:transform .25s var(--ease),box-shadow .25s var(--ease)}
-.btn::before{transition:transform .7s var(--ease)}
-.btn::after{transition:transform .3s var(--ease)}
-.stack li{transition:background .3s var(--ease),color .3s var(--ease),transform .3s var(--ease),box-shadow .3s var(--ease)}
-.stack li::before{transition:transform .3s var(--ease),color .3s var(--ease)}
-.svc{transition:grid-template-rows var(--t-split) var(--ease),row-gap var(--t-split) var(--ease)}   /* jede Karte klappt einzeln auf */
-.svc__media{transition:border-radius var(--t-split) var(--ease),box-shadow .4s var(--ease)}
-.svc__img img{transition:transform .9s var(--ease)}
-.glass-tile{transition:transform .4s var(--ease)}
-.svc__toggle{transition:transform .45s var(--ease),background .25s var(--ease)}
-.svc__toggle::before,.svc__toggle::after{transition:background .25s var(--ease)}
+/* ---------- Übergänge ----------
+   Flüssig heißt: kurz (--t-hover, --t-split) und möglichst nur transform/opacity animieren.
+   Teure Flächen (Unschärfe, Fotos) liegen auf eigenen Ebenen (will-change) und werden beim Bewegen nicht neu gezeichnet. */
+.menu a{transition:background .18s var(--ease-out),color .18s var(--ease-out),box-shadow .18s var(--ease-out)}
+.btn{transition:transform var(--t-hover) var(--ease-out),box-shadow var(--t-hover) var(--ease-out),background-color var(--t-hover) var(--ease-out)}
+.btn::before{transition:transform .5s var(--ease-out)}
+.btn::after{transition:transform var(--t-hover) var(--ease-out)}
+.stack li{transition:background-color var(--t-hover) var(--ease-out),transform var(--t-hover) var(--ease-out),box-shadow var(--t-hover) var(--ease-out)}
+.stack li::before{transition:transform var(--t-hover) var(--ease-out)}
+
+/* Klappkarten: Zeilenhöhe animieren, Ecken ohne Animation (das Neuzeichnen der Rundung über dem Foto ruckelt).
+   Beim Öffnen runden sich die Ecken sofort, beim Schließen erst, wenn die Karte zu ist. */
+.svc{transition:grid-template-rows var(--t-split) var(--ease-out),row-gap var(--t-split) var(--ease-out)}
+.svc__media,.svc__list{transition:border-radius 0s linear var(--t-split)}
+.svc.is-open .svc__media,.svc.is-open .svc__list{transition-delay:0s}
+.svc__img img{transition:transform .5s var(--ease-out);will-change:transform}
+.glass-tile{transition:transform var(--t-hover) var(--ease-out);will-change:transform}
+.svc__toggle{transition:transform var(--t-split) var(--ease-out),background-color .18s var(--ease-out)}
+.svc__toggle::before,.svc__toggle::after{transition:background-color .18s var(--ease-out)}
 .svc__more{transition:visibility 0s linear var(--t-split)}          /* erst nach dem Zuklappen verstecken */
 .svc.is-open .svc__more{transition-delay:0s}
-.svc__more-pad{transition:opacity .35s var(--ease),translate .45s var(--ease)}
-.svc.is-open .svc__more-pad{transition-delay:.18s}
-.svc__list{transition:border-radius var(--t-split) var(--ease)}
-.checks li{transition:transform .25s var(--ease)}
-.checks li::before{transition:background .25s var(--ease)}
-.checks li::after{transition:border-color .25s var(--ease)}
-.bt{transition:transform .35s var(--ease),box-shadow .35s var(--ease)}
-.bt__seal{transition:rotate .5s var(--ease),scale .5s var(--ease)}
-.glass-in{transition:transform .4s var(--ease)}
-.sec-head__ico{transition:transform .5s var(--ease)}
-.contact__close{transition:transform .3s var(--ease),box-shadow .3s var(--ease)}
-.rv{transition:transform .35s var(--ease),box-shadow .35s var(--ease)}
-.site-footer a{transition:color .2s var(--ease),background .25s var(--ease)}
+.svc__more-pad{transition:opacity .18s var(--ease-out),translate var(--t-split) var(--ease-out)}
+.svc.is-open .svc__more-pad{transition:opacity .24s var(--ease-out) .08s,translate var(--t-split) var(--ease-out)}
+.checks li{transition:transform .18s var(--ease-out)}
+.checks li::before{transition:background-color .18s var(--ease-out)}
+.checks li::after{transition:border-color .18s var(--ease-out)}
+
+/* Kacheln: eigene Ebene, damit beim Anheben nichts neu gezeichnet wird */
+.bt,.rv{transition:transform var(--t-hover) var(--ease-out),box-shadow var(--t-hover) var(--ease-out);will-change:transform}
+.bt__seal{transition:rotate .3s var(--ease-out),scale .3s var(--ease-out);will-change:transform}
+.bt--logo .glass-in::after{transition:transform .7s var(--ease-out)}
+.bt--logo .glass-in img{transition:filter var(--t-hover) var(--ease-out)}
+.sec-head__ico{transition:transform .3s var(--ease-out)}
+.contact__close{transition:transform var(--t-hover) var(--ease-out),box-shadow var(--t-hover) var(--ease-out)}
+.site-footer a{transition:color .18s var(--ease-out),background-color .18s var(--ease-out)}
 
 /* ---------- Navigation ---------- */
 /* Leichter orangener Glas-Schimmer statt einer Fläche */
@@ -53,8 +60,7 @@
 .stack li:hover::before{transform:translateX(3px);color:var(--accent-2)}
 
 /* ---------- Klappkarten ---------- */
-.svc:hover .svc__media{box-shadow:var(--sh-3)}
-.svc:hover .svc__img img{transform:scale(1.06)}
+.svc:hover .svc__img img{transform:scale(1.04)}
 .svc:hover .glass-tile{transform:translateY(-4px)}
 .svc__toggle:hover{background:var(--accent)}
 .svc__toggle:hover::before,.svc__toggle:hover::after{background:var(--white)}
@@ -65,10 +71,12 @@
 /* ---------- Abschnitts-Kopf: Symbol dreht sich leicht ---------- */
 .sec-head:hover .sec-head__ico{transform:rotate(-12deg) scale(1.06)}
 
-/* ---------- Bento: nur anheben und stärkerer Schatten, kein Farbeffekt ---------- */
+/* ---------- Bento: anheben und stärkerer Schatten ---------- */
 .bt:hover{transform:translateY(-4px);box-shadow:var(--sh-3)}
 .bt--eco:hover .bt__seal{rotate:0deg;scale:1.03}
-.bt--logo:hover .glass-in{transform:translateY(-3px)}
+/* Partner: kein Anheben der Glasfläche (das erzeugte den weißen Kasten), stattdessen Licht: Streifen fährt durch, Logo wird heller */
+.bt--logo:hover .glass-in::after{transform:translateX(120%)}
+.bt--logo:hover .glass-in img{filter:var(--logo-lit)}
 
 /* ---------- Kontaktformular: kurzes Einblenden, Schließen-Button dreht sich ---------- */
 .contact__close:hover{transform:rotate(90deg);box-shadow:inset 0 0 0 1px var(--line),var(--sh-2)}
@@ -81,8 +89,12 @@
 .rv:hover{transform:translateY(-4px);box-shadow:var(--sh-3)}
 
 /* ---------- Footer ---------- */
-.site-footer a:hover{color:var(--white)}
-.social a:hover{background:var(--white);color:var(--navy)}
+.legal a:hover{color:var(--white)}
+.ft-up,.ft-hiring,.ft-contact a{transition:background .18s var(--ease-out),box-shadow .18s var(--ease-out),transform var(--t-hover) var(--ease-out),color .18s var(--ease-out)}
+/* Footer: gleicher orangener Glas-Schimmer wie Menü und Glas-Buttons */
+.ft-up:hover,.ft-hiring:hover{background:var(--nav-hover),var(--glass-row);box-shadow:inset 0 0 0 1px var(--nav-hover-line),var(--nav-hover-glow);transform:translateY(-2px)}
+.ft-contact a:hover{background:var(--glass-row)}
+.ft-contact a:hover span{color:var(--white)}
 
 /* ---------- Einblenden beim Scrollen ----------
    Ruhezustand bleibt sichtbar, nur der Einstieg wird animiert.
@@ -100,10 +112,11 @@
   *,*::before,*::after{transition-duration:.01ms!important;transition-delay:0s!important;animation:none!important}
   .btn:hover,.btn:active,
   .stack li:hover,.checks li:hover,.bt:hover,.rv:hover,.svc:hover .glass-tile,
-  .sec-head:hover .sec-head__ico,.bt--logo:hover .glass-in,.contact__close:hover{transform:none}
+  .sec-head:hover .sec-head__ico,.contact__close:hover{transform:none}
   .btn:hover::after{transform:rotate(45deg) translate(-2px,2px)}
   .stack li:hover::before{transform:none}
   .svc:hover .svc__img img{transform:none}
   .bt--eco:hover .bt__seal{rotate:-2deg;scale:none}
   .svc__more-pad{translate:none}
+  .bt--logo .glass-in::after{display:none}
 }

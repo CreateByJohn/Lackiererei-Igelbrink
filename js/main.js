@@ -110,7 +110,56 @@
     return el.offsetHeight + (parseFloat(getComputedStyle(el).marginTop) || 0);
   });
   watch(document.querySelector('.site-footer'), '--fh', function (el) {
+    // Passt der Footer nicht ganz ins Fenster, wird er nicht freigelegt, sondern scrollt normal mit (.footer-static).
+    root.classList.toggle('footer-static', el.offsetHeight > window.innerHeight - 24);
     return el.offsetHeight;
+  });
+})();
+
+// Footer: Live-Status der Öffnungszeiten (Mo–Fr 08:00–17:00, Zeit in Dülmen).
+// Ohne JavaScript bleibt das Badge versteckt, die Zeiten stehen trotzdem da. Aktualisiert sich jede Minute.
+(function () {
+  var badge = document.querySelector('[data-open-status]');
+  if (!badge) return;
+  var text = badge.querySelector('[data-open-text]');
+  var OPEN = 8 * 60, CLOSE = 17 * 60;
+  var DAYS = ['So', 'Mo', 'Di', 'Mi', 'Do', 'Fr', 'Sa'];
+
+  function berlinNow() {
+    var parts = new Intl.DateTimeFormat('de-DE', { timeZone: 'Europe/Berlin', weekday: 'short', hour: '2-digit', minute: '2-digit', hourCycle: 'h23' })
+      .formatToParts(new Date());
+    var get = function (t) { return (parts.find(function (p) { return p.type === t; }) || {}).value; };
+    return { day: DAYS.indexOf(get('weekday').replace('.', '')), min: +get('hour') * 60 + +get('minute') };
+  }
+
+  function update() {
+    var n = berlinNow();
+    var weekday = n.day >= 1 && n.day <= 5;
+    var open = weekday && n.min >= OPEN && n.min < CLOSE;
+    var msg;
+    if (open) msg = 'Jetzt geöffnet – bis 17:00 Uhr';
+    else if (weekday && n.min < OPEN) msg = 'Geschlossen – öffnet heute um 08:00 Uhr';
+    else if (n.day >= 1 && n.day <= 4) msg = 'Geschlossen – öffnet morgen um 08:00 Uhr';
+    else msg = 'Geschlossen – öffnet Montag um 08:00 Uhr';
+    badge.classList.toggle('is-open', open);
+    text.textContent = msg;
+    badge.hidden = false;
+  }
+
+  update();
+  setInterval(update, 60000);
+})();
+
+// Footer: "Nach oben" scrollt weich (bei reduzierter Bewegung sofort) und setzt den Fokus auf den Seitenanfang.
+(function () {
+  var up = document.querySelector('.ft-up');
+  if (!up) return;
+  up.addEventListener('click', function (e) {
+    e.preventDefault();
+    var smooth = !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    window.scrollTo({ top: 0, behavior: smooth ? 'smooth' : 'auto' });
+    var skip = document.querySelector('.skip');
+    if (skip) skip.focus({ preventScroll: true });
   });
 })();
 
