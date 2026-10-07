@@ -85,11 +85,18 @@
   --logo-tile-bg:#e9edf3;                 /* Grundfläche unter dem unscharfen Logo */
   --glass-logo:rgba(255,255,255,.5);      /* Glasfläche auf den Partner-Kacheln */
   --glass-logo-line:rgba(255,255,255,.75);
+  --logo-light:rgba(255,255,255,.9);      /* Lichtstreifen beim Hover über die Partner-Kachel */
+  --logo-dim:brightness(.9) saturate(.8);                                        /* Logo in Ruhe leicht gedämpft … */
+  --logo-lit:brightness(1.1) saturate(1.2) drop-shadow(0 0 12px rgba(255,255,255,.95));  /* … und beim Hover „beleuchtet“ */
   --glass-text:rgba(255,255,255,.8);      /* weißere Glasfläche, wenn Fließtext darauf steht (ECOcert-Kachel) */
   --backdrop:rgba(14,22,42,.62);          /* Hintergrund hinter dem Kontaktformular */
   --shine:rgba(255,255,255,.38);
   --footer-line:rgba(255,255,255,.14);
   --footer-pill-line:rgba(255,255,255,.28);
+  --ft-logo-bg:rgba(255,255,255,.94);
+  --ft-open:#3ecf8e;                       /* Live-Status: geöffnet */
+  --ft-open-glow:rgba(62,207,142,.22);
+  --ft-closed:#8a94a8;
 
   /* Bild-Platzhalter (Ladefläche hinter Fotos) */
   --ph1:#c7d0e0;
@@ -142,7 +149,9 @@
 
   /* Bewegung */
   --ease:cubic-bezier(.2,.7,.2,1);
-  --t-split:.55s;            /* Aufklappen der Leistungs-Karten */
+  --ease-out:cubic-bezier(.22,1,.36,1);   /* schneller Start, weiches Ende: wirkt direkt, ohne zu hängen */
+  --t-hover:.22s;            /* Hover: Buttons, Kacheln, Zeilen */
+  --t-split:.36s;            /* Aufklappen der Leistungs-Karten */
 
   /* Layout */
   --wrap:1200px;

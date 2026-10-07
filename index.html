@@ -434,6 +434,9 @@
 </div>
 
 <!-- FOOTER -->
+<!-- Footer: Kopfzeile (Logo, Karriere-Hinweis, Nach oben) | vier Glas-Karten | Siegel | Rechtliches.
+     Wird ab 980 × 760 px beim Scrollen hinter dem Inhalt freigelegt (siehe components.css);
+     passt er nicht ins Fenster, scrollt er normal mit (.footer-static, siehe js/main.js). -->
 <footer class="site-footer" id="kontakt">
   <div class="site-footer__img" aria-hidden="true">
     <picture>
@@ -442,27 +445,63 @@
     </picture>
   </div>
   <div class="site-footer__inner">
-    <div class="site-footer__logo"><span><img src="assets/img/01-logo-lackiertechnik-igelbrink.png" width="1062" height="354" loading="lazy" decoding="async" alt="Lackiertechnik Igelbrink"></span></div>
-    <div>
-      <h2 class="footer-title">Öffnungszeiten:</h2>
-      <p>Montag – Freitag:<br>08:00 – 17:00 Uhr<br>oder nach Vereinbarung<br>Samstag:<br>nach Vereinbarung</p>
+
+    <div class="ft-top">
+      <a class="ft-logo" href="#"><img src="assets/img/01-logo-lackiertechnik-igelbrink.png" width="1062" height="354" loading="lazy" decoding="async" alt="Lackiertechnik Igelbrink – zur Startseite"></a>
+      <p class="ft-claim">Ihre Lackiererei und Unfallwerkstatt in Dülmen.</p>
+      <a class="ft-hiring" href="#karriere"><span class="ft-hiring__dot" aria-hidden="true"></span>Wir stellen ein: Fahrzeuglackierer/-in (m/w/d)</a>
+      <a class="ft-up" href="#" aria-label="Nach oben"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5"/><path d="m6 11 6-6 6 6"/></svg></a>
     </div>
-    <div>
-      <h2 class="footer-title">Lackiertechnik Igelbrink</h2>
-      <p>Telgenkamp 31<br>48249 Dülmen</p>
+
+    <div class="ft-cards">
+      <!-- TODO: Klären, ob die Werkstatt mittags geschlossen hat (davon hängt der Live-Status in js/main.js ab) -->
+      <section class="ft-card" aria-labelledby="ft-zeiten">
+        <span class="ft-card__ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/></svg></span>
+        <h2 class="ft-card__title" id="ft-zeiten">Öffnungszeiten</h2>
+        <p class="ft-status" data-open-status hidden><span class="ft-status__dot" aria-hidden="true"></span><span data-open-text></span></p>
+        <dl class="ft-hours">
+          <div><dt>Montag – Freitag</dt><dd>08:00 – 17:00 Uhr</dd></div>
+          <div><dt>Samstag</dt><dd>nach Vereinbarung</dd></div>
+        </dl>
+        <p class="ft-note">Termine außerhalb der Zeiten gern nach Absprache.</p>
+      </section>
+
+      <section class="ft-card" aria-labelledby="ft-adresse">
+        <span class="ft-card__ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-6.5-5.6-6.5-11a6.5 6.5 0 0 1 13 0C18.5 15.4 12 21 12 21z"/><circle cx="12" cy="10" r="2.4"/></svg></span>
+        <h2 class="ft-card__title" id="ft-adresse">Anfahrt</h2>
+        <address class="ft-address"><strong>Lackiertechnik Igelbrink</strong><br>Telgenkamp 31<br>48249 Dülmen</address>
+        <a class="btn btn--glass btn--small" href="https://www.google.com/maps/dir/?api=1&amp;destination=Telgenkamp+31,+48249+D%C3%BClmen" target="_blank" rel="noopener">Route planen</a>
+      </section>
+
+      <section class="ft-card" aria-labelledby="ft-kontakt">
+        <span class="ft-card__ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h3.2l1.6 4-2 1.3a10.5 10.5 0 0 0 4.9 4.9l1.3-2 4 1.6V17a2 2 0 0 1-2 2A14 14 0 0 1 3 6a2 2 0 0 1 2-2z"/></svg></span>
+        <h2 class="ft-card__title" id="ft-kontakt">Kontakt</h2>
+        <ul class="ft-contact">
+          <li><a href="tel:+4925947843823"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h3.2l1.6 4-2 1.3a10.5 10.5 0 0 0 4.9 4.9l1.3-2 4 1.6V17a2 2 0 0 1-2 2A14 14 0 0 1 3 6a2 2 0 0 1 2-2z"/></svg><span><small>Telefon</small>+49 2594 7843823</span></a></li>
+          <li><a href="tel:+4917645875781"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="7" y="2.5" width="10" height="19" rx="2.2"/><path d="M11 18.5h2"/></svg><span><small>Mobil</small>+49 176 45875781</span></a></li>
+          <li><a href="mailto:info@lackiertechnik-igelbrink.de"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5.5" width="18" height="13" rx="2"/><path d="m3.5 7 8.5 6 8.5-6"/></svg><span><small>E-Mail</small>info@lackiertechnik-igelbrink.de</span></a></li>
+        </ul>
+      </section>
+      <section class="ft-card" aria-labelledby="ft-social">
+        <span class="ft-card__ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="5.5" r="2.5"/><circle cx="6" cy="12" r="2.5"/><circle cx="18" cy="18.5" r="2.5"/><path d="m8.2 10.8 7.6-4.1M8.2 13.2l7.6 4.1"/></svg></span>
+        <h2 class="ft-card__title" id="ft-social">Folgen</h2>
+        <!-- TODO: Echte Links für Facebook, Instagram und Google eintragen (bisher Platzhalter "#") -->
+        <ul class="ft-contact">
+          <li><a href="#"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14.5 8.5H17V5h-2.5A3.5 3.5 0 0 0 11 8.5V11H8.5v3.5H11V21h3.5v-6.5H17l.5-3.5h-3V9a.5.5 0 0 1 .5-.5z"/></svg><span><small>Facebook</small>Profil ansehen</span></a></li>
+          <li><a href="#"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="3.5" width="17" height="17" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.3" cy="6.7" r=".8" fill="currentColor"/></svg><span><small>Instagram</small>Profil ansehen</span></a></li>
+          <li><a href="#"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 12.2c0-.6-.1-1.2-.2-1.7H12v3.3h4.5a4 4 0 0 1-1.7 2.6"/><path d="M14.8 16.4A6.5 6.5 0 1 1 16.6 7"/></svg><span><small>Google</small>Bewertungen ansehen</span></a></li>
+        </ul>
+      </section>
     </div>
-    <div>
-      <h2 class="footer-title">Kontakt</h2>
-      <p>Tel: <a href="tel:+4925947843823">+49 2594 7843823</a><br>Mobil: <a href="tel:+4917645875781">+49 17645875781</a><br>Mail: <a href="mailto:info@lackiertechnik-igelbrink.de">info@lackiertechnik-igelbrink.de</a></p>
-    </div>
-    <div>
-      <h2 class="footer-title">Folgen</h2>
-      <ul class="social">
-        <li><a href="#">Facebook</a></li>
-        <li><a href="#">Instagram</a></li>
-        <li><a href="#">Google</a></li>
+
+    <div class="ft-meta">
+      <!-- TODO: Klären, ob „Meisterbetrieb“ als Siegel ergänzt wird (Meisterbrief liegt in bilder-originale) -->
+      <ul class="ft-seals" aria-label="Zertifikate">
+        <li><img src="assets/img/11-partner-dekra-siegel.png" width="600" height="600" loading="lazy" decoding="async" alt="DEKRA geprüft"></li>
+        <li class="ft-seals__text"><strong>ECOcert100</strong>zertifizierter Betrieb</li>
       </ul>
     </div>
+
     <div class="legal">
       <ul>
         <li><a href="#">Impressum</a></li>
@@ -472,7 +511,7 @@
         <li><a href="#">AGB</a></li>
         <li><a href="#">Vertrag widerrufen</a></li>
       </ul>
-      <span>Copyright © 2026. All rights reserved</span>
+      <span>© 2026 Lackiertechnik Igelbrink</span>
     </div>
   </div>
 </footer>
