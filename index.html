@@ -9,10 +9,10 @@
 <link rel="icon" type="image/png" href="assets/img/13-favicon.png">
 <link rel="preload" href="assets/fonts/barlow-condensed-latin-700-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/barlow-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="css/tokens.css">
-<link rel="stylesheet" href="css/base.css">
-<link rel="stylesheet" href="css/components.css">
-<link rel="stylesheet" href="css/effects.css">
+<link rel="stylesheet" href="css/tokens.css?v=202610142001">
+<link rel="stylesheet" href="css/base.css?v=202610142001">
+<link rel="stylesheet" href="css/components.css?v=202610142001">
+<link rel="stylesheet" href="css/effects.css?v=202610142001">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -43,38 +43,55 @@
 <a class="skip" href="#inhalt">Zum Inhalt springen</a>
 
 <!-- Wiederverwendbare Symbole: einmal definiert, per <use href="#…"> eingesetzt -->
-<svg hidden><symbol id="stern" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2.5l2.9 6 6.6.8-4.9 4.6 1.3 6.5L12 17.2l-5.9 3.2 1.3-6.5L2.5 9.3l6.6-.8L12 2.5z"/></symbol></svg>
+<svg hidden>
+  <symbol id="stern" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2.5l2.9 6 6.6.8-4.9 4.6 1.3 6.5L12 17.2l-5.9 3.2 1.3-6.5L2.5 9.3l6.6-.8L12 2.5z"/></symbol>
+  <symbol id="i-tel" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="M5 4h3.2l1.6 4-2 1.3a10.5 10.5 0 0 0 4.9 4.9l1.3-2 4 1.6V17a2 2 0 0 1-2 2A14 14 0 0 1 3 6a2 2 0 0 1 2-2z"/></symbol>
+  <symbol id="i-pin" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-6.5-5.6-6.5-11a6.5 6.5 0 0 1 13 0C18.5 15.4 12 21 12 21z"/><circle cx="12" cy="10" r="2.4"/></g></symbol>
+  <symbol id="i-uhr" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/></g></symbol>
+  <symbol id="i-mail" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5.5" width="18" height="13" rx="2"/><path d="m3.5 7 8.5 6 8.5-6"/></g></symbol>
+  <symbol id="i-mobil" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="2.5" width="10" height="19" rx="2.2"/><path d="M11 18.5h2"/></g></symbol>
+  <symbol id="i-auto" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 17h14v-5l-2-5H7l-2 5v5z"/><path d="M5 12h14"/><circle cx="8" cy="17" r="2"/><circle cx="16" cy="17" r="2"/></g></symbol>
+  <symbol id="i-caravan" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17V7a2 2 0 0 1 2-2h11l5 6v6H3z"/><path d="M16 5v6h5"/><path d="M7 9h5"/><circle cx="7" cy="17" r="2"/><circle cx="17" cy="17" r="2"/></g></symbol>
+  <symbol id="i-klassik" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="M12 3l2.6 5.3 5.9.9-4.3 4.1 1 5.8L12 16.4 6.8 19.1l1-5.8L3.5 9.2l5.9-.9L12 3z"/></symbol>
+  <symbol id="i-schild" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v5.5c0 4.4-3 8-7 9.5-4-1.5-7-5.1-7-9.5V6l7-3z"/><path d="m9 12 2 2 4-4"/></g></symbol>
+  <symbol id="i-hol" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 6.5h11v9h-11z"/><path d="M13.5 9.5h4l3 3.5v2.5h-7"/><circle cx="6.5" cy="17" r="1.8"/><circle cx="17" cy="17" r="1.8"/></g></symbol>
+  <symbol id="i-schluessel" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="15" r="4.5"/><path d="m11.2 11.8 8.3-8.3"/><path d="m16.5 6.5 2.5 2.5"/><path d="m14 9 2 2"/></g></symbol>
+  <symbol id="i-kalender" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="5" width="17" height="15.5" rx="2"/><path d="M3.5 10h17M8 3v4M16 3v4"/><path d="m9.5 15 2 2 3.5-3.5"/></g></symbol>
+  <symbol id="i-fb" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="M14.5 8.5H17V5h-2.5A3.5 3.5 0 0 0 11 8.5V11H8.5v3.5H11V21h3.5v-6.5H17l.5-3.5h-3V9a.5.5 0 0 1 .5-.5z"/></symbol>
+  <symbol id="i-ig" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="3.5" width="17" height="17" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.3" cy="6.7" r=".8" fill="currentColor"/></g></symbol>
+  <symbol id="i-g" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12.2c0-.6-.1-1.2-.2-1.7H12v3.3h4.5a4 4 0 0 1-1.7 2.6"/><path d="M14.8 16.4A6.5 6.5 0 1 1 16.6 7"/></g></symbol>
+</svg>
 
 <div class="page">
 
 <!-- HEADER -->
 <header class="site-header">
   <nav class="site-nav" aria-label="Hauptnavigation">
-    <a class="brand" href="#"><img src="assets/img/01-logo-lackiertechnik-igelbrink.png" width="1062" height="354" alt="Lackiertechnik Igelbrink"></a>
+    <a class="brand" href="#/"><img src="assets/img/01-logo-lackiertechnik-igelbrink.png" width="1062" height="354" alt="Lackiertechnik Igelbrink"></a>
     <ul class="menu" id="menu">
-      <li><a href="#">Classic Car Spezialist</a></li>
-      <li><a href="#leistungen">Service</a>
+      <!-- Anzeigename „Dienstleistung“, die Unterseite heißt im Link weiterhin /service -->
+      <li><a href="#service">Dienstleistung</a>
         <ul class="submenu">
-          <li><a href="#leistungen">PKW- Unfallinstandsetzung</a></li>
-          <li><a href="#leistungen">Wohnwagen- und Wohnmobil Reparatur und Lackierung</a></li>
-          <li><a href="#leistungen">Old- und Youngtimer Restauration</a></li>
-          <li><a href="#leistungen">Hohlraumkonservierung und Unterbodenschutz</a></li>
+          <li><a href="#service">PKW- Unfallinstandsetzung</a></li>
+          <li><a href="#service">Wohnwagen- und Wohnmobil Reparatur und Lackierung</a></li>
+          <li><a href="#service">Old- und Youngtimer Restauration</a></li>
+          <li><a href="#service">Hohlraumkonservierung und Unterbodenschutz</a></li>
         </ul>
       </li>
       <li><a href="#">Projekte</a></li>
-      <li><a href="#zertifikat">Unternehmen</a>
+      <li><a href="#ueber-uns">Über uns</a>
         <ul class="submenu">
-          <li><a href="#">Über uns</a></li>
-          <li><a href="#">Qualität</a></li>
-          <li><a href="#partner">Partner</a></li>
+          <li><a href="#ueber-uns">Unser Betrieb</a></li>
+          <li><a href="#qualitaet">Qualität</a></li>
         </ul>
       </li>
       <li><a href="#karriere">Karriere</a></li>
-      <li><a href="#kontakt">Kontakt</a></li>
+      <li><a href="#/kontakt">Kontakt</a></li>
       <!-- Nur im mobilen Menü sichtbar, wenn der Button in der Pille ausgeblendet ist -->
       <li class="menu__cta"><button class="btn btn--small" type="button" data-open-contact aria-haspopup="dialog" aria-controls="kontaktformular">Online-Termin</button></li>
     </ul>
     <div class="nav-actions">
+      <a class="nav-tel" href="tel:+4925947843823" aria-label="Anrufen: 02594 7843823"><svg aria-hidden="true"><use href="#i-tel"/></svg><span>02594 7843823</span></a>
       <button class="btn btn--small" type="button" data-open-contact aria-haspopup="dialog" aria-controls="kontaktformular">Online-Termin</button>
       <button class="burger" id="burger" type="button" aria-expanded="false" aria-controls="menu">Menü</button>
     </div>
@@ -82,13 +99,13 @@
 </header>
 <!-- /HEADER -->
 
-<main class="wrap" id="inhalt">
+<main class="wrap" id="inhalt" data-view="start">
 
   <section class="hero">
     <div class="hero__frame">
       <picture>
         <source type="image/webp" srcset="assets/img/02-hero-startseite-800.webp 800w, assets/img/02-hero-startseite-1400.webp 1400w, assets/img/02-hero-startseite-2400.webp 2400w" sizes="100vw">
-        <img class="hero__img" src="assets/img/02-hero-startseite-1600.jpg" width="2400" height="1600" fetchpriority="high"
+        <img class="hero__img" data-px=".18" src="assets/img/02-hero-startseite-1600.jpg" width="2400" height="1600" fetchpriority="high"
              alt="Lackierer mit Spritzpistole über frisch lackierten Karosserieteilen in der Lackierkabine">
       </picture>
       <canvas class="hero__cover" aria-hidden="true"></canvas>
@@ -105,25 +122,50 @@
     </div>
   </section>
 
-  <section class="pt-s">
-    <div class="band">
+  <!-- UNSERE EXPERTISE (vorher „Leistungen im Überblick“): Überschrift über dem Bereich,
+       darunter das Band mit einzeln aufklappbaren Zeilen (Akkordeon) -->
+  <section class="zone zone--first" id="expertise" aria-labelledby="expertise-title">
+    <div class="sec-head">
+      <div class="sec-head__divider" aria-hidden="true"><span class="sec-head__ico"><svg viewBox="0 0 24 24"><use href="#i-schild"/></svg></span></div>
+      <p class="eyebrow">Expertise</p>
+      <h2 id="expertise-title">Unsere Expertise</h2>
+    </div>
+    <div class="band band--exp">
       <picture class="band__img">
         <source type="image/webp" srcset="assets/img/03-leistungen-lackierkabine-800.webp 800w, assets/img/03-leistungen-lackierkabine-1600.webp 1600w" sizes="(max-width: 1232px) calc(100vw - 32px), 1200px">
-        <img src="assets/img/03-leistungen-lackierkabine-1600.jpg" width="1600" height="1200" decoding="async" alt="">
+        <img data-px=".12" src="assets/img/03-leistungen-lackierkabine-1600.jpg" width="1600" height="1200" decoding="async" alt="">
       </picture>
-      <div>
-        <h2>Unsere Leistungen im Überblick:</h2>
-        <div class="band__rule"></div>
-      </div>
-      <ul class="stack">
-        <li>PKW- Unfallschadeninstandsetzung inkl. Versicherungsabwicklung</li>
-        <li>CARAVAN Strukturblech- und GFK- Instandsetzung inkl. Versicherungsabwicklung</li>
-        <li>Oldtimer- und Youngtimer- Restauration</li>
-        <li>Unterbodenschutz und Holraumkonservierung</li>
-        <li>Hol- und Bringservice</li>
-        <li>Leihwagen</li>
-        <li>Flexible Terminvergabe innerhalb kurzer Zeit</li>
+      <ul class="exp">
+        <li class="exp__item">
+          <button class="exp__head" type="button" aria-expanded="false" aria-controls="exp-1"><span class="exp__ico" aria-hidden="true"><svg><use href="#i-auto"/></svg></span><span class="exp__title">PKW- Unfallschaden&shy;instandsetzung inkl. Versicherungs&shy;abwicklung</span><span class="exp__plus" aria-hidden="true"></span></button>
+          <div class="exp__body" id="exp-1"><div class="exp__pad"><p>Karosserie-, Richt- und Lackarbeiten nach Herstellervorgaben – die komplette Abwicklung mit Ihrer Versicherung übernehmen wir.</p></div></div>
+        </li>
+        <li class="exp__item">
+          <button class="exp__head" type="button" aria-expanded="false" aria-controls="exp-2"><span class="exp__ico" aria-hidden="true"><svg><use href="#i-caravan"/></svg></span><span class="exp__title">CARAVAN Strukturblech- und GFK- Instand&shy;setzung inkl. Versicherungs&shy;abwicklung</span><span class="exp__plus" aria-hidden="true"></span></button>
+          <div class="exp__body" id="exp-2"><div class="exp__pad"><p>Hagelschaden, Riss im GFK oder Delle im Strukturblech – wir bringen Ihr Wohnmobil oder Ihren Wohnwagen wieder in Bestform.</p></div></div>
+        </li>
+        <li class="exp__item">
+          <button class="exp__head" type="button" aria-expanded="false" aria-controls="exp-3"><span class="exp__ico" aria-hidden="true"><svg><use href="#i-klassik"/></svg></span><span class="exp__title">Oldtimer- und Youngtimer- Restauration</span><span class="exp__plus" aria-hidden="true"></span></button>
+          <div class="exp__body" id="exp-3"><div class="exp__pad"><p>Originalgetreue Karosserie- und Lackarbeiten mit Liebe zum Detail – Erhaltung statt Austausch, wo immer möglich.</p></div></div>
+        </li>
+        <li class="exp__item">
+          <button class="exp__head" type="button" aria-expanded="false" aria-controls="exp-4"><span class="exp__ico" aria-hidden="true"><svg><use href="#i-schild"/></svg></span><span class="exp__title">Unterbodenschutz und Hohlraum&shy;konservierung</span><span class="exp__plus" aria-hidden="true"></span></button>
+          <div class="exp__body" id="exp-4"><div class="exp__pad"><p>Dauerhafter Schutz vor Rost an Unterboden und Hohlräumen – für den Werterhalt Ihres Fahrzeugs.</p></div></div>
+        </li>
+        <li class="exp__item">
+          <button class="exp__head" type="button" aria-expanded="false" aria-controls="exp-5"><span class="exp__ico" aria-hidden="true"><svg><use href="#i-hol"/></svg></span><span class="exp__title">Hol- und Bringservice</span><span class="exp__plus" aria-hidden="true"></span></button>
+          <div class="exp__body" id="exp-5"><div class="exp__pad"><p>Wir holen Ihr Fahrzeug ab und bringen es nach der Reparatur wieder zu Ihnen zurück.</p></div></div>
+        </li>
+        <li class="exp__item">
+          <button class="exp__head" type="button" aria-expanded="false" aria-controls="exp-6"><span class="exp__ico" aria-hidden="true"><svg><use href="#i-schluessel"/></svg></span><span class="exp__title">Leihwagen</span><span class="exp__plus" aria-hidden="true"></span></button>
+          <div class="exp__body" id="exp-6"><div class="exp__pad"><p>Ersatzfahrzeug auf Wunsch – so bleiben Sie auch während der Reparatur mobil.</p></div></div>
+        </li>
+        <li class="exp__item">
+          <button class="exp__head" type="button" aria-expanded="false" aria-controls="exp-7"><span class="exp__ico" aria-hidden="true"><svg><use href="#i-kalender"/></svg></span><span class="exp__title">Flexible Terminvergabe innerhalb kurzer Zeit</span><span class="exp__plus" aria-hidden="true"></span></button>
+          <div class="exp__body" id="exp-7"><div class="exp__pad"><p>Schnelle Terminvergabe und kurze Standzeiten – wir richten uns nach Ihnen.</p></div></div>
+        </li>
       </ul>
+      <p class="draft-note draft-note--small exp__note">Entwurf: Kurztexte aus den vorhandenen Inhalten abgeleitet, bitte vom Kunden bestätigen lassen</p>
     </div>
   </section>
 
@@ -150,13 +192,14 @@
     </div>
   </section>
 
-  <section class="zone" id="leistungen" aria-labelledby="leistungen-title">
-    <!-- SEC-HEAD: Symbol | Augenbraue | Überschrift -->
+  <!-- DIENSTLEISTUNG: Anker #service (die Unterseite heißt im Link /service) -->
+  <section class="zone" id="service" aria-labelledby="service-title">
     <div class="sec-head">
       <div class="sec-head__divider" aria-hidden="true"><span class="sec-head__ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a4 4 0 0 0-5.2 5.2L3.6 17.4a1.6 1.6 0 0 0 2.3 2.3l5.9-5.9a4 4 0 0 0 5.2-5.2l-2.5 2.5-2.3-.4-.4-2.3 2.5-2.5z"/></svg></span></div>
-      <p class="eyebrow">Service</p>
-      <h2 id="leistungen-title">Unsere Schwerpunkte</h2>
+      <p class="eyebrow">Dienstleistung</p>
+      <h2 id="service-title">Unsere Schwerpunkte</h2>
     </div>
+
     <div class="cards">
       <article class="svc">
         <div class="svc__media">
@@ -263,103 +306,54 @@
         </div>
       </article>
     </div>
+
   </section>
 
-  <section class="zone" id="zertifikat" aria-labelledby="zertifikat-title">
-    <!-- SEC-HEAD: Symbol | Augenbraue | Überschrift -->
+  <!-- QUALITÄT: Zertifikate und Partner zusammengefasst. Zertifikate schlicht, ohne Zusatztext. -->
+  <section class="zone" id="qualitaet" aria-labelledby="qualitaet-title">
     <div class="sec-head">
       <div class="sec-head__divider" aria-hidden="true"><span class="sec-head__ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="9" r="5.5"/><path d="M9.6 9.2l1.7 1.7 3.2-3.4"/><path d="M8.5 13.6 7 21l5-2.6L17 21l-1.5-7.4"/></svg></span></div>
       <p class="eyebrow">Qualität</p>
-      <h2 id="zertifikat-title">Zertifiziert und gut vernetzt</h2>
+      <h2 id="qualitaet-title">Zertifiziert</h2>
     </div>
-    <!-- ECOcert-Kachel im Glas-Look über die volle Breite: Schild unscharf als Hintergrund, darüber Glasfläche mit scharfem Schild und Text -->
-    <div class="bt bt--glass bt--eco">
-      <picture class="bt__blur" aria-hidden="true">
-        <source type="image/webp" srcset="assets/img/07-qualitaet-ecocert100-werkstattschild-400.webp">
-        <img src="assets/img/07-qualitaet-ecocert100-werkstattschild-400.jpg" width="400" height="300" loading="lazy" decoding="async" alt="">
-      </picture>
-      <div class="glass-in">
-        <picture>
-          <source type="image/webp" srcset="assets/img/07-qualitaet-ecocert100-werkstattschild-400.webp 400w, assets/img/07-qualitaet-ecocert100-werkstattschild-960.webp 960w" sizes="(max-width: 560px) calc(100vw - 80px), 480px">
-          <img class="bt__seal" src="assets/img/07-qualitaet-ecocert100-werkstattschild-960.jpg" srcset="assets/img/07-qualitaet-ecocert100-werkstattschild-400.jpg 400w, assets/img/07-qualitaet-ecocert100-werkstattschild-960.jpg 960w" sizes="(max-width: 560px) calc(100vw - 80px), 480px"
-               width="960" height="720" loading="lazy" decoding="async" alt="ECOcert100 Werkstattschild">
-        </picture>
-        <div class="bt__text">
-          <h3 class="bt__title" id="eco-title">Wir sind zertifizierter ECOcert100 Betrieb:</h3>
-          <p>Mit ECOcert100 wird das Ziel verfolgt, die Qualitäts- und Nachhaltigkeitsstandards von Lackierbetrieben zu ermitteln und zu bewerten. Mit dem ECOcert100-Zertifikat können wir uns gegenüber unseren Kunden, Versicherungen oder Automobilherstellern als umweltfreundlicher und nachhaltiger Partner positionieren.</p>
-          <a class="btn btn--glass btn--glass-light" href="#" aria-describedby="eco-title">Mehr erfahren</a>
-        </div>
-      </div>
-    </div>
-  </section>
+    <ul class="certs">
+      <li class="cert">
+        <span class="cert__frame"><img src="assets/img/14-qualitaet-meisterbrief-600.webp" width="600" height="828" loading="lazy" alt="Meisterbrief im Maler- und Lackiererhandwerk von Marko Igelbrink"></span>
+        <span class="cert__name">Meisterbetrieb</span>
+      </li>
+      <li class="cert">
+        <span class="cert__frame cert__frame--wide"><img src="assets/img/07-qualitaet-ecocert100-werkstattschild-960.webp" width="960" height="720" loading="lazy" alt="ECOcert100 Werkstattschild"></span>
+        <span class="cert__name">ECOcert100</span>
+      </li>
+      <li class="cert">
+        <span class="cert__frame"><img src="assets/img/15-qualitaet-dekra-zertifikat-600.webp" width="600" height="848" loading="lazy" alt="DEKRA Zertifikat Werkstattprüfung für Lackierfachbetriebe"></span>
+        <span class="cert__name">DEKRA geprüft</span>
+      </li>
+    </ul>
 
-  <section class="zone" id="partner" aria-labelledby="partner-title">
-    <!-- SEC-HEAD: Symbol | Augenbraue | Überschrift -->
-    <div class="sec-head">
-      <div class="sec-head__divider" aria-hidden="true"><span class="sec-head__ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="5" r="2.5"/><circle cx="5" cy="18.5" r="2.5"/><circle cx="19" cy="18.5" r="2.5"/><path d="M10.8 7.2 6.2 16.3"/><path d="M13.2 7.2l4.6 9.1"/><path d="M7.5 18.5h9"/></svg></span></div>
-      <p class="eyebrow">Partner</p>
-      <h2 id="partner-title">Unsere Partner...</h2>
-    </div>
-    <div class="bento">
-      <div class="bt bt--glass bt--logo bt--gla">
-        <picture class="bt__blur" aria-hidden="true">
-          <source type="image/webp" srcset="assets/img/08-partner-glasurit.webp">
-          <img src="assets/img/08-partner-glasurit.png" width="200" height="200" loading="lazy" decoding="async" alt="">
-        </picture>
-        <span class="glass-in">
-          <picture>
-            <source type="image/webp" srcset="assets/img/08-partner-glasurit.webp">
-            <img src="assets/img/08-partner-glasurit.png" width="200" height="200" loading="lazy" decoding="async" alt="Glasurit">
-          </picture>
-        </span>
+    <h3 class="sub-head" id="partner">Unsere Partner</h3>
+    <div class="bento bento--3">
+      <div class="bt bt--glass bt--logo">
+        <picture class="bt__blur" aria-hidden="true"><img src="assets/img/08-partner-glasurit.webp" width="200" height="200" loading="lazy" alt=""></picture>
+        <span class="glass-in"><img src="assets/img/08-partner-glasurit.webp" width="200" height="200" loading="lazy" alt="Glasurit"></span>
       </div>
-      <div class="bt bt--glass bt--logo bt--hbc">
-        <picture class="bt__blur" aria-hidden="true">
-          <source type="image/webp" srcset="assets/img/09-partner-hbc-system.webp">
-          <img src="assets/img/09-partner-hbc-system.png" width="600" height="230" loading="lazy" decoding="async" alt="">
-        </picture>
-        <span class="glass-in">
-          <picture>
-            <source type="image/webp" srcset="assets/img/09-partner-hbc-system.webp">
-            <img src="assets/img/09-partner-hbc-system.png" width="600" height="230" loading="lazy" decoding="async" alt="HBC-System">
-          </picture>
-        </span>
+      <div class="bt bt--glass bt--logo">
+        <picture class="bt__blur" aria-hidden="true"><img src="assets/img/09-partner-hbc-system.webp" width="600" height="230" loading="lazy" alt=""></picture>
+        <span class="glass-in"><img src="assets/img/09-partner-hbc-system.webp" width="600" height="230" loading="lazy" alt="HBC-System"></span>
       </div>
-      <div class="bt bt--glass bt--logo bt--tmx">
-        <picture class="bt__blur" aria-hidden="true">
-          <source type="image/webp" srcset="assets/img/10-partner-timemax.webp">
-          <img src="assets/img/10-partner-timemax.png" width="600" height="200" loading="lazy" decoding="async" alt="">
-        </picture>
-        <span class="glass-in">
-          <picture>
-            <source type="image/webp" srcset="assets/img/10-partner-timemax.webp">
-            <img src="assets/img/10-partner-timemax.png" width="600" height="200" loading="lazy" decoding="async" alt="Timemax">
-          </picture>
-        </span>
-      </div>
-      <div class="bt bt--glass bt--logo bt--dek">
-        <picture class="bt__blur" aria-hidden="true">
-          <source type="image/webp" srcset="assets/img/11-partner-dekra-siegel.webp">
-          <img src="assets/img/11-partner-dekra-siegel.png" width="600" height="600" loading="lazy" decoding="async" alt="">
-        </picture>
-        <span class="glass-in">
-          <picture>
-            <source type="image/webp" srcset="assets/img/11-partner-dekra-siegel.webp">
-            <img src="assets/img/11-partner-dekra-siegel.png" width="600" height="600" loading="lazy" decoding="async" alt="DEKRA geprüft – Werkstattprüfung für Karosserie- und Lackierfachbetriebe">
-          </picture>
-        </span>
+      <div class="bt bt--glass bt--logo">
+        <picture class="bt__blur" aria-hidden="true"><img src="assets/img/10-partner-timemax.webp" width="600" height="200" loading="lazy" alt=""></picture>
+        <span class="glass-in"><img src="assets/img/10-partner-timemax.webp" width="600" height="200" loading="lazy" alt="Timemax"></span>
       </div>
     </div>
   </section>
 
   <section class="zone" id="bewertungen" aria-labelledby="bewertungen-title">
-    <!-- SEC-HEAD: Symbol | Augenbraue | Überschrift -->
     <div class="sec-head">
       <div class="sec-head__divider" aria-hidden="true"><span class="sec-head__ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5.5h16a1.5 1.5 0 0 1 1.5 1.5v9a1.5 1.5 0 0 1-1.5 1.5H10l-4.5 3.5V17.5H4A1.5 1.5 0 0 1 2.5 16V7A1.5 1.5 0 0 1 4 5.5z"/><path d="M12 8.3l1 2.1 2.3.3-1.7 1.6.4 2.3-2-1.1-2 1.1.4-2.3-1.7-1.6 2.3-.3z" fill="currentColor" stroke-width="1"/></svg></span></div>
-      <p class="eyebrow">Google Bewertung</p>
+      <p class="eyebrow">Kundenbewertung</p>
       <h2 id="bewertungen-title">Das sagen unsere Kunden über uns</h2>
     </div>
-    <!-- TODO: Google-Bewertungen einbinden (Google Business Profile API, serverseitig) -->
     <div class="reviews">
       <div class="rv rv--sum">
         <div class="stars" aria-hidden="true"><svg viewBox="0 0 24 24"><use href="#stern"/></svg><svg viewBox="0 0 24 24"><use href="#stern"/></svg><svg viewBox="0 0 24 24"><use href="#stern"/></svg><svg viewBox="0 0 24 24"><use href="#stern"/></svg><svg viewBox="0 0 24 24"><use href="#stern"/></svg></div>
@@ -386,8 +380,75 @@
       </article>
     </div>
   </section>
+</main>
 
-  <section id="termin" class="pt-0 pb-s">
+<!-- KARRIERE: eigenes Banner über die volle Fensterbreite -->
+<section class="career" id="karriere" aria-labelledby="karriere-title" data-view="start">
+  <picture class="career__img" aria-hidden="true"><img data-px=".15" src="assets/img/16-karriere-lackierkabine-1600.webp" width="1600" height="1200" loading="lazy" alt=""></picture>
+  <div class="career__inner">
+    <div class="career__intro">
+      <p class="career__badge"><span class="career__dot" aria-hidden="true"></span>Wir stellen ein</p>
+      <h2 class="career__title" id="karriere-title">Wir suchen Verstärkung! <span>Fahrzeuglackierer/-in (m/w/d)</span></h2>
+      <p class="career__lead">Du hast deine Ausbildung im Bereich Fahrzeuglackierung abgeschlossen, arbeitest sorgfältig und hast Freude am Handwerk? Dann bewirb dich bei uns in Dülmen.</p>
+      <div class="career__actions">
+        <a class="btn" href="mailto:info@lackiertechnik-igelbrink.de?subject=Bewerbung%20als%20Fahrzeuglackierer%2Fin">Jetzt bewerben</a>
+        <a class="btn btn--glass" href="tel:+4917645875781">Anrufen</a>
+      </div>
+      <p class="career__contact">Deine Ansprechpartnerin: <b>Frau E. Gerlach-Igelbrink</b> · <a href="tel:+4917645875781">+49 176 45875781</a></p>
+    </div>
+    <div class="career__cols">
+      <div class="job__col">
+        <h3>Das bringst du mit</h3>
+        <ul class="job__list">
+          <li>Abgeschlossene Ausbildung im Bereich Fahrzeuglackierung</li>
+          <li>Sorgfältige und professionelle Arbeitsweise</li>
+          <li>Motivation, Zuverlässigkeit und Freude am Handwerk</li>
+        </ul>
+      </div>
+      <div class="job__col">
+        <h3>Das bieten wir dir</h3>
+        <ul class="job__list">
+          <li>Familiäres Arbeitsumfeld und ein Team, das zusammenhält</li>
+          <li>Abwechslungsreiche Aufgaben und eigenverantwortliches Arbeiten</li>
+          <li>Faire Bezahlung und langfristige Jobsicherheit</li>
+          <li>Moderne Technik, hochwertige Arbeitsmittel und regelmäßige Fortbildungen</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="wrap" data-view="start">
+  <!-- SOCIAL MEDIA: eigenes Banner -->
+  <section class="pb-0" id="social" aria-labelledby="social-title">
+    <div class="social">
+      <div class="social__text">
+        <p class="eyebrow eyebrow--on-dark">Social Media</p>
+        <h2 id="social-title">Folgen Sie uns</h2>
+        <p>Einblicke in aktuelle Projekte, Restaurationen und unsere Werkstatt in Dülmen.</p>
+      </div>
+      <!-- Zwei große Kacheln mit Bild bzw. Video im Hintergrund.
+           Video: <img> durch <video autoplay muted loop playsinline preload="metadata" poster="…"> mit MP4/WebM ersetzen (Datei selbst hosten, siehe Hinweis im Chat). -->
+      <ul class="social__media">
+        <li>
+          <a class="sm-tile" href="https://www.instagram.com/lackiertechnik_igelbrink/" target="_blank" rel="noopener">
+            <span class="sm-tile__media" aria-hidden="true"><img src="assets/img/18-social-instagram-1000.webp" width="1000" height="767" loading="lazy" alt=""></span>
+            <span class="sm-tile__top"><span class="sm-tile__ico"><svg aria-hidden="true"><use href="#i-ig"/></svg></span><span class="draft-note draft-note--small">Platzhalter: hier läuft später ein Reel</span></span>
+            <span class="sm-tile__foot"><span><small>Instagram</small><b>@lackiertechnik_igelbrink</b></span><span class="btn btn--glass btn--small">Profil ansehen</span></span>
+          </a>
+        </li>
+        <li>
+          <a class="sm-tile" href="https://www.facebook.com/profile.php?id=100091703222337" target="_blank" rel="noopener">
+            <span class="sm-tile__media" aria-hidden="true"><img src="assets/img/19-social-facebook-1000.webp" width="1000" height="750" loading="lazy" alt=""></span>
+            <span class="sm-tile__top"><span class="sm-tile__ico"><svg aria-hidden="true"><use href="#i-fb"/></svg></span><span class="draft-note draft-note--small">Platzhalter: hier läuft später ein Video/Post</span></span>
+            <span class="sm-tile__foot"><span><small>Facebook</small><b>Lackiertechnik Igelbrink</b></span><span class="btn btn--glass btn--small">Seite ansehen</span></span>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="termin" class="pb-s">
     <div class="cta">
       <div class="cta__text">
         <h2>Jetzt Termin vereinbaren!</h2>
@@ -395,43 +456,81 @@
         <p>Kontaktieren Sie uns jetzt – wir kümmern uns um Ihren Schaden schnell, zuverlässig und unkompliziert.</p>
       </div>
       <button class="btn" type="button" data-open-contact aria-haspopup="dialog" aria-controls="kontaktformular">Online-Termin</button>
+    </div>
+  </section>
+</div>
 
-      <!-- KARRIERE: Stellenanzeige über die volle Breite des Termin-Bands -->
-      <div class="job" id="karriere">
-        <p class="eyebrow eyebrow--on-dark">Karriere</p>
-        <h2 class="job__title" id="karriere-title">Wir suchen Verstärkung: Fahrzeuglackierer/-in (m/w/d)</h2>
-        <p>Du hast deine Ausbildung im Bereich Fahrzeuglackierung abgeschlossen, arbeitest sorgfältig und hast Freude am Handwerk? Dann bewirb dich bei uns in Dülmen.</p>
-        <div class="job__cols">
-          <div class="job__col">
-            <h3>Das bringst du mit</h3>
-            <ul class="job__list">
-              <li>Abgeschlossene Ausbildung im Bereich Fahrzeuglackierung</li>
-              <li>Sorgfältige und professionelle Arbeitsweise</li>
-              <li>Motivation, Zuverlässigkeit und Freude am Handwerk</li>
-            </ul>
+<!-- KONTAKTSEITE (in der echten Seite: kontakt.html). Links die Infos wie bisher plus Karte, rechts nur der Button zum Formular. -->
+<main class="wrap kontakt" id="kontakt-seite" data-view="kontakt" hidden>
+  <section class="zone zone--first" aria-labelledby="kontakt-seite-title">
+    <div class="sec-head">
+      <div class="sec-head__divider" aria-hidden="true"><span class="sec-head__ico"><svg viewBox="0 0 24 24"><use href="#i-mail"/></svg></span></div>
+      <p class="eyebrow">Kontakt</p>
+      <h2 id="kontakt-seite-title">Kontaktieren Sie uns gerne!</h2>
+    </div>
+    <div class="kt">
+      <div class="kt__info">
+        <!-- Eine Kachel: Adresse, Öffnungszeiten, Telefon, E-Mail -->
+        <section class="kt-card" aria-label="Kontaktdaten">
+          <div class="kt-grid">
+            <div class="kt-block">
+              <h3><span class="kt-card__ico"><svg aria-hidden="true"><use href="#i-pin"/></svg></span>Adresse</h3>
+              <address>Lackiertechnik Igelbrink<br>Telgenkamp 31<br>48249 Dülmen</address>
+              <a class="kt-route" href="https://www.google.com/maps/dir/?api=1&amp;destination=Telgenkamp+31,+48249+D%C3%BClmen" target="_blank" rel="noopener">Route planen</a>
+            </div>
+            <div class="kt-block">
+              <h3><span class="kt-card__ico"><svg aria-hidden="true"><use href="#i-uhr"/></svg></span>Öffnungszeiten</h3>
+              <dl class="kt-hours">
+                <div><dt>Montag – Freitag</dt><dd>08:00 – 17:00 Uhr<br><small>oder nach Vereinbarung</small></dd></div>
+                <div><dt>Samstag</dt><dd>nach Vereinbarung</dd></div>
+              </dl>
+            </div>
+            <div class="kt-block">
+              <h3><span class="kt-card__ico"><svg aria-hidden="true"><use href="#i-tel"/></svg></span>Telefon</h3>
+              <ul class="kt-list">
+                <li><a href="tel:+4925947843823"><svg aria-hidden="true"><use href="#i-tel"/></svg><span><small>Telefon</small>+49 2594 7843823</span></a></li>
+                <li><a href="tel:+4917645875781"><svg aria-hidden="true"><use href="#i-mobil"/></svg><span><small>Mobil</small>+49 176 45875781</span></a></li>
+              </ul>
+            </div>
+            <div class="kt-block">
+              <h3><span class="kt-card__ico"><svg aria-hidden="true"><use href="#i-mail"/></svg></span>E-Mail</h3>
+              <ul class="kt-list">
+                <li><a href="mailto:info@lackiertechnik-igelbrink.de"><svg aria-hidden="true"><use href="#i-mail"/></svg><span><small>E-Mail</small>info@lackiertechnik-igelbrink.de</span></a></li>
+              </ul>
+            </div>
           </div>
-          <div class="job__col">
-            <h3>Das bieten wir dir</h3>
-            <ul class="job__list">
-              <li>Familiäres Arbeitsumfeld und ein Team, das zusammenhält</li>
-              <li>Abwechslungsreiche Aufgaben und eigenverantwortliches Arbeiten</li>
-              <li>Faire Bezahlung und langfristige Jobsicherheit</li>
-              <li>Moderne Technik, hochwertige Arbeitsmittel und regelmäßige Fortbildungen</li>
-            </ul>
+        </section>
+        <!-- Karte: Zwei-Klick-Lösung (DSGVO). Google Maps lädt erst nach Zustimmung. -->
+        <div class="kt-map" data-map>
+          <h3 class="kt-map__title">Besuchen Sie uns</h3>
+          <div class="kt-map__box">
+            <div class="kt-map__consent">
+              <svg aria-hidden="true"><use href="#i-pin"/></svg>
+              <p>Beim Laden der Karte werden Daten an Google übermittelt. Mehr dazu in der <a href="#">Datenschutzerklärung</a>.</p>
+              <button class="btn btn--small" type="button" data-map-load>Karte laden</button>
+            </div>
           </div>
-        </div>
-        <div class="job__apply">
-          <div class="job__contact">
-            <p>Deine Ansprechpartnerin: <b>Frau E. Gerlach-Igelbrink</b></p>
-            <p class="job__links"><a href="tel:+4917645875781">+49 17645875781</a> <a href="mailto:info@lackiertechnik-igelbrink.de">info@lackiertechnik-igelbrink.de</a></p>
-          </div>
-          <a class="btn btn--glass" href="mailto:info@lackiertechnik-igelbrink.de?subject=Bewerbung%20als%20Fahrzeuglackierer%2Fin" aria-describedby="karriere-title">Jetzt bewerben</a>
         </div>
       </div>
+      <aside class="kt__cta">
+        <p class="eyebrow eyebrow--on-dark">Anfrage</p>
+        <h3>Schreiben Sie uns</h3>
+        <p>Schildern Sie uns kurz Ihr Anliegen – wir melden uns schnellstmöglich bei Ihnen.</p>
+        <button class="btn" type="button" data-open-contact aria-haspopup="dialog" aria-controls="kontaktformular">Anfrage stellen</button>
+        <p class="kt__or">oder direkt anrufen: <a href="tel:+4925947843823">02594 7843823</a></p>
+      </aside>
     </div>
   </section>
 </main>
 </div>
+
+<!-- INFO-LEISTE: die wichtigsten Footer-Infos (Status, Telefon, Adresse), beim Scrollen immer unten sichtbar.
+     Blendet sich am Seitenanfang und über dem echten Footer aus (js/main.js). -->
+<aside class="infobar" aria-label="Kurzinfo">
+  <p class="infobar__item infobar__status" data-open-status hidden><span class="ft-status__dot" aria-hidden="true"></span><span data-open-text></span></p>
+  <a class="infobar__item" href="tel:+4925947843823"><svg aria-hidden="true"><use href="#i-tel"/></svg><span>02594 7843823</span></a>
+  <a class="infobar__item infobar__adr" href="https://www.google.com/maps/dir/?api=1&amp;destination=Telgenkamp+31,+48249+D%C3%BClmen" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-pin"/></svg><span>Telgenkamp 31, Dülmen</span></a>
+</aside>
 
 <!-- FOOTER -->
 <!-- Footer: Kopfzeile (Logo, Karriere-Hinweis, Nach oben) | vier Glas-Karten | Siegel | Rechtliches.
@@ -492,14 +591,6 @@
           <li><a href="#"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 12.2c0-.6-.1-1.2-.2-1.7H12v3.3h4.5a4 4 0 0 1-1.7 2.6"/><path d="M14.8 16.4A6.5 6.5 0 1 1 16.6 7"/></svg><span><small>Google</small>Bewertungen ansehen</span></a></li>
         </ul>
       </section>
-    </div>
-
-    <div class="ft-meta">
-      <!-- TODO: Klären, ob „Meisterbetrieb“ als Siegel ergänzt wird (Meisterbrief liegt in bilder-originale) -->
-      <ul class="ft-seals" aria-label="Zertifikate">
-        <li><img src="assets/img/11-partner-dekra-siegel.png" width="600" height="600" loading="lazy" decoding="async" alt="DEKRA geprüft"></li>
-        <li class="ft-seals__text"><strong>ECOcert100</strong>zertifizierter Betrieb</li>
-      </ul>
     </div>
 
     <div class="legal">
@@ -578,7 +669,8 @@
   </div>
 </dialog>
 
-<script src="js/main.js" defer></script>
-<script src="js/hero-spray.js" defer></script>
+
+<script src="js/main.js?v=202610142001" defer></script>
+<script src="js/hero-spray.js?v=202610142001" defer></script>
 </body>
 </html>

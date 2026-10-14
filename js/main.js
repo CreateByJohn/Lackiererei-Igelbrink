@@ -118,10 +118,10 @@
 
 // Footer: Live-Status der Öffnungszeiten (Mo–Fr 08:00–17:00, Zeit in Dülmen).
 // Ohne JavaScript bleibt das Badge versteckt, die Zeiten stehen trotzdem da. Aktualisiert sich jede Minute.
+// Gilt für alle Badges mit data-open-status (Footer und Info-Leiste).
 (function () {
-  var badge = document.querySelector('[data-open-status]');
-  if (!badge) return;
-  var text = badge.querySelector('[data-open-text]');
+  var badges = document.querySelectorAll('[data-open-status]');
+  if (!badges.length) return;
   var OPEN = 8 * 60, CLOSE = 17 * 60;
   var DAYS = ['So', 'Mo', 'Di', 'Mi', 'Do', 'Fr', 'Sa'];
 
@@ -141,9 +141,11 @@
     else if (weekday && n.min < OPEN) msg = 'Geschlossen – öffnet heute um 08:00 Uhr';
     else if (n.day >= 1 && n.day <= 4) msg = 'Geschlossen – öffnet morgen um 08:00 Uhr';
     else msg = 'Geschlossen – öffnet Montag um 08:00 Uhr';
-    badge.classList.toggle('is-open', open);
-    text.textContent = msg;
-    badge.hidden = false;
+    badges.forEach(function (badge) {
+      badge.classList.toggle('is-open', open);
+      badge.querySelector('[data-open-text]').textContent = msg;
+      badge.hidden = false;
+    });
   }
 
   update();
@@ -240,4 +242,115 @@
     // TODO: Formular-Versand anbinden (serverseitig, mit Spam-Schutz). Bis dahin wird nichts gesendet.
     e.preventDefault();
   });
+})();
+
+// Unsere Expertise: Zeilen einzeln aufklappen (Akkordeon).
+(function () {
+  document.querySelectorAll('.exp__head').forEach(function (head) {
+    head.addEventListener('click', function () {
+      var item = head.closest('.exp__item');
+      var open = !item.classList.contains('is-open');
+      item.classList.toggle('is-open', open);
+      head.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+  });
+})();
+
+// Parallax: Bilder mit data-px verschieben sich beim Scrollen leicht gegen die Scrollrichtung.
+// Der Hero bewegt sich mit der Scrollposition, alle anderen Bilder relativ zur Fenstermitte,
+// begrenzt auf den Überstand des Bildes über seinen Rahmen (kein sichtbarer Rand).
+// Nur mit requestAnimationFrame und nur für Bilder im Fenster; aus bei reduzierter Bewegung.
+(function () {
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  var els = Array.prototype.slice.call(document.querySelectorAll('[data-px]'));
+  if (!els.length) return;
+  var ticking = false;
+
+  function update() {
+    ticking = false;
+    var vh = window.innerHeight;
+    els.forEach(function (img) {
+      var speed = parseFloat(img.getAttribute('data-px')) || 0;
+      var box = img.parentElement.getBoundingClientRect();
+      if (box.bottom < -100 || box.top > vh + 100 || box.height === 0) return;
+      var y;
+      if (img.classList.contains('hero__img')) {
+        y = Math.max(0, -box.top) * speed;
+      } else {
+        var room = Math.max(0, (img.offsetHeight - box.height) / 2);
+        y = -(box.top + box.height / 2 - vh / 2) * speed;
+        y = Math.max(-room, Math.min(room, y));
+      }
+      img.style.setProperty('--py', y.toFixed(1) + 'px');
+    });
+  }
+  function request() { if (!ticking) { ticking = true; requestAnimationFrame(update); } }
+  window.addEventListener('scroll', request, { passive: true });
+  window.addEventListener('resize', request);
+  window.addEventListener('load', request);
+  document.addEventListener('viewchange', request);
+  update();
+})();
+
+// Info-Leiste: erscheint nach dem ersten Bildschirm und verschwindet, sobald der echte Footer ins Bild kommt.
+(function () {
+  var bar = document.querySelector('.infobar');
+  var footer = document.querySelector('.site-footer');
+  if (!bar || !footer) return;
+  var ticking = false;
+  function update() {
+    ticking = false;
+    var y = window.scrollY, vh = window.innerHeight;
+    var docH = document.documentElement.scrollHeight;
+    var hasHero = !!document.querySelector('.hero:not([hidden])') && document.querySelector('[data-view="start"]:not([hidden])');
+    var start = hasHero ? vh * 0.6 : 40;
+    var nearFooter = y + vh > docH - footer.offsetHeight * 0.85;
+    bar.classList.toggle('is-visible', y > start && !nearFooter);
+  }
+  function request() { if (!ticking) { ticking = true; requestAnimationFrame(update); } }
+  window.addEventListener('scroll', request, { passive: true });
+  window.addEventListener('resize', request);
+  document.addEventListener('viewchange', request);
+  update();
+})();
+
+// Kontaktseite, Karte: Google Maps lädt erst nach Klick (Zwei-Klick-Lösung, DSGVO).
+(function () {
+  document.querySelectorAll('[data-map]').forEach(function (wrap) {
+    var btn = wrap.querySelector('[data-map-load]');
+    if (!btn) return;
+    btn.addEventListener('click', function () {
+      var box = wrap.querySelector('.kt-map__box');
+      box.innerHTML = '<iframe title="Karte: Lackiertechnik Igelbrink, Telgenkamp 31, 48249 Dülmen" loading="lazy" referrerpolicy="no-referrer-when-downgrade" ' +
+        'src="https://www.google.com/maps?q=Telgenkamp+31,+48249+D%C3%BClmen&output=embed"></iframe>';
+    });
+  });
+})();
+
+// Ansichten Start / Kontakt (bis kontakt.html existiert): #/kontakt zeigt die Kontaktseite, #/ oder ein Anker die Startseite.
+// Elemente mit data-view gehören zu einer Ansicht; nach jedem Wechsel wird "viewchange" ausgelöst (Parallax, Info-Leiste).
+(function () {
+  var views = document.querySelectorAll('[data-view]');
+  if (!views.length) return;
+  var startTitle = document.title;
+
+  function show(name) {
+    views.forEach(function (v) { v.hidden = v.getAttribute('data-view') !== name; });
+    document.title = name === 'kontakt' ? 'Kontakt – Lackiertechnik Igelbrink' : startTitle;
+    document.dispatchEvent(new Event('viewchange'));
+  }
+
+  function route() {
+    var h = location.hash;
+    if (h.indexOf('#/kontakt') === 0) { show('kontakt'); window.scrollTo(0, 0); return; }
+    var wasHidden = document.querySelector('[data-view="start"]').hidden;
+    show('start');
+    if (h === '' || h === '#/') { if (wasHidden || h === '#/') window.scrollTo(0, 0); return; }
+    // Anker der Startseite: war sie gerade versteckt, hat der Browser noch nicht hingescrollt
+    var el = document.getElementById(h.slice(1));
+    if (el && wasHidden) requestAnimationFrame(function () { el.scrollIntoView(); });
+  }
+
+  window.addEventListener('hashchange', route);
+  route();
 })();

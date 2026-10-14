@@ -167,4 +167,13 @@
   --seal-w:480px;                           /* maximale Breite des ECOcert-Schilds */
   --logo-h:clamp(44px,6vw,76px);            /* einheitliche Logo-Höhe auf den Partner-Kacheln */
   --dialog-w:680px;
+
+  /* Überschriften in den Logo-Farben: Blau/Schwarz wie „LACKIERTECHNIK“ */
+  --heading:#1e2a44;
+  --logo-orange:#ff5000;
+
+  /* Info-Leiste unten, Karriere-Banner, Bild-Kacheln (Social Media) */
+  --infobar-glass:rgba(255,255,255,.72);
+  --grad-career:linear-gradient(100deg,rgba(14,22,42,.95) 0%,rgba(14,22,42,.86) 42%,rgba(27,42,74,.55) 100%);
+  --grad-media:linear-gradient(0deg,rgba(14,22,42,.88) 0%,rgba(14,22,42,.35) 50%,rgba(14,22,42,.05) 100%);
 }
