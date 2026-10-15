@@ -53,7 +53,7 @@
 
   cards.forEach(function (card) {
     var media = card.querySelector('.svc__media');
-    if (!media) return;
+    if (!media || !card.querySelector('.svc__toggle')) return;   // Karten ohne „+“ (service.html) klappen nicht auf
     // Der Button liegt im Bildbereich, sein Klick (auch per Tastatur) landet ebenfalls hier.
     media.addEventListener('click', function (e) {
       if (e.target.closest('a')) return;
@@ -334,6 +334,78 @@
       copy.setAttribute('aria-hidden', 'true');
       copy.querySelectorAll('img').forEach(function (img) { img.alt = ''; });
       track.appendChild(copy);
+    });
+  });
+})();
+
+// Galerie .steps: Klick auf ein Bild öffnet die Lightbox (natives <dialog>).
+// Pfeile und Tastatur ←/→ blättern, Escape schließt (nativ), danach geht der Fokus zurück an das angeklickte Bild.
+// Läuft nur, wenn es eine Galerie gibt. Das <dialog> wird hier erzeugt, damit es nicht in jeder Seite stehen muss.
+(function () {
+  var openers = Array.prototype.slice.call(document.querySelectorAll('.steps__open'));
+  if (!openers.length) return;
+  var ARROW = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">';
+  var box = document.createElement('dialog');
+  box.className = 'lightbox';
+  box.setAttribute('aria-label', 'Bildansicht');
+  box.innerHTML =
+    '<div class="lightbox__stage"><img alt=""></div>' +
+    '<button class="lightbox__btn lightbox__prev" type="button" aria-label="Vorheriges Bild">' + ARROW + '<path d="m15 5-7 7 7 7"/></svg></button>' +
+    '<button class="lightbox__btn lightbox__next" type="button" aria-label="Nächstes Bild">' + ARROW + '<path d="m9 5 7 7-7 7"/></svg></button>' +
+    '<button class="lightbox__btn lightbox__close" type="button" aria-label="Bildansicht schließen">' + ARROW + '<path d="M6 6l12 12M18 6 6 18"/></svg></button>' +
+    '<p class="lightbox__count" aria-live="polite"></p>';
+  document.body.appendChild(box);
+  var img = box.querySelector('img');
+  var count = box.querySelector('.lightbox__count');
+  var webp = document.createElement('canvas').toDataURL('image/webp').indexOf('data:image/webp') === 0;
+  var index = 0, opener = null;
+
+  function show(i) {
+    index = (i + openers.length) % openers.length;
+    var b = openers[index];
+    img.classList.remove('is-new');
+    img.src = (webp && b.getAttribute('data-full-webp')) || b.getAttribute('data-full');
+    img.alt = (b.querySelector('img') || {}).alt || '';
+    void img.offsetWidth;   // Animation bei jedem Wechsel neu starten
+    img.classList.add('is-new');
+    count.textContent = 'Bild ' + (index + 1) + ' von ' + openers.length;
+    // Nachbarbilder vorladen, damit das Blättern ohne Wartezeit klappt
+    [index + 1, index - 1].forEach(function (n) {
+      var nb = openers[(n + openers.length) % openers.length];
+      new Image().src = (webp && nb.getAttribute('data-full-webp')) || nb.getAttribute('data-full');
+    });
+  }
+
+  openers.forEach(function (b, i) {
+    b.addEventListener('click', function () {
+      opener = b;
+      show(i);
+      box.showModal();
+      box.querySelector('.lightbox__close').focus();
+    });
+  });
+  box.querySelector('.lightbox__prev').addEventListener('click', function () { show(index - 1); });
+  box.querySelector('.lightbox__next').addEventListener('click', function () { show(index + 1); });
+  box.querySelector('.lightbox__close').addEventListener('click', function () { box.close(); });
+  box.addEventListener('keydown', function (e) {
+    if (e.key === 'ArrowLeft') { e.preventDefault(); show(index - 1); }
+    if (e.key === 'ArrowRight') { e.preventDefault(); show(index + 1); }
+  });
+  // Klick auf die dunkle Fläche neben dem Bild schließt
+  box.addEventListener('click', function (e) {
+    if (e.target === box || e.target.classList.contains('lightbox__stage')) box.close();
+  });
+  box.addEventListener('close', function () {
+    if (opener) opener.focus();   // Fokus zurück an das angeklickte Bild
+  });
+})();
+
+// Formulare direkt auf der Seite (Online-Termin, Widerrufsformular): Versand ist noch nicht angebunden.
+(function () {
+  document.querySelectorAll('form[data-form-todo]').forEach(function (form) {
+    form.addEventListener('submit', function (e) {
+      // TODO: Formular-Versand anbinden (serverseitig, mit Spam-Schutz). Bis dahin wird nichts gesendet.
+      e.preventDefault();
     });
   });
 })();

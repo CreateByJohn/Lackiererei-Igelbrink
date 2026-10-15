@@ -165,3 +165,53 @@
   .mq-item__glass::after{display:none}
   .marquee{overflow-x:auto;-webkit-mask-image:none;mask-image:none}
 }
+
+/* =====================================================================
+   UNTERSEITEN
+   ===================================================================== */
+
+/* Aktiver Menüpunkt (aria-current): dezent, gleiche Optik wie Hover. „true“ = Elternpunkt einer Unterseite */
+.menu>li>a[aria-current]{background:var(--nav-hover);color:var(--accent-strong);box-shadow:inset 0 0 0 1px var(--nav-hover-line)}
+.submenu a[aria-current]{background:var(--nav-hover);color:var(--accent-strong)}
+
+/* Galerie: Bild zoomt leicht, Lupe erscheint */
+.steps__open img{transition:transform .5s var(--ease-out);will-change:transform}
+.steps__open::before,.steps__open::after{transition:opacity .2s var(--ease-out),transform .2s var(--ease-out);transform:scale(.8)}
+.steps__open:hover img,.steps__open:focus-visible img{transform:scale(1.05)}
+.steps__open:hover::before,.steps__open:hover::after,.steps__open:focus-visible::before,.steps__open:focus-visible::after{opacity:1;transform:none}
+
+/* Lightbox: kurzes Einblenden, Bildwechsel weich */
+@keyframes lightbox-in{from{opacity:0}}
+@keyframes lightbox-img{from{opacity:0;scale:.97}}
+.lightbox[open]{animation:lightbox-in .25s var(--ease-out)}
+.lightbox[open]::backdrop{animation:lightbox-in .25s var(--ease-out)}
+.lightbox__stage img.is-new{animation:lightbox-img .3s var(--ease-out)}
+.lightbox__btn{transition:background .18s var(--ease-out),box-shadow .18s var(--ease-out),transform var(--t-hover) var(--ease-out)}
+.lightbox__btn:hover{background:var(--nav-hover),var(--glass-chip);box-shadow:inset 0 0 0 1px var(--nav-hover-line),var(--nav-hover-glow)}
+.lightbox__close:hover{transform:rotate(90deg)}
+
+/* Projekt-Kacheln: Bild zoomt, Glas-Kachel hebt sich */
+.proj{transition:transform var(--t-hover) var(--ease-out),box-shadow var(--t-hover) var(--ease-out)}
+.proj__img img{transition:transform .5s var(--ease-out);will-change:transform}
+.proj:hover,.proj:focus-visible{transform:translateY(-4px);box-shadow:var(--sh-3)}
+.proj:hover .proj__img img,.proj:focus-visible .proj__img img{transform:scale(1.05)}
+.proj:hover .glass-tile,.proj:focus-visible .glass-tile{transform:translateY(-4px)}
+
+/* Karten auf Unterseiten: anheben wie die Kundenstimmen */
+.flow li,.team__card,.partner{transition:transform var(--t-hover) var(--ease-out),box-shadow var(--t-hover) var(--ease-out),color .18s var(--ease-out)}
+.flow li:hover,.team__card:hover,.partner:hover{transform:translateY(-4px);box-shadow:var(--sh-3)}
+.partner:hover{color:var(--accent-strong)}
+
+/* Einblenden beim Scrollen (wie auf der Startseite) */
+@media (prefers-reduced-motion:no-preference){
+  @supports ((animation-timeline:view()) and (animation-range:entry)){
+    .proj,.steps__item,.flow li,.team__card,.contact-person,.form-card,.partners{animation:rise auto var(--ease) backwards;animation-timeline:view();animation-range:entry 0% entry 55%}
+  }
+}
+
+/* Reduzierte Bewegung: kein Zoom, kein Anheben, kein Übergang in der Lightbox */
+@media (prefers-reduced-motion:reduce){
+  .steps__open:hover img,.steps__open:focus-visible img,.proj:hover,.proj:focus-visible,.proj:hover .proj__img img,.proj:focus-visible .proj__img img,
+  .proj:hover .glass-tile,.proj:focus-visible .glass-tile,.flow li:hover,.team__card:hover,.partner:hover,.lightbox__close:hover{transform:none}
+  .steps__open::before,.steps__open::after{transform:none}
+}

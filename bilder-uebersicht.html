@@ -56,7 +56,7 @@ section.x code{background:#eef1f6;padding:1px 6px;border-radius:6px}
 <div class="w">
 <header>
   <h1>Bilder-Übersicht</h1>
-  <p class="lead">Alle Bilder der Website von Lackiertechnik Igelbrink, sortiert nach Nummer. Die Übersicht liest alle Seiten (Liste <code>PAGES</code> unten im Skript) bei jedem Öffnen neu ein. Vorschau, Dateinamen, Maße, Alt-Texte und Fundorte (Seite und Zeile) sind deshalb immer der aktuelle Stand.</p>
+  <p class="lead">Alle Bilder der Website von Lackiertechnik Igelbrink (Startseite und alle Unterseiten), sortiert nach Nummer. Die Übersicht liest alle Seiten (Liste <code>PAGES</code> unten im Skript) bei jedem Öffnen neu ein. Vorschau, Dateinamen, Maße, Alt-Texte und Fundorte (Seite und Zeile) sind deshalb immer der aktuelle Stand.</p>
 </header>
 
 <section class="how">
@@ -77,7 +77,7 @@ section.x code{background:#eef1f6;padding:1px 6px;border-radius:6px}
 
 <section class="x" id="regeln">
   <h2>Benennungsprinzip</h2>
-  <p><code>NN-bereich-motiv-BREITE.endung</code>. Beispiel: <code>02-hero-startseite-1600.jpg</code></p>
+  <p><code>NN-bereich-motiv-BREITE.endung</code> (ab 100 dreistellig). Beispiel: <code>02-hero-startseite-1600.jpg</code></p>
   <p>NN ist die laufende Nummer (01, 02 …). Danach folgen Bereich und Motiv. Am Ende steht die Breite in Pixeln, wenn es mehrere Größen gibt. Ein neues Bild bekommt die nächste freie Nummer (14, 15 …). Die Nummer ändert sich nie, auch wenn das Bild später an anderer Stelle sitzt.</p>
   <p>Ordner: <code>assets/img</code> enthält nur Bilder, die die Website lädt. Originale und aussortierte Dateien liegen in <code>bilder-originale</code> und werden nie eingebunden.</p>
 </section>
@@ -85,33 +85,174 @@ section.x code{background:#eef1f6;padding:1px 6px;border-radius:6px}
 
 <script>
 // Seiten, die eingelesen werden. Neue Seite = hier eintragen.
-const PAGES = ['index.html', 'kontakt.html'];
+const PAGES = [
+ 'index.html',
+ 'service.html',
+ 'unfallinstandsetzung.html',
+ 'wohnmobil-service.html',
+ 'oldtimerlackierung.html',
+ 'unterbodenschutz.html',
+ 'projekte.html',
+ 'ferrari.html',
+ 'opel-manta.html',
+ 'mercedes-w123.html',
+ 'bmw-e36-cabrio.html',
+ 'karmann-ghia-cabriolet.html',
+ 'porsche-356.html',
+ 'ueber-uns.html',
+ 'karriere.html',
+ 'online-termin.html',
+ 'kontakt.html',
+ 'impressum.html',
+ 'datenschutz.html',
+ 'disclaimer.html',
+ 'agb.html',
+ 'widerruf.html',
+ 'widerrufsformular.html',
+ 'vertrag-widerrufen.html'
+];
 
 // Beschreibung pro Platz (sortiert nach Nummer). Alt-Texte, Dateien, Maße und Fundorte kommen live aus den Seiten.
 // unused:true = bewusst zurzeit nicht eingebunden (wird nicht als Fehler gemeldet).
 const SLOTS = {
  '01': {bereich:'Navigation und Footer', stelle:'Logo in der Navigationspille (oben links) und im weißen Feld des Footers, auf jeder Seite.', soll:'Querformat 3:1 (aktuell 1062 × 354), transparenter Hintergrund, PNG.'},
- '02': {bereich:'Startseite, Hero', stelle:'Hintergrundbild der ersten Bildschirmseite. Wird beim Laden von der Spray-Animation aufgedeckt. Die Datei „02-hero-spraygun.svg“ ist die Spritzpistole der Animation (dekorativ).', soll:'Querformat 3:2, mindestens 2400 px breit, Motiv rechts (links liegt der Text auf einem dunklen Verlauf). Benötigt: WebP in 800, 1400 und 2400 px plus JPG in 1600 px.'},
- '03': {bereich:'Expertise-Band (zurzeit nicht eingebunden)', stelle:'Hintergrund hinter „Unsere Expertise“. Der Abschnitt ist von der Startseite entfernt und kommt auf die Unterseite „Dienstleistung“ (service.html).', soll:'4:3, mindestens 1600 px breit. Benötigt: WebP 800 und 1600, JPG 1600.', unused:true},
- '04': {bereich:'Startseite, Schwerpunkte, Karte 1', stelle:'Bild der Karte „PKW- Unfallinstandsetzung inkl. Versicherungsabwicklung“.', soll:'Querformat 4:3, mindestens 1200 px breit. Wird im Hochformat 3:4 zugeschnitten, Motiv mittig halten. Benötigt: WebP + JPG in 600 und 1200.'},
- '05': {bereich:'Startseite, Schwerpunkte, Karte 2', stelle:'Bild der Karte „Wohnwagen- und Wohnmobil Instandsetzung“.', soll:'Quadrat oder Hochformat, mindestens 1080 px breit. Benötigt: WebP + JPG in 600 und 1080.'},
+ '02': {bereich:'Startseite, Hero und Seitenköpfe', stelle:'Hintergrundbild der ersten Bildschirmseite. Außerdem Seitenkopf von service.html und online-termin.html (Ersatzbild, live ohne Titelbild). Wird beim Laden von der Spray-Animation aufgedeckt. Die Datei „02-hero-spraygun.svg“ ist die Spritzpistole der Animation (dekorativ).', soll:'Querformat 3:2, mindestens 2400 px breit, Motiv rechts (links liegt der Text auf einem dunklen Verlauf). Benötigt: WebP in 800, 1400 und 2400 px plus JPG in 1600 px.'},
+ '03': {bereich:'Expertise-Band, Zertifikate', stelle:'Hintergrund hinter „Unsere Expertise“ auf service.html und hinter den Zertifikaten auf ueber-uns.html (verschiebt sich beim Scrollen leicht, Parallax). Alt-Text ist bewusst leer, weil es ein Hintergrundbild ist.', soll:'4:3, mindestens 1600 px breit. Benötigt: WebP 800 und 1600, JPG 1600.'},
+ '04': {bereich:'Startseite, Schwerpunkte, Karte 1', stelle:'Bild der Karte „PKW- Unfallinstandsetzung inkl. Versicherungsabwicklung“. Außerdem Inhaltsbild auf unfallinstandsetzung.html (live IMG_3944).', soll:'Querformat 4:3, mindestens 1200 px breit. Wird im Hochformat 3:4 zugeschnitten, Motiv mittig halten. Benötigt: WebP + JPG in 600 und 1200.'},
+ '05': {bereich:'Startseite, Schwerpunkte, Karte 2', stelle:'Bild der Karte „Wohnwagen- und Wohnmobil Instandsetzung“. Außerdem Seitenkopf von wohnmobil-service.html (Ersatzbild).', soll:'Quadrat oder Hochformat, mindestens 1080 px breit. Benötigt: WebP + JPG in 600 und 1080.'},
  '06': {bereich:'Startseite, Schwerpunkte, Karte 3', stelle:'Bild der Karte „Oldtimer Spezialist:“.', soll:'Querformat 4:3, mindestens 1200 px breit. Benötigt: WebP + JPG in 600 und 1200.'},
  '07': {bereich:'Qualität, Karussell', stelle:'Karussell „Zertifikate und Partner“, Kachel 2 (ECOcert100 Werkstattschild). Zweimal verwendet: scharf auf der Glasfläche plus unscharfer Hintergrund.', soll:'4:3, mindestens 960 px breit. Benötigt: WebP + JPG 960 (die 400er-Dateien sind zurzeit nicht eingebunden).'},
- '08': {bereich:'Qualität, Karussell', stelle:'Karussell „Zertifikate und Partner“, Kachel 4 (Glasurit). Zweimal verwendet: scharf plus unscharfer Hintergrund.', soll:'Freigestellt, transparenter Hintergrund (kein weißer Kasten), mindestens 400 px breit. Das Logo wird in die feste Kachelgröße eingepasst. Benötigt: WebP + PNG.'},
- '09': {bereich:'Qualität, Karussell', stelle:'Karussell „Zertifikate und Partner“, Kachel 5 (HBC-System). Zweimal verwendet: scharf plus unscharfer Hintergrund.', soll:'Freigestellt, transparenter Hintergrund (kein weißer Kasten), Querformat. Benötigt: WebP + PNG.'},
- '10': {bereich:'Qualität, Karussell', stelle:'Karussell „Zertifikate und Partner“, Kachel 6 (Timemax). Zweimal verwendet: scharf plus unscharfer Hintergrund.', soll:'Freigestellt, transparenter Hintergrund (kein weißer Kasten), Querformat. Benötigt: WebP + PNG.'},
+ '08': {bereich:'Qualität, Karussell', stelle:'Karussell „Zertifikate und Partner“, Kachel 4 (Glasurit). Zweimal verwendet: scharf plus unscharfer Hintergrund. Außerdem Partner-Liste auf ueber-uns.html.', soll:'Freigestellt, transparenter Hintergrund (kein weißer Kasten), mindestens 400 px breit. Das Logo wird in die feste Kachelgröße eingepasst. Benötigt: WebP + PNG.'},
+ '09': {bereich:'Qualität, Karussell', stelle:'Karussell „Zertifikate und Partner“, Kachel 5 (HBC-System). Zweimal verwendet: scharf plus unscharfer Hintergrund. Außerdem Partner-Liste auf ueber-uns.html.', soll:'Freigestellt, transparenter Hintergrund (kein weißer Kasten), Querformat. Benötigt: WebP + PNG.'},
+ '10': {bereich:'Qualität, Karussell', stelle:'Karussell „Zertifikate und Partner“, Kachel 6 (Timemax). Zweimal verwendet: scharf plus unscharfer Hintergrund. Außerdem Partner-Liste auf ueber-uns.html.', soll:'Freigestellt, transparenter Hintergrund (kein weißer Kasten), Querformat. Benötigt: WebP + PNG.'},
  '11': {bereich:'DEKRA-Siegel (zurzeit nicht eingebunden)', stelle:'Früher Partner-Kachel 4. DEKRA steht jetzt als Zertifikat (Bild 15) im Karussell „Zertifikate und Partner“.', soll:'Nur das runde Siegel, quadratisch 600 × 600 px, außerhalb des Kreises transparent (kein weißer Rand). Benötigt: WebP + PNG.', unused:true},
  '12': {bereich:'Footer', stelle:'Bild rechts im Footer, blendet nach links aus, auf jeder Seite. Alt-Text ist bewusst leer, weil es ein Hintergrundbild ist.', soll:'Quadrat, mindestens 800 px (aktuell 675), damit es auf großen Bildschirmen scharf bleibt. Benötigt: WebP 400 und 675, JPG 675.'},
  '13': {bereich:'Browser-Tab', stelle:'Favicon im Kopf jeder Seite. Ein Favicon hat kein Alt-Attribut.', soll:'Quadrat, 192 × 192 px, PNG.'},
- '14': {bereich:'Qualität, Karussell', stelle:'Karussell „Zertifikate und Partner“, Kachel 1 (Meisterbrief). Zweimal verwendet: scharf plus unscharfer Hintergrund.', soll:'Hochformat wie das Original (aktuell 600 × 828), gut lesbar. Benötigt: WebP + JPG 600.'},
- '15': {bereich:'Qualität, Karussell', stelle:'Karussell „Zertifikate und Partner“, Kachel 3 (DEKRA-Zertifikat). Zweimal verwendet: scharf plus unscharfer Hintergrund.', soll:'Hochformat wie das Original (aktuell 600 × 848). Benötigt: WebP + JPG 600.'},
+ '14': {bereich:'Qualität, Karussell', stelle:'Karussell „Zertifikate und Partner“, Kachel 1 (Meisterbrief). Zweimal verwendet: scharf plus unscharfer Hintergrund. Außerdem im Zertifikat-Akkordeon auf ueber-uns.html.', soll:'Hochformat wie das Original (aktuell 600 × 828), gut lesbar. Benötigt: WebP + JPG 600.'},
+ '15': {bereich:'Qualität, Karussell', stelle:'Karussell „Zertifikate und Partner“, Kachel 3 (DEKRA-Zertifikat). Zweimal verwendet: scharf plus unscharfer Hintergrund. Außerdem im Zertifikat-Akkordeon auf ueber-uns.html.', soll:'Hochformat wie das Original (aktuell 600 × 848). Benötigt: WebP + JPG 600.'},
  '16': {bereich:'Karriere', stelle:'Hintergrund des Karriere-Banners (verschiebt sich beim Scrollen leicht, Parallax). Alt-Text ist bewusst leer, weil es ein Hintergrundbild ist.', soll:'4:3, mindestens 1600 px breit, Motiv eher rechts (links liegt der Text auf einem dunklen Verlauf). Benötigt: WebP + JPG 1600.'},
- '18': {bereich:'Social Media', stelle:'Hintergrund der Instagram-Kachel (Platzhalter, später ein Reel). Alt-Text bewusst leer.', soll:'Hochformat oder 4:3, mindestens 1000 px breit. Benötigt: WebP + JPG 1000.'},
- '19': {bereich:'Social Media', stelle:'Hintergrund der Facebook-Kachel (Platzhalter, später ein Video/Post). Alt-Text bewusst leer.', soll:'Hochformat oder 4:3, mindestens 1000 px breit. Benötigt: WebP + JPG 1000.'}
+ '18': {bereich:'Social Media', stelle:'Hintergrund der Instagram-Kachel (Platzhalter, später ein Reel). Außerdem Seitenkopf von projekte.html (Ersatzbild). Alt-Text bewusst leer.', soll:'Hochformat oder 4:3, mindestens 1000 px breit. Benötigt: WebP + JPG 1000.'},
+ '19': {bereich:'Social Media', stelle:'Hintergrund der Facebook-Kachel (Platzhalter, später ein Video/Post). Alt-Text bewusst leer.', soll:'Hochformat oder 4:3, mindestens 1000 px breit. Benötigt: WebP + JPG 1000.'},
+ '20': {bereich:'Dienstleistung, Leistungs-Karte', stelle:'Live-Original: projekte/ferrari-grundiert-front-kabine.png. Fundort: service.html.', soll:'Seitenverhältnis wie jetzt (764 × 756). Benötigt: WebP + JPG in 600 / 764 px.'},
+ '21': {bereich:'Dienstleistung, Leistungs-Karte', stelle:'Live-Original: leistungen/wohnmobil-see-hochformat.png. Fundort: service.html.', soll:'Seitenverhältnis wie jetzt (322 × 367). Benötigt: WebP + JPG in 322 px.'},
+ '22': {bereich:'Dienstleistung, Leistungs-Karte', stelle:'Live-Original: leistungen/unfall-golf-achsvermessung.jpg. Fundort: service.html, unfallinstandsetzung.html. Als Seitenkopf: Hintergrund mit Verlauf, Alt-Text dort bewusst leer.', soll:'Seitenverhältnis wie jetzt (1280 × 847). Benötigt: WebP + JPG in 600 / 1200 / 1280 px.'},
+ '23': {bereich:'Dienstleistung, Leistungs-Karte', stelle:'Live-Original: leistungen/stock-unterboden-auspuff-pixabay.jpg. Fundort: service.html.', soll:'Seitenverhältnis wie jetzt (1280 × 847). Benötigt: WebP + JPG in 600 / 1200 px.'},
+ '24': {bereich:'Dienstleistung, Galerie', stelle:'Live-Original: projekte/opel-manta-abklebung-detail.jpeg. Fundort: service.html, opel-manta.html.', soll:'Seitenverhältnis wie jetzt (2560 × 1920). Benötigt: WebP + JPG in 600 / 1200 px.'},
+ '25': {bereich:'Dienstleistung, Galerie', stelle:'Live-Original: projekte/opel-manta-rot-fertig-hof.jpg. Fundort: service.html, projekte.html, opel-manta.html. Als Seitenkopf: Hintergrund mit Verlauf, Alt-Text dort bewusst leer.', soll:'Seitenverhältnis wie jetzt (2560 × 1920). Benötigt: WebP + JPG in 600 / 1200 / 1400 / 2400 px.'},
+ '26': {bereich:'Dienstleistung, Galerie', stelle:'Live-Original: leistungen/motorraeder-motorradlackierung.jpg. Fundort: service.html.', soll:'Seitenverhältnis wie jetzt (1024 × 683). Benötigt: WebP + JPG in 600 / 1024 px.'},
+ '27': {bereich:'Unfallinstandsetzung', stelle:'Live-Original: leistungen/unfall-golf-achsvermessung-hochformat.jpeg. Fundort: unfallinstandsetzung.html.', soll:'Seitenverhältnis wie jetzt (306 × 241). Benötigt: WebP + JPG in 306 px.'},
+ '28': {bereich:'Wohnmobil-Service', stelle:'Live-Original: leistungen/wohnmobil-see-querformat.png. Fundort: wohnmobil-service.html.', soll:'Seitenverhältnis wie jetzt (554 × 367). Benötigt: WebP + JPG in 554 px.'},
+ '29': {bereich:'Seitenkopf', stelle:'Live-Original: projekte/mercedes-w123-fertig-front-hof.jpeg. Fundort: oldtimerlackierung.html. Als Seitenkopf: Hintergrund mit Verlauf, Alt-Text dort bewusst leer.', soll:'Seitenverhältnis wie jetzt (2048 × 1536). Benötigt: WebP + JPG in 800 / 1400 / 2048 px.'},
+ '30': {bereich:'Oldtimerlackierung, Galerie', stelle:'Live-Original: leistungen/oldtimer-ferrari-rohkarosse-klein.jpg. Fundort: oldtimerlackierung.html.', soll:'Seitenverhältnis wie jetzt (320 × 240). Benötigt: WebP + JPG in 320 px.'},
+ '31': {bereich:'Oldtimerlackierung, Galerie', stelle:'Live-Original: leistungen/oldtimer-ferrari-grundiert-abgeklebt-klein.jpg. Fundort: oldtimerlackierung.html.', soll:'Seitenverhältnis wie jetzt (320 × 240). Benötigt: WebP + JPG in 320 px.'},
+ '32': {bereich:'Seitenkopf', stelle:'Live-Original: team-und-werkstatt/lackierkabine-lackierer-bei-der-arbeit.jpg. Fundort: service.html, unterbodenschutz.html, ueber-uns.html. Als Seitenkopf: Hintergrund mit Verlauf, Alt-Text dort bewusst leer.', soll:'Seitenverhältnis wie jetzt (2560 × 1920). Benötigt: WebP + JPG in 800 / 1400 / 2400 px.'},
+ '33': {bereich:'Unterbodenschutz, Galerie', stelle:'Live-Original: leistungen/unterbodenschutz-mitarbeiter-unterboden.jpg. Fundort: unterbodenschutz.html.', soll:'Seitenverhältnis wie jetzt (1077 × 1512). Benötigt: WebP + JPG in 600 / 1077 px.'},
+ '34': {bereich:'Unterbodenschutz, Galerie', stelle:'Live-Original: leistungen/unterbodenschutz-endoskop-pruefung.jpg. Fundort: unterbodenschutz.html.', soll:'Seitenverhältnis wie jetzt (1512 × 2016). Benötigt: WebP + JPG in 600 / 1200 px.'},
+ '35': {bereich:'Unterbodenschutz, Galerie', stelle:'Live-Original: leistungen/unterbodenschutz-endoskop-kamera.jpg. Fundort: unterbodenschutz.html.', soll:'Seitenverhältnis wie jetzt (1512 × 2016). Benötigt: WebP + JPG in 600 / 1200 px.'},
+ '36': {bereich:'Projekt-Kachel und Seitenkopf', stelle:'Live-Original: projekte/ferrari-250-gt-lusso-fertig-ausstellung.jpg. Fundort: projekte.html, ferrari.html. Als Seitenkopf: Hintergrund mit Verlauf, Alt-Text dort bewusst leer.', soll:'Seitenverhältnis wie jetzt (2339 × 1461). Benötigt: WebP + JPG in 600 / 1200 / 1400 / 2339 px.'},
+ '37': {bereich:'Projekt-Kachel und Seitenkopf', stelle:'Live-Original: projekte/karmann-ghia-cabrio-lackierkabine-3.jpeg. Fundort: projekte.html, karmann-ghia-cabriolet.html. Als Seitenkopf: Hintergrund mit Verlauf, Alt-Text dort bewusst leer.', soll:'Seitenverhältnis wie jetzt (2048 × 1536). Benötigt: WebP + JPG in 600 / 1200 / 1400 / 2048 px.'},
+ '38': {bereich:'Projekt-Kachel und Seitenkopf', stelle:'Live-Original: projekte/porsche-356-front-blank.jpeg. Fundort: projekte.html, porsche-356.html. Als Seitenkopf: Hintergrund mit Verlauf, Alt-Text dort bewusst leer.', soll:'Seitenverhältnis wie jetzt (1600 × 1200). Benötigt: WebP + JPG in 600 / 1200 / 1400 / 1600 px.'},
+ '39': {bereich:'Projekt-Kachel und Seitenkopf', stelle:'Live-Original: projekte/bmw-e36-cabrio-anhaenger.jpeg. Fundort: projekte.html, bmw-e36-cabrio.html. Als Seitenkopf: Hintergrund mit Verlauf, Alt-Text dort bewusst leer.', soll:'Seitenverhältnis wie jetzt (2048 × 1536). Benötigt: WebP + JPG in 600 / 1200 / 1400 / 2048 px.'},
+ '40': {bereich:'Projekt-Kachel und Seitenkopf', stelle:'Live-Original: projekte/mercedes-w123-fertig-seite-halle-2.jpeg. Fundort: projekte.html, mercedes-w123.html. Als Seitenkopf: Hintergrund mit Verlauf, Alt-Text dort bewusst leer.', soll:'Seitenverhältnis wie jetzt (2048 × 1536). Benötigt: WebP + JPG in 600 / 1200 / 1400 / 2048 px.'},
+ '41': {bereich:'Ferrari, Arbeitsschritte', stelle:'Live-Original: projekte/ferrari-rohkarosse-werkstatt.png. Fundort: oldtimerlackierung.html, ferrari.html.', soll:'Seitenverhältnis wie jetzt (960 × 723). Benötigt: WebP + JPG in 600 / 960 px.'},
+ '42': {bereich:'Ferrari, Arbeitsschritte', stelle:'Live-Original: projekte/ferrari-rohkarosse-silber-abgeklebt.png. Fundort: oldtimerlackierung.html, ferrari.html.', soll:'Seitenverhältnis wie jetzt (986 × 739). Benötigt: WebP + JPG in 600 / 986 px.'},
+ '43': {bereich:'Ferrari, Arbeitsschritte', stelle:'Live-Original: projekte/ferrari-schleifen-detail.png. Fundort: ferrari.html.', soll:'Seitenverhältnis wie jetzt (964 × 723). Benötigt: WebP + JPG in 600 / 964 px.'},
+ '44': {bereich:'Ferrari, Arbeitsschritte', stelle:'Live-Original: projekte/ferrari-anbauteile-tueren.png. Fundort: ferrari.html.', soll:'Seitenverhältnis wie jetzt (1012 × 758). Benötigt: WebP + JPG in 600 / 1012 px.'},
+ '45': {bereich:'Ferrari, Arbeitsschritte', stelle:'Live-Original: projekte/ferrari-lackierer-spritzpistole.png. Fundort: ferrari.html.', soll:'Seitenverhältnis wie jetzt (722 × 691). Benötigt: WebP + JPG in 600 / 722 px.'},
+ '46': {bereich:'Ferrari, Arbeitsschritte', stelle:'Live-Original: projekte/ferrari-lackierer-spritzpistole-2.png. Fundort: ferrari.html.', soll:'Seitenverhältnis wie jetzt (767 × 682). Benötigt: WebP + JPG in 600 / 767 px.'},
+ '47': {bereich:'Ferrari, Arbeitsschritte', stelle:'Live-Original: projekte/ferrari-grundiert-front-kabine-3.png. Fundort: ferrari.html.', soll:'Seitenverhältnis wie jetzt (1053 × 790). Benötigt: WebP + JPG in 600 / 1053 px.'},
+ '48': {bereich:'Ferrari, Arbeitsschritte', stelle:'Live-Original: projekte/ferrari-grundiert-tuer-detail.png. Fundort: ferrari.html.', soll:'Seitenverhältnis wie jetzt (1023 × 767). Benötigt: WebP + JPG in 600 / 1023 px.'},
+ '49': {bereich:'Ferrari, Arbeitsschritte', stelle:'Live-Original: projekte/ferrari-gespachtelt-kotfluegel.png. Fundort: ferrari.html.', soll:'Seitenverhältnis wie jetzt (1046 × 784). Benötigt: WebP + JPG in 600 / 1046 px.'},
+ '50': {bereich:'Ferrari, Arbeitsschritte', stelle:'Live-Original: projekte/ferrari-grundiert-front-detail.png. Fundort: ferrari.html.', soll:'Seitenverhältnis wie jetzt (960 × 720). Benötigt: WebP + JPG in 600 / 960 px.'},
+ '51': {bereich:'Ferrari, Arbeitsschritte', stelle:'Live-Original: projekte/ferrari-grundiert-seite-kabine.png. Fundort: ferrari.html.', soll:'Seitenverhältnis wie jetzt (1050 × 787). Benötigt: WebP + JPG in 600 / 1050 px.'},
+ '52': {bereich:'Ferrari, Arbeitsschritte', stelle:'Live-Original: projekte/ferrari-grundiert-front-schraeg.png. Fundort: ferrari.html.', soll:'Seitenverhältnis wie jetzt (1008 × 756). Benötigt: WebP + JPG in 600 / 1008 px.'},
+ '53': {bereich:'Ferrari, Arbeitsschritte', stelle:'Live-Original: projekte/ferrari-gefuellert-front.png. Fundort: ferrari.html.', soll:'Seitenverhältnis wie jetzt (1042 × 781). Benötigt: WebP + JPG in 600 / 1042 px.'},
+ '54': {bereich:'Ferrari, Arbeitsschritte', stelle:'Live-Original: projekte/ferrari-grundiert-frontansicht.png. Fundort: ferrari.html.', soll:'Seitenverhältnis wie jetzt (963 × 722). Benötigt: WebP + JPG in 600 / 963 px.'},
+ '55': {bereich:'Ferrari, Arbeitsschritte', stelle:'Live-Original: projekte/ferrari-grundiert-front-kabine-2.png. Fundort: ferrari.html.', soll:'Seitenverhältnis wie jetzt (974 × 730). Benötigt: WebP + JPG in 600 / 974 px.'},
+ '56': {bereich:'Ferrari, Arbeitsschritte', stelle:'Live-Original: projekte/ferrari-grundiert-seite-rad.png. Fundort: ferrari.html.', soll:'Seitenverhältnis wie jetzt (963 × 722). Benötigt: WebP + JPG in 600 / 963 px.'},
+ '57': {bereich:'Ferrari, Arbeitsschritte', stelle:'Live-Original: projekte/ferrari-farbmuster-farbkarten.png. Fundort: ferrari.html.', soll:'Seitenverhältnis wie jetzt (2048 × 1567). Benötigt: WebP + JPG in 600 / 1200 px.'},
+ '58': {bereich:'Ferrari, Arbeitsschritte', stelle:'Live-Original: projekte/ferrari-farbmischung-waage.png. Fundort: ferrari.html.', soll:'Seitenverhältnis wie jetzt (1210 × 716). Benötigt: WebP + JPG in 600 / 1200 px.'},
+ '59': {bereich:'Ferrari, Arbeitsschritte', stelle:'Live-Original: projekte/ferrari-silber-lackiert-front.png. Fundort: ferrari.html.', soll:'Seitenverhältnis wie jetzt (940 × 720). Benötigt: WebP + JPG in 600 / 940 px.'},
+ '60': {bereich:'Ferrari, Arbeitsschritte', stelle:'Live-Original: projekte/ferrari-motorhaube-lackiert.png. Fundort: ferrari.html.', soll:'Seitenverhältnis wie jetzt (960 × 720). Benötigt: WebP + JPG in 600 / 960 px.'},
+ '61': {bereich:'Ferrari, Arbeitsschritte', stelle:'Live-Original: projekte/ferrari-silber-lackiert-front-2.png. Fundort: ferrari.html.', soll:'Seitenverhältnis wie jetzt (997 × 747). Benötigt: WebP + JPG in 600 / 997 px.'},
+ '62': {bereich:'Ferrari, Arbeitsschritte', stelle:'Live-Original: projekte/ferrari-motorhaube-lackiert-2.png. Fundort: ferrari.html.', soll:'Seitenverhältnis wie jetzt (978 × 733). Benötigt: WebP + JPG in 600 / 978 px.'},
+ '63': {bereich:'Ferrari, Arbeitsschritte', stelle:'Live-Original: projekte/ferrari-politur-detail.png. Fundort: ferrari.html.', soll:'Seitenverhältnis wie jetzt (960 × 720). Benötigt: WebP + JPG in 600 / 960 px.'},
+ '64': {bereich:'Ferrari, Arbeitsschritte', stelle:'Live-Original: projekte/ferrari-silber-heck-kofferraum.png. Fundort: ferrari.html.', soll:'Seitenverhältnis wie jetzt (960 × 720). Benötigt: WebP + JPG in 600 / 960 px.'},
+ '65': {bereich:'Opel Manta, Galerie', stelle:'Live-Original: projekte/opel-manta-halle.jpg. Fundort: opel-manta.html.', soll:'Seitenverhältnis wie jetzt (1440 × 2560). Benötigt: WebP + JPG in 600 / 1200 px.'},
+ '66': {bereich:'Opel Manta, Galerie', stelle:'Live-Original: projekte/opel-manta-abgeklebt-halle.jpeg. Fundort: opel-manta.html.', soll:'Seitenverhältnis wie jetzt (1920 × 2560). Benötigt: WebP + JPG in 600 / 1200 px.'},
+ '67': {bereich:'Opel Manta, Galerie', stelle:'Live-Original: projekte/opel-manta-rot-fertig-front.jpg. Fundort: opel-manta.html.', soll:'Seitenverhältnis wie jetzt (940 × 788). Benötigt: WebP + JPG in 600 / 940 px.'},
+ '68': {bereich:'Opel Manta, Galerie', stelle:'Live-Original: projekte/opel-manta-seitenansicht.jpg. Fundort: opel-manta.html.', soll:'Seitenverhältnis wie jetzt (2048 × 1536). Benötigt: WebP + JPG in 600 / 1200 px.'},
+ '69': {bereich:'Opel Manta, Galerie', stelle:'Live-Original: projekte/opel-manta-heck.jpg. Fundort: opel-manta.html.', soll:'Seitenverhältnis wie jetzt (2048 × 1536). Benötigt: WebP + JPG in 600 / 1200 px.'},
+ '70': {bereich:'Opel Manta, Galerie', stelle:'Live-Original: projekte/opel-manta-rot-seite-hof.jpeg. Fundort: opel-manta.html.', soll:'Seitenverhältnis wie jetzt (2048 × 1536). Benötigt: WebP + JPG in 600 / 1200 px.'},
+ '71': {bereich:'Mercedes W123, Galerie', stelle:'Live-Original: projekte/mercedes-w123-vorher-motorrad.jpeg. Fundort: mercedes-w123.html.', soll:'Seitenverhältnis wie jetzt (2048 × 1152). Benötigt: WebP + JPG in 600 / 1200 px.'},
+ '72': {bereich:'Mercedes W123, Galerie', stelle:'Live-Original: projekte/mercedes-w123-blech-detail.jpeg. Fundort: mercedes-w123.html.', soll:'Seitenverhältnis wie jetzt (2048 × 1536). Benötigt: WebP + JPG in 600 / 1200 px.'},
+ '73': {bereich:'Mercedes W123, Galerie', stelle:'Live-Original: projekte/mercedes-w123-seite-geschliffen.jpeg. Fundort: mercedes-w123.html.', soll:'Seitenverhältnis wie jetzt (2048 × 1536). Benötigt: WebP + JPG in 600 / 1200 px.'},
+ '74': {bereich:'Mercedes W123, Galerie', stelle:'Live-Original: projekte/mercedes-w123-kotfluegel-geschliffen.jpeg. Fundort: mercedes-w123.html.', soll:'Seitenverhältnis wie jetzt (2048 × 1536). Benötigt: WebP + JPG in 600 / 1200 px.'},
+ '75': {bereich:'Mercedes W123, Galerie', stelle:'Live-Original: projekte/mercedes-w123-seite-abgeklebt.jpeg. Fundort: mercedes-w123.html.', soll:'Seitenverhältnis wie jetzt (2048 × 1536). Benötigt: WebP + JPG in 600 / 1200 px.'},
+ '76': {bereich:'Mercedes W123, Galerie', stelle:'Live-Original: projekte/mercedes-w123-heck-seite.jpeg. Fundort: mercedes-w123.html.', soll:'Seitenverhältnis wie jetzt (2048 × 1536). Benötigt: WebP + JPG in 600 / 1200 px.'},
+ '77': {bereich:'Mercedes W123, Galerie', stelle:'Live-Original: projekte/mercedes-w123-tuer-bearbeitet.jpeg. Fundort: mercedes-w123.html.', soll:'Seitenverhältnis wie jetzt (2048 × 1536). Benötigt: WebP + JPG in 600 / 1200 px.'},
+ '78': {bereich:'Mercedes W123, Galerie', stelle:'Live-Original: projekte/mercedes-w123-front-geschliffen.jpeg. Fundort: mercedes-w123.html.', soll:'Seitenverhältnis wie jetzt (2048 × 1536). Benötigt: WebP + JPG in 600 / 1200 px.'},
+ '79': {bereich:'Mercedes W123, Galerie', stelle:'Live-Original: projekte/mercedes-w123-kofferraum.jpeg. Fundort: mercedes-w123.html.', soll:'Seitenverhältnis wie jetzt (2048 × 1536). Benötigt: WebP + JPG in 600 / 1200 px.'},
+ '80': {bereich:'Mercedes W123, Galerie', stelle:'Live-Original: projekte/mercedes-w123-front-seite.jpeg. Fundort: mercedes-w123.html.', soll:'Seitenverhältnis wie jetzt (2048 × 1536). Benötigt: WebP + JPG in 600 / 1200 px.'},
+ '81': {bereich:'Mercedes W123, Galerie', stelle:'Live-Original: projekte/mercedes-w123-motorraum.jpeg. Fundort: mercedes-w123.html.', soll:'Seitenverhältnis wie jetzt (2048 × 1536). Benötigt: WebP + JPG in 600 / 1200 px.'},
+ '82': {bereich:'Mercedes W123, Galerie', stelle:'Live-Original: projekte/mercedes-w123-grundiert-werkstatt.jpeg. Fundort: mercedes-w123.html.', soll:'Seitenverhältnis wie jetzt (2048 × 1536). Benötigt: WebP + JPG in 600 / 1200 px.'},
+ '83': {bereich:'Mercedes W123, Galerie', stelle:'Live-Original: projekte/mercedes-w123-lackierkabine-tuer.jpeg. Fundort: mercedes-w123.html.', soll:'Seitenverhältnis wie jetzt (1920 × 2560). Benötigt: WebP + JPG in 600 / 1200 px.'},
+ '84': {bereich:'Mercedes W123, Galerie', stelle:'Live-Original: projekte/mercedes-w123-lackierkabine-front.jpeg. Fundort: mercedes-w123.html.', soll:'Seitenverhältnis wie jetzt (1920 × 2560). Benötigt: WebP + JPG in 600 / 1200 px.'},
+ '85': {bereich:'Mercedes W123, Galerie', stelle:'Live-Original: projekte/mercedes-w123-lackierkabine-heck.jpeg. Fundort: mercedes-w123.html.', soll:'Seitenverhältnis wie jetzt (1920 × 2560). Benötigt: WebP + JPG in 600 / 1200 px.'},
+ '86': {bereich:'Mercedes W123, Galerie', stelle:'Live-Original: projekte/mercedes-w123-lackierkabine-heck-2.jpeg. Fundort: mercedes-w123.html.', soll:'Seitenverhältnis wie jetzt (1920 × 2560). Benötigt: WebP + JPG in 600 / 1200 px.'},
+ '87': {bereich:'Mercedes W123, Galerie', stelle:'Live-Original: projekte/mercedes-w123-lackierkabine-front-2.jpeg. Fundort: mercedes-w123.html.', soll:'Seitenverhältnis wie jetzt (1920 × 2560). Benötigt: WebP + JPG in 600 / 1200 px.'},
+ '88': {bereich:'Mercedes W123, Galerie', stelle:'Live-Original: projekte/mercedes-w123-fertig-front-hof.jpeg. Fundort: mercedes-w123.html.', soll:'Seitenverhältnis wie jetzt (2048 × 1536). Benötigt: WebP + JPG in 600 / 1200 px.'},
+ '89': {bereich:'Mercedes W123, Galerie', stelle:'Live-Original: projekte/mercedes-w123-fertig-seite-halle.jpeg. Fundort: mercedes-w123.html.', soll:'Seitenverhältnis wie jetzt (2048 × 1536). Benötigt: WebP + JPG in 600 / 1200 px.'},
+ '90': {bereich:'Mercedes W123, Galerie', stelle:'Live-Original: projekte/mercedes-w123-fertig-heck-hof.jpeg. Fundort: mercedes-w123.html.', soll:'Seitenverhältnis wie jetzt (2048 × 1536). Benötigt: WebP + JPG in 600 / 1200 px.'},
+ '91': {bereich:'Mercedes W123, Galerie', stelle:'Live-Original: projekte/mercedes-w123-fertig-heck-baeume.jpeg. Fundort: mercedes-w123.html.', soll:'Seitenverhältnis wie jetzt (2048 × 1536). Benötigt: WebP + JPG in 600 / 1200 px.'},
+ '92': {bereich:'Mercedes W123, Galerie', stelle:'Live-Original: projekte/mercedes-w123-fertig-seite-detail.jpeg. Fundort: mercedes-w123.html.', soll:'Seitenverhältnis wie jetzt (2048 × 1536). Benötigt: WebP + JPG in 600 / 1200 px.'},
+ '93': {bereich:'BMW E36 Cabrio, Galerie', stelle:'Live-Original: projekte/bmw-e36-hebebuehne-halle.jpeg. Fundort: bmw-e36-cabrio.html.', soll:'Seitenverhältnis wie jetzt (1920 × 2560). Benötigt: WebP + JPG in 600 / 1200 px.'},
+ '94': {bereich:'BMW E36 Cabrio, Galerie', stelle:'Live-Original: projekte/bmw-e36-cabrio-seite-werkstatt.jpeg. Fundort: bmw-e36-cabrio.html.', soll:'Seitenverhältnis wie jetzt (2048 × 1536). Benötigt: WebP + JPG in 600 / 1200 px.'},
+ '95': {bereich:'BMW E36 Cabrio, Galerie', stelle:'Live-Original: projekte/bmw-e36-heck-werkstatt.jpeg. Fundort: bmw-e36-cabrio.html.', soll:'Seitenverhältnis wie jetzt (2048 × 1536). Benötigt: WebP + JPG in 600 / 1200 px.'},
+ '96': {bereich:'BMW E36 Cabrio, Galerie', stelle:'Live-Original: projekte/bmw-e36-cabrio-hebebuehne.jpeg. Fundort: bmw-e36-cabrio.html.', soll:'Seitenverhältnis wie jetzt (1920 × 2560). Benötigt: WebP + JPG in 600 / 1200 px.'},
+ '97': {bereich:'BMW E36 Cabrio, Galerie', stelle:'Live-Original: projekte/bmw-e36-cabrio-innenraum-ausgebaut.jpeg. Fundort: bmw-e36-cabrio.html.', soll:'Seitenverhältnis wie jetzt (1920 × 2560). Benötigt: WebP + JPG in 600 / 1200 px.'},
+ '98': {bereich:'BMW E36 Cabrio, Galerie', stelle:'Live-Original: projekte/bmw-e36-innenraum-demontage.jpeg. Fundort: bmw-e36-cabrio.html.', soll:'Seitenverhältnis wie jetzt (1440 × 2560). Benötigt: WebP + JPG in 600 / 1200 px.'},
+ '99': {bereich:'BMW E36 Cabrio, Galerie', stelle:'Live-Original: projekte/bmw-e36-tuer-ausgebaut.jpeg. Fundort: bmw-e36-cabrio.html.', soll:'Seitenverhältnis wie jetzt (1920 × 2560). Benötigt: WebP + JPG in 600 / 1200 px.'},
+ '100': {bereich:'BMW E36 Cabrio, Galerie', stelle:'Live-Original: projekte/bmw-e36-tuer-auf-gestell.jpeg. Fundort: bmw-e36-cabrio.html.', soll:'Seitenverhältnis wie jetzt (1920 × 2560). Benötigt: WebP + JPG in 600 / 1200 px.'},
+ '101': {bereich:'BMW E36 Cabrio, Galerie', stelle:'Live-Original: projekte/bmw-e36-rost-schweller.jpeg. Fundort: bmw-e36-cabrio.html.', soll:'Seitenverhältnis wie jetzt (2048 × 1536). Benötigt: WebP + JPG in 600 / 1200 px.'},
+ '102': {bereich:'BMW E36 Cabrio, Galerie', stelle:'Live-Original: projekte/bmw-e36-unterboden-rost.jpeg. Fundort: bmw-e36-cabrio.html.', soll:'Seitenverhältnis wie jetzt (2048 × 1536). Benötigt: WebP + JPG in 600 / 1200 px.'},
+ '103': {bereich:'BMW E36 Cabrio, Galerie', stelle:'Live-Original: projekte/bmw-e36-querlenker-rost.jpeg. Fundort: bmw-e36-cabrio.html.', soll:'Seitenverhältnis wie jetzt (1920 × 2560). Benötigt: WebP + JPG in 600 / 1200 px.'},
+ '104': {bereich:'BMW E36 Cabrio, Galerie', stelle:'Live-Original: projekte/bmw-e36-hinterachse-unterboden.jpeg. Fundort: bmw-e36-cabrio.html.', soll:'Seitenverhältnis wie jetzt (2048 × 1536). Benötigt: WebP + JPG in 600 / 1200 px.'},
+ '105': {bereich:'BMW E36 Cabrio, Galerie', stelle:'Live-Original: projekte/bmw-e36-achstraeger-rost.jpeg. Fundort: bmw-e36-cabrio.html.', soll:'Seitenverhältnis wie jetzt (1920 × 2560). Benötigt: WebP + JPG in 600 / 1200 px.'},
+ '106': {bereich:'BMW E36 Cabrio, Galerie', stelle:'Live-Original: projekte/bmw-e36-radhaus-rost.jpeg. Fundort: bmw-e36-cabrio.html.', soll:'Seitenverhältnis wie jetzt (1920 × 2560). Benötigt: WebP + JPG in 600 / 1200 px.'},
+ '107': {bereich:'BMW E36 Cabrio, Galerie', stelle:'Live-Original: projekte/bmw-e36-querlenker.jpeg. Fundort: bmw-e36-cabrio.html.', soll:'Seitenverhältnis wie jetzt (2048 × 1536). Benötigt: WebP + JPG in 600 / 1200 px.'},
+ '108': {bereich:'BMW E36 Cabrio, Galerie', stelle:'Live-Original: projekte/bmw-e36-achstraeger-teile.jpeg. Fundort: bmw-e36-cabrio.html.', soll:'Seitenverhältnis wie jetzt (1920 × 2560). Benötigt: WebP + JPG in 600 / 1200 px.'},
+ '109': {bereich:'BMW E36 Cabrio, Galerie', stelle:'Live-Original: projekte/bmw-e36-differential-teile.jpeg. Fundort: bmw-e36-cabrio.html.', soll:'Seitenverhältnis wie jetzt (2048 × 1536). Benötigt: WebP + JPG in 600 / 1200 px.'},
+ '110': {bereich:'BMW E36 Cabrio, Galerie', stelle:'Live-Original: projekte/bmw-e36-hinterachse-teile.jpeg. Fundort: bmw-e36-cabrio.html.', soll:'Seitenverhältnis wie jetzt (1920 × 2560). Benötigt: WebP + JPG in 600 / 1200 px.'},
+ '111': {bereich:'BMW E36 Cabrio, Galerie', stelle:'Live-Original: projekte/bmw-e36-radnabe.jpeg. Fundort: bmw-e36-cabrio.html.', soll:'Seitenverhältnis wie jetzt (1920 × 2560). Benötigt: WebP + JPG in 600 / 1200 px.'},
+ '112': {bereich:'BMW E36 Cabrio, Galerie', stelle:'Live-Original: projekte/bmw-e36-halter-grundiert.jpeg. Fundort: bmw-e36-cabrio.html.', soll:'Seitenverhältnis wie jetzt (1440 × 2560). Benötigt: WebP + JPG in 600 / 1200 px.'},
+ '113': {bereich:'BMW E36 Cabrio, Galerie', stelle:'Live-Original: projekte/bmw-e36-radhaus-blank.jpeg. Fundort: bmw-e36-cabrio.html.', soll:'Seitenverhältnis wie jetzt (2048 × 1536). Benötigt: WebP + JPG in 600 / 1200 px.'},
+ '114': {bereich:'BMW E36 Cabrio, Galerie', stelle:'Live-Original: projekte/bmw-e36-innenraum-mittelkonsole.jpeg. Fundort: bmw-e36-cabrio.html.', soll:'Seitenverhältnis wie jetzt (1920 × 2560). Benötigt: WebP + JPG in 600 / 1200 px.'},
+ '115': {bereich:'BMW E36 Cabrio, Galerie', stelle:'Live-Original: projekte/bmw-e36-cabrio-heck.jpeg. Fundort: bmw-e36-cabrio.html.', soll:'Seitenverhältnis wie jetzt (2048 × 1536). Benötigt: WebP + JPG in 600 / 1200 px.'},
+ '116': {bereich:'BMW E36 Cabrio, Galerie', stelle:'Live-Original: projekte/bmw-e36-cabrio-innenraum.jpeg. Fundort: bmw-e36-cabrio.html.', soll:'Seitenverhältnis wie jetzt (2048 × 1536). Benötigt: WebP + JPG in 600 / 1200 px.'},
+ '117': {bereich:'BMW E36 Cabrio, Galerie', stelle:'Live-Original: projekte/bmw-e36-kofferraum.jpeg. Fundort: bmw-e36-cabrio.html.', soll:'Seitenverhältnis wie jetzt (2048 × 1536). Benötigt: WebP + JPG in 600 / 1200 px.'},
+ '118': {bereich:'BMW E36 Cabrio, Galerie', stelle:'Live-Original: projekte/bmw-e36-motorraum.jpeg. Fundort: bmw-e36-cabrio.html.', soll:'Seitenverhältnis wie jetzt (1920 × 2560). Benötigt: WebP + JPG in 600 / 1200 px.'},
+ '119': {bereich:'BMW E36 Cabrio, Galerie', stelle:'Live-Original: projekte/bmw-e36-front.jpeg. Fundort: bmw-e36-cabrio.html.', soll:'Seitenverhältnis wie jetzt (1920 × 2560). Benötigt: WebP + JPG in 600 / 1200 px.'},
+ '120': {bereich:'BMW E36 Cabrio, Galerie', stelle:'Live-Original: projekte/bmw-e36-hebebuehne.jpeg. Fundort: bmw-e36-cabrio.html.', soll:'Seitenverhältnis wie jetzt (2048 × 1536). Benötigt: WebP + JPG in 600 / 1200 px.'},
+ '121': {bereich:'Karmann Ghia, Galerie', stelle:'Live-Original: projekte/karmann-ghia-cabrio-grundiert.jpeg. Fundort: karmann-ghia-cabriolet.html.', soll:'Seitenverhältnis wie jetzt (2048 × 1536). Benötigt: WebP + JPG in 600 / 1200 px.'},
+ '122': {bereich:'Karmann Ghia, Galerie', stelle:'Live-Original: projekte/karmann-ghia-cabrio-werkstatt.jpeg. Fundort: karmann-ghia-cabriolet.html.', soll:'Seitenverhältnis wie jetzt (1920 × 2560). Benötigt: WebP + JPG in 600 / 1200 px.'},
+ '123': {bereich:'Karmann Ghia, Galerie', stelle:'Live-Original: projekte/karmann-ghia-cabrio-lackierkabine.jpeg. Fundort: karmann-ghia-cabriolet.html.', soll:'Seitenverhältnis wie jetzt (2048 × 1536). Benötigt: WebP + JPG in 600 / 1200 px.'},
+ '124': {bereich:'Karmann Ghia, Galerie', stelle:'Live-Original: projekte/karmann-ghia-cabrio-front-gespachtelt.jpeg. Fundort: karmann-ghia-cabriolet.html.', soll:'Seitenverhältnis wie jetzt (2048 × 1536). Benötigt: WebP + JPG in 600 / 1200 px.'},
+ '125': {bereich:'Karmann Ghia, Galerie', stelle:'Live-Original: projekte/karmann-ghia-cabrio-lackierkabine-2.jpeg. Fundort: karmann-ghia-cabriolet.html.', soll:'Seitenverhältnis wie jetzt (2048 × 1536). Benötigt: WebP + JPG in 600 / 1200 px.'},
+ '126': {bereich:'Karmann Ghia, Galerie', stelle:'Live-Original: projekte/karmann-ghia-blech-detail.jpeg. Fundort: karmann-ghia-cabriolet.html.', soll:'Seitenverhältnis wie jetzt (1200 × 1600). Benötigt: WebP + JPG in 600 / 1200 px.'},
+ '127': {bereich:'Porsche 356, Galerie', stelle:'Live-Original: projekte/porsche-356-rohkarosse-gestell.jpeg. Fundort: porsche-356.html.', soll:'Seitenverhältnis wie jetzt (2048 × 1536). Benötigt: WebP + JPG in 600 / 1200 px.'},
+ '128': {bereich:'Porsche 356, Galerie', stelle:'Live-Original: projekte/porsche-356-unterboden-drehgestell.jpeg. Fundort: porsche-356.html.', soll:'Seitenverhältnis wie jetzt (2048 × 1536). Benötigt: WebP + JPG in 600 / 1200 px.'},
+ '129': {bereich:'Über uns, Team', stelle:'Live-Original: team-und-werkstatt/portrait-marko-igelbrink.png. Fundort: ueber-uns.html.', soll:'Seitenverhältnis wie jetzt (1080 × 1080). Benötigt: WebP + JPG in 400 / 800 px.'},
+ '130': {bereich:'Über uns, Team', stelle:'Live-Original: team-und-werkstatt/portrait-frau-igelbrink.png. Fundort: ueber-uns.html.', soll:'Seitenverhältnis wie jetzt (1080 × 1080). Benötigt: WebP + JPG in 400 / 800 px.'},
+ '131': {bereich:'Über uns, Zertifikate', stelle:'Live-Original: siegel/teilnahmebescheinigung-pkw-karosserieinstandsetzung.jpg. Fundort: ueber-uns.html.', soll:'Seitenverhältnis wie jetzt (1787 × 2560). Benötigt: WebP + JPG in 600 / 1200 px.'},
+ '132': {bereich:'Über uns, Zertifikate', stelle:'Live-Original: siegel/zertifikat-hbc-instandsetzung-wohnmobile.jpg. Fundort: ueber-uns.html.', soll:'Seitenverhältnis wie jetzt (1814 × 2560). Benötigt: WebP + JPG in 600 / 1200 px.'},
+ '133': {bereich:'Über uns, Zertifikate', stelle:'Live-Original: siegel/urkunde-glasurit-classic-business.jpg. Fundort: ueber-uns.html.', soll:'Seitenverhältnis wie jetzt (1823 × 2560). Benötigt: WebP + JPG in 600 / 1200 px.'},
+ '134': {bereich:'Karriere', stelle:'Live-Original: sonstiges/ki-bild-lackierpistole-igelbrink.png. Fundort: karriere.html.', soll:'Seitenverhältnis wie jetzt (1147 × 1371). Benötigt: WebP + JPG in 600 / 1147 px.'},
+ '135': {bereich:'Karriere', stelle:'Live-Original: team-und-werkstatt/portrait-frau-igelbrink-hell.png. Fundort: karriere.html.', soll:'Seitenverhältnis wie jetzt (1080 × 1080). Benötigt: WebP + PNG in 400 / 800 px.'}
 };
 const T = Date.now();
 const bust = u => u + (u.includes('?') ? '&' : '?') + 't=' + T;
-const slotOf = u => (u.match(/assets\/img\/(\d\d)-/) || [])[1] || null;
+const slotOf = u => (u.match(/assets\/img\/(\d{2,3})-/) || [])[1] || null;
 const el = (tag, attrs = {}, ...kids) => { const e = document.createElement(tag); for (const [k,v] of Object.entries(attrs)) { if (k === 'class') e.className = v; else if (k === 'text') e.textContent = v; else e.setAttribute(k, v); } kids.flat().forEach(k => e.append(k)); return e; };
 const kb = n => n < 1024 ? n + ' B' : (n / 1024 < 100 ? (n / 1024).toFixed(1) : Math.round(n / 1024)) + ' KB';
 const probe = url => new Promise(res => { const i = new Image(); i.onload = () => res({ok:true, w:i.naturalWidth, h:i.naturalHeight}); i.onerror = () => res({ok:false}); i.src = bust(url); });
@@ -164,7 +305,7 @@ async function run() {
   }
   if (!loaded) { status.append(el('div', {class:'msg bad', text:'Die Seiten konnten nicht gelesen werden. Bitte diese Übersicht über den lokalen Server öffnen (z. B. http://localhost:8000/bilder-uebersicht.html), nicht per Doppelklick.'})); return; }
 
-  const nrs = [...new Set([...Object.keys(SLOTS), ...Object.keys(slots)])].sort();
+  const nrs = [...new Set([...Object.keys(SLOTS), ...Object.keys(slots)])].sort((x, y) => x - y);
   nrs.forEach(nr => nav.append(el('a', {href:'#b' + nr, text:nr + ' ' + (SLOTS[nr] ? SLOTS[nr].bereich : 'ohne Beschreibung')})));
 
   for (const nr of nrs) {

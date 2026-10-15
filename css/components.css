@@ -28,7 +28,7 @@
   font:600 1.02rem/1 var(--f-body);letter-spacing:.01em;text-decoration:none;white-space:nowrap;padding:17px 30px;border-radius:var(--radius-pill);border:0;
   background:var(--grad-accent);color:var(--on-accent);box-shadow:var(--sh-btn);cursor:pointer}
 .btn::before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(105deg,transparent 30%,var(--shine) 50%,transparent 70%);transform:translateX(-120%)}
-.btn::after{content:"";width:.6em;height:.6em;border-top:2.5px solid currentColor;border-right:2.5px solid currentColor;transform:rotate(45deg) translate(-2px,2px);margin-left:-2px}
+.btn::after{content:"";flex:none;width:.6em;height:.6em;border-top:2.5px solid currentColor;border-right:2.5px solid currentColor;transform:rotate(45deg) translate(-2px,2px);margin-left:-2px}
 .btn--small{padding:13px 22px;font-size:.96rem}
 
 /* Glas-Button: gleiche Form wie .btn (Pfeil, Glanz, Anheben), aber Glas statt Orange. Orange bleibt den Haupt-Aktionen vorbehalten.
@@ -588,3 +588,183 @@ html:has(.contact[open]){overflow:hidden}   /* Seite dahinter scrollt nicht mit 
   .exp__pad p{padding-left:18px}
 }
 .sm-tile__media picture{display:block;height:100%}
+
+/* =====================================================================
+   UNTERSEITEN
+   ===================================================================== */
+
+/* ---------- Seitenkopf .page-hero ----------
+   Wie der Hero der Startseite: Bild über die volle Fensterbreite mit Verlauf, rutscht unter die Navigationspille (--hdr).
+   Kürzer (--page-hero-h) und ohne Spray-Animation. Das Bild ist etwas höher als der Rahmen (Parallax über data-px). */
+.page-hero{padding:0;margin-top:calc(var(--hdr) * -1)}
+.page-hero__frame{position:relative;isolation:isolate;overflow:hidden;display:flex;align-items:flex-end;width:100vw;margin-left:calc(50% - 50vw);
+  min-height:var(--page-hero-h);background:var(--navy)}
+.page-hero__img{position:absolute;inset:0;z-index:-2;overflow:hidden}
+.page-hero__img img{position:absolute;left:0;inset:-14% 0;width:100%;height:128%;max-width:none;object-fit:cover;object-position:50% 50%}
+.page-hero__frame::after{content:"";position:absolute;inset:0;z-index:-1;background:var(--grad-page-hero)}
+.page-hero__body{width:100%;max-width:var(--wrap);margin-inline:auto;padding:calc(var(--hdr) + var(--hero-top-gap)) var(--gutter) clamp(36px,7vh,64px);
+  display:grid;justify-items:start;gap:18px;color:var(--on-image)}
+.page-hero h1{max-width:20em;font-size:clamp(2.2rem,4.8vw,3.8rem)}
+.page-hero__lead{max-width:62ch;font-size:clamp(1rem,1.4vw,1.15rem);line-height:1.6;color:var(--on-image-muted)}
+.page-hero__lead strong{color:var(--on-image);font-weight:600}
+
+/* Fließtext ohne große erste Zeile (Unterseiten: der erste Absatz ist dort normaler Text) */
+.prose--plain p:first-of-type{font-family:var(--f-body);font-weight:400;font-size:1.1rem;line-height:1.75;color:var(--fg-soft)}
+.prose strong{color:var(--fg);font-weight:600}
+.sec-head__lead{max-width:56ch;font-family:var(--f-display);font-weight:500;font-size:clamp(1.2rem,2vw,1.5rem);line-height:1.25;color:var(--fg-soft)}
+
+/* Zwei gleich breite Spalten (Fotos nebeneinander) und einzelnes Foto mit runden Ecken */
+.split--even{grid-template-columns:repeat(2,minmax(0,1fr))}
+.media{margin:0;overflow:hidden;border-radius:var(--radius);background:var(--grad-ph);box-shadow:var(--sh-2)}
+.media img{width:100%;height:auto}
+
+/* ---------- Leistungs-Karten ohne Aufklappen (service.html) ----------
+   Gleiche Optik wie die Schwerpunkt-Klappkarten, nur Bild mit Glas-Kachel und Link. */
+.cards--4{grid-template-columns:repeat(4,minmax(0,1fr));gap:18px}
+.svc--link .svc__media{border-radius:var(--radius);cursor:default}
+.svc--link .glass-tile h3{font-size:1.35rem}
+.callout--price{margin-top:clamp(24px,3vw,36px);text-align:center}
+.callout--price h3{margin:0;font-size:clamp(1.5rem,2.6vw,2rem)}
+.callout--price+.steps{margin-top:clamp(24px,3vw,36px)}
+
+/* ---------- Galerie .steps (Arbeitsschritte, Bilderreihen) ----------
+   Raster mit <figure>; Klick auf ein Bild öffnet die Lightbox (js/main.js). 3 Spalten, 2 ab 980 px, 1 ab 560 px. */
+.steps{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--steps-gap)}
+.steps--4{grid-template-columns:repeat(4,minmax(0,1fr))}
+.prose+.steps,.steps+.steps{margin-top:clamp(24px,3vw,36px)}
+.steps__item{margin:0;display:grid;gap:10px}
+.steps__open{all:unset;box-sizing:border-box;display:block;position:relative;overflow:hidden;aspect-ratio:4/3;border-radius:var(--radius-tile);
+  background:var(--grad-ph);box-shadow:var(--sh-2);cursor:zoom-in}
+.steps__open img{width:100%;height:100%;object-fit:cover}
+.steps__open:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
+/* Lupe beim Hover: ::before = heller Kreis, ::after = Symbol (Maske, Farbe aus --accent) */
+.steps__open::before,.steps__open::after{content:"";position:absolute;right:12px;bottom:12px;width:38px;height:38px;opacity:0;pointer-events:none}
+.steps__open::before{border-radius:50%;background:var(--toggle-bg);box-shadow:var(--sh-2)}
+.steps__open::after{background:var(--accent);
+  -webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round'%3E%3Ccircle cx='10.5' cy='10.5' r='6'/%3E%3Cpath d='m15 15 5 5M10.5 8v5M8 10.5h5'/%3E%3C/svg%3E") center/20px no-repeat;
+          mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round'%3E%3Ccircle cx='10.5' cy='10.5' r='6'/%3E%3Cpath d='m15 15 5 5M10.5 8v5M8 10.5h5'/%3E%3C/svg%3E") center/20px no-repeat}
+.steps figcaption{font-family:var(--f-display);font-weight:700;font-size:1rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+
+/* Lightbox (natives <dialog>, wird von js/main.js erzeugt) */
+.lightbox{width:100%;height:100%;max-width:none;max-height:none;margin:0;padding:0;border:0;background:transparent;color:var(--on-image);overflow:hidden}
+.lightbox::backdrop{background:var(--lightbox-bg)}
+.lightbox__stage{position:absolute;inset:0;display:grid;place-items:center;padding:clamp(56px,8vh,80px) clamp(16px,7vw,96px)}
+.lightbox__stage img{max-width:100%;max-height:100%;width:auto;height:auto;border-radius:var(--radius-md);box-shadow:var(--sh-3)}
+.lightbox__btn{position:absolute;display:grid;place-items:center;width:52px;height:52px;border:0;border-radius:50%;cursor:pointer;color:var(--on-image);
+  background:var(--glass-chip);box-shadow:inset 0 0 0 1px var(--glass-line)}
+.lightbox__btn svg{width:24px;height:24px}
+.lightbox__btn:focus-visible{outline:3px solid var(--accent-2);outline-offset:3px}
+.lightbox__prev{left:clamp(8px,2vw,24px);top:50%;translate:0 -50%}
+.lightbox__next{right:clamp(8px,2vw,24px);top:50%;translate:0 -50%}
+.lightbox__close{right:clamp(8px,2vw,24px);top:clamp(8px,2vw,24px)}
+.lightbox__count{position:absolute;left:50%;bottom:clamp(12px,3vh,24px);translate:-50% 0;padding:6px 14px;border-radius:var(--radius-pill);
+  background:var(--glass-chip);font-weight:600;font-size:.92rem}
+html:has(.lightbox[open]){overflow:hidden}
+
+/* ---------- Ablauf: nummerierte Schritte mit Titel (oldtimerlackierung.html) ---------- */
+.flow{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;counter-reset:flow}
+.flow li{position:relative;display:grid;align-content:start;gap:8px;padding:22px 22px 22px 74px;background:var(--surface);border-radius:var(--radius);box-shadow:var(--sh-2);counter-increment:flow}
+.flow li::before{content:counter(flow);position:absolute;left:20px;top:20px;display:grid;place-items:center;width:38px;height:38px;border-radius:50%;
+  background:var(--accent-soft);color:var(--accent-strong);font-family:var(--f-display);font-weight:700;font-size:1.2rem}
+.flow__title{font-size:1.4rem;color:var(--heading)}
+.flow p{color:var(--fg-soft)}
+
+/* ---------- Projekt-Kacheln (projekte.html): ganze Kachel verlinkt, Glas-Kachel mit Fahrzeugname ---------- */
+.projects{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px}
+.proj{position:relative;display:block;overflow:hidden;aspect-ratio:4/3;border-radius:var(--radius);background:var(--grad-ph);box-shadow:var(--sh-2);text-decoration:none;color:var(--on-image)}
+.proj__img,.proj__img img{position:absolute;inset:0;width:100%;height:100%}
+.proj__img img{object-fit:cover}
+.proj::after{content:"";position:absolute;inset:0;background:var(--grad-svc);pointer-events:none}
+.glass-tile--plain{padding:16px 20px;flex-direction:row;justify-content:space-between;align-items:center;text-align:left}
+.proj__name{font-family:var(--f-display);font-weight:700;font-size:1.5rem;line-height:1.1}
+.glass-tile--plain::after{content:"";flex:none;width:.6em;height:.6em;margin-right:4px;border-top:2.5px solid currentColor;border-right:2.5px solid currentColor;transform:rotate(45deg)}
+
+/* Projektseiten: Zurück / Nächster */
+.pnav{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;margin-top:clamp(28px,4vw,48px)}
+.pnav .btn:first-child::after{order:-1;margin:0 0 0 -2px;transform:rotate(-135deg) translate(-2px,2px)}
+
+/* ---------- Über uns: Team, Zertifikate, Partner ---------- */
+.team{list-style:none;margin:0;padding:0;display:grid;gap:16px}
+.team__card{display:grid;grid-template-columns:var(--team-img) minmax(0,1fr);grid-template-rows:auto 1fr;column-gap:20px;row-gap:6px;align-items:start;
+  padding:18px;background:var(--surface);border-radius:var(--radius);box-shadow:var(--sh-2)}
+.team__img{grid-row:1 / span 2}
+.team__img img{width:var(--team-img);height:var(--team-img);border-radius:var(--radius-tile);object-fit:cover;background:var(--sk-1)}
+.team__card h3{align-self:end;font-size:1.5rem;color:var(--heading)}
+.team__card p{color:var(--fg-soft)}
+.band--certs{margin-top:clamp(24px,3vw,36px);justify-items:start}
+.exp--single{grid-template-columns:minmax(0,1fr);width:100%}
+.exp__media{padding:0 18px 18px 66px}
+.exp__media img{width:min(100%,420px);height:auto;border-radius:var(--radius-md);box-shadow:var(--sh-3);background:var(--white)}
+.partners{display:grid;justify-items:center;gap:18px;margin-top:clamp(28px,4vw,48px);text-align:center}
+.partners h3{font-size:clamp(1.5rem,2.6vw,2rem);color:var(--heading)}
+.partners__list{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;justify-content:center;gap:12px}
+.partner{display:inline-flex;align-items:center;gap:12px;padding:10px 18px 10px 10px;border-radius:var(--radius-pill);background:var(--surface);box-shadow:var(--sh-2);
+  text-decoration:none;color:var(--fg);font-weight:600}
+.partner__logo{display:grid;place-items:center;width:64px;height:40px;padding:4px 8px;border-radius:var(--radius-pill);background:var(--logo-tile-bg)}
+.partner__logo img{max-width:100%;max-height:var(--partner-logo-h);width:auto;height:auto;object-fit:contain}
+
+/* ---------- Karriere-Seite: Banner als Seitenkopf, darunter die Inhalte der Live-Seite ---------- */
+.career--head{margin-top:calc(var(--hdr) * -1);padding-top:calc(var(--hdr) + clamp(40px,7vw,96px))}
+.career--head .career__title{font-size:clamp(2.6rem,6vw,4.8rem)}
+.prose--career p{font-size:1.05rem}
+.split--career{margin-top:clamp(28px,4vw,48px)}
+.callout--apply{display:grid;gap:14px;justify-items:start}
+.callout--apply strong{color:var(--white)}
+.callout--apply a:not(.btn){color:var(--on-navy)}
+.contact-person{display:flex;flex-wrap:wrap;align-items:center;gap:20px 32px;margin-top:clamp(28px,4vw,48px);padding:clamp(22px,3vw,32px);
+  background:var(--surface);border-radius:var(--radius-lg);box-shadow:var(--sh-2)}
+.contact-person__img img{width:160px;height:160px;border-radius:50%;object-fit:cover;background:var(--sk-1)}
+.contact-person h2{flex:1;min-width:240px;font-size:clamp(1.4rem,2.6vw,2rem);line-height:1.3;color:var(--heading);overflow-wrap:anywhere}
+
+/* ---------- Formular direkt auf der Seite (Online-Termin, Widerrufsformular) ---------- */
+.form-card{max-width:820px;margin-inline:auto;padding:clamp(22px,4vw,44px);background:var(--surface);border-radius:var(--radius-xl);box-shadow:var(--sh-3)}
+.form--page{margin-top:0}
+.field--group{margin:0;padding:0;border:0;min-width:0;display:grid;gap:8px}
+.field--group legend{padding:0;margin-bottom:6px;font-weight:600;font-size:.95rem}
+.field--group .field--check{display:grid}
+.field input[type="file"]{padding:10px 12px;cursor:pointer}
+.field ::placeholder{color:var(--muted);opacity:1}
+
+/* ---------- Rechtstexte .legal-text: schmale, gut lesbare Spalte, druckfreundlich ---------- */
+.zone--legal .sec-head h1{font-size:clamp(2.1rem,4.4vw,3.4rem);color:var(--heading)}
+.legal-text{max-width:var(--legal-w);margin-inline:auto;color:var(--fg-soft);font-size:1.02rem;line-height:1.7}
+.legal-text>*+*{margin-top:14px}
+.legal-text h2{margin-top:44px;font-size:clamp(1.6rem,2.6vw,2rem);color:var(--heading)}
+.legal-text h3{margin-top:30px;font-size:1.35rem;color:var(--heading)}
+.legal-text h4{margin-top:24px;font-family:var(--f-body);font-size:1.05rem;font-weight:600;color:var(--fg)}
+.legal-text h2+*,.legal-text h3+*,.legal-text h4+*{margin-top:10px}
+.legal-text ul,.legal-text ol{padding-left:1.4em}
+.legal-text li+li{margin-top:6px}
+.legal-text a{color:var(--accent-strong);font-weight:600;text-underline-offset:3px;overflow-wrap:anywhere}
+.legal-text strong{color:var(--fg)}
+.legal-text table{width:100%;border-collapse:collapse;font-size:.95rem}
+.legal-text th,.legal-text td{padding:8px 10px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+.legal-text .form{margin-block:24px;padding:clamp(20px,3vw,32px);background:var(--surface);border-radius:var(--radius-lg);box-shadow:var(--sh-2)}
+@media print{
+  .site-header,.site-footer,.infobar,.skip,.contact,.legal-text .form{display:none!important}
+  body,.page{background:var(--white);padding:0;margin:0}
+  .page{margin-bottom:0!important}
+  .zone--legal{padding:0}
+  .zone--legal .sec-head__divider,.zone--legal .eyebrow{display:none}
+  .legal-text{max-width:none;color:var(--print-ink);font-size:11pt}
+  .legal-text a{color:var(--print-ink);text-decoration:underline}
+  .legal-text h2,.legal-text h3{break-after:avoid}
+}
+
+/* ---------- Responsive (Unterseiten) ---------- */
+@media (max-width:1100px){.cards--4,.steps--4{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:980px){
+  .cards--4{max-width:none}
+  .steps,.projects{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .flow{grid-template-columns:minmax(0,1fr)}
+  .page-hero__frame::after{background:var(--grad-page-hero-narrow)}
+}
+@media (max-width:560px){
+  .cards--4,.steps,.steps--4,.projects,.split--even{grid-template-columns:minmax(0,1fr)}
+  .page-hero .btn{width:100%}
+  .exp__media{padding-left:18px}
+  .team__card{grid-template-columns:96px minmax(0,1fr)}
+  .team__img img{width:96px;height:96px}
+  .pnav .btn{flex:1 1 100%}
+  .flow li{padding-left:22px;padding-top:70px}
+}

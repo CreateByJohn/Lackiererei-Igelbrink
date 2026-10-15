@@ -1,0 +1,25 @@
+# Netlify: alte WordPress-Adressen dauerhaft (301) auf die neuen Seiten umleiten.
+# Die neuen Seiten sind flache HTML-Dateien; Netlify liefert sie ohne .html aus (Pretty URLs).
+/services/                            /service                  301
+/leistungen/unfallinstandsetzung/     /unfallinstandsetzung     301
+/leistungen/wohnmobil-service/        /wohnmobil-service        301
+/oldtimerlackierung/                  /oldtimerlackierung       301
+/leistungen/unterbodenschutz/         /unterbodenschutz         301
+/projekte/                            /projekte                 301
+/ferrari/                             /ferrari                  301
+/opel-manta/                          /opel-manta               301
+/mercedes-w123/                       /mercedes-w123            301
+/bmw-e36-cabrio/                      /bmw-e36-cabrio           301
+/karmann-chia-cabriolet/              /karmann-ghia-cabriolet   301
+/porsche-356/                         /porsche-356              301
+/ueber-uns/                           /ueber-uns                301
+/karriere/                            /karriere                 301
+/online-termin/                       /online-termin            301
+/kontakt/                             /kontakt                  301
+/impressum/                           /impressum                301
+/datenschutz/                         /datenschutz              301
+/disclaimer/                          /disclaimer               301
+/agb/                                 /agb                      301
+/widerruf/                            /widerruf                 301
+/widerrufsformular/                   /widerrufsformular        301
+/kopie-datenschutz/                   /vertrag-widerrufen       301

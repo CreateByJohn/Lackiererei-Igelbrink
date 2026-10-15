@@ -183,4 +183,16 @@
   --mq-gray:grayscale(1);    /* Kachel in Ruhe */
   --grad-career:linear-gradient(100deg,rgba(14,22,42,.95) 0%,rgba(14,22,42,.86) 42%,rgba(27,42,74,.55) 100%);
   --grad-media:linear-gradient(0deg,rgba(14,22,42,.88) 0%,rgba(14,22,42,.35) 50%,rgba(14,22,42,.05) 100%);
+
+  /* Unterseiten: Seitenkopf, Galerie mit Lightbox, Projekt-Kacheln, Rechtstexte */
+  --page-hero-h:clamp(380px,60vh,560px);    /* Höhe des Seitenkopfs (.page-hero) */
+  --grad-page-hero:linear-gradient(90deg,rgba(14,22,42,.9) 0%,rgba(14,22,42,.82) 50%,rgba(14,22,42,.45) 80%,rgba(14,22,42,.25) 100%),
+                   linear-gradient(0deg,rgba(14,22,42,.7) 0%,rgba(14,22,42,0) 60%);   /* wie --grad-hero, aber dunkler: die Texte der Unterseiten sind länger */
+  --grad-page-hero-narrow:linear-gradient(0deg,rgba(14,22,42,.9) 0%,rgba(14,22,42,.78) 55%,rgba(14,22,42,.6) 100%);   /* schmal: Text über die ganze Breite */
+  --steps-gap:clamp(12px,1.6vw,18px);       /* Abstand in der Bildergalerie .steps */
+  --lightbox-bg:rgba(10,16,32,.92);         /* Hintergrund der Lightbox */
+  --legal-w:72ch;                           /* Spaltenbreite der Rechtstexte */
+  --team-img:132px;                         /* Porträts auf „Über uns“ */
+  --partner-logo-h:30px;                   /* Logo in den Partner-Pillen („Über uns“) */
+  --print-ink:#000;                         /* Textfarbe beim Drucken der Rechtstexte */
 }
