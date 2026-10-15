@@ -288,7 +288,6 @@
   window.addEventListener('scroll', request, { passive: true });
   window.addEventListener('resize', request);
   window.addEventListener('load', request);
-  document.addEventListener('viewchange', request);
   update();
 })();
 
@@ -302,15 +301,13 @@
     ticking = false;
     var y = window.scrollY, vh = window.innerHeight;
     var docH = document.documentElement.scrollHeight;
-    var hasHero = !!document.querySelector('.hero:not([hidden])') && document.querySelector('[data-view="start"]:not([hidden])');
-    var start = hasHero ? vh * 0.6 : 40;
+    var start = document.querySelector('.hero') ? vh * 0.6 : 40;   // Seiten ohne Hero (z. B. Kontakt): sofort nach dem ersten Scrollen
     var nearFooter = y + vh > docH - footer.offsetHeight * 0.85;
     bar.classList.toggle('is-visible', y > start && !nearFooter);
   }
   function request() { if (!ticking) { ticking = true; requestAnimationFrame(update); } }
   window.addEventListener('scroll', request, { passive: true });
   window.addEventListener('resize', request);
-  document.addEventListener('viewchange', request);
   update();
 })();
 
@@ -327,30 +324,16 @@
   });
 })();
 
-// Ansichten Start / Kontakt (bis kontakt.html existiert): #/kontakt zeigt die Kontaktseite, #/ oder ein Anker die Startseite.
-// Elemente mit data-view gehören zu einer Ansicht; nach jedem Wechsel wird "viewchange" ausgelöst (Parallax, Info-Leiste).
+// Karussell Zertifikate und Partner: zweite Kopie der Liste anhängen, damit das Band nahtlos endlos läuft.
+// Die Kopie ist für Screenreader unsichtbar (aria-hidden). Bei reduzierter Bewegung keine Kopie: das Band steht still.
 (function () {
-  var views = document.querySelectorAll('[data-view]');
-  if (!views.length) return;
-  var startTitle = document.title;
-
-  function show(name) {
-    views.forEach(function (v) { v.hidden = v.getAttribute('data-view') !== name; });
-    document.title = name === 'kontakt' ? 'Kontakt – Lackiertechnik Igelbrink' : startTitle;
-    document.dispatchEvent(new Event('viewchange'));
-  }
-
-  function route() {
-    var h = location.hash;
-    if (h.indexOf('#/kontakt') === 0) { show('kontakt'); window.scrollTo(0, 0); return; }
-    var wasHidden = document.querySelector('[data-view="start"]').hidden;
-    show('start');
-    if (h === '' || h === '#/') { if (wasHidden || h === '#/') window.scrollTo(0, 0); return; }
-    // Anker der Startseite: war sie gerade versteckt, hat der Browser noch nicht hingescrollt
-    var el = document.getElementById(h.slice(1));
-    if (el && wasHidden) requestAnimationFrame(function () { el.scrollIntoView(); });
-  }
-
-  window.addEventListener('hashchange', route);
-  route();
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  document.querySelectorAll('.marquee__track').forEach(function (track) {
+    Array.prototype.slice.call(track.children).forEach(function (item) {
+      var copy = item.cloneNode(true);
+      copy.setAttribute('aria-hidden', 'true');
+      copy.querySelectorAll('img').forEach(function (img) { img.alt = ''; });
+      track.appendChild(copy);
+    });
+  });
 })();

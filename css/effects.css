@@ -113,8 +113,19 @@
 .sm-tile{transition:transform var(--t-hover) var(--ease-out),box-shadow var(--t-hover) var(--ease-out)}
 .sm-tile:hover{transform:translateY(-4px);box-shadow:inset 0 0 0 1px var(--nav-hover-line),var(--nav-hover-glow),var(--sh-3)}
 
-.cert__frame{transition:transform var(--t-hover) var(--ease-out),box-shadow var(--t-hover) var(--ease-out)}
-.cert:hover .cert__frame{transform:translateY(-4px) rotate(-1deg);box-shadow:var(--sh-3),inset 0 0 0 1px var(--line)}
+/* Karussell: läuft endlos, hält beim Hover oder Tastatur-Fokus an; die Kachel unter der Maus wird farbig und hebt sich */
+@keyframes marquee{to{transform:translateX(calc(-50% - var(--mq-gap) / 2))}}
+.marquee__track{animation:marquee var(--mq-speed) linear infinite}
+.marquee:hover .marquee__track,.marquee:focus-within .marquee__track{animation-play-state:paused}
+.mq-item__tile{transition:filter .35s var(--ease-out),transform var(--t-hover) var(--ease-out),box-shadow var(--t-hover) var(--ease-out)}
+.mq-item__glass::after{transition:transform .7s var(--ease-out)}
+.mq-item__glass img{transition:filter var(--t-hover) var(--ease-out)}
+.mq-item__name{transition:color .2s var(--ease-out)}
+/* Hover/Fokus: Farbe kommt zurück, Lichtstreifen fährt durch, Bild leuchtet leicht auf (wie bisher die Partner-Kacheln) */
+.mq-item:hover .mq-item__tile,.mq-item:focus-within .mq-item__tile{filter:none;transform:translateY(-4px);box-shadow:var(--sh-3)}
+.mq-item:hover .mq-item__glass::after{transform:translateX(120%)}
+.mq-item:hover .mq-item__glass img,.mq-item:focus-within .mq-item__glass img{filter:var(--logo-lit)}
+.mq-item:hover .mq-item__name{color:var(--accent-strong)}
 
 .infobar{transition:opacity .3s var(--ease-out),transform .4s var(--ease-out)}
 
@@ -128,10 +139,10 @@
 @media (prefers-reduced-motion:no-preference){
   @supports ((animation-timeline:view()) and (animation-range:entry)){
     @keyframes rise{from{translate:0 40px}}
-    .svc,.band,.prose,.callout,.bt,.rv,.cta,.stack li{animation:rise auto var(--ease) backwards;animation-timeline:view();animation-range:entry 0% entry 55%}
+    .svc,.band,.prose,.callout,.bt,.rv,.stack li{animation:rise auto var(--ease) backwards;animation-timeline:view();animation-range:entry 0% entry 55%}
     /* Parallax (neu): Abschnitte gleiten beim Einfahren dezent hoch und wachsen leicht auf */
     @keyframes rise-in{from{translate:0 56px;scale:.965;opacity:.35}}
-    .sec-head,.sub-head,.cert,.exp__item,.social,.career__inner,.kt-card,.kt__cta,.kt-map{animation:rise-in auto var(--ease) backwards;animation-timeline:view();animation-range:entry 0% entry 60%}
+    .sec-head,.marquee,.exp__item,.social,.career__inner,.kt-card,.kt__cta,.kt-map{animation:rise-in auto var(--ease) backwards;animation-timeline:view();animation-range:entry 0% entry 60%}
     .exp__item{animation-range:entry 0% entry 40%}
   }
 }
@@ -150,5 +161,7 @@
   .svc__more-pad{translate:none}
   .bt--logo .glass-in::after{display:none}
   [data-px]{translate:none!important}
-  .sm-tile:hover,.cert:hover .cert__frame{transform:none}
+  .sm-tile:hover,.mq-item:hover .mq-item__tile,.mq-item:focus-within .mq-item__tile{transform:none}
+  .mq-item__glass::after{display:none}
+  .marquee{overflow-x:auto;-webkit-mask-image:none;mask-image:none}
 }

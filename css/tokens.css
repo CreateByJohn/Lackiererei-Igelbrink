@@ -174,6 +174,13 @@
 
   /* Info-Leiste unten, Karriere-Banner, Bild-Kacheln (Social Media) */
   --infobar-glass:rgba(255,255,255,.72);
+
+  /* Karussell Zertifikate und Partner */
+  --mq-w:220px;              /* Breite einer Kachel */
+  --mq-h:200px;              /* Höhe der Bildfläche */
+  --mq-gap:22px;
+  --mq-speed:38s;            /* Dauer für eine Runde */
+  --mq-gray:grayscale(1);    /* Kachel in Ruhe */
   --grad-career:linear-gradient(100deg,rgba(14,22,42,.95) 0%,rgba(14,22,42,.86) 42%,rgba(27,42,74,.55) 100%);
   --grad-media:linear-gradient(0deg,rgba(14,22,42,.88) 0%,rgba(14,22,42,.35) 50%,rgba(14,22,42,.05) 100%);
 }

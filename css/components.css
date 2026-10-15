@@ -228,29 +228,11 @@
 .draft-note{max-width:100%;padding:8px 12px;border-radius:var(--radius-sm);background:var(--note);color:var(--note-fg);font-size:.85rem;font-weight:600}
 .draft-note--small{align-self:flex-start;margin-top:auto;padding:6px 10px;font-size:.78rem}
 
-/* ---------- Termin-Band ---------- */
-.cta{position:relative;overflow:hidden;display:grid;grid-template-columns:minmax(0,1.3fr) auto;gap:20px 40px;align-items:center;
-  background:var(--grad-cta);color:var(--on-navy);border-radius:var(--radius-lg);padding:clamp(28px,5vw,56px);box-shadow:var(--sh-3)}
-.cta__text h2{margin-bottom:14px}
-.cta p{color:var(--on-navy-muted)}
-.cta__text p+p{margin-top:8px}
-.cta .btn{font-size:1.1rem;padding:18px 32px}
-.cta .eyebrow--on-dark{color:var(--accent-2)}   /* mit .cta davor, sonst gewinnt die graue Farbe aus ".cta p" */
-
-/* Karriere im Termin-Band: über die volle Breite, mit Trennlinie oben */
-.job{grid-column:1/-1;display:grid;gap:18px;margin-top:clamp(12px,2vw,24px);padding-top:clamp(24px,3.5vw,40px);border-top:1px solid var(--footer-line)}
-.job .eyebrow{justify-self:start}
-.job__title{font-size:clamp(1.6rem,3vw,2.2rem)}
-.job__cols{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+/* Karriere: Spalten und Listen (genutzt im Karriere-Banner .career) */
 .job__col{display:grid;align-content:start;gap:12px;padding:20px 22px;border-radius:var(--radius-row);background:var(--glass-row);box-shadow:inset 0 0 0 1px var(--glass-line-row)}
 .job__col h3{font-size:1.3rem;color:var(--on-navy)}
 .job__list{list-style:none;margin:0;padding:0;display:grid;gap:8px;color:var(--on-navy-muted)}
 .job__list li{position:relative;padding-left:24px}
-.job__apply{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px 28px}
-.job__contact{display:grid;gap:4px}
-.cta .job__contact b{color:var(--on-navy)}
-.job__contact a{color:var(--on-navy);text-decoration:underline;text-underline-offset:3px}
-.job__links{display:flex;flex-wrap:wrap;gap:4px 20px}
 
 /* ---------- Kontaktformular (natives <dialog>, öffnet per showModal) ---------- */
 .contact{width:min(var(--dialog-w),100% - 2 * var(--gutter));max-width:none;max-height:calc(100dvh - 2 * var(--gutter));padding:0;border:0;
@@ -320,7 +302,7 @@ html:has(.contact[open]){overflow:hidden}   /* Seite dahinter scrollt nicht mit 
 .ft-up svg{width:20px;height:20px}
 
 /* Drei Glas-Karten wie im Karriere-Block */
-.ft-cards{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.85fr) minmax(0,1.3fr) minmax(0,.9fr);gap:16px}   /* Kontakt etwas breiter für die E-Mail-Adresse */
+.ft-cards{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));grid-auto-rows:1fr;gap:16px}   /* alle Kacheln gleich breit und gleich hoch */
 @media (max-width:1240px){.ft-cards{grid-template-columns:repeat(2,minmax(0,1fr))}}   /* E-Mail-Adresse braucht Platz: ab hier zwei Spalten */
 .ft-card{display:flex;flex-direction:column;align-items:flex-start;gap:12px;padding:24px 22px;border-radius:var(--radius);
   background:var(--glass-row);box-shadow:inset 0 0 0 1px var(--glass-line-row),inset 0 1px 0 rgba(255,255,255,.08)}
@@ -393,7 +375,7 @@ html:has(.contact[open]){overflow:hidden}   /* Seite dahinter scrollt nicht mit 
   .cards{grid-template-columns:minmax(0,1fr);max-width:620px;margin-inline:auto}
   .svc__media{aspect-ratio:4/3}
   .hero__frame::after{background:var(--grad-hero-narrow)}
-  .split,.band,.cta,.job__cols{grid-template-columns:minmax(0,1fr)}
+  .split,.band{grid-template-columns:minmax(0,1fr)}
   .bt--eco .glass-in{grid-template-columns:minmax(0,1fr);justify-items:start}
   .bento{grid-template-columns:repeat(2,minmax(0,1fr));grid-template-areas:"gla hbc" "tmx dek"}
   .reviews{grid-template-columns:repeat(2,minmax(0,1fr))}
@@ -407,8 +389,7 @@ html:has(.contact[open]){overflow:hidden}   /* Seite dahinter scrollt nicht mit 
   .nav-actions .btn{display:none}
   .menu__cta{display:block;padding-top:8px}
   .menu__cta .btn{width:100%;text-transform:none;letter-spacing:.01em}
-  .hero__text .btn,.cta .btn{width:100%}
-  .job__apply{flex-direction:column;align-items:stretch}
+  .hero__text .btn{width:100%}
   .chip{border-radius:var(--radius-lg)}
   .svc__media{aspect-ratio:4/5}
   .bento{grid-template-columns:minmax(0,1fr);grid-template-areas:"gla" "hbc" "tmx" "dek"}
@@ -425,7 +406,7 @@ html:has(.contact[open]){overflow:hidden}   /* Seite dahinter scrollt nicht mit 
    ===================================================================== */
 
 /* ---------- Überschriften in Logo-Blau ---------- */
-.sec-head h2,.sub-head,.prose p:first-of-type,.bt__title,.contact__title,.kt-block h3,.kt-map__title,.cert__name{color:var(--heading)}
+.sec-head h2,.prose p:first-of-type,.bt__title,.contact__title,.kt-block h3,.kt-map__title{color:var(--heading)}
 
 /* ---------- Parallax: Bilder mit data-px (Faktor) verschieben sich beim Scrollen über translate (js/main.js).
    Die Bilder sind etwas höher als ihr Rahmen, damit beim Verschieben kein Rand sichtbar wird. ---------- */
@@ -466,17 +447,30 @@ html:has(.contact[open]){overflow:hidden}   /* Seite dahinter scrollt nicht mit 
 .exp__pad p{padding:0 18px 16px 66px;color:var(--on-image-muted);font-size:.98rem}
 .exp__note{justify-self:start}
 
-/* ---------- Qualität: Zertifikate schlicht, ohne Zusatztext ---------- */
-.certs{list-style:none;margin:0 auto;padding:0;display:flex;flex-wrap:wrap;justify-content:center;gap:clamp(16px,3vw,32px)}
-.cert{display:grid;justify-items:center;gap:14px}
-.cert__frame{display:block;height:clamp(220px,26vw,320px);padding:12px;border-radius:var(--radius);background:var(--surface);box-shadow:var(--sh-2),inset 0 0 0 1px var(--line);overflow:hidden}
-.cert__frame img{width:auto;height:100%;max-width:none;border-radius:var(--radius-xs)}
-.cert__name{font-family:var(--f-display);font-weight:700;font-size:1.35rem;text-transform:uppercase;letter-spacing:.04em}
-
-/* Zwischenüberschrift über einer Kachelgruppe */
-.sub-head{display:grid;justify-items:center;gap:12px;margin:clamp(40px,6vw,64px) 0 clamp(18px,2.4vw,26px);text-align:center;font-size:clamp(1.6rem,2.8vw,2.2rem)}
-.sub-head::after{content:"";width:48px;height:3px;border-radius:var(--radius-xs);background:var(--grad-accent-bar)}
-.bento--3{grid-template-columns:repeat(3,minmax(0,1fr));grid-template-areas:none;max-width:980px;margin-inline:auto}
+/* ---------- Qualität: Zertifikate und Partner im Karussell ----------
+   Endlos-Band, das langsam nach links läuft. js/main.js hängt eine zweite, versteckte Kopie der Liste an,
+   die Animation verschiebt um genau eine Listenlänge (-50 %). In Ruhe grau, beim Hover oder Fokus in Farbe.
+   Bei reduzierter Bewegung steht das Band still und lässt sich seitlich scrollen. */
+.marquee{position:relative;overflow:hidden;padding-block:12px;
+  -webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
+.marquee__track{list-style:none;margin:0;padding:0;display:flex;gap:var(--mq-gap);width:max-content}
+.mq-item{flex:none;display:grid;justify-items:center;gap:12px;width:var(--mq-w)}
+/* Glas-Kachel wie bisher bei den Partnern: .mq-item__blur = dasselbe Bild stark unscharf als farbiger Hintergrund,
+   .mq-item__glass = halbtransparente Glasfläche mit dem scharfen Bild. In Ruhe ist die ganze Kachel grau (--mq-gray). */
+.mq-item__tile{position:relative;isolation:isolate;overflow:hidden;display:grid;grid-template-rows:minmax(0,1fr);width:100%;height:var(--mq-h);padding:14px;
+  border-radius:var(--radius);background:var(--logo-tile-bg);box-shadow:var(--sh-2);filter:var(--mq-gray)}
+.mq-item__blur{position:absolute;inset:-25%;z-index:-1;pointer-events:none}
+.mq-item__blur img{width:100%;height:100%;max-width:none;object-fit:cover;filter:blur(28px) saturate(1.6);opacity:.85}
+.mq-item__glass{position:relative;overflow:hidden;display:grid;grid-template-rows:minmax(0,1fr);padding:12px;border-radius:var(--radius-tile);
+  background:var(--glass-logo);box-shadow:var(--sh-glass-logo)}
+.mq-item__glass::after{content:"";position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(105deg,transparent 30%,var(--logo-light) 50%,transparent 70%);transform:translateX(-120%)}   /* Lichtstreifen beim Hover (effects.css) */
+.mq-item__glass picture{display:contents}
+.mq-item__glass img{width:100%;height:100%;object-fit:contain;border-radius:var(--radius-xs);filter:var(--logo-dim)}
+.mq-item--logo .mq-item__glass{padding:18px 20px}
+.mq-item__name{font-family:var(--f-display);font-weight:700;font-size:1.05rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+/* Geräte ohne Hover (Touch): Farbe immer sichtbar, sonst bliebe alles grau */
+@media (hover:none){.mq-item__tile{filter:none}}
 
 /* ---------- Karriere-Banner (volle Fensterbreite) ---------- */
 .career{position:relative;isolation:isolate;overflow:hidden;margin:var(--section-gap-s) calc(var(--gutter) * -1) 0;padding:clamp(56px,9vw,120px) var(--gutter);
@@ -584,16 +578,13 @@ html:has(.contact[open]){overflow:hidden}   /* Seite dahinter scrollt nicht mit 
   .exp{grid-template-columns:minmax(0,1fr)}
   .career__inner,.kt{grid-template-columns:minmax(0,1fr)}
   .kt__cta{position:static}
-  .bento--3{grid-template-columns:repeat(3,minmax(0,1fr));grid-template-areas:none}
 }
 @media (max-width:640px){
-  .cert__frame{height:auto;max-width:300px}
-  .cert__frame img{width:100%;height:auto}
   .social__media,.kt-grid{grid-template-columns:minmax(0,1fr)}
   .sm-tile{height:360px}
 }
 @media (max-width:560px){
-  .bento--3{grid-template-columns:minmax(0,1fr);grid-template-areas:none}
   .career__actions .btn{flex:1}
   .exp__pad p{padding-left:18px}
 }
+.sm-tile__media picture{display:block;height:100%}
