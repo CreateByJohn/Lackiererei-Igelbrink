@@ -456,21 +456,22 @@ html:has(.contact[open]){overflow:hidden}   /* Seite dahinter scrollt nicht mit 
 .marquee__track{list-style:none;margin:0;padding:0;display:flex;gap:var(--mq-gap);width:max-content}
 .mq-item{flex:none;display:grid;justify-items:center;gap:12px;width:var(--mq-w)}
 /* Glas-Kachel wie bisher bei den Partnern: .mq-item__blur = dasselbe Bild stark unscharf als farbiger Hintergrund,
-   .mq-item__glass = halbtransparente Glasfläche mit dem scharfen Bild. In Ruhe ist die ganze Kachel grau (--mq-gray). */
+   .mq-item__glass = halbtransparente Glasfläche mit dem scharfen Bild. In Ruhe sind beide Bilder grau (--mq-gray, direkt am <img>,
+   nicht an der ganzen Kachel: so muss beim Hover nur das jeweilige Bild neu gefiltert werden, nicht die ganze verschachtelte Fläche). */
 .mq-item__tile{position:relative;isolation:isolate;overflow:hidden;display:grid;grid-template-rows:minmax(0,1fr);width:100%;height:var(--mq-h);padding:14px;
-  border-radius:var(--radius);background:var(--logo-tile-bg);box-shadow:var(--sh-2);filter:var(--mq-gray)}
-.mq-item__blur{position:absolute;inset:-25%;z-index:-1;pointer-events:none}
-.mq-item__blur img{width:100%;height:100%;max-width:none;object-fit:cover;filter:blur(28px) saturate(1.6);opacity:.85}
+  border-radius:var(--radius);background:var(--logo-tile-bg);box-shadow:var(--sh-2)}
+.mq-item__blur{position:absolute;inset:-25%;z-index:-1;pointer-events:none;transform:translateZ(0)}   /* eigene Ebene: der große Weichzeichner wird nicht mit der Kachel neu gerechnet */
+.mq-item__blur img{width:100%;height:100%;max-width:none;object-fit:cover;filter:blur(28px) saturate(1.6) var(--mq-gray);opacity:.85;will-change:filter}
 .mq-item__glass{position:relative;overflow:hidden;display:grid;grid-template-rows:minmax(0,1fr);padding:12px;border-radius:var(--radius-tile);
   background:var(--glass-logo);box-shadow:var(--sh-glass-logo)}
-.mq-item__glass::after{content:"";position:absolute;inset:0;pointer-events:none;
-  background:linear-gradient(105deg,transparent 30%,var(--logo-light) 50%,transparent 70%);transform:translateX(-120%)}   /* Lichtstreifen beim Hover (effects.css) */
 .mq-item__glass picture{display:contents}
-.mq-item__glass img{width:100%;height:100%;object-fit:contain;border-radius:var(--radius-xs);filter:var(--logo-dim)}
+.mq-item__glass source{display:none}   /* sonst wird <source> durch display:contents zur eigenen Rasterzeile und drückt das Bild nach unten */
+.mq-item__glass img{width:100%;height:100%;object-fit:contain;border-radius:var(--radius-xs);
+  filter:var(--logo-dim) drop-shadow(0 0 0 transparent) var(--mq-gray)}   /* gleiche Filter-Reihenfolge wie --mq-lit, damit der Übergang weich statt sprunghaft ist */
 .mq-item--logo .mq-item__glass{padding:18px 20px}
 .mq-item__name{font-family:var(--f-display);font-weight:700;font-size:1.05rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
 /* Geräte ohne Hover (Touch): Farbe immer sichtbar, sonst bliebe alles grau */
-@media (hover:none){.mq-item__tile{filter:none}}
+@media (hover:none){.mq-item__blur img{filter:blur(28px) saturate(1.6)}.mq-item__glass img{filter:var(--logo-dim)}}
 
 /* ---------- Karriere-Banner (volle Fensterbreite) ---------- */
 .career{position:relative;isolation:isolate;overflow:hidden;margin:var(--section-gap-s) calc(var(--gutter) * -1) 0;padding:clamp(56px,9vw,120px) var(--gutter);
@@ -695,13 +696,6 @@ html:has(.lightbox[open]){overflow:hidden}
 .exp--single{grid-template-columns:minmax(0,1fr);width:100%}
 .exp__media{padding:0 18px 18px 66px}
 .exp__media img{width:min(100%,420px);height:auto;border-radius:var(--radius-md);box-shadow:var(--sh-3);background:var(--white)}
-.partners{display:grid;justify-items:center;gap:18px;margin-top:clamp(28px,4vw,48px);text-align:center}
-.partners h3{font-size:clamp(1.5rem,2.6vw,2rem);color:var(--heading)}
-.partners__list{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;justify-content:center;gap:12px}
-.partner{display:inline-flex;align-items:center;gap:12px;padding:10px 18px 10px 10px;border-radius:var(--radius-pill);background:var(--surface);box-shadow:var(--sh-2);
-  text-decoration:none;color:var(--fg);font-weight:600}
-.partner__logo{display:grid;place-items:center;width:64px;height:40px;padding:4px 8px;border-radius:var(--radius-pill);background:var(--logo-tile-bg)}
-.partner__logo img{max-width:100%;max-height:var(--partner-logo-h);width:auto;height:auto;object-fit:contain}
 
 /* ---------- Karriere-Seite: Banner als Seitenkopf, darunter die Inhalte der Live-Seite ---------- */
 .career--head{margin-top:calc(var(--hdr) * -1);padding-top:calc(var(--hdr) + clamp(40px,7vw,96px))}

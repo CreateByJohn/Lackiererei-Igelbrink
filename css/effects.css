@@ -117,14 +117,13 @@
 @keyframes marquee{to{transform:translateX(calc(-50% - var(--mq-gap) / 2))}}
 .marquee__track{animation:marquee var(--mq-speed) linear infinite}
 .marquee:hover .marquee__track,.marquee:focus-within .marquee__track{animation-play-state:paused}
-.mq-item__tile{transition:filter .35s var(--ease-out),transform var(--t-hover) var(--ease-out),box-shadow var(--t-hover) var(--ease-out)}
-.mq-item__glass::after{transition:transform .7s var(--ease-out)}
-.mq-item__glass img{transition:filter var(--t-hover) var(--ease-out)}
+.mq-item__tile{transition:transform var(--t-hover) var(--ease-out),box-shadow var(--t-hover) var(--ease-out)}
+.mq-item__blur img,.mq-item__glass img{transition:filter var(--t-hover) var(--ease-out)}
 .mq-item__name{transition:color .2s var(--ease-out)}
-/* Hover/Fokus: Farbe kommt zurück, Lichtstreifen fährt durch, Bild leuchtet leicht auf (wie bisher die Partner-Kacheln) */
-.mq-item:hover .mq-item__tile,.mq-item:focus-within .mq-item__tile{filter:none;transform:translateY(-4px);box-shadow:var(--sh-3)}
-.mq-item:hover .mq-item__glass::after{transform:translateX(120%)}
-.mq-item:hover .mq-item__glass img,.mq-item:focus-within .mq-item__glass img{filter:var(--logo-lit)}
+/* Hover/Fokus: Farbe kommt zurück (Grau sitzt an den beiden Bildern), Bild leuchtet dezent auf, Kachel hebt sich */
+.mq-item:hover .mq-item__tile,.mq-item:focus-within .mq-item__tile{transform:translateY(-4px);box-shadow:var(--sh-3)}
+.mq-item:hover .mq-item__blur img,.mq-item:focus-within .mq-item__blur img{filter:blur(28px) saturate(1.6)}
+.mq-item:hover .mq-item__glass img,.mq-item:focus-within .mq-item__glass img{filter:var(--mq-lit)}
 .mq-item:hover .mq-item__name{color:var(--accent-strong)}
 
 .infobar{transition:opacity .3s var(--ease-out),transform .4s var(--ease-out)}
@@ -162,7 +161,6 @@
   .bt--logo .glass-in::after{display:none}
   [data-px]{translate:none!important}
   .sm-tile:hover,.mq-item:hover .mq-item__tile,.mq-item:focus-within .mq-item__tile{transform:none}
-  .mq-item__glass::after{display:none}
   .marquee{overflow-x:auto;-webkit-mask-image:none;mask-image:none}
 }
 
@@ -198,20 +196,19 @@
 .proj:hover .glass-tile,.proj:focus-visible .glass-tile{transform:translateY(-4px)}
 
 /* Karten auf Unterseiten: anheben wie die Kundenstimmen */
-.flow li,.team__card,.partner{transition:transform var(--t-hover) var(--ease-out),box-shadow var(--t-hover) var(--ease-out),color .18s var(--ease-out)}
-.flow li:hover,.team__card:hover,.partner:hover{transform:translateY(-4px);box-shadow:var(--sh-3)}
-.partner:hover{color:var(--accent-strong)}
+.flow li,.team__card{transition:transform var(--t-hover) var(--ease-out),box-shadow var(--t-hover) var(--ease-out),color .18s var(--ease-out)}
+.flow li:hover,.team__card:hover{transform:translateY(-4px);box-shadow:var(--sh-3)}
 
 /* Einblenden beim Scrollen (wie auf der Startseite) */
 @media (prefers-reduced-motion:no-preference){
   @supports ((animation-timeline:view()) and (animation-range:entry)){
-    .proj,.steps__item,.flow li,.team__card,.contact-person,.form-card,.partners{animation:rise auto var(--ease) backwards;animation-timeline:view();animation-range:entry 0% entry 55%}
+    .proj,.steps__item,.flow li,.team__card,.contact-person,.form-card{animation:rise auto var(--ease) backwards;animation-timeline:view();animation-range:entry 0% entry 55%}
   }
 }
 
 /* Reduzierte Bewegung: kein Zoom, kein Anheben, kein Übergang in der Lightbox */
 @media (prefers-reduced-motion:reduce){
   .steps__open:hover img,.steps__open:focus-visible img,.proj:hover,.proj:focus-visible,.proj:hover .proj__img img,.proj:focus-visible .proj__img img,
-  .proj:hover .glass-tile,.proj:focus-visible .glass-tile,.flow li:hover,.team__card:hover,.partner:hover,.lightbox__close:hover{transform:none}
+  .proj:hover .glass-tile,.proj:focus-visible .glass-tile,.flow li:hover,.team__card:hover,.lightbox__close:hover{transform:none}
   .steps__open::before,.steps__open::after{transform:none}
 }

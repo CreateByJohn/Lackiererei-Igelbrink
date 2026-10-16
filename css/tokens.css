@@ -88,6 +88,7 @@
   --logo-light:rgba(255,255,255,.9);      /* Lichtstreifen beim Hover über die Partner-Kachel */
   --logo-dim:brightness(.9) saturate(.8);                                        /* Logo in Ruhe leicht gedämpft … */
   --logo-lit:brightness(1.1) saturate(1.2) drop-shadow(0 0 12px rgba(255,255,255,.95));  /* … und beim Hover „beleuchtet“ */
+  --mq-lit:brightness(1.02) saturate(1.1) drop-shadow(0 0 6px rgba(255,255,255,.35));  /* Karussell: Bild beim Hover leicht aufgehellt */
   --glass-text:rgba(255,255,255,.8);      /* weißere Glasfläche, wenn Fließtext darauf steht (ECOcert-Kachel) */
   --backdrop:rgba(14,22,42,.62);          /* Hintergrund hinter dem Kontaktformular */
   --shine:rgba(255,255,255,.38);
@@ -179,8 +180,8 @@
   --mq-w:220px;              /* Breite einer Kachel */
   --mq-h:200px;              /* Höhe der Bildfläche */
   --mq-gap:22px;
-  --mq-speed:38s;            /* Dauer für eine Runde */
-  --mq-gray:grayscale(1);    /* Kachel in Ruhe */
+  --mq-speed:57s;            /* Dauer für eine Runde (9 Kacheln) */
+  --mq-gray:grayscale(1);    /* Bilder der Kachel in Ruhe */
   --grad-career:linear-gradient(100deg,rgba(14,22,42,.95) 0%,rgba(14,22,42,.86) 42%,rgba(27,42,74,.55) 100%);
   --grad-media:linear-gradient(0deg,rgba(14,22,42,.88) 0%,rgba(14,22,42,.35) 50%,rgba(14,22,42,.05) 100%);
 
@@ -193,6 +194,5 @@
   --lightbox-bg:rgba(10,16,32,.92);         /* Hintergrund der Lightbox */
   --legal-w:72ch;                           /* Spaltenbreite der Rechtstexte */
   --team-img:132px;                         /* Porträts auf „Über uns“ */
-  --partner-logo-h:30px;                   /* Logo in den Partner-Pillen („Über uns“) */
   --print-ink:#000;                         /* Textfarbe beim Drucken der Rechtstexte */
 }
