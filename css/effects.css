@@ -195,6 +195,21 @@
 .proj:hover .proj__img img,.proj:focus-visible .proj__img img{transform:scale(1.05)}
 .proj:hover .glass-tile,.proj:focus-visible .glass-tile{transform:translateY(-4px)}
 
+/* Projekt-Timeline (Lackstab): Knoten wird orange und wirft einen Spritzer-Ring, das Bild federt herein.
+   Der Tropfen folgt der Füllung direkt (ohne Übergang) und federt nach dem Scrollen auf scaleY(1) zurück. */
+@keyframes rail-splash{from{transform:scale(1);opacity:.9}to{transform:scale(2.6);opacity:0}}
+.rail__node{transition:background-color .35s var(--ease-out),border-color .35s var(--ease-out),color .35s var(--ease-out),box-shadow .35s var(--ease-out)}
+.steps--rail>li.is-on .rail__node::after{animation:rail-splash .9s ease-out}
+.steps--rail.is-ready .steps__item{transition:transform .7s var(--rail-spring),opacity .5s var(--ease-out)}
+.rail__drop{transition:opacity .2s var(--ease-out)}
+.rail__drop svg{transition:transform .15s var(--ease-out)}
+
+/* Projekt-Navigation: Karte hebt sich, Name in Akzentfarbe */
+.pnav__card{transition:transform var(--t-hover) var(--ease-out),box-shadow var(--t-hover) var(--ease-out)}
+.pnav__card strong{transition:color .18s var(--ease-out)}
+.pnav__card:hover,.pnav__card:focus-visible{transform:translateY(-4px);box-shadow:var(--sh-3)}
+.pnav__card:hover strong,.pnav__card:focus-visible strong{color:var(--accent-strong)}
+
 /* Karten auf Unterseiten: anheben wie die Kundenstimmen */
 .flow li,.team__card{transition:transform var(--t-hover) var(--ease-out),box-shadow var(--t-hover) var(--ease-out),color .18s var(--ease-out)}
 .flow li:hover,.team__card:hover{transform:translateY(-4px);box-shadow:var(--sh-3)}
@@ -203,6 +218,7 @@
 @media (prefers-reduced-motion:no-preference){
   @supports ((animation-timeline:view()) and (animation-range:entry)){
     .proj,.steps__item,.flow li,.team__card,.contact-person,.form-card{animation:rise auto var(--ease) backwards;animation-timeline:view();animation-range:entry 0% entry 55%}
+    .steps--rail .steps__item{animation:none}   /* die Timeline hat ihr eigenes Einblenden (is-on) */
   }
 }
 
@@ -211,4 +227,11 @@
   .steps__open:hover img,.steps__open:focus-visible img,.proj:hover,.proj:focus-visible,.proj:hover .proj__img img,.proj:focus-visible .proj__img img,
   .proj:hover .glass-tile,.proj:focus-visible .glass-tile,.flow li:hover,.team__card:hover,.lightbox__close:hover{transform:none}
   .steps__open::before,.steps__open::after{transform:none}
+  .pnav__card:hover,.pnav__card:focus-visible{transform:none}
+  /* Timeline: Stab voll, alle Knoten orange, Bilder sofort sichtbar, kein Tropfen und kein Spritzer */
+  .steps--rail>li .rail__node{border-color:var(--accent);background:var(--accent);color:var(--on-accent);box-shadow:0 0 0 8px var(--rail-ring)}
+  .steps--rail>li .rail__node::after{animation:none}
+  .steps--rail .steps__item{transform:none!important;opacity:1!important;transition:none}
+  .rail__fill{height:var(--rail-len,0px)}
+  .rail__drop{display:none}
 }

@@ -194,5 +194,22 @@
   --lightbox-bg:rgba(10,16,32,.92);         /* Hintergrund der Lightbox */
   --legal-w:72ch;                           /* Spaltenbreite der Rechtstexte */
   --team-img:132px;                         /* Porträts auf „Über uns“ */
+  /* Projekt-Timeline „Lackstab“ (.steps--rail) und Projekt-Navigation (.pnav) */
+  --rail-w:4px;                             /* Breite des Stabs */
+  --rail-node:46px;                         /* Knoten mit Schrittnummer */
+  --rail-gap:64px;                          /* Abstand zwischen den Schritten */
+  --rail-gap-sm:40px;                       /* … auf dem Handy */
+  --rail-col-gap:80px;                      /* Abstand Bild ↔ Text, der Stab läuft in der Mitte */
+  --rail-indent:64px;                       /* Handy: Einzug rechts vom Stab */
+  --rail-x-sm:22px;                         /* Handy: Stab so weit vom linken Rand der Liste */
+  --rail-max:1080px;                        /* maximale Breite der Timeline */
+  --rail-end-h:34px;                        /* Höhe der End-Pille „Projekt abgeschlossen“ */
+  --rail-line:60%;                          /* Auslöselinie: Anteil der Fensterhöhe (js/main.js liest den Wert) */
+  --rail-grad:linear-gradient(180deg,var(--accent),#f08a4b);   /* Füllung des Stabs: Akzent zu hellerem Orange */
+  --rail-glow:0 0 10px rgba(232,98,46,.45);
+  --rail-ring:rgba(207,74,28,.14);          /* Ring um den erreichten Knoten */
+  --rail-spring:cubic-bezier(.2,.8,.2,1.2); /* Bild federt herein, mit leichtem Überschwingen */
+  --pnav-img:120px;                         /* Vorschaubild in den Projekt-Karten */
+  --pnav-img-sm:96px;                       /* … auf dem Handy */
   --print-ink:#000;                         /* Textfarbe beim Drucken der Rechtstexte */
 }

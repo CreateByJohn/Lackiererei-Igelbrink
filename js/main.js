@@ -338,6 +338,93 @@
   });
 })();
 
+// Projekt-Timeline „Lackstab“ (.steps--rail): Der Stab füllt sich beim Scrollen bis zur Auslöselinie (--rail-line, Anteil der Fensterhöhe).
+// Schritte, deren Knoten darüber liegt, bekommen „is-on“ (Knoten orange, Bild federt herein); beim Hochscrollen geht es zurück.
+// Der Lacktropfen hängt am Ende der Füllung und streckt sich bei schnellem Scrollen (--drip, max. 1.9).
+// Stab, Füllung, Tropfen und End-Pille werden hier als versteckte Zeile eingefügt, damit sie nicht in jeder Seite stehen müssen.
+// Bei reduzierter Bewegung: Stab voll, alle Schritte erreicht, kein Tropfen und kein Scroll-Listener.
+(function () {
+  var lists = Array.prototype.slice.call(document.querySelectorAll('.steps--rail'));
+  if (!lists.length) return;
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var DROP = '<svg viewBox="0 0 26 34" aria-hidden="true"><path d="M13 0C13 0 0 15 0 22a13 12 0 0 0 26 0C26 15 13 0 13 0z" fill="currentColor"/>' +
+    '<ellipse cx="8.5" cy="21" rx="2.6" ry="4" fill="#fff" opacity=".45"/></svg>';
+  var line = (parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--rail-line')) || 60) / 100;
+
+  var rails = lists.map(function (ul) {
+    var items = Array.prototype.slice.call(ul.children);
+    var deco = document.createElement('li');
+    deco.className = 'rail__deco';
+    deco.setAttribute('aria-hidden', 'true');
+    deco.innerHTML = '<span class="rail__bar"></span><span class="rail__fill"></span><span class="rail__drop">' + DROP + '</span>' +
+      '<span class="rail__end">Projekt abgeschlossen</span>';
+    ul.appendChild(deco);
+    ul.classList.add('has-rail');
+    return { ul: ul, items: items, end: deco.querySelector('.rail__end'), offs: [], top: 0, len: 0, fill: -1,
+      nodes: items.map(function (li) { return li.querySelector('.rail__node'); }) };
+  });
+
+  // Geometrie relativ zur Liste: Knotenmitten und Stab von der Mitte des ersten Knotens bis zur Mitte der End-Pille.
+  // Wird nur bei Größenänderungen gemessen, beim Scrollen reicht dann eine Messung der Liste.
+  function measure(r) {
+    var base = r.ul.getBoundingClientRect().top;
+    r.offs = r.nodes.map(function (n) { var b = n.getBoundingClientRect(); return b.top + b.height / 2 - base; });
+    var e = r.end.getBoundingClientRect();
+    r.top = r.offs[0] || 0;
+    r.len = Math.max(0, e.top + e.height / 2 - base - r.top);
+    r.ul.style.setProperty('--rail-top', r.top + 'px');
+    r.ul.style.setProperty('--rail-len', r.len + 'px');
+  }
+
+  function update() {
+    ticking = false;
+    var y = window.innerHeight * line;
+    rails.forEach(function (r) {
+      var base = r.ul.getBoundingClientRect().top;
+      var fill = r.len ? Math.min(1, Math.max(0, (y - base - r.top) / r.len)) : 0;
+      // Tropfen strecken: je weiter sich die Füllung seit dem letzten Frame bewegt hat, desto länger
+      if (r.fill >= 0) {
+        var px = Math.abs(fill - r.fill) * r.len;
+        if (px > 1) r.ul.style.setProperty('--drip', (1 + Math.min(0.9, px / 40)).toFixed(2));
+      }
+      r.fill = fill;
+      r.ul.style.setProperty('--fill', fill.toFixed(4));
+      r.ul.classList.toggle('is-empty', fill <= 0);
+      r.ul.classList.toggle('is-done', fill >= 1);
+      r.offs.forEach(function (o, i) { r.items[i].classList.toggle('is-on', base + o <= y); });
+    });
+  }
+
+  if (reduce) {
+    rails.forEach(function (r) {
+      r.items.forEach(function (li) { li.classList.add('is-on'); });
+      r.ul.style.setProperty('--fill', 1);
+      r.ul.classList.add('is-done');
+    });
+    var remeasure = function () { rails.forEach(measure); };
+    if ('ResizeObserver' in window) rails.forEach(function (r) { new ResizeObserver(remeasure).observe(r.ul); });
+    window.addEventListener('resize', remeasure);
+    remeasure();
+    return;
+  }
+
+  var ticking = false, settle = 0;
+  function onScroll() {
+    if (!ticking) { ticking = true; requestAnimationFrame(update); }
+    // ca. 120 ms nach dem letzten Scrollen federt der Tropfen auf normale Länge zurück
+    clearTimeout(settle);
+    settle = setTimeout(function () { rails.forEach(function (r) { r.ul.style.setProperty('--drip', 1); }); }, 120);
+  }
+  function relayout() { rails.forEach(measure); update(); }
+
+  // ResizeObserver erfasst auch Höhenänderungen durch nachgeladene Schriften; resize als Rückfall
+  if ('ResizeObserver' in window) rails.forEach(function (r) { new ResizeObserver(relayout).observe(r.ul); });
+  window.addEventListener('resize', relayout);
+  window.addEventListener('scroll', onScroll, { passive: true });
+  rails.forEach(function (r) { r.ul.classList.add('is-ready'); });
+  relayout();
+})();
+
 // Galerie .steps: Klick auf ein Bild öffnet die Lightbox (natives <dialog>).
 // Pfeile und Tastatur ←/→ blättern, Escape schließt (nativ), danach geht der Fokus zurück an das angeklickte Bild.
 // Läuft nur, wenn es eine Galerie gibt. Das <dialog> wird hier erzeugt, damit es nicht in jeder Seite stehen muss.
