@@ -644,7 +644,6 @@ html:has(.contact[open]){overflow:hidden}   /* Seite dahinter scrollt nicht mit 
 .steps__open::after{background:var(--accent);
   -webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round'%3E%3Ccircle cx='10.5' cy='10.5' r='6'/%3E%3Cpath d='m15 15 5 5M10.5 8v5M8 10.5h5'/%3E%3C/svg%3E") center/20px no-repeat;
           mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round'%3E%3Ccircle cx='10.5' cy='10.5' r='6'/%3E%3Cpath d='m15 15 5 5M10.5 8v5M8 10.5h5'/%3E%3C/svg%3E") center/20px no-repeat}
-.steps figcaption{font-family:var(--f-display);font-weight:700;font-size:1rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
 
 /* ---------- Projekt-Timeline (Lackstab): .steps--rail auf den sechs Projektseiten ----------
    Senkrechter Stab mit nummerierten Knoten, Bild und Text wechseln je Schritt die Seite (Handy: einspaltig, Stab links).
