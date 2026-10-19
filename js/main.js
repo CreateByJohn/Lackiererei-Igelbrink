@@ -53,7 +53,7 @@
 
   cards.forEach(function (card) {
     var media = card.querySelector('.svc__media');
-    if (!media) return;
+    if (!media || !card.querySelector('.svc__toggle')) return;   // Karten ohne „+“ (service.html) klappen nicht auf
     // Der Button liegt im Bildbereich, sein Klick (auch per Tastatur) landet ebenfalls hier.
     media.addEventListener('click', function (e) {
       if (e.target.closest('a')) return;
@@ -118,10 +118,10 @@
 
 // Footer: Live-Status der Öffnungszeiten (Mo–Fr 08:00–17:00, Zeit in Dülmen).
 // Ohne JavaScript bleibt das Badge versteckt, die Zeiten stehen trotzdem da. Aktualisiert sich jede Minute.
+// Gilt für alle Badges mit data-open-status (Footer und Info-Leiste).
 (function () {
-  var badge = document.querySelector('[data-open-status]');
-  if (!badge) return;
-  var text = badge.querySelector('[data-open-text]');
+  var badges = document.querySelectorAll('[data-open-status]');
+  if (!badges.length) return;
   var OPEN = 8 * 60, CLOSE = 17 * 60;
   var DAYS = ['So', 'Mo', 'Di', 'Mi', 'Do', 'Fr', 'Sa'];
 
@@ -141,9 +141,11 @@
     else if (weekday && n.min < OPEN) msg = 'Geschlossen – öffnet heute um 08:00 Uhr';
     else if (n.day >= 1 && n.day <= 4) msg = 'Geschlossen – öffnet morgen um 08:00 Uhr';
     else msg = 'Geschlossen – öffnet Montag um 08:00 Uhr';
-    badge.classList.toggle('is-open', open);
-    text.textContent = msg;
-    badge.hidden = false;
+    badges.forEach(function (badge) {
+      badge.classList.toggle('is-open', open);
+      badge.querySelector('[data-open-text]').textContent = msg;
+      badge.hidden = false;
+    });
   }
 
   update();
@@ -239,5 +241,258 @@
   form.addEventListener('submit', function (e) {
     // TODO: Formular-Versand anbinden (serverseitig, mit Spam-Schutz). Bis dahin wird nichts gesendet.
     e.preventDefault();
+  });
+})();
+
+// Unsere Expertise: Zeilen einzeln aufklappen (Akkordeon).
+(function () {
+  document.querySelectorAll('.exp__head').forEach(function (head) {
+    head.addEventListener('click', function () {
+      var item = head.closest('.exp__item');
+      var open = !item.classList.contains('is-open');
+      item.classList.toggle('is-open', open);
+      head.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+  });
+})();
+
+// Parallax: Bilder mit data-px verschieben sich beim Scrollen leicht gegen die Scrollrichtung.
+// Der Hero bewegt sich mit der Scrollposition, alle anderen Bilder relativ zur Fenstermitte,
+// begrenzt auf den Überstand des Bildes über seinen Rahmen (kein sichtbarer Rand).
+// Nur mit requestAnimationFrame und nur für Bilder im Fenster; aus bei reduzierter Bewegung.
+(function () {
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  var els = Array.prototype.slice.call(document.querySelectorAll('[data-px]'));
+  if (!els.length) return;
+  var ticking = false;
+
+  function update() {
+    ticking = false;
+    var vh = window.innerHeight;
+    els.forEach(function (img) {
+      var speed = parseFloat(img.getAttribute('data-px')) || 0;
+      var box = img.parentElement.getBoundingClientRect();
+      if (box.bottom < -100 || box.top > vh + 100 || box.height === 0) return;
+      var y;
+      if (img.classList.contains('hero__img')) {
+        y = Math.max(0, -box.top) * speed;
+      } else {
+        var room = Math.max(0, (img.offsetHeight - box.height) / 2);
+        y = -(box.top + box.height / 2 - vh / 2) * speed;
+        y = Math.max(-room, Math.min(room, y));
+      }
+      img.style.setProperty('--py', y.toFixed(1) + 'px');
+    });
+  }
+  function request() { if (!ticking) { ticking = true; requestAnimationFrame(update); } }
+  window.addEventListener('scroll', request, { passive: true });
+  window.addEventListener('resize', request);
+  window.addEventListener('load', request);
+  update();
+})();
+
+// Info-Leiste: erscheint nach dem ersten Bildschirm und verschwindet, sobald der echte Footer ins Bild kommt.
+(function () {
+  var bar = document.querySelector('.infobar');
+  var footer = document.querySelector('.site-footer');
+  if (!bar || !footer) return;
+  var ticking = false;
+  function update() {
+    ticking = false;
+    var y = window.scrollY, vh = window.innerHeight;
+    var docH = document.documentElement.scrollHeight;
+    var start = document.querySelector('.hero') ? vh * 0.6 : 40;   // Seiten ohne Hero (z. B. Kontakt): sofort nach dem ersten Scrollen
+    var nearFooter = y + vh > docH - footer.offsetHeight * 0.85;
+    bar.classList.toggle('is-visible', y > start && !nearFooter);
+  }
+  function request() { if (!ticking) { ticking = true; requestAnimationFrame(update); } }
+  window.addEventListener('scroll', request, { passive: true });
+  window.addEventListener('resize', request);
+  update();
+})();
+
+// Kontaktseite, Karte: Google Maps lädt erst nach Klick (Zwei-Klick-Lösung, DSGVO).
+(function () {
+  document.querySelectorAll('[data-map]').forEach(function (wrap) {
+    var btn = wrap.querySelector('[data-map-load]');
+    if (!btn) return;
+    btn.addEventListener('click', function () {
+      var box = wrap.querySelector('.kt-map__box');
+      box.innerHTML = '<iframe title="Karte: Lackiertechnik Igelbrink, Telgenkamp 31, 48249 Dülmen" loading="lazy" referrerpolicy="no-referrer-when-downgrade" ' +
+        'src="https://www.google.com/maps?q=Telgenkamp+31,+48249+D%C3%BClmen&output=embed"></iframe>';
+    });
+  });
+})();
+
+// Karussell Zertifikate und Partner: zweite Kopie der Liste anhängen, damit das Band nahtlos endlos läuft.
+// Die Kopie ist für Screenreader unsichtbar (aria-hidden). Bei reduzierter Bewegung keine Kopie: das Band steht still.
+(function () {
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  document.querySelectorAll('.marquee__track').forEach(function (track) {
+    Array.prototype.slice.call(track.children).forEach(function (item) {
+      var copy = item.cloneNode(true);
+      copy.setAttribute('aria-hidden', 'true');
+      copy.querySelectorAll('img').forEach(function (img) { img.alt = ''; });
+      track.appendChild(copy);
+    });
+  });
+})();
+
+// Projekt-Timeline „Lackstab“ (.steps--rail): Der Stab füllt sich beim Scrollen bis zur Auslöselinie (--rail-line, Anteil der Fensterhöhe).
+// Schritte, deren Knoten darüber liegt, bekommen „is-on“ (Knoten orange, Bild federt herein); beim Hochscrollen geht es zurück.
+// Der Lacktropfen hängt am Ende der Füllung und streckt sich bei schnellem Scrollen (--drip, max. 1.9).
+// Stab, Füllung, Tropfen und End-Pille werden hier als versteckte Zeile eingefügt, damit sie nicht in jeder Seite stehen müssen.
+// Bei reduzierter Bewegung: Stab voll, alle Schritte erreicht, kein Tropfen und kein Scroll-Listener.
+(function () {
+  var lists = Array.prototype.slice.call(document.querySelectorAll('.steps--rail'));
+  if (!lists.length) return;
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var DROP = '<svg viewBox="0 0 26 34" aria-hidden="true"><path d="M13 0C13 0 0 15 0 22a13 12 0 0 0 26 0C26 15 13 0 13 0z" fill="currentColor"/>' +
+    '<ellipse cx="8.5" cy="21" rx="2.6" ry="4" fill="#fff" opacity=".45"/></svg>';
+  var line = (parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--rail-line')) || 60) / 100;
+
+  var rails = lists.map(function (ul) {
+    var items = Array.prototype.slice.call(ul.children);
+    var deco = document.createElement('li');
+    deco.className = 'rail__deco';
+    deco.setAttribute('aria-hidden', 'true');
+    deco.innerHTML = '<span class="rail__bar"></span><span class="rail__fill"></span><span class="rail__drop">' + DROP + '</span>' +
+      '<span class="rail__end">Projekt abgeschlossen</span>';
+    ul.appendChild(deco);
+    ul.classList.add('has-rail');
+    return { ul: ul, items: items, end: deco.querySelector('.rail__end'), offs: [], top: 0, len: 0, fill: -1,
+      nodes: items.map(function (li) { return li.querySelector('.rail__node'); }) };
+  });
+
+  // Geometrie relativ zur Liste: Knotenmitten und Stab von der Mitte des ersten Knotens bis zur Mitte der End-Pille.
+  // Wird nur bei Größenänderungen gemessen, beim Scrollen reicht dann eine Messung der Liste.
+  function measure(r) {
+    var base = r.ul.getBoundingClientRect().top;
+    r.offs = r.nodes.map(function (n) { var b = n.getBoundingClientRect(); return b.top + b.height / 2 - base; });
+    var e = r.end.getBoundingClientRect();
+    r.top = r.offs[0] || 0;
+    r.len = Math.max(0, e.top + e.height / 2 - base - r.top);
+    r.ul.style.setProperty('--rail-top', r.top + 'px');
+    r.ul.style.setProperty('--rail-len', r.len + 'px');
+  }
+
+  function update() {
+    ticking = false;
+    var y = window.innerHeight * line;
+    rails.forEach(function (r) {
+      var base = r.ul.getBoundingClientRect().top;
+      var fill = r.len ? Math.min(1, Math.max(0, (y - base - r.top) / r.len)) : 0;
+      // Tropfen strecken: je weiter sich die Füllung seit dem letzten Frame bewegt hat, desto länger
+      if (r.fill >= 0) {
+        var px = Math.abs(fill - r.fill) * r.len;
+        if (px > 1) r.ul.style.setProperty('--drip', (1 + Math.min(0.9, px / 40)).toFixed(2));
+      }
+      r.fill = fill;
+      r.ul.style.setProperty('--fill', fill.toFixed(4));
+      r.ul.classList.toggle('is-empty', fill <= 0);
+      r.ul.classList.toggle('is-done', fill >= 1);
+      r.offs.forEach(function (o, i) { r.items[i].classList.toggle('is-on', base + o <= y); });
+    });
+  }
+
+  if (reduce) {
+    rails.forEach(function (r) {
+      r.items.forEach(function (li) { li.classList.add('is-on'); });
+      r.ul.style.setProperty('--fill', 1);
+      r.ul.classList.add('is-done');
+    });
+    var remeasure = function () { rails.forEach(measure); };
+    if ('ResizeObserver' in window) rails.forEach(function (r) { new ResizeObserver(remeasure).observe(r.ul); });
+    window.addEventListener('resize', remeasure);
+    remeasure();
+    return;
+  }
+
+  var ticking = false, settle = 0;
+  function onScroll() {
+    if (!ticking) { ticking = true; requestAnimationFrame(update); }
+    // ca. 120 ms nach dem letzten Scrollen federt der Tropfen auf normale Länge zurück
+    clearTimeout(settle);
+    settle = setTimeout(function () { rails.forEach(function (r) { r.ul.style.setProperty('--drip', 1); }); }, 120);
+  }
+  function relayout() { rails.forEach(measure); update(); }
+
+  // ResizeObserver erfasst auch Höhenänderungen durch nachgeladene Schriften; resize als Rückfall
+  if ('ResizeObserver' in window) rails.forEach(function (r) { new ResizeObserver(relayout).observe(r.ul); });
+  window.addEventListener('resize', relayout);
+  window.addEventListener('scroll', onScroll, { passive: true });
+  rails.forEach(function (r) { r.ul.classList.add('is-ready'); });
+  relayout();
+})();
+
+// Galerie .steps: Klick auf ein Bild öffnet die Lightbox (natives <dialog>).
+// Pfeile und Tastatur ←/→ blättern, Escape schließt (nativ), danach geht der Fokus zurück an das angeklickte Bild.
+// Läuft nur, wenn es eine Galerie gibt. Das <dialog> wird hier erzeugt, damit es nicht in jeder Seite stehen muss.
+(function () {
+  var openers = Array.prototype.slice.call(document.querySelectorAll('.steps__open'));
+  if (!openers.length) return;
+  var ARROW = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">';
+  var box = document.createElement('dialog');
+  box.className = 'lightbox';
+  box.setAttribute('aria-label', 'Bildansicht');
+  box.innerHTML =
+    '<div class="lightbox__stage"><img alt=""></div>' +
+    '<button class="lightbox__btn lightbox__prev" type="button" aria-label="Vorheriges Bild">' + ARROW + '<path d="m15 5-7 7 7 7"/></svg></button>' +
+    '<button class="lightbox__btn lightbox__next" type="button" aria-label="Nächstes Bild">' + ARROW + '<path d="m9 5 7 7-7 7"/></svg></button>' +
+    '<button class="lightbox__btn lightbox__close" type="button" aria-label="Bildansicht schließen">' + ARROW + '<path d="M6 6l12 12M18 6 6 18"/></svg></button>' +
+    '<p class="lightbox__count" aria-live="polite"></p>';
+  document.body.appendChild(box);
+  var img = box.querySelector('img');
+  var count = box.querySelector('.lightbox__count');
+  var webp = document.createElement('canvas').toDataURL('image/webp').indexOf('data:image/webp') === 0;
+  var index = 0, opener = null;
+
+  function show(i) {
+    index = (i + openers.length) % openers.length;
+    var b = openers[index];
+    img.classList.remove('is-new');
+    img.src = (webp && b.getAttribute('data-full-webp')) || b.getAttribute('data-full');
+    img.alt = (b.querySelector('img') || {}).alt || '';
+    void img.offsetWidth;   // Animation bei jedem Wechsel neu starten
+    img.classList.add('is-new');
+    count.textContent = 'Bild ' + (index + 1) + ' von ' + openers.length;
+    // Nachbarbilder vorladen, damit das Blättern ohne Wartezeit klappt
+    [index + 1, index - 1].forEach(function (n) {
+      var nb = openers[(n + openers.length) % openers.length];
+      new Image().src = (webp && nb.getAttribute('data-full-webp')) || nb.getAttribute('data-full');
+    });
+  }
+
+  openers.forEach(function (b, i) {
+    b.addEventListener('click', function () {
+      opener = b;
+      show(i);
+      box.showModal();
+      box.querySelector('.lightbox__close').focus();
+    });
+  });
+  box.querySelector('.lightbox__prev').addEventListener('click', function () { show(index - 1); });
+  box.querySelector('.lightbox__next').addEventListener('click', function () { show(index + 1); });
+  box.querySelector('.lightbox__close').addEventListener('click', function () { box.close(); });
+  box.addEventListener('keydown', function (e) {
+    if (e.key === 'ArrowLeft') { e.preventDefault(); show(index - 1); }
+    if (e.key === 'ArrowRight') { e.preventDefault(); show(index + 1); }
+  });
+  // Klick auf die dunkle Fläche neben dem Bild schließt
+  box.addEventListener('click', function (e) {
+    if (e.target === box || e.target.classList.contains('lightbox__stage')) box.close();
+  });
+  box.addEventListener('close', function () {
+    if (opener) opener.focus();   // Fokus zurück an das angeklickte Bild
+  });
+})();
+
+// Formulare direkt auf der Seite (Online-Termin, Widerrufsformular): Versand ist noch nicht angebunden.
+(function () {
+  document.querySelectorAll('form[data-form-todo]').forEach(function (form) {
+    form.addEventListener('submit', function (e) {
+      // TODO: Formular-Versand anbinden (serverseitig, mit Spam-Schutz). Bis dahin wird nichts gesendet.
+      e.preventDefault();
+    });
   });
 })();

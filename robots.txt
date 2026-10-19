@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /bilder-uebersicht.html
+Disallow: /tools/
+
+Sitemap: https://lackiertechnik-igelbrink.de/sitemap.xml

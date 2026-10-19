@@ -96,13 +96,53 @@
 .ft-contact a:hover{background:var(--glass-row)}
 .ft-contact a:hover span{color:var(--white)}
 
+/* ---------- Neu: Navigation-Telefon, Expertise, Expand-Kacheln, Zertifikate, Banner, Info-Leiste ---------- */
+.nav-tel,.infobar__item,.kt-list a{transition:background .18s var(--ease-out),box-shadow .18s var(--ease-out),color .18s var(--ease-out),transform var(--t-hover) var(--ease-out)}
+.nav-tel:hover,.infobar__item:hover{background:var(--nav-hover);color:var(--accent-strong);box-shadow:inset 0 0 0 1px var(--nav-hover-line)}
+.kt-list a:hover{background:var(--nav-hover),var(--glass-btn-light);color:var(--accent-strong)}
+
+.exp__item{transition:background-color var(--t-hover) var(--ease-out),box-shadow var(--t-hover) var(--ease-out),transform var(--t-hover) var(--ease-out)}
+.exp__body{transition:grid-template-rows var(--t-split) var(--ease-out)}
+.exp__plus{transition:rotate var(--t-split) var(--ease-out),background-color .18s var(--ease-out)}
+.exp__head:hover .exp__plus{background:var(--accent)}
+.exp__item:not(.is-open):hover{background:var(--glass-row-hover);box-shadow:inset 0 0 0 1px var(--glass-line-row-hover)}
+
+/* Social-Kacheln: Bild bewegt sich langsam (Platzhalter für das spätere Video), beim Hover hebt sich die Kachel */
+@keyframes drift{from{scale:1.04;translate:-1.5% 0}to{scale:1.12;translate:1.5% -1%}}
+.sm-tile__media img{animation:drift 18s ease-in-out infinite alternate;will-change:transform}
+.sm-tile{transition:transform var(--t-hover) var(--ease-out),box-shadow var(--t-hover) var(--ease-out)}
+.sm-tile:hover{transform:translateY(-4px);box-shadow:inset 0 0 0 1px var(--nav-hover-line),var(--nav-hover-glow),var(--sh-3)}
+
+/* Karussell: läuft endlos, hält beim Hover oder Tastatur-Fokus an; die Kachel unter der Maus wird farbig und hebt sich */
+@keyframes marquee{to{transform:translateX(calc(-50% - var(--mq-gap) / 2))}}
+.marquee__track{animation:marquee var(--mq-speed) linear infinite}
+.marquee:hover .marquee__track,.marquee:focus-within .marquee__track{animation-play-state:paused}
+.mq-item__tile{transition:transform var(--t-hover) var(--ease-out),box-shadow var(--t-hover) var(--ease-out)}
+.mq-item__blur img,.mq-item__glass img{transition:filter var(--t-hover) var(--ease-out)}
+.mq-item__name{transition:color .2s var(--ease-out)}
+/* Hover/Fokus: Farbe kommt zurück (Grau sitzt an den beiden Bildern), Bild leuchtet dezent auf, Kachel hebt sich */
+.mq-item:hover .mq-item__tile,.mq-item:focus-within .mq-item__tile{transform:translateY(-4px);box-shadow:var(--sh-3)}
+.mq-item:hover .mq-item__blur img,.mq-item:focus-within .mq-item__blur img{filter:blur(28px) saturate(1.6)}
+.mq-item:hover .mq-item__glass img,.mq-item:focus-within .mq-item__glass img{filter:var(--mq-lit)}
+.mq-item:hover .mq-item__name{color:var(--accent-strong)}
+
+.infobar{transition:opacity .3s var(--ease-out),transform .4s var(--ease-out)}
+
+/* Karriere: pulsierender Punkt im Badge */
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(255,255,255,.7)}100%{box-shadow:0 0 0 10px rgba(255,255,255,0)}}
+.career__dot{animation:pulse 1.6s var(--ease-out) infinite}
+
 /* ---------- Einblenden beim Scrollen ----------
    Ruhezustand bleibt sichtbar, nur der Einstieg wird animiert.
    Nur mit Browser-Unterstützung und nur ohne Wunsch nach reduzierter Bewegung. */
 @media (prefers-reduced-motion:no-preference){
   @supports ((animation-timeline:view()) and (animation-range:entry)){
     @keyframes rise{from{translate:0 40px}}
-    .svc,.band,.prose,.callout,.bt,.rv,.cta,.stack li{animation:rise auto var(--ease) backwards;animation-timeline:view();animation-range:entry 0% entry 55%}
+    .svc,.band,.prose,.callout,.bt,.rv,.stack li{animation:rise auto var(--ease) backwards;animation-timeline:view();animation-range:entry 0% entry 55%}
+    /* Parallax (neu): Abschnitte gleiten beim Einfahren dezent hoch und wachsen leicht auf */
+    @keyframes rise-in{from{translate:0 56px;scale:.965;opacity:.35}}
+    .sec-head,.marquee,.exp__item,.social,.career__inner,.kt-card,.kt__cta,.kt-map{animation:rise-in auto var(--ease) backwards;animation-timeline:view();animation-range:entry 0% entry 60%}
+    .exp__item{animation-range:entry 0% entry 40%}
   }
 }
 
@@ -119,4 +159,79 @@
   .bt--eco:hover .bt__seal{rotate:-2deg;scale:none}
   .svc__more-pad{translate:none}
   .bt--logo .glass-in::after{display:none}
+  [data-px]{translate:none!important}
+  .sm-tile:hover,.mq-item:hover .mq-item__tile,.mq-item:focus-within .mq-item__tile{transform:none}
+  .marquee{overflow-x:auto;-webkit-mask-image:none;mask-image:none}
+}
+
+/* =====================================================================
+   UNTERSEITEN
+   ===================================================================== */
+
+/* Aktiver Menüpunkt (aria-current): dezent, gleiche Optik wie Hover. „true“ = Elternpunkt einer Unterseite */
+.menu>li>a[aria-current]{background:var(--nav-hover);color:var(--accent-strong);box-shadow:inset 0 0 0 1px var(--nav-hover-line)}
+.submenu a[aria-current]{background:var(--nav-hover);color:var(--accent-strong)}
+
+/* Galerie: Bild zoomt leicht, Lupe erscheint */
+.steps__open img{transition:transform .5s var(--ease-out);will-change:transform}
+.steps__open::before,.steps__open::after{transition:opacity .2s var(--ease-out),transform .2s var(--ease-out);transform:scale(.8)}
+.steps__open:hover img,.steps__open:focus-visible img{transform:scale(1.05)}
+.steps__open:hover::before,.steps__open:hover::after,.steps__open:focus-visible::before,.steps__open:focus-visible::after{opacity:1;transform:none}
+
+/* Lightbox: kurzes Einblenden, Bildwechsel weich */
+@keyframes lightbox-in{from{opacity:0}}
+@keyframes lightbox-img{from{opacity:0;scale:.97}}
+.lightbox[open]{animation:lightbox-in .25s var(--ease-out)}
+.lightbox[open]::backdrop{animation:lightbox-in .25s var(--ease-out)}
+.lightbox__stage img.is-new{animation:lightbox-img .3s var(--ease-out)}
+.lightbox__btn{transition:background .18s var(--ease-out),box-shadow .18s var(--ease-out),transform var(--t-hover) var(--ease-out)}
+.lightbox__btn:hover{background:var(--nav-hover),var(--glass-chip);box-shadow:inset 0 0 0 1px var(--nav-hover-line),var(--nav-hover-glow)}
+.lightbox__close:hover{transform:rotate(90deg)}
+
+/* Projekt-Kacheln: Bild zoomt, Glas-Kachel hebt sich */
+.proj{transition:transform var(--t-hover) var(--ease-out),box-shadow var(--t-hover) var(--ease-out)}
+.proj__img img{transition:transform .5s var(--ease-out);will-change:transform}
+.proj:hover,.proj:focus-visible{transform:translateY(-4px);box-shadow:var(--sh-3)}
+.proj:hover .proj__img img,.proj:focus-visible .proj__img img{transform:scale(1.05)}
+.proj:hover .glass-tile,.proj:focus-visible .glass-tile{transform:translateY(-4px)}
+
+/* Projekt-Timeline (Lackstab): Knoten wird orange und wirft einen Spritzer-Ring, das Bild federt herein.
+   Der Tropfen folgt der Füllung direkt (ohne Übergang) und federt nach dem Scrollen auf scaleY(1) zurück. */
+@keyframes rail-splash{from{transform:scale(1);opacity:.9}to{transform:scale(2.6);opacity:0}}
+.rail__node{transition:background-color .35s var(--ease-out),border-color .35s var(--ease-out),color .35s var(--ease-out),box-shadow .35s var(--ease-out)}
+.steps--rail>li.is-on .rail__node::after{animation:rail-splash .9s ease-out}
+.steps--rail.is-ready .steps__item{transition:transform .7s var(--rail-spring),opacity .5s var(--ease-out)}
+.rail__drop{transition:opacity .2s var(--ease-out)}
+.rail__drop svg{transition:transform .15s var(--ease-out)}
+
+/* Projekt-Navigation: Karte hebt sich, Name in Akzentfarbe */
+.pnav__card{transition:transform var(--t-hover) var(--ease-out),box-shadow var(--t-hover) var(--ease-out)}
+.pnav__card strong{transition:color .18s var(--ease-out)}
+.pnav__card:hover,.pnav__card:focus-visible{transform:translateY(-4px);box-shadow:var(--sh-3)}
+.pnav__card:hover strong,.pnav__card:focus-visible strong{color:var(--accent-strong)}
+
+/* Karten auf Unterseiten: anheben wie die Kundenstimmen */
+.flow li,.team__card{transition:transform var(--t-hover) var(--ease-out),box-shadow var(--t-hover) var(--ease-out),color .18s var(--ease-out)}
+.flow li:hover,.team__card:hover{transform:translateY(-4px);box-shadow:var(--sh-3)}
+
+/* Einblenden beim Scrollen (wie auf der Startseite) */
+@media (prefers-reduced-motion:no-preference){
+  @supports ((animation-timeline:view()) and (animation-range:entry)){
+    .proj,.steps__item,.flow li,.team__card,.contact-person,.form-card{animation:rise auto var(--ease) backwards;animation-timeline:view();animation-range:entry 0% entry 55%}
+    .steps--rail .steps__item{animation:none}   /* die Timeline hat ihr eigenes Einblenden (is-on) */
+  }
+}
+
+/* Reduzierte Bewegung: kein Zoom, kein Anheben, kein Übergang in der Lightbox */
+@media (prefers-reduced-motion:reduce){
+  .steps__open:hover img,.steps__open:focus-visible img,.proj:hover,.proj:focus-visible,.proj:hover .proj__img img,.proj:focus-visible .proj__img img,
+  .proj:hover .glass-tile,.proj:focus-visible .glass-tile,.flow li:hover,.team__card:hover,.lightbox__close:hover{transform:none}
+  .steps__open::before,.steps__open::after{transform:none}
+  .pnav__card:hover,.pnav__card:focus-visible{transform:none}
+  /* Timeline: Stab voll, alle Knoten orange, Bilder sofort sichtbar, kein Tropfen und kein Spritzer */
+  .steps--rail>li .rail__node{border-color:var(--accent);background:var(--accent);color:var(--on-accent);box-shadow:0 0 0 8px var(--rail-ring)}
+  .steps--rail>li .rail__node::after{animation:none}
+  .steps--rail .steps__item{transform:none!important;opacity:1!important;transition:none}
+  .rail__fill{height:var(--rail-len,0px)}
+  .rail__drop{display:none}
 }
