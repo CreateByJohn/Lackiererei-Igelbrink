@@ -42,6 +42,7 @@
   --accent-strong:#bd3b00;   /* gleicher Farbton, dunkler: kleine Schrift auf hellen Flächen (5,5:1 auf Weiß, 5,1:1 auf --bg) und Button-Fläche */
   --accent-btn:#d14200;      /* hellere Seite des Button-Verlaufs (weiße Schrift 4,7:1) */
   --accent-2:#ff7a33;        /* helleres Orange für Schrift und Symbole auf Navy (5,5:1 auf --navy) */
+  --accent-on-image:#ffb184; /* noch heller: kleine Schrift direkt auf Fotos mit Verlauf (Seitenkopf), mind. 4,7:1 */
   --on-accent:#ffffff;
   --accent-soft:#ffeadf;
   --accent-fade:rgba(254,80,0,0);
@@ -70,9 +71,10 @@
   --nav-glass-shine:linear-gradient(180deg,rgba(255,255,255,.35),rgba(255,255,255,0) 60%);
   --nav-blur:blur(24px) saturate(1.8);   /* Unschärfe hinter Pille und Untermenü */
   --submenu-glass:rgba(255,255,255,.9);   /* Untermenü fast deckend: die Unschärfe wirkt in der Pille nicht noch einmal */
-  --nav-hover:radial-gradient(120% 140% at 50% 120%,rgba(254,80,0,.26),rgba(254,80,0,.07) 70%);   /* orangener Glas-Schimmer (Menü, Glas-Buttons) */
+  --nav-hover:radial-gradient(120% 140% at 50% 120%,rgba(254,80,0,.2),rgba(254,80,0,.05) 70%);   /* orangener Glas-Schimmer (Menü, Glas-Buttons) */
   --nav-hover-line:rgba(254,80,0,.36);
   --nav-hover-glow:0 0 18px -4px rgba(254,80,0,.5);
+  --nav-hover-base:rgba(255,255,255,.88);   /* helle Grundfläche unter dem Schimmer: orange Schrift bleibt auch über dunklen Fotos lesbar */
   --glass:rgba(255,255,255,.16);
   --glass-chip:rgba(255,255,255,.14);
   --glass-row:rgba(255,255,255,.08);
