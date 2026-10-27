@@ -10,10 +10,10 @@
 <link rel="icon" type="image/png" href="assets/img/13-favicon.png">
 <link rel="preload" href="assets/fonts/barlow-condensed-latin-700-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/barlow-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="css/tokens.css?v=202610272335">
-<link rel="stylesheet" href="css/base.css?v=202610272335">
-<link rel="stylesheet" href="css/components.css?v=202610272335">
-<link rel="stylesheet" href="css/effects.css?v=202610272335">
+<link rel="stylesheet" href="css/tokens.css?v=202610272337">
+<link rel="stylesheet" href="css/base.css?v=202610272337">
+<link rel="stylesheet" href="css/components.css?v=202610272337">
+<link rel="stylesheet" href="css/effects.css?v=202610272337">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -264,25 +264,76 @@
       <p class="field--full field__hint" id="kf-kanal-hint">Telefon oder E-Mail – eines von beiden reicht.</p>
       <p class="field--full field__error" id="kf-kanal-error" hidden>Bitte geben Sie eine Telefonnummer oder eine E-Mail-Adresse an.</p>
       <div class="field">
-        <label for="kf-fahrzeug">Fahrzeug (Marke und Modell)</label>
-        <input id="kf-fahrzeug" name="fahrzeug" type="text" autocomplete="off">
-      </div>
-      <div class="field">
         <label for="kf-anliegen">Anliegen</label>
         <span class="field__select">
+          <!-- value = Kurzname; Auslöser mit data-anliegen="unfall" (usw.) wählen die Option beim Öffnen vor (js/main.js) -->
           <select id="kf-anliegen" name="anliegen" autocomplete="off" required>
             <option value="">Bitte wählen</option>
-            <option>PKW- Unfallinstandsetzung</option>
-            <option>Wohnwagen- und Wohnmobil Instandsetzung</option>
-            <option>Oldtimer- und Youngtimer- Restauration</option>
-            <option>Unterbodenschutz und Hohlraumkonservierung</option>
-            <option>Sonstiges</option>
+            <option value="unfall">Unfallinstandsetzung / Versicherungsschaden</option>
+            <option value="caravan">Caravan</option>
+            <option value="classic">Classic Cars</option>
+            <option value="unterboden">Unterbodenschutz und Hohlraumkonservierung</option>
+            <option value="sonstiges">Sonstiges</option>
           </select>
         </span>
       </div>
       <div class="field">
         <label for="kf-termin">Wunschtermin (freiwillig)</label>
         <input id="kf-termin" name="wunschtermin" type="date" autocomplete="off">
+      </div>
+      <!-- Marke: Vorschläge aus der Liste, freie Eingabe bleibt möglich (PKW und Caravan) -->
+      <div class="field">
+        <label for="kf-marke">Marke (freiwillig)</label>
+        <input id="kf-marke" name="marke" type="text" list="kf-marken" autocomplete="off">
+        <datalist id="kf-marken">
+          <option value="Audi"></option>
+          <option value="BMW"></option>
+          <option value="Citroën"></option>
+          <option value="Cupra"></option>
+          <option value="Dacia"></option>
+          <option value="Fiat"></option>
+          <option value="Ford"></option>
+          <option value="Honda"></option>
+          <option value="Hyundai"></option>
+          <option value="Jeep"></option>
+          <option value="Kia"></option>
+          <option value="Land Rover"></option>
+          <option value="Mazda"></option>
+          <option value="Mercedes-Benz"></option>
+          <option value="Mini"></option>
+          <option value="Mitsubishi"></option>
+          <option value="Nissan"></option>
+          <option value="Opel"></option>
+          <option value="Peugeot"></option>
+          <option value="Porsche"></option>
+          <option value="Renault"></option>
+          <option value="Seat"></option>
+          <option value="Škoda"></option>
+          <option value="Smart"></option>
+          <option value="Subaru"></option>
+          <option value="Suzuki"></option>
+          <option value="Tesla"></option>
+          <option value="Toyota"></option>
+          <option value="Volkswagen"></option>
+          <option value="Volvo"></option>
+          <option value="Adria"></option>
+          <option value="Bürstner"></option>
+          <option value="Carado"></option>
+          <option value="Dethleffs"></option>
+          <option value="Fendt"></option>
+          <option value="Hobby"></option>
+          <option value="Hymer"></option>
+          <option value="Knaus"></option>
+          <option value="LMC"></option>
+          <option value="Pössl"></option>
+          <option value="Sunlight"></option>
+          <option value="Tabbert"></option>
+          <option value="Weinsberg"></option>
+        </datalist>
+      </div>
+      <div class="field">
+        <label for="kf-modell">Modell (freiwillig)</label>
+        <input id="kf-modell" name="modell" type="text" autocomplete="off">
       </div>
       <div class="field field--full">
         <label for="kf-nachricht">Nachricht</label>
@@ -301,6 +352,6 @@
 <!-- /DIALOG -->
 
 
-<script src="js/main.js?v=202610272335" defer></script>
+<script src="js/main.js?v=202610272337" defer></script>
 </body>
 </html>

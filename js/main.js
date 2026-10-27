@@ -167,10 +167,12 @@
 
 // Kontaktformular: alle Elemente mit data-open-contact öffnen das <dialog> per showModal().
 // Schließen per X, Escape (nativ) oder Klick auf den Hintergrund; der Fokus geht zurück an den Auslöser.
+// Ein Auslöser mit data-anliegen="unfall" (Wert einer Option) wählt das Anliegen beim Öffnen vor („Schaden melden“).
 (function () {
   var dialog = document.getElementById('kontaktformular');
   if (!dialog || typeof dialog.showModal !== 'function') return;
   var form = dialog.querySelector('form');
+  var topic = dialog.querySelector('#kf-anliegen');
   var opener = null;
 
   document.addEventListener('click', function (e) {
@@ -178,6 +180,8 @@
     if (!trigger) return;
     e.preventDefault();
     opener = trigger;
+    var pre = trigger.getAttribute('data-anliegen');
+    if (pre && topic) topic.value = pre;
     if (!dialog.open) dialog.showModal();
   });
 
