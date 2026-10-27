@@ -275,16 +275,18 @@
 })();
 
 // Info-Leiste: erscheint nach dem ersten Bildschirm und verschwindet, sobald der echte Footer ins Bild kommt.
+// Mobil (Floating-Bar, bis 760 px) ist sie von Anfang an sichtbar: Telefon und Online-Termin stehen dort nicht mehr im Header.
 (function () {
   var bar = document.querySelector('.infobar');
   var footer = document.querySelector('.site-footer');
   if (!bar || !footer) return;
+  var mobile = window.matchMedia('(max-width: 760px)');
   var ticking = false;
   function update() {
     ticking = false;
     var y = window.scrollY, vh = window.innerHeight;
     var docH = document.documentElement.scrollHeight;
-    var start = document.querySelector('.hero') ? vh * 0.6 : 40;   // Seiten ohne Hero (z. B. Kontakt): sofort nach dem ersten Scrollen
+    var start = mobile.matches ? -1 : document.querySelector('.hero') ? vh * 0.6 : 40;   // Seiten ohne Hero (z. B. Kontakt): sofort nach dem ersten Scrollen
     var nearFooter = y + vh > docH - footer.offsetHeight * 0.85;
     bar.classList.toggle('is-visible', y > start && !nearFooter);
   }

@@ -10,10 +10,10 @@
 <link rel="icon" type="image/png" href="assets/img/13-favicon.png">
 <link rel="preload" href="assets/fonts/barlow-condensed-latin-700-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/barlow-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="css/tokens.css?v=202610272347">
-<link rel="stylesheet" href="css/base.css?v=202610272347">
-<link rel="stylesheet" href="css/components.css?v=202610272347">
-<link rel="stylesheet" href="css/effects.css?v=202610272347">
+<link rel="stylesheet" href="css/tokens.css?v=202610272348">
+<link rel="stylesheet" href="css/base.css?v=202610272348">
+<link rel="stylesheet" href="css/components.css?v=202610272348">
+<link rel="stylesheet" href="css/effects.css?v=202610272348">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -47,6 +47,8 @@
 <svg hidden>
   <symbol id="i-tel" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="M5 4h3.2l1.6 4-2 1.3a10.5 10.5 0 0 0 4.9 4.9l1.3-2 4 1.6V17a2 2 0 0 1-2 2A14 14 0 0 1 3 6a2 2 0 0 1 2-2z"/></symbol>
   <symbol id="i-pin" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-6.5-5.6-6.5-11a6.5 6.5 0 0 1 13 0C18.5 15.4 12 21 12 21z"/><circle cx="12" cy="10" r="2.4"/></g></symbol>
+  <symbol id="i-wa" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20l1.3-4A8.5 8.5 0 1 1 8.4 19z"/><path d="M9 8.6c0 3.4 2.9 6.4 6.3 6.4l1-1.4-2-1.1-1 .9a5 5 0 0 1-2.2-2.2l.9-1-1.1-2z"/></g></symbol>
+  <symbol id="i-kalender" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="5" width="17" height="15.5" rx="2"/><path d="M3.5 10h17M8 3v4M16 3v4"/><path d="m9.5 15 2 2 3.5-3.5"/></g></symbol>
 </svg>
 
 <div class="page">
@@ -68,7 +70,7 @@
       <li><a href="projekte.html">Projekte</a></li>
       <li><a href="ueber-uns.html">Über uns</a></li>
       <li><a href="karriere.html">Karriere</a></li>
-      <!-- Nur im mobilen Menü sichtbar, wenn der Button in der Pille ausgeblendet ist -->
+      <!-- Nur im mobilen Menü sichtbar: bis 760 px zeigt die Pille nur Logo und Menü-Button -->
       <li class="menu__cta"><button class="btn btn--small" type="button" data-open-contact aria-haspopup="dialog" aria-controls="kontaktformular">Online-Termin</button></li>
     </ul>
     <div class="nav-actions">
@@ -154,11 +156,16 @@
 
 <!-- INFO-LEISTE -->
 <!-- Info-Leiste: die wichtigsten Footer-Infos (Status, Telefon, Adresse), beim Scrollen immer unten sichtbar.
-     Blendet sich am Seitenanfang und über dem echten Footer aus (js/main.js). -->
+     Blendet sich am Seitenanfang und über dem echten Footer aus (js/main.js).
+     Mobil (bis 760 px) wird sie zur Floating-Bar mit großen Tap-Flächen: Anrufen, Online-Termin, Route (kurze Beschriftung .infobar__short),
+     dann ist sie schon ab Seitenanfang sichtbar, weil Telefon und Online-Termin dort nicht mehr im Header stehen. -->
 <aside class="infobar" aria-label="Kurzinfo">
   <p class="infobar__item infobar__status" data-open-status hidden><span class="ft-status__dot" aria-hidden="true"></span><span data-open-text></span></p>
-  <a class="infobar__item" href="tel:+4925947843823"><svg aria-hidden="true"><use href="#i-tel"/></svg><span>02594 7843823</span></a>
-  <a class="infobar__item infobar__adr" href="https://www.google.com/maps/dir/?api=1&amp;destination=Telgenkamp+31,+48249+D%C3%BClmen" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-pin"/></svg><span>Telgenkamp 31, Dülmen</span></a>
+  <a class="infobar__item" href="tel:+4925947843823" aria-label="Anrufen: 02594 7843823"><svg aria-hidden="true"><use href="#i-tel"/></svg><span class="infobar__long">02594 7843823</span><span class="infobar__short">Anrufen</span></a>
+  <!-- WhatsApp: Nummer folgt vom Kunden, dann hidden entfernen -->
+  <a class="infobar__item infobar__wa" href="https://wa.me/&lt;NUMMER&gt;" target="_blank" rel="noopener" hidden><svg aria-hidden="true"><use href="#i-wa"/></svg><span>WhatsApp</span></a>
+  <button class="infobar__item infobar__termin" type="button" data-open-contact aria-haspopup="dialog" aria-controls="kontaktformular"><svg aria-hidden="true"><use href="#i-kalender"/></svg><span>Online-Termin</span></button>
+  <a class="infobar__item infobar__adr" href="https://www.google.com/maps/dir/?api=1&amp;destination=Telgenkamp+31,+48249+D%C3%BClmen" target="_blank" rel="noopener" aria-label="Route planen: Telgenkamp 31, Dülmen"><svg aria-hidden="true"><use href="#i-pin"/></svg><span class="infobar__long">Telgenkamp 31, Dülmen</span><span class="infobar__short">Route</span></a>
 </aside>
 <!-- /INFO-LEISTE -->
 
@@ -215,9 +222,9 @@
         <span class="ft-card__ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="5.5" r="2.5"/><circle cx="6" cy="12" r="2.5"/><circle cx="18" cy="18.5" r="2.5"/><path d="m8.2 10.8 7.6-4.1M8.2 13.2l7.6 4.1"/></svg></span>
         <h2 class="ft-card__title" id="ft-social">Folgen</h2>
         <ul class="ft-contact">
-          <li><a href="https://www.facebook.com/profile.php?id=100091703222337" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14.5 8.5H17V5h-2.5A3.5 3.5 0 0 0 11 8.5V11H8.5v3.5H11V21h3.5v-6.5H17l.5-3.5h-3V9a.5.5 0 0 1 .5-.5z"/></svg><span><small>Facebook</small>Profil ansehen</span></a></li>
-          <li><a href="https://www.instagram.com/lackiertechnik_igelbrink/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="3.5" width="17" height="17" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.3" cy="6.7" r=".8" fill="currentColor"/></svg><span><small>Instagram</small>Profil ansehen</span></a></li>
-          <li><a href="https://g.page/r/CeGDcTp7F3GrEBM/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 12.2c0-.6-.1-1.2-.2-1.7H12v3.3h4.5a4 4 0 0 1-1.7 2.6"/><path d="M14.8 16.4A6.5 6.5 0 1 1 16.6 7"/></svg><span><small>Google</small>Bewertungen ansehen</span></a></li>
+          <li><a href="https://www.facebook.com/profile.php?id=100091703222337" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14.5 8.5H17V5h-2.5A3.5 3.5 0 0 0 11 8.5V11H8.5v3.5H11V21h3.5v-6.5H17l.5-3.5h-3V9a.5.5 0 0 1 .5-.5z"/></svg><span>Facebook<small>Profil ansehen</small></span></a></li>
+          <li><a href="https://www.instagram.com/lackiertechnik_igelbrink/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="3.5" width="17" height="17" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.3" cy="6.7" r=".8" fill="currentColor"/></svg><span>Instagram<small>Profil ansehen</small></span></a></li>
+          <li><a href="https://g.page/r/CeGDcTp7F3GrEBM/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 12.2c0-.6-.1-1.2-.2-1.7H12v3.3h4.5a4 4 0 0 1-1.7 2.6"/><path d="M14.8 16.4A6.5 6.5 0 1 1 16.6 7"/></svg><span>Google<small>Bewertungen ansehen</small></span></a></li>
         </ul>
       </section>
     </div>
@@ -352,6 +359,6 @@
 <!-- /DIALOG -->
 
 
-<script src="js/main.js?v=202610272347" defer></script>
+<script src="js/main.js?v=202610272348" defer></script>
 </body>
 </html>
