@@ -752,7 +752,7 @@ html:has(.lightbox[open]){overflow:hidden}
   .pnav__card--next small{justify-content:flex-start}
 }
 
-/* ---------- Über uns: Team, Zertifikate, Partner ---------- */
+/* ---------- Über uns: Team ---------- */
 .team{list-style:none;margin:0;padding:0;display:grid;gap:16px}
 .team__card{display:grid;grid-template-columns:var(--team-img) minmax(0,1fr);grid-template-rows:auto 1fr;column-gap:20px;row-gap:6px;align-items:start;
   padding:18px;background:var(--surface);border-radius:var(--radius);box-shadow:var(--sh-2)}
@@ -760,10 +760,6 @@ html:has(.lightbox[open]){overflow:hidden}
 .team__img img{width:var(--team-img);height:var(--team-img);border-radius:var(--radius-tile);object-fit:cover;background:var(--sk-1)}
 .team__card h3{align-self:end;font-size:1.5rem;color:var(--heading)}
 .team__card p{color:var(--fg-soft)}
-.band--certs{margin-top:clamp(24px,3vw,36px);justify-items:start}
-.exp--single{grid-template-columns:minmax(0,1fr);width:100%}
-.exp__media{padding:0 18px 18px 66px}
-.exp__media img{width:min(100%,420px);height:auto;border-radius:var(--radius-md);box-shadow:var(--sh-3);background:var(--white)}
 
 /* ---------- Karriere-Seite: Banner als Seitenkopf, darunter die Inhalte der Live-Seite ---------- */
 .career--head{margin-top:calc(var(--hdr) * -1);padding-top:calc(var(--hdr) + clamp(40px,7vw,96px))}
@@ -824,7 +820,6 @@ html:has(.lightbox[open]){overflow:hidden}
 @media (max-width:560px){
   .cards--4,.steps,.steps--4,.projects,.split--even{grid-template-columns:minmax(0,1fr)}
   .page-hero .btn{width:100%}
-  .exp__media{padding-left:18px}
   .team__card{grid-template-columns:96px minmax(0,1fr)}
   .team__img img{width:96px;height:96px}
   .flow li{padding-left:22px;padding-top:70px}
@@ -856,6 +851,7 @@ html:has(.lightbox[open]){overflow:hidden}
 .about__facts{display:grid;gap:22px;justify-items:start}
 .facts{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;width:100%}
 .facts--3{grid-template-columns:repeat(3,minmax(0,1fr))}
+.facts--4{grid-template-columns:repeat(4,minmax(0,1fr))}
 .fact{display:flex;flex-direction:column;align-items:flex-start;gap:4px;min-width:0;padding:20px;background:var(--surface);border-radius:var(--radius);box-shadow:var(--sh-2)}
 .fact__ico{display:grid;place-items:center;width:44px;height:44px;margin-bottom:8px;border-radius:var(--radius-md);background:var(--accent-soft);color:var(--accent-strong)}
 .fact__ico svg{width:22px;height:22px}
@@ -882,12 +878,40 @@ html:has(.lightbox[open]){overflow:hidden}
 .kt--home .kt-map__box{aspect-ratio:auto;height:100%;min-height:var(--map-min-h)}
 .kt-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px}
 
+/* ---------- ueber-uns.html: Team, Betrieb in Bildern, Angebot, Karriere-Kasten, FAQ ---------- */
+.team-wrap{display:grid;gap:14px;justify-items:center}
+.team-wrap .team{grid-template-columns:repeat(2,minmax(0,1fr));width:100%;max-width:900px}
+.team-wrap>.draft-note{align-self:auto;margin-top:0}
+.pics{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.pics .about__pic{aspect-ratio:4/3}
+.about__pic--ph{display:grid;place-content:center;justify-items:center;gap:10px;background:var(--grad-process-ph);color:var(--accent-strong);box-shadow:inset 0 0 0 1px var(--line)}
+.about__pic--ph svg{width:40px;height:40px;opacity:.75}
+.about__pic--ph figcaption{font-family:var(--f-display);font-weight:700;font-size:1.25rem;color:var(--heading)}
+.pics__note{display:inline-block;margin-top:14px}
+.offer{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.offer__link{display:grid;grid-template-columns:auto minmax(0,1fr) auto;align-items:center;gap:16px;height:100%;padding:20px 22px;
+  background:var(--surface);border-radius:var(--radius);box-shadow:var(--sh-2);color:var(--fg-soft);text-decoration:none}
+.offer__link::after{content:"";width:.6em;height:.6em;border-top:2.5px solid var(--accent-strong);border-right:2.5px solid var(--accent-strong);transform:rotate(45deg);margin-right:4px}   /* Pfeil wie bei .btn */
+.offer__ico{display:grid;place-items:center;width:48px;height:48px;border-radius:var(--radius-md);background:var(--accent-soft);color:var(--accent-strong)}
+.offer__ico svg{width:24px;height:24px}
+.offer__txt{display:grid;gap:4px}
+.offer__txt strong{font-family:var(--f-display);font-weight:700;font-size:1.35rem;line-height:1.15;color:var(--heading)}
+.offer__txt span{font-size:.96rem;line-height:1.5}
+.offer__more{display:flex;justify-content:center;margin-top:clamp(20px,3vw,28px)}
+.callout--work{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:clamp(24px,4vw,56px);align-items:center;padding:clamp(26px,4vw,48px);border-radius:var(--radius-lg)}
+.callout--work__text{display:grid;gap:14px;justify-items:start}
+.callout--work h2{color:var(--white)}
+.callout--work .eyebrow--on-dark{color:var(--accent-2)}
+.callout--work .job__list{gap:12px}
+.band--faq{justify-items:start}   /* ohne Foto: dunkles Band (Hintergrund --navy mit --grad-band) */
+
 @media (max-width:1100px){
   .process{grid-template-columns:repeat(3,minmax(0,1fr))}
-  .facts--3{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .facts--3,.facts--4{grid-template-columns:repeat(2,minmax(0,1fr))}
 }
 @media (max-width:980px){
-  .about{grid-template-columns:minmax(0,1fr)}
+  .about,.callout--work,.offer{grid-template-columns:minmax(0,1fr)}
+  .pics{grid-template-columns:repeat(2,minmax(0,1fr))}
   .kt--home{grid-template-columns:minmax(0,1fr)}
   .kt--home .kt-map__box{height:auto;min-height:0;aspect-ratio:4/3}
 }
@@ -899,6 +923,8 @@ html:has(.lightbox[open]){overflow:hidden}
   .process__body::before{position:static;width:36px;height:36px;margin-bottom:4px;font-size:1.1rem;box-shadow:none}
 }
 @media (max-width:560px){
-  .facts,.facts--3{grid-template-columns:minmax(0,1fr)}
+  .facts,.facts--3,.facts--4,.pics,.team-wrap .team{grid-template-columns:minmax(0,1fr)}
+  .offer__link{grid-template-columns:auto minmax(0,1fr);padding:18px}
+  .offer__link::after{display:none}
   .kt-actions .btn,.process__cta .btn{flex:1 1 100%}
 }
