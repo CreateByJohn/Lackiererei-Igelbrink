@@ -154,7 +154,7 @@
   --ease:cubic-bezier(.2,.7,.2,1);
   --ease-out:cubic-bezier(.22,1,.36,1);   /* schneller Start, weiches Ende: wirkt direkt, ohne zu hängen */
   --t-hover:.22s;            /* Hover: Buttons, Kacheln, Zeilen */
-  --t-split:.36s;            /* Aufklappen der Leistungs-Karten */
+  --t-split:.36s;            /* Aufklappen (Akkordeon .exp) */
 
   /* Layout */
   --wrap:1200px;
@@ -181,7 +181,7 @@
   --mq-w:220px;              /* Breite einer Kachel */
   --mq-h:200px;              /* Höhe der Bildfläche */
   --mq-gap:22px;
-  --mq-speed:57s;            /* Dauer für eine Runde (9 Kacheln) */
+  --mq-step:6.3s;            /* Laufzeit je Kachel: eine Runde dauert Anzahl × --mq-step (js/main.js setzt --mq-n) */
   --mq-gray:grayscale(1);    /* Bilder der Kachel in Ruhe */
   --grad-career:linear-gradient(100deg,rgba(17,23,38,.95) 0%,rgba(17,23,38,.86) 42%,rgba(31,42,68,.55) 100%);
   --grad-media:linear-gradient(0deg,rgba(17,23,38,.88) 0%,rgba(17,23,38,.35) 50%,rgba(17,23,38,.05) 100%);
@@ -213,4 +213,11 @@
   --pnav-img:120px;                         /* Vorschaubild in den Projekt-Karten */
   --pnav-img-sm:96px;                       /* … auf dem Handy */
   --print-ink:#000;                         /* Textfarbe beim Drucken der Rechtstexte */
+
+  /* Feedback Meeting 1: Prozess-Karten, Hard Facts, Bilder „Über uns“, Floating-Bar mobil */
+  --process-gap:clamp(12px,1.6vw,18px);     /* Abstand der Prozess-Karten */
+  --process-badge:46px;                     /* Nummernkreis auf den Prozess-Karten */
+  --grad-process-ph:linear-gradient(135deg,var(--accent-soft),var(--sk-1));   /* neutrale Fläche, solange das eigene Foto fehlt */
+  --map-min-h:360px;                        /* Mindesthöhe der Karte im Kontakt-Bereich der Startseite */
+  --fab-h:64px;                             /* Höhe der Floating-Bar unten (mobil) */
 }

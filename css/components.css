@@ -112,18 +112,14 @@
 .callout p{color:var(--on-navy-muted)}
 .callout p+p{margin-top:14px}
 
-/* ---------- Leistungs-Karten (Klappkarte) ----------
-   Drei Zeilen: Bild | Beschreibung | Liste. Die Beschreibung ist geschlossen 0 hoch und wächst beim Öffnen auf.
-   Jede Karte klappt einzeln auf (.svc.is-open). Die Karten stehen oben bündig,
-   damit eine offene Karte die anderen nicht mit in die Länge zieht.
-   js/main.js schaltet .is-open und gleicht die Höhen von Glas-Kacheln und Listen an. */
+/* ---------- Leistungs-Karten ----------
+   Zwei Zeilen: Bild mit Glas-Kachel (Titel, Kurzzeile, Link) | Stichpunktliste.
+   js/main.js gleicht die Höhen von Glas-Kacheln und Listen an. */
 .cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px;align-items:start}
-.svc{display:grid;grid-template-rows:auto 0fr auto;row-gap:0;min-width:0}
-.svc.is-open{grid-template-rows:auto 1fr auto;row-gap:12px}
+.svc{display:grid;min-width:0}
 
-.svc__media{position:relative;overflow:hidden;width:100%;aspect-ratio:3/4;max-height:600px;cursor:pointer;
+.svc__media{position:relative;overflow:hidden;width:100%;aspect-ratio:3/4;max-height:600px;
   border-radius:var(--radius) var(--radius) 0 0;background:var(--grad-ph);box-shadow:var(--sh-2)}
-.svc.is-open .svc__media{border-radius:var(--radius)}
 .svc__img,.svc__img img{position:absolute;inset:0;width:100%;height:100%}
 .svc__img img{object-fit:cover}
 .svc__media::after{content:"";position:absolute;inset:0;background:var(--grad-svc);pointer-events:none}
@@ -140,22 +136,7 @@
 .glass-tile p{color:var(--on-glass-muted);font-size:.98rem}
 .glass-tile .btn{align-self:center;margin-top:auto;text-shadow:none}   /* sitzt immer unten; ohne Link bleibt der Platz leer */
 
-/* Runder "+"-Button, dreht sich beim Öffnen zum "×" */
-.svc__toggle{position:absolute;top:14px;right:14px;z-index:2;display:grid;place-items:center;width:46px;height:46px;border:0;border-radius:50%;
-  background:var(--toggle-bg);box-shadow:var(--sh-2);cursor:pointer}
-.svc__toggle::before,.svc__toggle::after{content:"";position:absolute;width:16px;height:2.5px;border-radius:var(--radius-2xs);background:var(--accent)}
-.svc__toggle::after{rotate:90deg}
-.svc.is-open .svc__toggle{transform:rotate(135deg)}
-
-/* Beschreibung: geschlossen unsichtbar, auch für Screenreader */
-.svc__more{min-height:0;overflow:hidden;visibility:hidden}
-.svc.is-open .svc__more{visibility:visible}
-.svc__more-pad{display:grid;gap:14px;padding:22px 24px;border-radius:var(--radius);background:var(--accent-soft);color:var(--fg-soft);opacity:0;translate:0 -14px}
-.svc.is-open .svc__more-pad{opacity:1;translate:0 0}
-.svc__more-pad p{font-size:1rem;line-height:1.65}
-
 .svc__list{display:grid;align-content:start;gap:14px;padding:22px 22px 24px;background:var(--surface);border-radius:0 0 var(--radius) var(--radius);box-shadow:var(--sh-2)}
-.svc.is-open .svc__list{border-radius:var(--radius)}
 .svc__list h4{font:600 .9rem var(--f-body);text-transform:uppercase;letter-spacing:.06em;color:var(--fg)}
 
 /* Häkchen-Liste */
@@ -205,9 +186,15 @@
 
 /* ---------- Kundenstimmen (Google Bewertung) ----------
    Dunkle Übersichtskachel + Bewertungskarten. Solange keine echten Daten angebunden sind: Skelett-Platzhalter. */
-.reviews{display:grid;grid-template-columns:minmax(0,1fr) repeat(3,minmax(0,1.2fr));gap:16px;align-items:stretch}
+/* Zusammenfassung links über zwei Zeilen, daneben vier Bewertungen im 2 × 2-Raster (980 px: Zusammenfassung oben, 560 px: einspaltig) */
+.reviews{display:grid;grid-template-columns:minmax(0,1fr) repeat(2,minmax(0,1.3fr));grid-template-rows:repeat(2,auto);gap:16px;align-items:stretch}
+.rv--sum{grid-row:1 / span 2;align-items:flex-start}
 .rv{display:flex;flex-direction:column;gap:14px;min-width:0;padding:24px;background:var(--surface);border-radius:var(--radius);box-shadow:var(--sh-2)}
 .rv--sum{justify-content:center;background:var(--grad-review);color:var(--on-navy)}
+.rv__score{color:var(--on-navy-muted)}
+.rv__score b{display:block;font-family:var(--f-display);font-size:clamp(2.6rem,4vw,3.4rem);line-height:1;color:var(--white)}
+.rv__count{margin-top:-6px;color:var(--on-navy-muted)}
+.rv--sum .btn{white-space:normal;text-align:left;line-height:1.25}
 .rv--sum strong{font-family:var(--f-display);font-size:1.7rem;font-weight:700}
 .rv--sum .stars svg{width:28px;height:28px;color:var(--star-on-dark)}
 .rv .stars svg{width:22px;height:22px}
@@ -379,6 +366,7 @@ html:has(.contact[open]){overflow:hidden}   /* Seite dahinter scrollt nicht mit 
   .bt--eco .glass-in{grid-template-columns:minmax(0,1fr);justify-items:start}
   .bento{grid-template-columns:repeat(2,minmax(0,1fr));grid-template-areas:"gla hbc" "tmx dek"}
   .reviews{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .rv--sum{grid-column:1 / -1;grid-row:auto}
   .ft-cards{grid-template-columns:repeat(2,minmax(0,1fr))}
   .ft-claim{flex-basis:100%;order:3}
   .site-footer__img{width:100%;-webkit-mask-image:var(--mask-fade-down);mask-image:var(--mask-fade-down);opacity:.6}
@@ -824,4 +812,77 @@ html:has(.lightbox[open]){overflow:hidden}
   .team__card{grid-template-columns:96px minmax(0,1fr)}
   .team__img img{width:96px;height:96px}
   .flow li{padding-left:22px;padding-top:70px}
+}
+
+/* =====================================================================
+   FEEDBACK MEETING 1: Prozess Versicherungsschaden, Hard Facts, Karussell-Gruppen, Kontakt-Bereich
+   ===================================================================== */
+
+/* ---------- Prozess „Versicherungsschaden“ (.process, wiederverwendbar: Startseite und unfallinstandsetzung.html) ----------
+   Geordnete Liste, die Nummer setzt der CSS-Zähler in den Kreis an der Kante zwischen Bild und Text.
+   5 Spalten, ab 1100 px 3 (3 + 2), ab 640 px einspaltig mit Bild links. */
+.process{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:var(--process-gap);counter-reset:process}
+.process__step{position:relative;display:grid;grid-template-rows:auto 1fr;min-width:0;overflow:hidden;background:var(--surface);border-radius:var(--radius);box-shadow:var(--sh-2);counter-increment:process}
+.process__media{position:relative;overflow:hidden;aspect-ratio:4/3;background:var(--grad-ph)}
+.process__media img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.process__media--ph{display:grid;place-items:center;background:var(--grad-process-ph);color:var(--accent-strong)}
+.process__media--ph svg{width:44px;height:44px;opacity:.75}
+.process__body{position:relative;display:flex;flex-direction:column;align-items:flex-start;gap:6px;padding:calc(var(--process-badge) / 2 + 14px) 18px 18px}
+.process__body::before{content:counter(process);position:absolute;left:16px;top:calc(var(--process-badge) / -2);display:grid;place-items:center;
+  width:var(--process-badge);height:var(--process-badge);border-radius:50%;background:var(--accent-strong);color:var(--on-accent);
+  font-family:var(--f-display);font-weight:700;font-size:1.35rem;line-height:1;box-shadow:0 0 0 4px var(--surface),var(--sh-2)}
+.process__body h3{font-size:1.3rem;color:var(--heading);hyphens:manual;-webkit-hyphens:manual}   /* lange Wörter mit &shy; im HTML */
+.process__body p{color:var(--fg-soft);font-size:.96rem;line-height:1.5}
+.process__cta{display:flex;flex-wrap:wrap;justify-content:center;gap:12px;margin-top:clamp(24px,3vw,36px)}
+
+/* ---------- Über uns (Startseite und ueber-uns.html): Hard Facts als Kacheln, daneben Bilder ---------- */
+.about{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(24px,4vw,56px);align-items:start}
+.about__facts{display:grid;gap:22px;justify-items:start}
+.facts{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;width:100%}
+.facts--3{grid-template-columns:repeat(3,minmax(0,1fr))}
+.fact{display:flex;flex-direction:column;align-items:flex-start;gap:4px;min-width:0;padding:20px;background:var(--surface);border-radius:var(--radius);box-shadow:var(--sh-2)}
+.fact__ico{display:grid;place-items:center;width:44px;height:44px;margin-bottom:8px;border-radius:var(--radius-md);background:var(--accent-soft);color:var(--accent-strong)}
+.fact__ico svg{width:22px;height:22px}
+.fact strong{font-family:var(--f-display);font-weight:700;font-size:1.35rem;line-height:1.15;color:var(--heading)}
+.fact>span:not([class]){color:var(--fg-soft)}
+.fact .draft-note{margin-top:8px}
+.about__pics{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.about__pic{margin:0;overflow:hidden;aspect-ratio:1;border-radius:var(--radius);background:var(--grad-ph);box-shadow:var(--sh-2)}
+.about__pic--wide{grid-column:1 / -1;aspect-ratio:16/9}
+.about__pic img{width:100%;height:100%;object-fit:cover}
+.about__pics>.draft-note{grid-column:1 / -1}
+
+/* ---------- Qualität: zwei Karussell-Reihen mit eigener Zwischenüberschrift ---------- */
+.mq-group{scroll-margin-top:calc(var(--hdr) + 16px)}
+.mq-group+.mq-group{margin-top:clamp(18px,2.6vw,30px)}
+.mq-group__title{text-align:center;font-size:1.5rem;color:var(--heading)}
+/* Zertifikat-Kachel ist ein Button (öffnet die Lightbox) und sieht aus wie die übrigen Kacheln */
+.mq-item__open{all:unset;box-sizing:border-box;display:grid;justify-items:center;gap:12px;width:100%;border-radius:var(--radius);cursor:zoom-in}
+.marquee:not(.is-ready){overflow-x:auto}   /* ohne JavaScript (und bei reduzierter Bewegung) seitlich scrollbar statt abgeschnitten */
+
+/* ---------- Kontakt-Bereich der Startseite: Kontaktdaten links, Karte rechts ---------- */
+.kt--home{grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);align-items:stretch}
+.kt--home .kt-map{margin-top:0}
+.kt--home .kt-map__box{aspect-ratio:auto;height:100%;min-height:var(--map-min-h)}
+.kt-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px}
+
+@media (max-width:1100px){
+  .process{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .facts--3{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media (max-width:980px){
+  .about{grid-template-columns:minmax(0,1fr)}
+  .kt--home{grid-template-columns:minmax(0,1fr)}
+  .kt--home .kt-map__box{height:auto;min-height:0;aspect-ratio:4/3}
+}
+@media (max-width:640px){
+  .process{grid-template-columns:minmax(0,1fr)}
+  .process__step{grid-template-columns:112px minmax(0,1fr);grid-template-rows:auto}
+  .process__media{aspect-ratio:auto;min-height:112px}
+  .process__body{padding:16px}
+  .process__body::before{position:static;width:36px;height:36px;margin-bottom:4px;font-size:1.1rem;box-shadow:none}
+}
+@media (max-width:560px){
+  .facts,.facts--3{grid-template-columns:minmax(0,1fr)}
+  .kt-actions .btn,.process__cta .btn{flex:1 1 100%}
 }

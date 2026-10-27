@@ -10,10 +10,10 @@
 <link rel="icon" type="image/png" href="assets/img/13-favicon.png">
 <link rel="preload" href="assets/fonts/barlow-condensed-latin-700-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/barlow-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="css/tokens.css?v=202610272337">
-<link rel="stylesheet" href="css/base.css?v=202610272337">
-<link rel="stylesheet" href="css/components.css?v=202610272337">
-<link rel="stylesheet" href="css/effects.css?v=202610272337">
+<link rel="stylesheet" href="css/tokens.css?v=202610272347">
+<link rel="stylesheet" href="css/base.css?v=202610272347">
+<link rel="stylesheet" href="css/components.css?v=202610272347">
+<link rel="stylesheet" href="css/effects.css?v=202610272347">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -61,6 +61,8 @@
   <symbol id="i-fb" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="M14.5 8.5H17V5h-2.5A3.5 3.5 0 0 0 11 8.5V11H8.5v3.5H11V21h3.5v-6.5H17l.5-3.5h-3V9a.5.5 0 0 1 .5-.5z"/></symbol>
   <symbol id="i-ig" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="3.5" width="17" height="17" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.3" cy="6.7" r=".8" fill="currentColor"/></g></symbol>
   <symbol id="i-g" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12.2c0-.6-.1-1.2-.2-1.7H12v3.3h4.5a4 4 0 0 1-1.7 2.6"/><path d="M14.8 16.4A6.5 6.5 0 1 1 16.6 7"/></g></symbol>
+  <symbol id="i-team" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.2"/><path d="M3 19.5a6 6 0 0 1 12 0"/><circle cx="17" cy="9" r="2.4"/><path d="M15.5 14.2A4.8 4.8 0 0 1 21 18.5"/></g></symbol>
+  <symbol id="i-doc" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/><path d="M9 13h6M9 17h4"/></g></symbol>
 </svg>
 
 <div class="page">
@@ -122,7 +124,7 @@
   <section class="zone zone--first" id="service" aria-labelledby="service-title">
     <div class="sec-head">
       <div class="sec-head__divider" aria-hidden="true"><span class="sec-head__ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a4 4 0 0 0-5.2 5.2L3.6 17.4a1.6 1.6 0 0 0 2.3 2.3l5.9-5.9a4 4 0 0 0 5.2-5.2l-2.5 2.5-2.3-.4-.4-2.3 2.5-2.5z"/></svg></span></div>
-      <p class="eyebrow">Dienstleistung</p>
+      <p class="eyebrow">Dienstleistungen</p>
       <h2 id="service-title">Unsere Schwerpunkte</h2>
     </div>
 
@@ -135,19 +137,14 @@
                  width="600" height="450" loading="lazy" decoding="async"
                  alt="Unfallschaden am Heck eines BMW in der Werkstatt">
           </picture>
-          <button class="svc__toggle" type="button" aria-expanded="false" aria-controls="svc-more-1" aria-label="Beschreibung einblenden"></button>
           <div class="glass-tile">
             <span class="glass-tile__ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 17h14v-5l-2-5H7l-2 5v5z"/><path d="M5 12h14"/><circle cx="8" cy="17" r="2"/><circle cx="16" cy="17" r="2"/></svg></span>
-            <h3 id="svc-title-1">PKW- Unfallinstandsetzung inkl. Versicherungsabwicklung</h3>
+            <h3 id="svc-title-1">Unfallinstandsetzung inkl. Versicherungsabwicklung</h3>
             <p>Unfall gehabt? Wir setzen Ihr Fahrzeug professionell instand.</p>
+            <a class="btn btn--glass btn--small" href="unfallinstandsetzung.html" aria-describedby="svc-title-1">Mehr erfahren</a>
           </div>
         </div>
-        <div class="svc__more" id="svc-more-1">
-          <div class="svc__more-pad">
-            <p>Ein Moment der Unachtsamkeit – und schon ist es passiert. Doch kein Grund zur Sorge: Wir sind spezialisiert auf PKW-Unfallinstandsetzung und bringen Ihr Fahrzeug fachgerecht, schnell und zuverlässig wieder in Top-Zustand.</p>
-            <p>Von der ersten Schadensaufnahme bis zur fertigen Reparatur – inklusive kompletter Versicherungsabwicklung – bieten wir Ihnen einen Rundum-sorglos-Service.</p>
-          </div>
-        </div>
+        <!-- Alttext: Ein Moment der Unachtsamkeit – und schon ist es passiert. Doch kein Grund zur Sorge: Wir sind spezialisiert auf PKW-Unfallinstandsetzung und bringen Ihr Fahrzeug fachgerecht, schnell und zuverlässig wieder in Top-Zustand. Von der ersten Schadensaufnahme bis zur fertigen Reparatur – inklusive kompletter Versicherungsabwicklung – bieten wir Ihnen einen Rundum-sorglos-Service. -->
         <div class="svc__list">
           <h4>Unsere Leistungen im Überblick:</h4>
           <ul class="checks">
@@ -169,20 +166,14 @@
                  width="600" height="600" loading="lazy" decoding="async"
                  alt="Wohnmobil an einem See">
           </picture>
-          <button class="svc__toggle" type="button" aria-expanded="false" aria-controls="svc-more-2" aria-label="Beschreibung einblenden"></button>
           <div class="glass-tile">
             <span class="glass-tile__ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17V7a2 2 0 0 1 2-2h11l5 6v6H3z"/><path d="M16 5v6h5"/><path d="M7 9h5"/><circle cx="7" cy="17" r="2"/><circle cx="17" cy="17" r="2"/></svg></span>
-            <h3 id="svc-title-2">Wohnwagen- und Wohnmobil Instandsetzung</h3>
-            <p>Ihr Profi für Wohnwagen- und Wohnmobil-Instandsetzung</p>
+            <h3 id="svc-title-2">Caravan</h3>
+            <p>Reparatur und Lackierung von Wohnwagen und Wohnmobilen</p>
             <a class="btn btn--glass btn--small" href="wohnmobil-service.html" aria-describedby="svc-title-2">Mehr erfahren</a>
           </div>
         </div>
-        <div class="svc__more" id="svc-more-2">
-          <div class="svc__more-pad">
-            <p>Schäden an GFK oder Strukturblech? Wir bringen Ihr mobiles Zuhause wieder in Bestform!</p>
-            <p>Ob Hagelschaden, Riss im GFK, Delle im Strukturblech oder ein Unfallschaden – wir sind Ihr spezialisierter Fachbetrieb für die Reparatur von Wohnwagen und Wohnmobilen. Mit modernster Technik und langjähriger Erfahrung sorgen wir dafür, dass Ihr Fahrzeug wieder wie neu aussieht und zuverlässig funktioniert.</p>
-          </div>
-        </div>
+        <!-- Alttext: Schäden an GFK oder Strukturblech? Wir bringen Ihr mobiles Zuhause wieder in Bestform! Ob Hagelschaden, Riss im GFK, Delle im Strukturblech oder ein Unfallschaden – wir sind Ihr spezialisierter Fachbetrieb für die Reparatur von Wohnwagen und Wohnmobilen. Mit modernster Technik und langjähriger Erfahrung sorgen wir dafür, dass Ihr Fahrzeug wieder wie neu aussieht und zuverlässig funktioniert. -->
         <div class="svc__list">
           <h4>Unsere Leistungen im Überblick:</h4>
           <ul class="checks">
@@ -204,20 +195,14 @@
                  width="600" height="450" loading="lazy" decoding="async"
                  alt="Mercedes W123 während der Restaurierung">
           </picture>
-          <button class="svc__toggle" type="button" aria-expanded="false" aria-controls="svc-more-3" aria-label="Beschreibung einblenden"></button>
           <div class="glass-tile">
             <span class="glass-tile__ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l2.6 5.3 5.9.9-4.3 4.1 1 5.8L12 16.4 6.8 19.1l1-5.8L3.5 9.2l5.9-.9L12 3z"/></svg></span>
-            <h3 id="svc-title-3">Oldtimer Spezialist:</h3>
-            <p>Klassiker verdienen besonderen Respekt – und die richtige Werkstatt.</p>
+            <h3 id="svc-title-3">Classic Cars</h3>
+            <p>Restauration von Old- und Youngtimern</p>
             <a class="btn btn--glass btn--small" href="oldtimerlackierung.html" aria-describedby="svc-title-3">Mehr erfahren</a>
           </div>
         </div>
-        <div class="svc__more" id="svc-more-3">
-          <div class="svc__more-pad">
-            <p>Wir sind spezialisiert auf die Instandsetzung, Pflege und Restaurierung von Oldtimern und Youngtimern – mit dem Anspruch, den originalen Charakter Ihres Fahrzeugs zu bewahren und technische Perfektion zu liefern.</p>
-            <p>Ob liebevolle Karosseriearbeiten, präzise Lackierungen, GFK-Reparaturen oder Strukturblech-Instandsetzung: Wir vereinen traditionelles Handwerk mit modernster Technik – für Fahrzeuge mit Geschichte und Seele.</p>
-          </div>
-        </div>
+        <!-- Alttext: Wir sind spezialisiert auf die Instandsetzung, Pflege und Restaurierung von Oldtimern und Youngtimern – mit dem Anspruch, den originalen Charakter Ihres Fahrzeugs zu bewahren und technische Perfektion zu liefern. Ob liebevolle Karosseriearbeiten, präzise Lackierungen, GFK-Reparaturen oder Strukturblech-Instandsetzung: Wir vereinen traditionelles Handwerk mit modernster Technik – für Fahrzeuge mit Geschichte und Seele. -->
         <div class="svc__list">
           <h4>Unsere Leistungen für Klassiker:</h4>
           <ul class="checks">
@@ -235,6 +220,62 @@
 
   </section>
 
+  <!-- PROZESS VERSICHERUNGSSCHADEN (wiederverwendbar: index.html und unfallinstandsetzung.html, Markup identisch bis auf die IDs).
+       Fünf nummerierte Karten als <ol>, die Nummer setzt ein CSS-Zähler. Je Karte ein Bild: vorhandenes Werkstattfoto
+       oder neutrale Fläche mit Symbol (.process__media--ph) samt Platzhalter-Hinweis, bis eigene Fotos da sind.
+       „Schaden melden“ öffnet das Kontaktformular mit vorausgewähltem Anliegen (data-anliegen, js/main.js). -->
+  <section class="zone" id="versicherungsschaden" aria-labelledby="versicherungsschaden-title">
+    <div class="sec-head">
+      <div class="sec-head__divider" aria-hidden="true"><span class="sec-head__ico"><svg viewBox="0 0 24 24"><use href="#i-schild"/></svg></span></div>
+      <p class="eyebrow">Versicherungsschaden</p>
+      <h2 id="versicherungsschaden-title">Unfall gehabt? Wir kümmern uns um alles.</h2>
+      <p class="sec-head__lead">Full-Service von der Schadenmeldung bis zur fertigen Reparatur – inklusive kompletter Abwicklung mit Ihrer Versicherung.</p>
+    </div>
+    <ol class="process">
+      <li class="process__step">
+        <div class="process__media process__media--ph"><svg aria-hidden="true"><use href="#i-tel"/></svg></div>
+        <div class="process__body">
+          <h3>Schaden melden</h3>
+          <p>Telefonisch, per WhatsApp oder über das Formular.</p>
+          <span class="draft-note draft-note--small">Platzhalter: eigenes Foto folgt</span>
+        </div>
+      </li>
+      <li class="process__step">
+        <div class="process__media"><picture><source type="image/webp" srcset="assets/img/22-service-unfallinstandsetzung-600.webp 600w, assets/img/22-service-unfallinstandsetzung-1200.webp 1200w" sizes="(max-width: 640px) calc(100vw - 32px), (max-width: 1100px) calc((100vw - 64px) / 3), 230px"><img src="assets/img/22-service-unfallinstandsetzung-600.jpg" width="600" height="397" loading="lazy" decoding="async" alt="VW Golf bei der Achsvermessung in der Werkstatt"></picture></div>
+        <div class="process__body">
+          <h3>Schadenaufnahme</h3>
+          <p>Bei uns in der Werkstatt.</p>
+        </div>
+      </li>
+      <li class="process__step">
+        <div class="process__media process__media--ph"><svg aria-hidden="true"><use href="#i-doc"/></svg></div>
+        <div class="process__body">
+          <h3>Gutachten und Kalkulation</h3>
+          <span class="draft-note draft-note--small">Platzhalter: eigenes Foto folgt</span>
+        </div>
+      </li>
+      <li class="process__step">
+        <div class="process__media process__media--ph"><svg aria-hidden="true"><use href="#i-schild"/></svg></div>
+        <div class="process__body">
+          <h3>Komplette Versicherungs&shy;abwicklung</h3>
+          <p>Wir kommunizieren direkt mit der Versicherung.</p>
+          <span class="draft-note draft-note--small">Platzhalter: eigenes Foto folgt</span>
+        </div>
+      </li>
+      <li class="process__step">
+        <div class="process__media"><picture><source type="image/webp" srcset="assets/img/24-service-galerie-abklebung-600.webp 600w, assets/img/24-service-galerie-abklebung-1200.webp 1200w" sizes="(max-width: 640px) calc(100vw - 32px), (max-width: 1100px) calc((100vw - 64px) / 3), 230px"><img src="assets/img/24-service-galerie-abklebung-600.jpg" width="600" height="450" loading="lazy" decoding="async" alt="Abgeklebtes Fahrzeug, Detailansicht"></picture></div>
+        <div class="process__body">
+          <h3>Reparatur und Übergabe</h3>
+          <p>Ersatzwagen nach Verfügbarkeit.</p>
+        </div>
+      </li>
+    </ol>
+    <div class="process__cta">
+      <button class="btn" type="button" data-open-contact data-anliegen="unfall" aria-haspopup="dialog" aria-controls="kontaktformular">Schaden melden</button>
+      <a class="btn btn--glass-light" href="tel:+4925947843823" aria-label="Anrufen: 02594 7843823">Anrufen</a>
+    </div>
+  </section>
+
   <section class="zone" id="ueber-uns" aria-labelledby="ueber-uns-title">
     <!-- SEC-HEAD: Symbol | Augenbraue | Überschrift -->
     <div class="sec-head">
@@ -242,43 +283,61 @@
       <p class="eyebrow">Über uns</p>
       <h2 id="ueber-uns-title">Ihre Fachwerkstatt in Dülmen</h2>
     </div>
-    <div class="split">
-      <div class="prose">
-        <p>Seit 2022 steht Lackiertechnik Igelbrink in Dülmen für Qualität, Präzision und Zuverlässigkeit rund um Fahrzeuglackierung- Karosserie-Instandsetzung und Unfallreparatur.</p>
-        <p>Unser Schwerpunkt liegt auf der professionellen Instandsetzung von Unfall- und Versicherungsschäden für PKW, Wohnwagen und Wohnmobile. Wir sorgen dafür, dass Ihr Fahrzeug nach einem Schaden wieder aussieht wie neu – fachgerecht, termingerecht und mit modernster Lackiertechnik.</p>
-        <p>Als erfahrener Lackier- und Karosseriebetrieb in Dülmen kümmern wir uns um die komplette Abwicklung Ihres Versicherungsschadens und begleiten Sie vom ersten Kontakt bis zur fertigen Übergabe Ihres Fahrzeugs.</p>
-        <p>Dabei setzen wir auf hochwertige Materialien, exakte Farbanpassung und sorgfältige Verarbeitung – für Ergebnisse, die überzeugen.</p>
-        <p>Neben aktuellen Fahrzeugen übernehmen wir auch Old- und Youngtimer-Lackierungen sowie Arbeiten an Wohnmobilen und Sonderfahrzeugen – mit der gleichen Leidenschaft fürs Detail, die jedes Projekt verdient.</p>
+    <div class="about">
+      <div class="about__facts">
+        <ul class="facts">
+          <li class="fact"><span class="fact__ico" aria-hidden="true"><svg><use href="#i-schild"/></svg></span><strong>Meisterbetrieb in Dülmen</strong><span>seit 2022</span></li>
+          <li class="fact"><span class="fact__ico" aria-hidden="true"><svg><use href="#i-schluessel"/></svg></span><strong>Freie Full-Service-Werkstatt</strong><span>nicht markengebunden</span></li>
+          <li class="fact"><span class="fact__ico" aria-hidden="true"><svg><use href="#i-team"/></svg></span><strong>Kleines, familiäres Team</strong><span>2 Inhaber, 1 Fachkraft, 2 Auszubildende</span></li>
+          <li class="fact"><span class="fact__ico" aria-hidden="true"><svg><use href="#i-klassik"/></svg></span><strong>Erfahrung als Vorführmeister / Landestrainer</strong><span>Marko Igelbrink, beim Lackhersteller</span><span class="draft-note draft-note--small">Angabe vom Kunden bestätigen lassen</span></li>
+        </ul>
+        <a class="btn btn--glass-light" href="ueber-uns.html">Mehr über uns</a>
       </div>
-      <aside class="callout">
-        <h3>Ihr Fahrzeug in besten Händen</h3>
-        <p>Bei Lackiertechnik Igelbrink erhalten Sie persönliche Beratung, transparente Abläufe und handwerkliche Qualität – direkt vom Fachmann.</p>
-        <p>Unser Ziel ist es, dass Sie Ihr Fahrzeug nicht nur repariert, sondern perfekt aufbereitet und gepflegt zurückbekommen.</p>
-      </aside>
+      <!-- Bilder: oben Betrieb (Lackierkabine), darunter die beiden Inhaber. Später gemeinsames Foto der Inhaber und weitere Betriebsfotos. -->
+      <div class="about__pics">
+        <figure class="about__pic about__pic--wide"><picture><source type="image/webp" srcset="assets/img/20-service-oldtimer-600.webp 600w, assets/img/20-service-oldtimer-764.webp 764w" sizes="(max-width: 980px) calc(100vw - 32px), 560px"><img src="assets/img/20-service-oldtimer-600.jpg" width="600" height="594" loading="lazy" decoding="async" alt="Grundierter Ferrari in der Lackierkabine"></picture></figure>
+        <figure class="about__pic"><picture><source type="image/webp" srcset="assets/img/129-team-marko-igelbrink-400.webp 400w, assets/img/129-team-marko-igelbrink-800.webp 800w" sizes="(max-width: 980px) calc(50vw - 24px), 280px"><img src="assets/img/129-team-marko-igelbrink-400.jpg" width="400" height="400" loading="lazy" decoding="async" alt="Marko Igelbrink, Inhaber und Lackierermeister"></picture></figure>
+        <figure class="about__pic"><picture><source type="image/webp" srcset="assets/img/130-team-eszter-gerlach-igelbrink-400.webp 400w, assets/img/130-team-eszter-gerlach-igelbrink-800.webp 800w" sizes="(max-width: 980px) calc(50vw - 24px), 280px"><img src="assets/img/130-team-eszter-gerlach-igelbrink-400.jpg" width="400" height="400" loading="lazy" decoding="async" alt="Eszter Gerlach-Igelbrink"></picture></figure>
+        <span class="draft-note draft-note--small">Neue Fotos folgen (Inhaber gemeinsam, Wartebereich, Büro, Spritzkabine)</span>
+      </div>
     </div>
+    <!-- Alttext: Seit 2022 steht Lackiertechnik Igelbrink in Dülmen für Qualität, Präzision und Zuverlässigkeit rund um Fahrzeuglackierung- Karosserie-Instandsetzung und Unfallreparatur. Unser Schwerpunkt liegt auf der professionellen Instandsetzung von Unfall- und Versicherungsschäden für PKW, Wohnwagen und Wohnmobile. Wir sorgen dafür, dass Ihr Fahrzeug nach einem Schaden wieder aussieht wie neu – fachgerecht, termingerecht und mit modernster Lackiertechnik. Als erfahrener Lackier- und Karosseriebetrieb in Dülmen kümmern wir uns um die komplette Abwicklung Ihres Versicherungsschadens und begleiten Sie vom ersten Kontakt bis zur fertigen Übergabe Ihres Fahrzeugs. Dabei setzen wir auf hochwertige Materialien, exakte Farbanpassung und sorgfältige Verarbeitung – für Ergebnisse, die überzeugen. Neben aktuellen Fahrzeugen übernehmen wir auch Old- und Youngtimer-Lackierungen sowie Arbeiten an Wohnmobilen und Sonderfahrzeugen – mit der gleichen Leidenschaft fürs Detail, die jedes Projekt verdient. | Kasten „Ihr Fahrzeug in besten Händen“: Bei Lackiertechnik Igelbrink erhalten Sie persönliche Beratung, transparente Abläufe und handwerkliche Qualität – direkt vom Fachmann. Unser Ziel ist es, dass Sie Ihr Fahrzeug nicht nur repariert, sondern perfekt aufbereitet und gepflegt zurückbekommen. -->
   </section>
 
-  <!-- QUALITÄT: Zertifikate und Partner gemeinsam in einem Karussell. Glas-Kacheln wie bisher bei den Partnern:
-       unscharfes Bild als farbiger Hintergrund, darauf Glasfläche mit scharfem Bild. In Ruhe grau, beim Hover farbig mit Lichtstreifen.
-       js/main.js verdoppelt die Liste für die Endlos-Schleife. -->
+  <!-- QUALITÄT: zwei Karussell-Reihen (gleiche Komponente auf index.html und ueber-uns.html).
+       „Zertifikate“ (#zertifikate): jede Kachel ist ein Button, Klick oder Enter öffnet das Zertifikat groß (Lightbox, js/main.js).
+       „Partner“ (#partner): reine Logo-Kacheln, das Band läuft in Gegenrichtung.
+       Glas-Kacheln: unscharfes Bild als farbiger Hintergrund, darauf Glasfläche mit scharfem Bild; in Ruhe grau, beim Hover oder Fokus farbig.
+       js/main.js hängt so viele versteckte Kopien an, dass jedes Band nahtlos endlos läuft. -->
   <section class="zone" id="qualitaet" aria-labelledby="qualitaet-title">
     <div class="sec-head">
       <div class="sec-head__divider" aria-hidden="true"><span class="sec-head__ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="9" r="5.5"/><path d="M9.6 9.2l1.7 1.7 3.2-3.4"/><path d="M8.5 13.6 7 21l5-2.6L17 21l-1.5-7.4"/></svg></span></div>
       <p class="eyebrow">Qualität</p>
       <h2 id="qualitaet-title">Zertifikate und Partner</h2>
+      <span class="draft-note draft-note--small">Liste wird vom Kunden aktualisiert</span>
     </div>
-    <div class="marquee" id="partner">
-      <ul class="marquee__track" aria-label="Zertifikate und Partner">
-        <li class="mq-item"><span class="mq-item__tile"><span class="mq-item__blur" aria-hidden="true"><img src="assets/img/14-qualitaet-meisterbrief-600.webp" alt="" loading="lazy" decoding="async"></span><span class="mq-item__glass"><picture><source type="image/webp" srcset="assets/img/14-qualitaet-meisterbrief-600.webp"><img src="assets/img/14-qualitaet-meisterbrief-600.jpg" width="600" height="828" loading="lazy" decoding="async" alt="Meisterbrief im Maler- und Lackiererhandwerk von Marko Igelbrink"></picture></span></span><span class="mq-item__name">Meisterbetrieb</span></li>
-        <li class="mq-item"><span class="mq-item__tile"><span class="mq-item__blur" aria-hidden="true"><img src="assets/img/07-qualitaet-ecocert100-werkstattschild-960.webp" alt="" loading="lazy" decoding="async"></span><span class="mq-item__glass"><picture><source type="image/webp" srcset="assets/img/07-qualitaet-ecocert100-werkstattschild-960.webp"><img src="assets/img/07-qualitaet-ecocert100-werkstattschild-960.jpg" width="960" height="720" loading="lazy" decoding="async" alt="ECOcert100 Werkstattschild"></picture></span></span><span class="mq-item__name">ECOcert100</span></li>
-        <li class="mq-item"><span class="mq-item__tile"><span class="mq-item__blur" aria-hidden="true"><img src="assets/img/15-qualitaet-dekra-zertifikat-600.webp" alt="" loading="lazy" decoding="async"></span><span class="mq-item__glass"><picture><source type="image/webp" srcset="assets/img/15-qualitaet-dekra-zertifikat-600.webp"><img src="assets/img/15-qualitaet-dekra-zertifikat-600.jpg" width="600" height="848" loading="lazy" decoding="async" alt="DEKRA Zertifikat Werkstattprüfung für Lackierfachbetriebe"></picture></span></span><span class="mq-item__name">DEKRA geprüft</span></li>
-        <li class="mq-item"><span class="mq-item__tile"><span class="mq-item__blur" aria-hidden="true"><img src="assets/img/131-zertifikat-pkw-karosserie-600.webp" alt="" loading="lazy" decoding="async"></span><span class="mq-item__glass"><picture><source type="image/webp" srcset="assets/img/131-zertifikat-pkw-karosserie-600.webp"><img src="assets/img/131-zertifikat-pkw-karosserie-600.jpg" width="600" height="860" loading="lazy" decoding="async" alt="Zertifikat PKW-Karosserieinstandsetzung"></picture></span></span><span class="mq-item__name">Karosserie-Instandsetzung</span></li>
-        <li class="mq-item"><span class="mq-item__tile"><span class="mq-item__blur" aria-hidden="true"><img src="assets/img/132-zertifikat-hbc-600.webp" alt="" loading="lazy" decoding="async"></span><span class="mq-item__glass"><picture><source type="image/webp" srcset="assets/img/132-zertifikat-hbc-600.webp"><img src="assets/img/132-zertifikat-hbc-600.jpg" width="600" height="847" loading="lazy" decoding="async" alt="Zertifikat HBC-Instandsetzung der strukturierten Außenhaut von Wohnmobilen und Wohnwagen"></picture></span></span><span class="mq-item__name">HBC-Zertifikat</span></li>
-        <li class="mq-item"><span class="mq-item__tile"><span class="mq-item__blur" aria-hidden="true"><img src="assets/img/133-zertifikat-classic-business-600.webp" alt="" loading="lazy" decoding="async"></span><span class="mq-item__glass"><picture><source type="image/webp" srcset="assets/img/133-zertifikat-classic-business-600.webp"><img src="assets/img/133-zertifikat-classic-business-600.jpg" width="600" height="843" loading="lazy" decoding="async" alt="Zertifikat „Classic Business“ von Glasurit"></picture></span></span><span class="mq-item__name">Classic Business</span></li>
-        <li class="mq-item mq-item--logo"><span class="mq-item__tile"><span class="mq-item__blur" aria-hidden="true"><img src="assets/img/08-partner-glasurit.webp" alt="" loading="lazy" decoding="async"></span><span class="mq-item__glass"><picture><source type="image/webp" srcset="assets/img/08-partner-glasurit.webp"><img src="assets/img/08-partner-glasurit.png" width="200" height="200" loading="lazy" decoding="async" alt="Glasurit"></picture></span></span><span class="mq-item__name">Glasurit</span></li>
-        <li class="mq-item mq-item--logo"><span class="mq-item__tile"><span class="mq-item__blur" aria-hidden="true"><img src="assets/img/09-partner-hbc-system.webp" alt="" loading="lazy" decoding="async"></span><span class="mq-item__glass"><picture><source type="image/webp" srcset="assets/img/09-partner-hbc-system.webp"><img src="assets/img/09-partner-hbc-system.png" width="600" height="230" loading="lazy" decoding="async" alt="HBC-System"></picture></span></span><span class="mq-item__name">HBC-System</span></li>
-        <li class="mq-item mq-item--logo"><span class="mq-item__tile"><span class="mq-item__blur" aria-hidden="true"><img src="assets/img/10-partner-timemax.webp" alt="" loading="lazy" decoding="async"></span><span class="mq-item__glass"><picture><source type="image/webp" srcset="assets/img/10-partner-timemax.webp"><img src="assets/img/10-partner-timemax.png" width="600" height="200" loading="lazy" decoding="async" alt="Timemax"></picture></span></span><span class="mq-item__name">Timemax</span></li>
-      </ul>
+    <div class="mq-group" id="zertifikate">
+      <h3 class="mq-group__title">Zertifikate</h3>
+      <div class="marquee">
+        <ul class="marquee__track" aria-label="Zertifikate">
+          <li class="mq-item"><button class="mq-item__open" type="button" data-full="assets/img/14-qualitaet-meisterbrief-600.jpg" data-full-webp="assets/img/14-qualitaet-meisterbrief-600.webp" aria-label="Meisterbetrieb – groß ansehen"><span class="mq-item__tile"><span class="mq-item__blur" aria-hidden="true"><img src="assets/img/14-qualitaet-meisterbrief-600.webp" alt="" loading="lazy" decoding="async"></span><span class="mq-item__glass"><picture><source type="image/webp" srcset="assets/img/14-qualitaet-meisterbrief-600.webp"><img src="assets/img/14-qualitaet-meisterbrief-600.jpg" width="600" height="828" loading="lazy" decoding="async" alt="Meisterbrief im Maler- und Lackiererhandwerk von Marko Igelbrink"></picture></span></span><span class="mq-item__name">Meisterbetrieb</span></button></li>
+          <li class="mq-item"><button class="mq-item__open" type="button" data-full="assets/img/07-qualitaet-ecocert100-werkstattschild-960.jpg" data-full-webp="assets/img/07-qualitaet-ecocert100-werkstattschild-960.webp" aria-label="ECOcert100 – groß ansehen"><span class="mq-item__tile"><span class="mq-item__blur" aria-hidden="true"><img src="assets/img/07-qualitaet-ecocert100-werkstattschild-960.webp" alt="" loading="lazy" decoding="async"></span><span class="mq-item__glass"><picture><source type="image/webp" srcset="assets/img/07-qualitaet-ecocert100-werkstattschild-960.webp"><img src="assets/img/07-qualitaet-ecocert100-werkstattschild-960.jpg" width="960" height="720" loading="lazy" decoding="async" alt="ECOcert100 Werkstattschild"></picture></span></span><span class="mq-item__name">ECOcert100</span></button></li>
+          <li class="mq-item"><button class="mq-item__open" type="button" data-full="assets/img/15-qualitaet-dekra-zertifikat-600.jpg" data-full-webp="assets/img/15-qualitaet-dekra-zertifikat-600.webp" aria-label="DEKRA geprüft – groß ansehen"><span class="mq-item__tile"><span class="mq-item__blur" aria-hidden="true"><img src="assets/img/15-qualitaet-dekra-zertifikat-600.webp" alt="" loading="lazy" decoding="async"></span><span class="mq-item__glass"><picture><source type="image/webp" srcset="assets/img/15-qualitaet-dekra-zertifikat-600.webp"><img src="assets/img/15-qualitaet-dekra-zertifikat-600.jpg" width="600" height="848" loading="lazy" decoding="async" alt="DEKRA Zertifikat Werkstattprüfung für Lackierfachbetriebe"></picture></span></span><span class="mq-item__name">DEKRA geprüft</span></button></li>
+          <li class="mq-item"><button class="mq-item__open" type="button" data-full="assets/img/131-zertifikat-pkw-karosserie-1200.jpg" data-full-webp="assets/img/131-zertifikat-pkw-karosserie-1200.webp" aria-label="Karosserie-Instandsetzung – groß ansehen"><span class="mq-item__tile"><span class="mq-item__blur" aria-hidden="true"><img src="assets/img/131-zertifikat-pkw-karosserie-600.webp" alt="" loading="lazy" decoding="async"></span><span class="mq-item__glass"><picture><source type="image/webp" srcset="assets/img/131-zertifikat-pkw-karosserie-600.webp"><img src="assets/img/131-zertifikat-pkw-karosserie-600.jpg" width="600" height="860" loading="lazy" decoding="async" alt="Zertifikat PKW-Karosserieinstandsetzung"></picture></span></span><span class="mq-item__name">Karosserie-Instandsetzung</span></button></li>
+          <li class="mq-item"><button class="mq-item__open" type="button" data-full="assets/img/132-zertifikat-hbc-1200.jpg" data-full-webp="assets/img/132-zertifikat-hbc-1200.webp" aria-label="HBC-Zertifikat – groß ansehen"><span class="mq-item__tile"><span class="mq-item__blur" aria-hidden="true"><img src="assets/img/132-zertifikat-hbc-600.webp" alt="" loading="lazy" decoding="async"></span><span class="mq-item__glass"><picture><source type="image/webp" srcset="assets/img/132-zertifikat-hbc-600.webp"><img src="assets/img/132-zertifikat-hbc-600.jpg" width="600" height="847" loading="lazy" decoding="async" alt="Zertifikat HBC-Instandsetzung der strukturierten Außenhaut von Wohnmobilen und Wohnwagen"></picture></span></span><span class="mq-item__name">HBC-Zertifikat</span></button></li>
+          <li class="mq-item"><button class="mq-item__open" type="button" data-full="assets/img/133-zertifikat-classic-business-1200.jpg" data-full-webp="assets/img/133-zertifikat-classic-business-1200.webp" aria-label="Classic Business – groß ansehen"><span class="mq-item__tile"><span class="mq-item__blur" aria-hidden="true"><img src="assets/img/133-zertifikat-classic-business-600.webp" alt="" loading="lazy" decoding="async"></span><span class="mq-item__glass"><picture><source type="image/webp" srcset="assets/img/133-zertifikat-classic-business-600.webp"><img src="assets/img/133-zertifikat-classic-business-600.jpg" width="600" height="843" loading="lazy" decoding="async" alt="Zertifikat „Classic Business“ von Glasurit"></picture></span></span><span class="mq-item__name">Classic Business</span></button></li>
+        </ul>
+      </div>
+    </div>
+    <div class="mq-group" id="partner">
+      <h3 class="mq-group__title">Partner</h3>
+      <div class="marquee marquee--reverse">
+        <ul class="marquee__track" aria-label="Partner">
+          <li class="mq-item mq-item--logo"><span class="mq-item__tile"><span class="mq-item__blur" aria-hidden="true"><img src="assets/img/08-partner-glasurit.webp" alt="" loading="lazy" decoding="async"></span><span class="mq-item__glass"><picture><source type="image/webp" srcset="assets/img/08-partner-glasurit.webp"><img src="assets/img/08-partner-glasurit.png" width="200" height="200" loading="lazy" decoding="async" alt="Glasurit"></picture></span></span><span class="mq-item__name">Glasurit</span></li>
+          <li class="mq-item mq-item--logo"><span class="mq-item__tile"><span class="mq-item__blur" aria-hidden="true"><img src="assets/img/09-partner-hbc-system.webp" alt="" loading="lazy" decoding="async"></span><span class="mq-item__glass"><picture><source type="image/webp" srcset="assets/img/09-partner-hbc-system.webp"><img src="assets/img/09-partner-hbc-system.png" width="600" height="230" loading="lazy" decoding="async" alt="HBC-System"></picture></span></span><span class="mq-item__name">HBC-System</span></li>
+          <li class="mq-item mq-item--logo"><span class="mq-item__tile"><span class="mq-item__blur" aria-hidden="true"><img src="assets/img/10-partner-timemax.webp" alt="" loading="lazy" decoding="async"></span><span class="mq-item__glass"><picture><source type="image/webp" srcset="assets/img/10-partner-timemax.webp"><img src="assets/img/10-partner-timemax.png" width="600" height="200" loading="lazy" decoding="async" alt="Timemax"></picture></span></span><span class="mq-item__name">Timemax</span></li>
+        </ul>
+      </div>
     </div>
   </section>
 
@@ -289,12 +348,23 @@
       <p class="eyebrow">Kundenbewertung</p>
       <h2 id="bewertungen-title">Das sagen unsere Kunden über uns</h2>
     </div>
+    <!-- Statisch, ohne Google-API: Zusammenfassung plus bis zu vier ausgewählte Bewertungen (wählt der Kunde aus).
+         Werte und Link sind Platzhalter, der Link ist das Google-Profil aus dem Footer. -->
     <div class="reviews">
       <div class="rv rv--sum">
         <div class="stars" aria-hidden="true"><svg viewBox="0 0 24 24"><use href="#stern"/></svg><svg viewBox="0 0 24 24"><use href="#stern"/></svg><svg viewBox="0 0 24 24"><use href="#stern"/></svg><svg viewBox="0 0 24 24"><use href="#stern"/></svg><svg viewBox="0 0 24 24"><use href="#stern"/></svg></div>
         <strong>Google Bewertung</strong>
-        <span class="draft-note draft-note--small">Platzhalter: Sternwertung, Anzahl und Link zum Google-Profil</span>
+        <p class="rv__score"><b>X,X</b> von 5 Sternen</p>
+        <p class="rv__count">XX Bewertungen</p>
+        <a class="btn btn--glass btn--small" href="https://g.page/r/CeGDcTp7F3GrEBM/" target="_blank" rel="noopener">Alle Google-Bewertungen lesen</a>
+        <span class="draft-note draft-note--small">Platzhalter: Gesamtnote, Anzahl und Link zum Google-Profil bestätigen</span>
       </div>
+      <article class="rv">
+        <div class="rv__who" aria-hidden="true"><span class="rv__avatar"></span><span class="sk-lines"><span class="sk sk--60"></span><span class="sk sk--35"></span></span></div>
+        <div class="stars" aria-hidden="true"><svg viewBox="0 0 24 24"><use href="#stern"/></svg><svg viewBox="0 0 24 24"><use href="#stern"/></svg><svg viewBox="0 0 24 24"><use href="#stern"/></svg><svg viewBox="0 0 24 24"><use href="#stern"/></svg><svg viewBox="0 0 24 24"><use href="#stern"/></svg></div>
+        <div class="sk-lines" aria-hidden="true"><span class="sk"></span><span class="sk"></span><span class="sk sk--80"></span><span class="sk sk--55"></span></div>
+        <span class="draft-note draft-note--small">Platzhalter für eine echte Google-Bewertung</span>
+      </article>
       <article class="rv">
         <div class="rv__who" aria-hidden="true"><span class="rv__avatar"></span><span class="sk-lines"><span class="sk sk--60"></span><span class="sk sk--35"></span></span></div>
         <div class="stars" aria-hidden="true"><svg viewBox="0 0 24 24"><use href="#stern"/></svg><svg viewBox="0 0 24 24"><use href="#stern"/></svg><svg viewBox="0 0 24 24"><use href="#stern"/></svg><svg viewBox="0 0 24 24"><use href="#stern"/></svg><svg viewBox="0 0 24 24"><use href="#stern"/></svg></div>
@@ -380,6 +450,61 @@
           </a>
         </li>
       </ul>
+    </div>
+  </section>
+
+  <!-- KONTAKT: Inhalte wie auf kontakt.html und im Footer, Karte mit Zwei-Klick-Lösung wie auf kontakt.html (js/main.js, [data-map]).
+       Eigene ID #kontakt-bereich: Der Footer trägt bereits id="kontakt". -->
+  <section class="zone" id="kontakt-bereich" aria-labelledby="kontakt-bereich-title">
+    <div class="sec-head">
+      <div class="sec-head__divider" aria-hidden="true"><span class="sec-head__ico"><svg viewBox="0 0 24 24"><use href="#i-pin"/></svg></span></div>
+      <p class="eyebrow">Kontakt</p>
+      <h2 id="kontakt-bereich-title">So erreichen Sie uns</h2>
+    </div>
+    <div class="kt kt--home">
+      <section class="kt-card" aria-label="Kontaktdaten">
+        <div class="kt-grid">
+          <div class="kt-block">
+            <h3><span class="kt-card__ico"><svg aria-hidden="true"><use href="#i-pin"/></svg></span>Adresse</h3>
+            <address>Lackiertechnik Igelbrink<br>Telgenkamp 31<br>48249 Dülmen</address>
+          </div>
+          <div class="kt-block">
+            <h3><span class="kt-card__ico"><svg aria-hidden="true"><use href="#i-uhr"/></svg></span>Öffnungszeiten</h3>
+            <dl class="kt-hours">
+              <div><dt>Montag – Freitag</dt><dd>08:00 – 17:00 Uhr<br><small>oder nach Vereinbarung</small></dd></div>
+              <div><dt>Samstag</dt><dd>nach Vereinbarung</dd></div>
+            </dl>
+          </div>
+          <div class="kt-block">
+            <h3><span class="kt-card__ico"><svg aria-hidden="true"><use href="#i-tel"/></svg></span>Telefon</h3>
+            <ul class="kt-list">
+              <li><a href="tel:+4925947843823"><svg aria-hidden="true"><use href="#i-tel"/></svg><span><small>Telefon</small>+49 2594 7843823</span></a></li>
+              <li><a href="tel:+4917645875781"><svg aria-hidden="true"><use href="#i-mobil"/></svg><span><small>Mobil</small>+49 176 45875781</span></a></li>
+            </ul>
+          </div>
+          <div class="kt-block">
+            <h3><span class="kt-card__ico"><svg aria-hidden="true"><use href="#i-mail"/></svg></span>E-Mail</h3>
+            <ul class="kt-list">
+              <li><a href="mailto:info@lackiertechnik-igelbrink.de"><svg aria-hidden="true"><use href="#i-mail"/></svg><span><small>E-Mail</small>info@lackiertechnik-igelbrink.de</span></a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="kt-actions">
+          <button class="btn" type="button" data-open-contact aria-haspopup="dialog" aria-controls="kontaktformular">Online-Termin</button>
+          <a class="btn btn--glass-light" href="https://www.google.com/maps/dir/?api=1&amp;destination=Telgenkamp+31,+48249+D%C3%BClmen" target="_blank" rel="noopener">Route planen</a>
+        </div>
+      </section>
+      <!-- Karte: Zwei-Klick-Lösung (DSGVO). Google Maps lädt erst nach Zustimmung. -->
+      <div class="kt-map" data-map>
+        <h3 class="visually-hidden">Karte</h3>
+        <div class="kt-map__box">
+          <div class="kt-map__consent">
+            <svg aria-hidden="true"><use href="#i-pin"/></svg>
+            <p>Beim Laden der Karte werden Daten an Google übermittelt. Mehr dazu in der <a href="datenschutz.html">Datenschutzerklärung</a>.</p>
+            <button class="btn btn--small" type="button" data-map-load>Karte laden</button>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -587,7 +712,7 @@
 <!-- /DIALOG -->
 
 
-<script src="js/main.js?v=202610272337" defer></script>
-<script src="js/hero-spray.js?v=202610272337" defer></script>
+<script src="js/main.js?v=202610272347" defer></script>
+<script src="js/hero-spray.js?v=202610272347" defer></script>
 </body>
 </html>

@@ -34,32 +34,11 @@
   });
 })();
 
-// Klappkarten: Klick auf das Bild oder den "+"-Button teilt die Karte und zeigt ihre Beschreibung.
-// Jede Karte klappt einzeln auf, auf allen Breiten. Ein Klick auf einen Link in der Glas-Kachel klappt nicht auf.
-// Die Karten sind voneinander unabhängig; equalize() sorgt dafür, dass Glas-Kacheln und Listen trotzdem gleich hoch sind.
+// Leistungs-Karten: equalize() sorgt dafür, dass Glas-Kacheln und Listen nebeneinander gleich hoch sind.
 (function () {
   var grid = document.querySelector('.cards');
   if (!grid) return;
-  var cards = grid.querySelectorAll('.svc');
   var wide = window.matchMedia('(min-width: 981px)');
-
-  function setCard(card, open) {
-    var btn = card.querySelector('.svc__toggle');
-    card.classList.toggle('is-open', open);
-    if (!btn) return;
-    btn.setAttribute('aria-expanded', open ? 'true' : 'false');
-    btn.setAttribute('aria-label', open ? 'Beschreibung ausblenden' : 'Beschreibung einblenden');
-  }
-
-  cards.forEach(function (card) {
-    var media = card.querySelector('.svc__media');
-    if (!media || !card.querySelector('.svc__toggle')) return;   // Karten ohne „+“ (service.html) klappen nicht auf
-    // Der Button liegt im Bildbereich, sein Klick (auch per Tastatur) landet ebenfalls hier.
-    media.addEventListener('click', function (e) {
-      if (e.target.closest('a')) return;
-      setCard(card, !card.classList.contains('is-open'));
-    });
-  });
 
   // Macht alle passenden Elemente so hoch wie das höchste (über min-height).
   // Vorher zurücksetzen, sonst misst man die alte, angeglichene Höhe.
@@ -80,7 +59,7 @@
   }
 
   // Neu messen, sobald die Schriften geladen sind (Text wird dadurch oft höher)
-  // und wenn sich die Breite ändert. Das Aufklappen ändert nur die Höhe, dann wird nicht gemessen.
+  // und wenn sich die Breite ändert (reine Höhenänderungen lösen keine neue Messung aus).
   // Der ResizeObserver misst außerdem sofort einmal beim Start.
   document.fonts.ready.then(update);
   var lastWidth = 0;
@@ -328,17 +307,43 @@
   });
 })();
 
-// Karussell Zertifikate und Partner: zweite Kopie der Liste anhängen, damit das Band nahtlos endlos läuft.
-// Die Kopie ist für Screenreader unsichtbar (aria-hidden). Bei reduzierter Bewegung keine Kopie: das Band steht still.
+// Karussells (Zertifikate, Partner): so viele Kopien der Liste anhängen, dass das Band auch bei wenigen Kacheln nahtlos endlos läuft
+// (Band mindestens Fensterbreite plus eine Runde). Eine Runde (--mq-shift) wird gemessen: Abstand vom ersten Original zur ersten Kopie.
+// Die Dauer wächst mit der Zahl der Kacheln (--mq-n × --mq-step), damit beide Bänder gleich schnell laufen. Erst dann startet die Animation (.is-ready).
+// Kopien sind für Screenreader unsichtbar (aria-hidden) und nicht per Tab erreichbar. Bei reduzierter Bewegung keine Kopien: das Band steht still.
 (function () {
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-  document.querySelectorAll('.marquee__track').forEach(function (track) {
-    Array.prototype.slice.call(track.children).forEach(function (item) {
-      var copy = item.cloneNode(true);
-      copy.setAttribute('aria-hidden', 'true');
-      copy.querySelectorAll('img').forEach(function (img) { img.alt = ''; });
-      track.appendChild(copy);
-    });
+  document.querySelectorAll('.marquee').forEach(function (box) {
+    var track = box.querySelector('.marquee__track');
+    if (!track || !track.children.length) return;
+    var items = Array.prototype.slice.call(track.children);
+    var lastWidth = 0;
+
+    function fill() {
+      var w = box.clientWidth;
+      if (!w || w === lastWidth) return;
+      lastWidth = w;
+      track.querySelectorAll('[data-mq-copy]').forEach(function (c) { c.remove(); });
+      var copies = 0, round = 0;
+      do {
+        items.forEach(function (item) {
+          var copy = item.cloneNode(true);
+          copy.setAttribute('aria-hidden', 'true');
+          copy.setAttribute('data-mq-copy', '');
+          copy.querySelectorAll('img').forEach(function (img) { img.alt = ''; });
+          copy.querySelectorAll('a, button').forEach(function (el) { el.tabIndex = -1; });
+          track.appendChild(copy);
+        });
+        copies++;
+        if (!round) round = track.children[items.length].offsetLeft - items[0].offsetLeft;
+      } while (round * copies < w && copies < 20);
+      track.style.setProperty('--mq-shift', round + 'px');
+      track.style.setProperty('--mq-n', items.length);
+      box.classList.add('is-ready');
+    }
+
+    fill();
+    if ('ResizeObserver' in window) new ResizeObserver(fill).observe(box);
   });
 })();
 
@@ -429,12 +434,14 @@
   relayout();
 })();
 
-// Galerie .steps: Klick auf ein Bild öffnet die Lightbox (natives <dialog>).
-// Pfeile und Tastatur ←/→ blättern, Escape schließt (nativ), danach geht der Fokus zurück an das angeklickte Bild.
-// Läuft nur, wenn es eine Galerie gibt. Das <dialog> wird hier erzeugt, damit es nicht in jeder Seite stehen muss.
+// Lightbox (natives <dialog>) für die Galerie .steps und die Zertifikate im Karussell (.mq-item__open).
+// Klick oder Enter öffnet das Bild groß. Pfeile und Tastatur ←/→ blättern innerhalb derselben Gruppe, Escape schließt (nativ),
+// danach geht der Fokus zurück an das angeklickte Bild bzw. die Kachel. Kopien im Karussell (aria-hidden) zählen nicht mit,
+// ein Klick darauf öffnet das passende Original. Läuft nur, wenn es etwas zu öffnen gibt; das <dialog> wird hier erzeugt.
 (function () {
-  var openers = Array.prototype.slice.call(document.querySelectorAll('.steps__open'));
-  if (!openers.length) return;
+  var SEL = '.steps__open, .mq-item__open';
+  if (!document.querySelector(SEL)) return;
+  var openers = [];
   var ARROW = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">';
   var box = document.createElement('dialog');
   box.className = 'lightbox';
@@ -456,10 +463,10 @@
     var b = openers[index];
     img.classList.remove('is-new');
     img.src = (webp && b.getAttribute('data-full-webp')) || b.getAttribute('data-full');
-    img.alt = (b.querySelector('img') || {}).alt || '';
+    img.alt = (b.querySelector('img:not([alt=""])') || {}).alt || '';   // Karussell: das scharfe Bild, nicht den unscharfen Hintergrund
     void img.offsetWidth;   // Animation bei jedem Wechsel neu starten
     img.classList.add('is-new');
-    count.textContent = 'Bild ' + (index + 1) + ' von ' + openers.length;
+    count.textContent = (b.classList.contains('mq-item__open') ? 'Zertifikat ' : 'Bild ') + (index + 1) + ' von ' + openers.length;
     // Nachbarbilder vorladen, damit das Blättern ohne Wartezeit klappt
     [index + 1, index - 1].forEach(function (n) {
       var nb = openers[(n + openers.length) % openers.length];
@@ -467,13 +474,22 @@
     });
   }
 
-  openers.forEach(function (b, i) {
-    b.addEventListener('click', function () {
-      opener = b;
-      show(i);
-      box.showModal();
-      box.querySelector('.lightbox__close').focus();
-    });
+  // Alle Bilder derselben Art auf der Seite bilden eine Gruppe (ohne Karussell-Kopien)
+  function group(b) {
+    var sel = b.classList.contains('mq-item__open') ? '.mq-item__open' : '.steps__open';
+    return Array.prototype.slice.call(document.querySelectorAll(sel)).filter(function (el) { return !el.closest('[aria-hidden="true"]'); });
+  }
+
+  document.addEventListener('click', function (e) {
+    var b = e.target.closest(SEL);
+    if (!b || box.contains(b)) return;
+    openers = group(b);
+    var orig = openers.indexOf(b) >= 0 ? b : openers.filter(function (o) { return o.getAttribute('data-full') === b.getAttribute('data-full'); })[0];
+    if (!orig) return;
+    opener = orig;
+    show(openers.indexOf(orig));
+    box.showModal();
+    box.querySelector('.lightbox__close').focus();
   });
   box.querySelector('.lightbox__prev').addEventListener('click', function () { show(index - 1); });
   box.querySelector('.lightbox__next').addEventListener('click', function () { show(index + 1); });
@@ -487,7 +503,7 @@
     if (e.target === box || e.target.classList.contains('lightbox__stage')) box.close();
   });
   box.addEventListener('close', function () {
-    if (opener) opener.focus();   // Fokus zurück an das angeklickte Bild
+    if (opener) opener.focus({ preventScroll: true });   // Fokus zurück an das angeklickte Bild (ohne das Karussell zu verschieben)
   });
 })();
 
