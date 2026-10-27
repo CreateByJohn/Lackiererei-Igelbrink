@@ -131,7 +131,7 @@
       parts.push({
         x: n.x + d * 4, y: n.y, vx: d * (Math.cos(a) * sp + 0.06), vy: Math.sin(a) * sp * 1.7 + 0.03,
         life: 0, max: 400 + Math.random() * 500, r: 0.7 + Math.random() * 2.3,
-        c: Math.random() < 0.18 ? '232,98,46' : '235,240,250'
+        c: Math.random() < 0.18 ? '254,80,0' : '235,240,250'
       });
     }
     // Feine, fast stehende Spritzer kurz vor der Kante (Overspray)

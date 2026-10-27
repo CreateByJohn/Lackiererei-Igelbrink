@@ -229,7 +229,7 @@
   .steps__open::before,.steps__open::after{transform:none}
   .pnav__card:hover,.pnav__card:focus-visible{transform:none}
   /* Timeline: Stab voll, alle Knoten orange, Bilder sofort sichtbar, kein Tropfen und kein Spritzer */
-  .steps--rail>li .rail__node{border-color:var(--accent);background:var(--accent);color:var(--on-accent);box-shadow:0 0 0 8px var(--rail-ring)}
+  .steps--rail>li .rail__node{border-color:var(--accent-strong);background:var(--accent-strong);color:var(--on-accent);box-shadow:0 0 0 8px var(--rail-ring)}
   .steps--rail>li .rail__node::after{animation:none}
   .steps--rail .steps__item{transform:none!important;opacity:1!important;transition:none}
   .rail__fill{height:var(--rail-len,0px)}

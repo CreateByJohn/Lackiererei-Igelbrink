@@ -6,7 +6,7 @@
 <meta name="robots" content="noindex,nofollow">
 <title>Bilder-Übersicht Igelbrink</title>
 <style>
-:root{--bg:#f4f6f9;--s:#fff;--fg:#14203a;--soft:#2b3752;--mut:#5a667e;--line:#d9dfe9;--acc:#c2410c;--accs:#fdeee6;--navy:#1b2a4a;--ok:#1f7a45;--warn:#a15c00;--warns:#fff4de;--bad:#b3261e;--bads:#fde8e6}
+:root{--bg:#f4f6f9;--s:#fff;--fg:#161e31;--soft:#2b3752;--mut:#5a667e;--line:#d9dfe9;--acc:#bd3b00;--accs:#fdeee6;--navy:#1f2a44;--ok:#1f7a45;--warn:#a15c00;--warns:#fff4de;--bad:#b3261e;--bads:#fde8e6}
 *{box-sizing:border-box}
 body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.55 system-ui,-apple-system,"Segoe UI",Arial,sans-serif;padding:0 16px 64px}
 .w{max-width:1100px;margin:0 auto}
@@ -23,7 +23,7 @@ h1{margin:0 0 8px;font-size:clamp(1.8rem,4vw,2.5rem);line-height:1.1}
 button,.nav a{font:600 .85rem system-ui;padding:6px 12px;border-radius:99px;background:var(--s);border:1px solid var(--line);color:var(--fg);cursor:pointer;text-decoration:none}
 button:hover,.nav a:hover{background:var(--accs);color:var(--acc);border-color:var(--acc)}
 .nav{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 24px}
-.card{display:grid;grid-template-columns:280px 1fr;gap:24px;background:var(--s);border-radius:20px;padding:20px;margin:0 0 18px;box-shadow:0 8px 24px -14px rgba(20,32,58,.25);scroll-margin-top:16px}
+.card{display:grid;grid-template-columns:280px 1fr;gap:24px;background:var(--s);border-radius:20px;padding:20px;margin:0 0 18px;box-shadow:0 8px 24px -14px rgba(22,30,49,.25);scroll-margin-top:16px}
 .thumb{position:relative;align-self:start;border-radius:14px;overflow:hidden;background:repeating-conic-gradient(#e9edf3 0 25%,#f7f9fc 0 50%) 0 0/16px 16px;aspect-ratio:4/3;display:grid;place-items:center}
 .thumb img{max-width:100%;max-height:100%;object-fit:contain}
 .num{position:absolute;left:8px;top:8px;background:var(--navy);color:#fff;font-weight:700;font-size:.85rem;padding:3px 10px;border-radius:99px}
@@ -115,7 +115,6 @@ const PAGES = [
 // Beschreibung pro Platz (sortiert nach Nummer). Alt-Texte, Dateien, Maße und Fundorte kommen live aus den Seiten.
 // unused:true = bewusst zurzeit nicht eingebunden (wird nicht als Fehler gemeldet).
 const SLOTS = {
- '01': {bereich:'Navigation und Footer', stelle:'Logo in der Navigationspille (oben links) und im weißen Feld des Footers, auf jeder Seite.', soll:'Querformat 3:1 (aktuell 1062 × 354), transparenter Hintergrund, PNG.'},
  '02': {bereich:'Startseite, Hero und Seitenköpfe', stelle:'Hintergrundbild der ersten Bildschirmseite. Außerdem Seitenkopf von service.html und online-termin.html (Ersatzbild, live ohne Titelbild). Wird beim Laden von der Spray-Animation aufgedeckt. Die Datei „02-hero-spraygun.svg“ ist die Spritzpistole der Animation (dekorativ).', soll:'Querformat 3:2, mindestens 2400 px breit, Motiv rechts (links liegt der Text auf einem dunklen Verlauf). Benötigt: WebP in 800, 1400 und 2400 px plus JPG in 1600 px.'},
  '03': {bereich:'Expertise-Band, Zertifikate', stelle:'Hintergrund hinter „Unsere Expertise“ auf service.html und hinter den Zertifikaten auf ueber-uns.html (verschiebt sich beim Scrollen leicht, Parallax). Alt-Text ist bewusst leer, weil es ein Hintergrundbild ist.', soll:'4:3, mindestens 1600 px breit. Benötigt: WebP 800 und 1600, JPG 1600.'},
  '04': {bereich:'Startseite, Schwerpunkte, Karte 1', stelle:'Bild der Karte „PKW- Unfallinstandsetzung inkl. Versicherungsabwicklung“. Außerdem Inhaltsbild auf unfallinstandsetzung.html (live IMG_3944).', soll:'Querformat 4:3, mindestens 1200 px breit. Wird im Hochformat 3:4 zugeschnitten, Motiv mittig halten. Benötigt: WebP + JPG in 600 und 1200.'},
@@ -248,7 +247,9 @@ const SLOTS = {
  '132': {bereich:'Über uns, Zertifikate', stelle:'Live-Original: siegel/zertifikat-hbc-instandsetzung-wohnmobile.jpg. Fundort: ueber-uns.html.', soll:'Seitenverhältnis wie jetzt (1814 × 2560). Benötigt: WebP + JPG in 600 / 1200 px.'},
  '133': {bereich:'Über uns, Zertifikate', stelle:'Live-Original: siegel/urkunde-glasurit-classic-business.jpg. Fundort: ueber-uns.html.', soll:'Seitenverhältnis wie jetzt (1823 × 2560). Benötigt: WebP + JPG in 600 / 1200 px.'},
  '134': {bereich:'Karriere', stelle:'Live-Original: sonstiges/ki-bild-lackierpistole-igelbrink.png. Fundort: karriere.html.', soll:'Seitenverhältnis wie jetzt (1147 × 1371). Benötigt: WebP + JPG in 600 / 1147 px.'},
- '135': {bereich:'Karriere', stelle:'Live-Original: team-und-werkstatt/portrait-frau-igelbrink-hell.png. Fundort: karriere.html.', soll:'Seitenverhältnis wie jetzt (1080 × 1080). Benötigt: WebP + PNG in 400 / 800 px.'}
+ '135': {bereich:'Karriere', stelle:'Live-Original: team-und-werkstatt/portrait-frau-igelbrink-hell.png. Fundort: karriere.html.', soll:'Seitenverhältnis wie jetzt (1080 × 1080). Benötigt: WebP + PNG in 400 / 800 px.'},
+ '136': {bereich:'Navigation (Logo farbig)', stelle:'Logo in der Navigationspille oben links, auf jeder Seite. Ersetzt das frühere Logo 01. Quelle: Logodateien „IL Logo rgb RZ.pdf“ (Vektor), Farben Orange #FE5000 und Dunkelblau #1F2A44.', soll:'SVG (Vektor, zugeschnitten auf die Logofläche 231,9 × 60,1) plus PNG 1200 × 312 mit transparentem Hintergrund als Rückfall.'},
+ '137': {bereich:'Footer (Logo weiß)', stelle:'Logo oben links im Footer, auf jeder Seite, ohne Kasten direkt auf dem dunklen Grund. Quelle: farbiges Vektor-Logo mit allen Flächen in Weiß (entspricht „IL Logo weis RZ.eps“). In der Vorschau hier kaum sichtbar, weil weiß auf hellem Grund.', soll:'SVG plus PNG 1200 × 312 mit transparentem Hintergrund als Rückfall.'}
 };
 const T = Date.now();
 const bust = u => u + (u.includes('?') ? '&' : '?') + 't=' + T;

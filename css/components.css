@@ -8,7 +8,7 @@
   background:var(--nav-glass-shine),var(--nav-glass);-webkit-backdrop-filter:var(--nav-blur);backdrop-filter:var(--nav-blur);
   border:1px solid var(--nav-glass-line);border-radius:var(--radius-pill);box-shadow:inset 0 1px 0 rgba(255,255,255,.6),var(--sh-2)}
 .brand{display:block;flex:none}
-.brand img{height:44px;width:auto}
+.brand img{height:38px;width:auto}   /* Logo ist eng zugeschnitten (ca. 3,9 : 1), deshalb etwas niedriger als das alte PNG mit Rand */
 
 .menu{display:flex;gap:2px;list-style:none;margin:0;padding:0;font-weight:500;font-size:.88rem;text-transform:uppercase;letter-spacing:.02em}
 .menu>li{position:relative}
@@ -131,7 +131,7 @@
 /* Glas-Kachel auf dem Bild: kompakt und recht durchsichtig, damit mehr vom Foto sichtbar bleibt.
    Der Textschatten hält die weiße Schrift auch auf hellen Bildstellen lesbar. */
 .glass-tile{position:absolute;left:14px;right:14px;bottom:14px;z-index:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;gap:8px;
-  padding:32px 20px 18px;border-radius:var(--radius-tile);text-align:center;color:var(--on-image);text-shadow:0 1px 10px rgba(14,22,42,.55);
+  padding:32px 20px 18px;border-radius:var(--radius-tile);text-align:center;color:var(--on-image);text-shadow:0 1px 10px rgba(17,23,38,.55);
   background:linear-gradient(var(--glass-row),var(--glass-row)),var(--glass-tile-tint);-webkit-backdrop-filter:blur(8px) saturate(1.3);backdrop-filter:blur(8px) saturate(1.3);box-shadow:var(--sh-glass)}
 .glass-tile__ico{position:absolute;top:-24px;left:50%;translate:-50% 0;display:grid;place-items:center;width:48px;height:48px;
   border-radius:var(--radius-row);background:var(--surface);color:var(--accent);box-shadow:var(--sh-2)}
@@ -201,7 +201,7 @@
 .bt--logo .glass-in img{filter:var(--logo-dim)}
 /* DEKRA: rundes Siegel (transparent freigestellt), größer als die Logos und mit eigenem Schatten */
 .bt--dek .glass-in{padding:6px}
-.bt--dek .glass-in img{height:calc(var(--logo-h) + 46px);max-height:100%;width:auto;aspect-ratio:1;filter:drop-shadow(0 6px 14px rgba(20,32,58,.25))}
+.bt--dek .glass-in img{height:calc(var(--logo-h) + 46px);max-height:100%;width:auto;aspect-ratio:1;filter:drop-shadow(0 6px 14px rgba(22,30,49,.25))}
 
 /* ---------- Kundenstimmen (Google Bewertung) ----------
    Dunkle Übersichtskachel + Bewertungskarten. Solange keine echten Daten angebunden sind: Skelett-Platzhalter. */
@@ -290,14 +290,14 @@ html:has(.contact[open]){overflow:hidden}   /* Seite dahinter scrollt nicht mit 
 .site-footer a{text-decoration:none;color:inherit}
 .site-footer ul{list-style:none;margin:0;padding:0}
 
-/* Kopfzeile: Logo auf Glas, kurzer Satz, Karriere-Hinweis, Nach-oben-Button */
+/* Kopfzeile: weißes Logo, kurzer Satz, Karriere-Hinweis, Nach-oben-Button */
 .ft-top{display:flex;flex-wrap:wrap;align-items:center;gap:14px 22px}
-.ft-logo{display:inline-block;padding:10px 16px;border-radius:var(--radius-row);background:var(--ft-logo-bg);box-shadow:var(--sh-2)}
-.ft-logo img{height:40px;width:auto}
+.ft-logo{display:inline-block;border-radius:var(--radius-xs)}   /* weißes Logo direkt auf dem dunklen Grund, ohne Kasten */
+.ft-logo img{height:44px;width:auto}
 .ft-claim{flex:1;min-width:200px;line-height:1.2;font-family:var(--f-display);font-size:1.35rem;font-weight:600;color:var(--on-navy)}
 .ft-hiring{display:inline-flex;align-items:center;gap:10px;padding:10px 16px;border-radius:var(--radius-pill);font-weight:600;font-size:.92rem;color:var(--on-navy);
   background:var(--glass-row);box-shadow:inset 0 0 0 1px var(--glass-line-row)}
-.ft-hiring__dot{width:8px;height:8px;border-radius:50%;background:var(--accent-2);box-shadow:0 0 0 4px rgba(232,98,46,.22)}
+.ft-hiring__dot{width:8px;height:8px;border-radius:50%;background:var(--accent-2);box-shadow:0 0 0 4px var(--accent-ring)}
 .ft-up{margin-left:auto;display:grid;place-items:center;width:46px;height:46px;border-radius:50%;color:var(--on-navy);background:var(--glass-chip);box-shadow:inset 0 0 0 1px var(--glass-line)}
 .ft-up svg{width:20px;height:20px}
 
@@ -385,7 +385,7 @@ html:has(.contact[open]){overflow:hidden}   /* Seite dahinter scrollt nicht mit 
 }
 
 @media (max-width:560px){
-  .brand img{height:36px}
+  .brand img{height:32px}
   .nav-actions .btn{display:none}
   .menu__cta{display:block;padding-top:8px}
   .menu__cta .btn{width:100%;text-transform:none;letter-spacing:.01em}
@@ -493,7 +493,7 @@ html:has(.contact[open]){overflow:hidden}   /* Seite dahinter scrollt nicht mit 
 .career__contact b{color:var(--on-navy)}
 .career__contact a{color:var(--on-navy)}
 .career__cols{display:grid;gap:14px}
-.career .job__col{background:linear-gradient(var(--glass-row),var(--glass-row)),rgba(14,22,42,.35);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
+.career .job__col{background:linear-gradient(var(--glass-row),var(--glass-row)),rgba(17,23,38,.35);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
 
 /* ---------- Social-Media-Banner: zwei große Kacheln mit Bild/Video im Hintergrund ---------- */
 .pb-0{padding-bottom:0}
@@ -514,7 +514,7 @@ html:has(.contact[open]){overflow:hidden}   /* Seite dahinter scrollt nicht mit 
 .sm-tile__ico{display:grid;place-items:center;width:52px;height:52px;border-radius:var(--radius-row);background:var(--surface);color:var(--accent);box-shadow:var(--sh-2)}
 .sm-tile__ico svg{width:26px;height:26px}
 .sm-tile__foot{display:grid;justify-items:start;gap:14px}
-.sm-tile__foot>span:first-child{display:grid;gap:2px;text-shadow:0 1px 10px rgba(14,22,42,.55);min-width:0}
+.sm-tile__foot>span:first-child{display:grid;gap:2px;text-shadow:0 1px 10px rgba(17,23,38,.55);min-width:0}
 .sm-tile__foot small{font-size:.85rem;letter-spacing:.14em;text-transform:uppercase;color:var(--accent-2);font-weight:600}
 .sm-tile__foot b{font-family:var(--f-display);font-size:clamp(1.4rem,2.4vw,1.9rem);line-height:1.1;overflow-wrap:anywhere}
 
@@ -664,7 +664,7 @@ html:has(.contact[open]){overflow:hidden}   /* Seite dahinter scrollt nicht mit 
 .rail__node{position:absolute;z-index:2;left:var(--rail-x);top:50%;translate:-50% -50%;display:grid;place-items:center;width:var(--rail-node);height:var(--rail-node);
   border:3px solid var(--line);border-radius:50%;background:var(--surface);color:var(--muted);font-family:var(--f-display);font-weight:700;font-size:1.15rem;line-height:1}
 .rail__node::after{content:"";position:absolute;inset:-3px;border:2px solid var(--accent);border-radius:50%;opacity:0;pointer-events:none}   /* Spritzer-Ring (effects.css) */
-.steps--rail>li.is-on .rail__node{border-color:var(--accent);background:var(--accent);color:var(--on-accent);box-shadow:0 0 0 8px var(--rail-ring)}
+.steps--rail>li.is-on .rail__node{border-color:var(--accent-strong);background:var(--accent-strong);color:var(--on-accent);box-shadow:0 0 0 8px var(--rail-ring)}
 .steps--rail.is-ready>li:not(.is-on) .steps__item{transform:scale(.94);opacity:.35}
 /* Deko-Zeile: grauer Stab, orange Füllung, Lacktropfen am Ende der Füllung, End-Pille */
 .rail__deco{position:absolute;inset:0;pointer-events:none}
