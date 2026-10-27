@@ -188,11 +188,7 @@
   });
 
   if (!form) return;
-  var tel = form.querySelector('#kf-tel');
-  var mail = form.querySelector('#kf-mail');
-  var error = form.querySelector('#kf-kanal-error');
   var date = form.querySelector('#kf-termin');
-  var checked = false;
 
   // Wunschtermin nicht in der Vergangenheit
   if (date) {
@@ -201,29 +197,57 @@
     date.min = d.toISOString().slice(0, 10);
   }
 
-  // Telefon oder E-Mail: eines von beiden muss ausgefüllt sein. Der Fehler steht direkt unter den beiden Feldern;
-  // setCustomValidity sorgt dafür, dass die eingebaute Prüfung das Absenden ebenfalls stoppt.
-  function checkChannel() {
-    var missing = !tel.value.trim() && !mail.value.trim();
-    var show = missing && checked;
-    tel.setCustomValidity(missing ? error.textContent : '');
-    error.hidden = !show;
-    tel.setAttribute('aria-invalid', show ? 'true' : 'false');
-    mail.setAttribute('aria-invalid', show ? 'true' : 'false');
-    return !missing;
-  }
-
-  tel.addEventListener('input', checkChannel);
-  mail.addEventListener('input', checkChannel);
-  form.querySelector('[type="submit"]').addEventListener('click', function () {
-    checked = true;
-    checkChannel();
-  });
-  checkChannel();
-
   form.addEventListener('submit', function (e) {
     // TODO: Formular-Versand anbinden (serverseitig, mit Spam-Schutz). Bis dahin wird nichts gesendet.
     e.preventDefault();
+  });
+})();
+
+// Formulare mit data-kanal (Kontaktformular im Dialog, Bewerbung auf karriere.html):
+// Telefon oder E-Mail, eines von beiden muss ausgefüllt sein. Der Fehler ([data-kanal-error]) steht direkt unter den beiden Feldern
+// und erscheint erst nach dem ersten Absenden; setCustomValidity sorgt dafür, dass die eingebaute Prüfung das Absenden ebenfalls stoppt.
+// Datei-Felder mit data-max-mb: jede Datei höchstens so groß, nur die erlaubten Endungen aus accept (Fehler im .field__error danach).
+(function () {
+  document.querySelectorAll('form[data-kanal]').forEach(function (form) {
+    var tel = form.querySelector('input[type="tel"]');
+    var mail = form.querySelector('input[type="email"]');
+    var error = form.querySelector('[data-kanal-error]');
+    if (!tel || !mail || !error) return;
+    var checked = false;
+
+    function checkChannel() {
+      var missing = !tel.value.trim() && !mail.value.trim();
+      var show = missing && checked;
+      tel.setCustomValidity(missing ? error.textContent : '');
+      error.hidden = !show;
+      tel.setAttribute('aria-invalid', show ? 'true' : 'false');
+      mail.setAttribute('aria-invalid', show ? 'true' : 'false');
+    }
+
+    tel.addEventListener('input', checkChannel);
+    mail.addEventListener('input', checkChannel);
+    form.querySelector('[type="submit"]').addEventListener('click', function () {
+      checked = true;
+      checkChannel();
+    });
+    checkChannel();
+  });
+
+  document.querySelectorAll('input[type="file"][data-max-mb]').forEach(function (input) {
+    var max = parseFloat(input.getAttribute('data-max-mb')) * 1024 * 1024;
+    var allowed = (input.getAttribute('accept') || '').split(',').filter(function (a) { return a.charAt(0) === '.'; });
+    var error = document.getElementById(input.id + '-error');
+    input.addEventListener('change', function () {
+      var msg = '';
+      Array.prototype.forEach.call(input.files, function (file) {
+        var ext = '.' + file.name.split('.').pop().toLowerCase();
+        if (allowed.length && allowed.indexOf(ext) < 0) msg = '„' + file.name + '“ hat ein anderes Format. Bitte nur PDF, JPG oder PNG.';
+        else if (file.size > max) msg = '„' + file.name + '“ ist größer als ' + input.getAttribute('data-max-mb') + ' MB. Bitte eine kleinere Datei wählen.';
+      });
+      input.setCustomValidity(msg);
+      input.setAttribute('aria-invalid', msg ? 'true' : 'false');
+      if (error) { error.textContent = msg; error.hidden = !msg; }
+    });
   });
 })();
 

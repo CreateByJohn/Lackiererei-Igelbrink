@@ -10,10 +10,10 @@
 <link rel="icon" type="image/png" href="assets/img/13-favicon.png">
 <link rel="preload" href="assets/fonts/barlow-condensed-latin-700-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/barlow-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="css/tokens.css?v=202610272352">
-<link rel="stylesheet" href="css/base.css?v=202610272352">
-<link rel="stylesheet" href="css/components.css?v=202610272352">
-<link rel="stylesheet" href="css/effects.css?v=202610272352">
+<link rel="stylesheet" href="css/tokens.css?v=202610272354">
+<link rel="stylesheet" href="css/base.css?v=202610272354">
+<link rel="stylesheet" href="css/components.css?v=202610272354">
+<link rel="stylesheet" href="css/effects.css?v=202610272354">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -49,6 +49,10 @@
   <symbol id="i-pin" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-6.5-5.6-6.5-11a6.5 6.5 0 0 1 13 0C18.5 15.4 12 21 12 21z"/><circle cx="12" cy="10" r="2.4"/></g></symbol>
   <symbol id="i-wa" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20l1.3-4A8.5 8.5 0 1 1 8.4 19z"/><path d="M9 8.6c0 3.4 2.9 6.4 6.3 6.4l1-1.4-2-1.1-1 .9a5 5 0 0 1-2.2-2.2l.9-1-1.1-2z"/></g></symbol>
   <symbol id="i-kalender" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="5" width="17" height="15.5" rx="2"/><path d="M3.5 10h17M8 3v4M16 3v4"/><path d="m9.5 15 2 2 3.5-3.5"/></g></symbol>
+  <symbol id="i-team" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.2"/><path d="M3 19.5a6 6 0 0 1 12 0"/><circle cx="17" cy="9" r="2.4"/><path d="M15.5 14.2A4.8 4.8 0 0 1 21 18.5"/></g></symbol>
+  <symbol id="i-doc" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/><path d="M9 13h6M9 17h4"/></g></symbol>
+  <symbol id="i-schluessel" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="15" r="4.5"/><path d="m11.2 11.8 8.3-8.3"/><path d="m16.5 6.5 2.5 2.5"/><path d="m14 9 2 2"/></g></symbol>
+  <symbol id="i-klassik" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="M12 3l2.6 5.3 5.9.9-4.3 4.1 1 5.8L12 16.4 6.8 19.1l1-5.8L3.5 9.2l5.9-.9L12 3z"/></symbol>
 </svg>
 
 <div class="page">
@@ -92,10 +96,12 @@
       <h1 class="career__title" id="karriere-title">Wir suchen Verstärkung! <span>Fahrzeuglackierer/-in (m/w/d)</span></h1>
       <p class="career__lead">Du hast deine Ausbildung im Bereich Fahrzeuglackierung abgeschlossen, arbeitest sorgfältig und hast Freude am Handwerk? Dann bewirb dich bei uns in Dülmen.</p>
       <div class="career__actions">
-        <a class="btn" href="mailto:info@lackiertechnik-igelbrink.de?subject=Bewerbung%20als%20Fahrzeuglackierer%2Fin">Jetzt bewerben</a>
+        <a class="btn" href="#bewerbung">Jetzt bewerben</a>
         <a class="btn btn--glass" href="tel:+4917645875781">Anrufen</a>
       </div>
       <p class="career__contact">Deine Ansprechpartnerin: <b>Frau E. Gerlach-Igelbrink</b> · <a href="tel:+4917645875781">+49 176 45875781</a></p>
+      <!-- Hintergrundbild ist vorerst ein Stockbild -->
+      <span class="draft-note draft-note--small">Foto folgt: Marko beim Lackieren oder neben einem fertigen Teil</span>
     </div>
     <div class="career__cols">
       <div class="job__col">
@@ -121,38 +127,86 @@
 
 <main class="wrap" id="inhalt">
 
+  <!-- KARRIERE BEI LACKIERTECHNIK IGELBRINK: die Texte der Live-Seite als wenige kurze Karten.
+       Anforderungen und Angebot stehen schon im Banner, die Werte auf ueber-uns.html; Langtexte unten als Alttext. -->
   <section class="zone" aria-labelledby="karriere-live-titel">
     <div class="sec-head">
-      <div class="sec-head__divider" aria-hidden="true"><span class="sec-head__ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.2"/><path d="M3 19.5a6 6 0 0 1 12 0"/><circle cx="17" cy="9" r="2.4"/><path d="M15.5 14.2A4.8 4.8 0 0 1 21 18.5"/></svg></span></div>
+      <div class="sec-head__divider" aria-hidden="true"><span class="sec-head__ico"><svg viewBox="0 0 24 24"><use href="#i-team"/></svg></span></div>
       <p class="eyebrow">Karriere</p>
       <h2 id="karriere-live-titel">Karriere bei Lackiertechnik Igelbrink</h2>
     </div>
-    <div class="split">
-      <div class="prose prose--plain prose--career">
-        <p><strong>Fahrzeuglackierer /-in (m/w/d) gesucht</strong></p>
-        <p><strong>Du bist ausgebildete/r Fahrzeuglackierer/-in, liebst dein Handwerk, arbeitest professionell und hast Lust auf ein Team, in dem Zusammenhalt wirklich zählt? Dann sollten wir uns kennenlernen!</strong></p>
-        <p>Wir sind <strong>Lackiertechnik Igelbrink</strong>, ein familiengeführter Karosserie- und Lackierfachbetrieb in <strong>Dülmen.</strong></p>
-        <p>In unserer Werkstatt leben wir die Werte, für die gutes Handwerk steht: <strong>Qualität, Kundenzufriedenheit, Ehrlichkeit, Loyalität, Macher-Mentalität und Teamgeist.</strong></p>
-        <p><strong>Das wünschen wir uns von dir:</strong><br>Eine abgeschlossene Ausbildung im Bereich Fahrzeuglackierung, eine sorgfältige und professionelle Arbeitsweise sowie Motivation, Zuverlässigkeit und Freude an deinem Handwerk.</p>
-        <p><strong>Das erwartet dich bei uns:</strong><br>Ein familiäres Arbeitsumfeld, ein Team, das zusammenhält, abwechslungsreiche Aufgaben, eigenverantwortliches Arbeiten, eine faire Bezahlung und ein sicherer Arbeitsplatz mit langfristiger Perspektive.</p>
-      </div>
-      <figure class="media"><picture><source type="image/webp" srcset="assets/img/134-karriere-lackierpistole-600.webp 600w, assets/img/134-karriere-lackierpistole-1147.webp 1147w" sizes="(max-width: 980px) calc(100vw - 32px), 460px"><img src="assets/img/134-karriere-lackierpistole-600.jpg" srcset="assets/img/134-karriere-lackierpistole-600.jpg 600w, assets/img/134-karriere-lackierpistole-1147.jpg 1147w" sizes="(max-width: 980px) calc(100vw - 32px), 460px" width="600" height="717" loading="lazy" decoding="async" alt="Lackierpistole mit Igelbrink-Schriftzug"></picture></figure>
+    <ul class="facts facts--3">
+      <li class="fact"><span class="fact__ico" aria-hidden="true"><svg><use href="#i-team"/></svg></span><strong>Familienbetrieb in Dülmen</strong><span>Ein familiengeführter Karosserie- und Lackierfachbetrieb mit kurzen Wegen, persönlicher Kommunikation und einem offenen Ohr für unsere Mitarbeiter.</span></li>
+      <li class="fact"><span class="fact__ico" aria-hidden="true"><svg><use href="#i-schluessel"/></svg></span><strong>Wir suchen Lösungen</strong><span>Auch dort, wo andere vielleicht schon aufgeben. Durch unser gutes Netzwerk realisieren wir auch Projekte, die über das klassische Karosserie- und Lackierhandwerk hinausgehen.</span></li>
+      <li class="fact"><span class="fact__ico" aria-hidden="true"><svg><use href="#i-klassik"/></svg></span><strong>Eigene Ideen erwünscht</strong><span>Engagement zählt. Wir wollen nicht einfach nur Aufträge abarbeiten, sondern gemeinsam gute Arbeit abliefern, auf die wir stolz sein können.</span></li>
+    </ul>
+    <!-- Alttext: Fahrzeuglackierer /-in (m/w/d) gesucht | Du bist ausgebildete/r Fahrzeuglackierer/-in, liebst dein Handwerk, arbeitest professionell und hast Lust auf ein Team, in dem Zusammenhalt wirklich zählt? Dann sollten wir uns kennenlernen! | Wir sind Lackiertechnik Igelbrink , ein familiengeführter Karosserie- und Lackierfachbetrieb in Dülmen. | In unserer Werkstatt leben wir die Werte, für die gutes Handwerk steht: Qualität, Kundenzufriedenheit, Ehrlichkeit, Loyalität, Macher-Mentalität und Teamgeist. | Das wünschen wir uns von dir: Eine abgeschlossene Ausbildung im Bereich Fahrzeuglackierung, eine sorgfältige und professionelle Arbeitsweise sowie Motivation, Zuverlässigkeit und Freude an deinem Handwerk. | Das erwartet dich bei uns: Ein familiäres Arbeitsumfeld, ein Team, das zusammenhält, abwechslungsreiche Aufgaben, eigenverantwortliches Arbeiten, eine faire Bezahlung und ein sicherer Arbeitsplatz mit langfristiger Perspektive. | Warum Lackiertechnik Igelbrink? | Bei uns geht es um mehr als Karosserie und Lack. Wir suchen Lösungen – auch dort, wo andere vielleicht schon aufgeben. | Für unsere Kunden nehmen wir uns die Zeit und setzen unsere Erfahrung und Energie ein, um auch bei außergewöhnlichen oder anspruchsvollen Aufträgen eine passende Lösung zu finden. Durch unser gutes Netzwerk können wir dabei auch Projekte realisieren, die über das klassische Karosserie- und Lackierhandwerk hinausgehen. | Diesen Anspruch leben wir auch innerhalb unseres Teams. Moderne Technik, hochwertige Arbeitsmittel und regelmäßige Weiterbildung gehören für uns genauso dazu wie ein offenes Ohr für unsere Mitarbeiter. | Als Familienunternehmen setzen wir auf kurze Wege, persönliche Kommunikation und ein Arbeitsumfeld, in dem eigene Ideen und Engagement ausdrücklich erwünscht sind. | Wir wollen nicht einfach nur Aufträge abarbeiten – wir wollen gemeinsam gute Arbeit abliefern, auf die wir stolz sein können. | Interesse? Dann melde dich einfach bei uns – unkompliziert per Telefon oder E-Mail. | Wir freuen uns darauf, dich kennenzulernen! | Sende deine Bewerbung bitte an: | Lackiertechnik Igelbrink Telgenkamp 31 48249 Dülmen Tel: +49 176 45875781 Mail: info@lackiertechnik-igelbrink.de -->
+  </section>
+
+  <!-- BEWERBUNG: kurzes Formular direkt auf der Seite (Ziel von „Jetzt bewerben“).
+       Gleiche Prüfung wie das Kontaktformular im Dialog: Name und Telefon oder E-Mail (data-kanal), Datenschutz; Dateien höchstens 5 MB (js/main.js).
+       Versand wie beim Kontaktformular noch nicht angebunden (data-form-todo). -->
+  <section class="zone" id="bewerbung" aria-labelledby="bewerbung-title">
+    <div class="sec-head">
+      <div class="sec-head__divider" aria-hidden="true"><span class="sec-head__ico"><svg viewBox="0 0 24 24"><use href="#i-doc"/></svg></span></div>
+      <p class="eyebrow">Bewerbung</p>
+      <h2 id="bewerbung-title">Jetzt bewerben</h2>
+      <p class="sec-head__lead">Kein Anschreiben nötig. Lebenslauf gern, aber freiwillig.</p>
     </div>
-    <div class="split split--career">
-      <div class="prose prose--plain prose--career">
-        <p><strong>Warum Lackiertechnik Igelbrink?</strong></p>
-        <p>Bei uns geht es um mehr als Karosserie und Lack. <strong>Wir suchen Lösungen – auch dort, wo andere vielleicht schon aufgeben.</strong></p>
-        <p>Für unsere Kunden nehmen wir uns die Zeit und setzen unsere Erfahrung und Energie ein, um auch bei außergewöhnlichen oder anspruchsvollen Aufträgen eine passende Lösung zu finden. Durch unser gutes Netzwerk können wir dabei auch Projekte realisieren, die über das klassische Karosserie- und Lackierhandwerk hinausgehen.</p>
-        <p>Diesen Anspruch leben wir auch innerhalb unseres Teams. <strong>Moderne Technik, hochwertige Arbeitsmittel und regelmäßige Weiterbildung</strong> gehören für uns genauso dazu wie ein offenes Ohr für unsere Mitarbeiter.</p>
-        <p>Als Familienunternehmen setzen wir auf kurze Wege, persönliche Kommunikation und ein Arbeitsumfeld, in dem <strong>eigene Ideen und Engagement ausdrücklich erwünscht sind.</strong></p>
-        <p><strong>Wir wollen nicht einfach nur Aufträge abarbeiten – wir wollen gemeinsam gute Arbeit abliefern, auf die wir stolz sein können.</strong></p>
-        <p><strong>Interesse?</strong><br><strong>Dann melde dich einfach bei uns – unkompliziert per Telefon oder E-Mail.</strong></p>
-        <p><strong>Wir freuen uns darauf, dich kennenzulernen!</strong></p>
+    <div class="apply">
+      <div class="form-card">
+        <p class="contact__hint">Pflichtangaben: Name und Telefon oder E-Mail.</p>
+        <form class="form form--page" id="bewerbung-form" action="#" method="post" enctype="multipart/form-data" data-form-todo data-kanal>
+          <!-- TODO: Versand-Endpunkt hier in action="…" eintragen (serverseitig, mit Spam-Schutz und Datei-Upload). Bis dahin wird nichts gesendet. -->
+          <div class="field field--full">
+            <label for="bw-name">Name</label>
+            <input id="bw-name" name="name" type="text" autocomplete="name" required>
+          </div>
+          <div class="field">
+            <label for="bw-tel">Telefon</label>
+            <input id="bw-tel" name="telefon" type="tel" inputmode="tel" autocomplete="tel" aria-describedby="bw-kanal-hint bw-kanal-error">
+          </div>
+          <div class="field">
+            <label for="bw-mail">E-Mail</label>
+            <input id="bw-mail" name="email" type="email" autocomplete="email" aria-describedby="bw-kanal-hint bw-kanal-error">
+          </div>
+          <p class="field--full field__hint" id="bw-kanal-hint">Telefon oder E-Mail – eines von beiden reicht.</p>
+          <p class="field--full field__error" id="bw-kanal-error" data-kanal-error hidden>Bitte geben Sie eine Telefonnummer oder eine E-Mail-Adresse an.</p>
+          <div class="field">
+            <label for="bw-stelle">Stelle</label>
+            <span class="field__select">
+              <select id="bw-stelle" name="stelle" required>
+                <option selected>Fahrzeuglackierer/-in (m/w/d)</option>
+                <option>Initiativbewerbung</option>
+              </select>
+            </span>
+          </div>
+          <div class="field">
+            <label for="bw-dateien">Lebenslauf / Unterlagen (freiwillig)</label>
+            <input id="bw-dateien" name="unterlagen[]" type="file" accept=".pdf,.jpg,.jpeg,.png,application/pdf,image/jpeg,image/png" multiple data-max-mb="5" aria-describedby="bw-dateien-hint bw-dateien-error">
+          </div>
+          <p class="field--full field__hint" id="bw-dateien-hint">PDF, JPG oder PNG, höchstens 5 MB pro Datei.</p>
+          <p class="field--full field__error" id="bw-dateien-error" hidden></p>
+          <div class="field field--full">
+            <label for="bw-nachricht">Kurze Nachricht (freiwillig)</label>
+            <textarea id="bw-nachricht" name="nachricht" rows="4" autocomplete="off"></textarea>
+          </div>
+          <div class="field field--full field--check">
+            <input id="bw-datenschutz" name="datenschutz" type="checkbox" required>
+            <label for="bw-datenschutz">Ich bin einverstanden, dass meine Angaben zur Bearbeitung meiner Bewerbung gespeichert und verwendet werden. Mehr dazu in der <a href="datenschutz.html">Datenschutzerklärung</a>.</label>
+          </div>
+          <div class="field--full form__actions">
+            <button class="btn" type="submit">Bewerbung senden</button>
+          </div>
+        </form>
       </div>
-      <aside class="callout callout--apply">
-        <p><strong>Sende deine Bewerbung bitte an:</strong></p>
-        <p>Lackiertechnik Igelbrink<br>Telgenkamp 31<br>48249 Dülmen<br>Tel: <a href="tel:+4925947843823">+49 176 45875781</a><br>Mail: <a href="mailto:info@lackiertechnik-igelbrink.de">info@lackiertechnik-igelbrink.de</a></p>
-        <a class="btn" href="mailto:info@lackiertechnik-igelbrink.de">Jetzt bewerben!</a>
+      <aside class="apply__aside">
+        <figure class="media"><picture><source type="image/webp" srcset="assets/img/134-karriere-lackierpistole-600.webp 600w, assets/img/134-karriere-lackierpistole-1147.webp 1147w" sizes="(max-width: 980px) calc(100vw - 32px), 460px"><img src="assets/img/134-karriere-lackierpistole-600.jpg" srcset="assets/img/134-karriere-lackierpistole-600.jpg 600w, assets/img/134-karriere-lackierpistole-1147.jpg 1147w" sizes="(max-width: 980px) calc(100vw - 32px), 460px" width="600" height="717" loading="lazy" decoding="async" alt="Lackierpistole mit Igelbrink-Schriftzug"></picture></figure>
+        <div class="apply__alt">
+          <h3>Lieber per E-Mail oder Telefon?</h3>
+          <p>Schick uns deine Bewerbung an <a href="mailto:info@lackiertechnik-igelbrink.de">info@lackiertechnik-igelbrink.de</a> oder ruf uns an: <a href="tel:+4917645875781">+49 176 45875781</a>.</p>
+          <address>Lackiertechnik Igelbrink<br>Telgenkamp 31<br>48249 Dülmen</address>
+        </div>
       </aside>
     </div>
     <div class="contact-person">
@@ -265,7 +319,7 @@
     <p class="contact__lead">Schildern Sie uns kurz Ihr Anliegen. Wir melden uns bei Ihnen.</p>
     <p class="contact__hint">Pflichtangaben: Name, Anliegen und Telefon oder E-Mail.</p>
 
-    <form class="form" id="kontakt-form" action="#" method="post">
+    <form class="form" id="kontakt-form" action="#" method="post" data-kanal>
       <!-- TODO: Formular-Versand anbinden (serverseitig, mit Spam-Schutz) -->
       <div class="field field--full">
         <label for="kf-name">Name</label>
@@ -280,7 +334,7 @@
         <input id="kf-mail" name="email" type="email" autocomplete="email" aria-describedby="kf-kanal-hint kf-kanal-error">
       </div>
       <p class="field--full field__hint" id="kf-kanal-hint">Telefon oder E-Mail – eines von beiden reicht.</p>
-      <p class="field--full field__error" id="kf-kanal-error" hidden>Bitte geben Sie eine Telefonnummer oder eine E-Mail-Adresse an.</p>
+      <p class="field--full field__error" id="kf-kanal-error" data-kanal-error hidden>Bitte geben Sie eine Telefonnummer oder eine E-Mail-Adresse an.</p>
       <div class="field">
         <label for="kf-anliegen">Anliegen</label>
         <span class="field__select">
@@ -370,6 +424,6 @@
 <!-- /DIALOG -->
 
 
-<script src="js/main.js?v=202610272352" defer></script>
+<script src="js/main.js?v=202610272354" defer></script>
 </body>
 </html>
