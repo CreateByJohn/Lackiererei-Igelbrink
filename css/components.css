@@ -612,6 +612,8 @@ html:has(.contact[open]){overflow:hidden}   /* Seite dahinter scrollt nicht mit 
 .page-hero h1{max-width:20em;font-size:clamp(2.2rem,4.8vw,3.8rem)}
 .page-hero__lead{max-width:62ch;font-size:clamp(1rem,1.4vw,1.15rem);line-height:1.6;color:var(--on-image-muted)}
 .page-hero__lead strong{color:var(--on-image);font-weight:600}
+.page-hero .eyebrow{color:var(--accent-2);margin-bottom:-8px}   /* Leistungsname über der Überschrift, helles Orange auf dem dunklen Verlauf */
+.page-hero__actions{display:flex;flex-wrap:wrap;gap:12px}
 
 /* Fließtext ohne große erste Zeile (Unterseiten: der erste Absatz ist dort normaler Text) */
 .prose--plain p:first-of-type{font-family:var(--f-body);font-weight:400;font-size:1.1rem;line-height:1.75;color:var(--fg-soft)}
