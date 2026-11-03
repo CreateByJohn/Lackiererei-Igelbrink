@@ -9,10 +9,10 @@
 <link rel="canonical" href="https://lackiertechnik-igelbrink.de/mercedes-w123">
 <link rel="icon" type="image/png" href="assets/img/13-favicon.png">
 <link rel="preload" href="assets/fonts/archivo-latin-standard-normal.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="css/tokens.css?v=202611031001">
-<link rel="stylesheet" href="css/base.css?v=202611031001">
-<link rel="stylesheet" href="css/components.css?v=202611031001">
-<link rel="stylesheet" href="css/effects.css?v=202611031001">
+<link rel="stylesheet" href="css/tokens.css?v=202611031101">
+<link rel="stylesheet" href="css/base.css?v=202611031101">
+<link rel="stylesheet" href="css/components.css?v=202611031101">
+<link rel="stylesheet" href="css/effects.css?v=202611031101">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -297,7 +297,9 @@
       <div class="field">
         <label for="kf-marke">Marke (freiwillig)</label>
         <input id="kf-marke" name="marke" type="text" list="kf-marken" autocomplete="off">
+        <!-- Marken alphabetisch, PKW und Caravan getrennt. Schlüssel müssen mit den Modell-Listen in js/main.js übereinstimmen. -->
         <datalist id="kf-marken">
+          <!-- PKW und Transporter -->
           <option value="Audi"></option>
           <option value="BMW"></option>
           <option value="Citroën"></option>
@@ -328,6 +330,7 @@
           <option value="Toyota"></option>
           <option value="Volkswagen"></option>
           <option value="Volvo"></option>
+          <!-- Caravan und Wohnmobil -->
           <option value="Adria"></option>
           <option value="Bürstner"></option>
           <option value="Carado"></option>
@@ -345,7 +348,8 @@
       </div>
       <div class="field">
         <label for="kf-modell">Modell (freiwillig)</label>
-        <input id="kf-modell" name="modell" type="text" autocomplete="off">
+        <input id="kf-modell" name="modell" type="text" list="kf-modelle" autocomplete="off">
+        <datalist id="kf-modelle"></datalist>   <!-- füllt js/main.js passend zur Marke -->
       </div>
       <div class="field field--full">
         <label for="kf-nachricht">Nachricht</label>
@@ -364,6 +368,6 @@
 <!-- /DIALOG -->
 
 
-<script src="js/main.js?v=202611031001" defer></script>
+<script src="js/main.js?v=202611031101" defer></script>
 </body>
 </html>

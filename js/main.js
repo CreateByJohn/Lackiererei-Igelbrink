@@ -576,3 +576,74 @@
   }, { threshold: 0.25 });
   videos.forEach(function (v) { io.observe(v); });
 })();
+
+// Kontaktformular, Modell-Vorschläge: passend zur gewählten Marke (#kf-marke) füllt sich die Liste #kf-modelle.
+// Groß-/Kleinschreibung egal, freie Eingabe bleibt möglich, Marken ohne Liste: keine Vorschläge.
+// Gängige Modelle in Deutschland (PKW, Transporter) und Caravan-/Wohnmobil-Baureihen; Schlüssel = Optionen der <datalist id="kf-marken">.
+(function () {
+  var marke = document.getElementById('kf-marke');
+  var liste = document.getElementById('kf-modelle');
+  var modell = document.getElementById('kf-modell');
+  if (!marke || !liste) return;
+
+  var M = {
+    'Audi': ['A1', 'A3', 'A4', 'A5', 'A6', 'A7', 'A8', 'Q2', 'Q3', 'Q4 e-tron', 'Q5', 'Q7', 'Q8', 'e-tron GT', 'TT'],
+    'BMW': ['1er', '2er', '3er', '4er', '5er', '7er', 'X1', 'X2', 'X3', 'X4', 'X5', 'X6', 'X7', 'Z4', 'i3', 'i4', 'iX', 'iX1', 'iX3'],
+    'Citroën': ['C1', 'C3', 'C3 Aircross', 'C4', 'C5 Aircross', 'C5 X', 'Berlingo', 'Jumpy', 'Jumper', 'SpaceTourer'],
+    'Cupra': ['Born', 'Formentor', 'Leon', 'Ateca', 'Tavascan', 'Terramar'],
+    'Dacia': ['Sandero', 'Duster', 'Jogger', 'Spring', 'Logan', 'Bigster'],
+    'Fiat': ['500', '500e', '500X', 'Panda', 'Tipo', 'Doblò', 'Ducato', 'Scudo', '600'],
+    'Ford': ['Fiesta', 'Focus', 'Puma', 'Kuga', 'Mustang', 'Mustang Mach-E', 'Explorer', 'Ranger', 'Transit', 'Transit Custom', 'Tourneo', 'S-Max', 'Galaxy'],
+    'Honda': ['Jazz', 'Civic', 'HR-V', 'CR-V', 'ZR-V', 'e:Ny1'],
+    'Hyundai': ['i10', 'i20', 'i30', 'Bayon', 'Kona', 'Tucson', 'Santa Fe', 'Ioniq 5', 'Ioniq 6'],
+    'Jeep': ['Avenger', 'Renegade', 'Compass', 'Wrangler', 'Grand Cherokee'],
+    'Kia': ['Picanto', 'Rio', 'Ceed', 'XCeed', 'Stonic', 'Niro', 'Sportage', 'Sorento', 'EV3', 'EV6', 'EV9'],
+    'Land Rover': ['Defender', 'Discovery', 'Discovery Sport', 'Range Rover', 'Range Rover Sport', 'Range Rover Evoque', 'Range Rover Velar'],
+    'Mazda': ['Mazda2', 'Mazda3', 'CX-3', 'CX-30', 'CX-5', 'CX-60', 'MX-5', 'MX-30'],
+    'Mercedes-Benz': ['A-Klasse', 'B-Klasse', 'C-Klasse', 'E-Klasse', 'S-Klasse', 'CLA', 'GLA', 'GLB', 'GLC', 'GLE', 'G-Klasse', 'EQA', 'EQB', 'EQE', 'EQS', 'V-Klasse', 'Vito', 'Sprinter', 'Citan'],
+    'Mini': ['Cooper', 'Countryman', 'Clubman', 'Aceman', 'Cabrio'],
+    'Mitsubishi': ['Space Star', 'ASX', 'Colt', 'Eclipse Cross', 'Outlander', 'L200'],
+    'Nissan': ['Micra', 'Juke', 'Qashqai', 'X-Trail', 'Leaf', 'Ariya', 'Townstar', 'Primastar'],
+    'Opel': ['Corsa', 'Astra', 'Mokka', 'Frontera', 'Grandland', 'Crossland', 'Insignia', 'Zafira', 'Combo', 'Vivaro', 'Movano'],
+    'Peugeot': ['208', '2008', '308', '3008', '408', '508', '5008', 'Rifter', 'Partner', 'Expert', 'Boxer'],
+    'Porsche': ['911', '718 Boxster', '718 Cayman', 'Macan', 'Cayenne', 'Panamera', 'Taycan'],
+    'Renault': ['Clio', 'Captur', 'Mégane', 'Austral', 'Arkana', 'Scénic', 'Kangoo', 'Trafic', 'Master', 'Twingo', 'Zoe'],
+    'Seat': ['Ibiza', 'Arona', 'Leon', 'Ateca', 'Tarraco'],
+    'Škoda': ['Fabia', 'Scala', 'Octavia', 'Superb', 'Kamiq', 'Karoq', 'Kodiaq', 'Enyaq', 'Elroq'],
+    'Smart': ['fortwo', 'forfour', '#1', '#3'],
+    'Subaru': ['Impreza', 'XV / Crosstrek', 'Forester', 'Outback', 'Solterra'],
+    'Suzuki': ['Swift', 'Ignis', 'Vitara', 'S-Cross', 'Jimny', 'Swace', 'Across'],
+    'Tesla': ['Model 3', 'Model Y', 'Model S', 'Model X'],
+    'Toyota': ['Aygo X', 'Yaris', 'Yaris Cross', 'Corolla', 'C-HR', 'RAV4', 'bZ4X', 'Prius', 'Hilux', 'Proace', 'Land Cruiser'],
+    'Volkswagen': ['Polo', 'Golf', 'T-Cross', 'T-Roc', 'Taigo', 'Tiguan', 'Touareg', 'Passat', 'Arteon', 'Touran', 'ID.3', 'ID.4', 'ID.5', 'ID.7', 'ID. Buzz', 'Up!', 'Caddy', 'Transporter / Multivan', 'California', 'Crafter', 'Amarok'],
+    'Volvo': ['EX30', 'XC40', 'EX40', 'XC60', 'XC90', 'EX90', 'V60', 'V90', 'S60', 'S90'],
+    // Caravan und Wohnmobil: Baureihen
+    'Adria': ['Action', 'Adora', 'Alpina', 'Altea', 'Coral', 'Compact', 'Matrix', 'Sonic', 'Twin', 'Aviva'],
+    'Bürstner': ['Averso', 'Premio', 'Lyseo', 'Ixeo', 'Delfin', 'Campeo', 'Habiton'],
+    'Carado': ['A-Serie', 'I-Serie', 'T-Serie', 'V-Serie', 'CV-Serie'],
+    'Dethleffs': ['Camper', 'Nomad', 'c\'go', 'Globebus', 'Trend', 'Pulse', 'Globetrotter XL', 'Just Go'],
+    'Fendt': ['Bianco', 'Tendenza', 'Opal', 'Diamant', 'Saphir', 'Apero'],
+    'Hobby': ['De Luxe', 'Excellent', 'Prestige', 'Premium', 'Ontour', 'Maxia', 'Optima', 'Vantana', 'Beachy'],
+    'Hymer': ['Eriba Touring', 'Eriba Nova', 'B-Klasse', 'Exsis', 'ML-T', 'Grand Canyon S', 'Free', 'Yosemite'],
+    'Knaus': ['Sport', 'Südwind', 'Deseo', 'Sky TI', 'Van TI', 'BoxStar', 'Live Wave', 'L!VE Traveller'],
+    'LMC': ['Style', 'Sassino', 'Musica', 'Vivo', 'Tourer', 'Cruiser'],
+    'Pössl': ['2Win', 'Summit', 'Roadcamp', 'D-Line', 'Campster'],
+    'Sunlight': ['Cliff', 'T-Serie', 'I-Serie', 'A-Serie'],
+    'Tabbert': ['Rossini', 'Da Vinci', 'Puccini', 'Pantera', 'Cellini'],
+    'Weinsberg': ['CaraOne', 'CaraCito', 'CaraCompact', 'CaraBus', 'CaraSuite', 'CaraHome']
+  };
+
+  function fuellen() {
+    var wert = marke.value.trim().toLowerCase();
+    var key = Object.keys(M).filter(function (k) { return k.toLowerCase() === wert; })[0];
+    liste.textContent = '';
+    (key ? M[key] : []).forEach(function (name) {
+      var o = document.createElement('option');
+      o.value = name;
+      liste.appendChild(o);
+    });
+    if (modell) modell.placeholder = key ? 'z. B. ' + M[key][0] : '';
+  }
+  marke.addEventListener('input', fuellen);
+  marke.addEventListener('change', fuellen);
+})();
