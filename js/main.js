@@ -562,3 +562,17 @@
     });
   });
 })();
+
+// Social-Kacheln: stumme Videos nur abspielen, solange mind. 25 % sichtbar sind (spart Akku und Datenvolumen).
+// Bei „Bewegung reduzieren“ wird nicht abgespielt, dann bleibt das Poster. Ohne IntersectionObserver: einfach abspielen.
+(function () {
+  var videos = document.querySelectorAll('.sm-tile video');
+  if (!videos.length) return;
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  function play(v) { v.muted = true; var r = v.play(); if (r && r.catch) r.catch(function () {}); }
+  if (!('IntersectionObserver' in window)) { videos.forEach(play); return; }
+  var io = new IntersectionObserver(function (eintraege) {
+    eintraege.forEach(function (e) { if (e.isIntersecting) play(e.target); else e.target.pause(); });
+  }, { threshold: 0.25 });
+  videos.forEach(function (v) { io.observe(v); });
+})();

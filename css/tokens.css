@@ -67,6 +67,7 @@
   --star-empty:#c9d0dc;
   --star-on-dark:rgba(255,255,255,.35);
   --sk-1:#e9edf3;
+  --mute-badge:rgba(17,23,38,.62);   /* Badge „ohne Ton“ auf den Social-Videos */
   --quote-mark:var(--accent-soft);   /* Anführungszeichen der Zitatkarten */
   --avatar:#e3e8f0;
 

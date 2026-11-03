@@ -105,8 +105,6 @@
 .exp__item:not(.is-open):hover{background:var(--glass-row-hover);box-shadow:inset 0 0 0 1px var(--glass-line-row-hover)}
 
 /* Social-Kacheln: Bild bewegt sich langsam (Platzhalter für das spätere Video), beim Hover hebt sich die Kachel */
-@keyframes drift{from{scale:1.04;translate:-1.5% 0}to{scale:1.12;translate:1.5% -1%}}
-.sm-tile__media img{animation:drift 18s ease-in-out infinite alternate;will-change:transform}
 .sm-tile{transition:transform var(--t-hover) var(--ease-out),box-shadow var(--t-hover) var(--ease-out)}
 .sm-tile:hover{transform:translateY(-4px);box-shadow:inset 0 0 0 1px var(--nav-hover-line),var(--nav-hover-glow),var(--sh-3)}
 
