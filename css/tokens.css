@@ -115,9 +115,9 @@
   --grad-accent:linear-gradient(135deg,var(--accent-btn),var(--accent-strong));   /* Button-Fläche: beide Enden ≥ 4,5:1 zu weißer Schrift */
   --grad-accent-bar:linear-gradient(90deg,var(--accent-2),var(--accent));
   --grad-ph:linear-gradient(135deg,var(--ph1),var(--ph2));
-  --grad-hero:linear-gradient(90deg,rgba(17,23,38,.86) 0%,rgba(17,23,38,.62) 42%,rgba(17,23,38,.12) 75%),
-              linear-gradient(0deg,rgba(17,23,38,.6) 0%,rgba(17,23,38,0) 45%);
-  --grad-hero-narrow:linear-gradient(90deg,rgba(17,23,38,.86) 0%,rgba(17,23,38,.72) 60%,rgba(17,23,38,.5) 100%),
+  --grad-hero:linear-gradient(90deg,rgba(17,23,38,.92) 0%,rgba(17,23,38,.82) 38%,rgba(17,23,38,.35) 62%,rgba(17,23,38,.08) 82%),
+              linear-gradient(0deg,rgba(17,23,38,.6) 0%,rgba(17,23,38,0) 45%);   /* kräftig links: das Hero-Foto (Banner mit viel Text) ist unruhig */
+  --grad-hero-narrow:linear-gradient(90deg,rgba(17,23,38,.9) 0%,rgba(17,23,38,.8) 60%,rgba(17,23,38,.62) 100%),
               linear-gradient(0deg,rgba(17,23,38,.6) 0%,rgba(17,23,38,0) 45%);   /* Text läuft hier über die ganze Bildbreite */
   --grad-band:linear-gradient(100deg,rgba(17,23,38,.94) 0%,rgba(17,23,38,.84) 45%,rgba(31,42,68,.8) 100%);
   --grad-svc:linear-gradient(0deg,rgba(17,23,38,.72) 0%,rgba(17,23,38,.1) 55%,rgba(17,23,38,0) 100%);
