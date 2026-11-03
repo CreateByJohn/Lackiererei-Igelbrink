@@ -9,10 +9,10 @@
 <link rel="canonical" href="https://lackiertechnik-igelbrink.de/">
 <link rel="icon" type="image/png" href="assets/img/13-favicon.png">
 <link rel="preload" href="assets/fonts/archivo-latin-standard-normal.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="css/tokens.css?v=202611030801">
-<link rel="stylesheet" href="css/base.css?v=202611030801">
-<link rel="stylesheet" href="css/components.css?v=202611030801">
-<link rel="stylesheet" href="css/effects.css?v=202611030801">
+<link rel="stylesheet" href="css/tokens.css?v=202611030901">
+<link rel="stylesheet" href="css/base.css?v=202611030901">
+<link rel="stylesheet" href="css/components.css?v=202611030901">
+<link rel="stylesheet" href="css/effects.css?v=202611030901">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -475,39 +475,9 @@
       <p class="eyebrow">Kontakt</p>
       <h2 id="kontakt-bereich-title">So erreichen Sie uns</h2>
     </div>
-    <div class="kt kt--home">
-      <section class="kt-card" aria-label="Kontaktdaten">
-        <div class="kt-grid">
-          <div class="kt-block">
-            <h3><span class="kt-card__ico"><svg aria-hidden="true"><use href="#i-pin"/></svg></span>Adresse</h3>
-            <address>Lackiertechnik Igelbrink<br>Telgenkamp 31<br>48249 Dülmen</address>
-          </div>
-          <div class="kt-block">
-            <h3><span class="kt-card__ico"><svg aria-hidden="true"><use href="#i-uhr"/></svg></span>Öffnungszeiten</h3>
-            <dl class="kt-hours">
-              <div><dt>Montag – Freitag</dt><dd>08:00 – 17:00 Uhr<br><small>oder nach Vereinbarung</small></dd></div>
-              <div><dt>Samstag</dt><dd>nach Vereinbarung</dd></div>
-            </dl>
-          </div>
-          <div class="kt-block">
-            <h3><span class="kt-card__ico"><svg aria-hidden="true"><use href="#i-tel"/></svg></span>Telefon</h3>
-            <ul class="kt-list">
-              <li><a href="tel:+4925947843823"><svg aria-hidden="true"><use href="#i-tel"/></svg><span><small>Telefon</small>+49 2594 7843823</span></a></li>
-              <li><a href="tel:+4917645875781"><svg aria-hidden="true"><use href="#i-mobil"/></svg><span><small>Mobil</small>+49 176 45875781</span></a></li>
-            </ul>
-          </div>
-          <div class="kt-block">
-            <h3><span class="kt-card__ico"><svg aria-hidden="true"><use href="#i-mail"/></svg></span>E-Mail</h3>
-            <ul class="kt-list">
-              <li><a href="mailto:info@lackiertechnik-igelbrink.de"><svg aria-hidden="true"><use href="#i-mail"/></svg><span><small>E-Mail</small>info@lackiertechnik-igelbrink.de</span></a></li>
-            </ul>
-          </div>
-        </div>
-        <div class="kt-actions">
-          <button class="btn" type="button" data-open-contact aria-haspopup="dialog" aria-controls="kontaktformular">Online-Termin</button>
-          <a class="btn btn--glass-light" href="https://www.google.com/maps/dir/?api=1&amp;destination=Telgenkamp+31,+48249+D%C3%BClmen" target="_blank" rel="noopener">Route planen</a>
-        </div>
-      </section>
+    <!-- Neu angeordnet: Karte groß links, rechts die Kontaktwege als Liste in der Reihenfolge Anrufen, Schreiben, Vorbeikommen.
+         kontakt.html behält ihr eigenes Layout (kt-card). -->
+    <div class="kx">
       <!-- Karte: Zwei-Klick-Lösung (DSGVO). Google Maps lädt erst nach Zustimmung. -->
       <div class="kt-map" data-map>
         <h3 class="visually-hidden">Karte</h3>
@@ -517,6 +487,20 @@
             <p>Beim Laden der Karte werden Daten an Google übermittelt. Mehr dazu in der <a href="datenschutz.html">Datenschutzerklärung</a>.</p>
             <button class="btn btn--small" type="button" data-map-load>Karte laden</button>
           </div>
+        </div>
+      </div>
+      <div class="kx__info">
+        <a class="kx__row" href="tel:+4925947843823"><span class="kx__ico"><svg aria-hidden="true"><use href="#i-tel"/></svg></span><span><small>Anrufen</small><b>02594 7843823</b></span><span class="kx__go">Anrufen</span></a>
+        <a class="kx__row" href="tel:+4917645875781"><span class="kx__ico"><svg aria-hidden="true"><use href="#i-mobil"/></svg></span><span><small>Mobil</small><b>0176 45875781</b></span><span class="kx__go">Anrufen</span></a>
+        <a class="kx__row" href="mailto:info@lackiertechnik-igelbrink.de"><span class="kx__ico"><svg aria-hidden="true"><use href="#i-mail"/></svg></span><span><small>E-Mail</small><b>info@lackiertechnik-igelbrink.de</b></span><span class="kx__go">Schreiben</span></a>
+        <a class="kx__row" href="https://www.google.com/maps/dir/?api=1&amp;destination=Telgenkamp+31,+48249+D%C3%BClmen" target="_blank" rel="noopener"><span class="kx__ico"><svg aria-hidden="true"><use href="#i-pin"/></svg></span><span><small>Adresse</small><address>Lackiertechnik Igelbrink<br>Telgenkamp 31, 48249 Dülmen</address></span><span class="kx__go">Route</span></a>
+        <div class="kx__row kx__row--static"><span class="kx__ico"><svg aria-hidden="true"><use href="#i-uhr"/></svg></span><span><small>Öffnungszeiten</small><b class="kx__status" data-open-status hidden><span class="ft-status__dot" aria-hidden="true"></span><span data-open-text></span></b></span></div>
+        <dl class="kx__hours">
+          <div><dt>Montag – Freitag</dt><dd>08:00 – 17:00 Uhr<br><small>oder nach Vereinbarung</small></dd></div>
+          <div><dt>Samstag</dt><dd>nach Vereinbarung</dd></div>
+        </dl>
+        <div class="kx__actions">
+          <button class="btn" type="button" data-open-contact aria-haspopup="dialog" aria-controls="kontaktformular">Online-Termin</button>
         </div>
       </div>
     </div>
@@ -736,6 +720,6 @@
 <!-- /DIALOG -->
 
 
-<script src="js/main.js?v=202611030801" defer></script>
+<script src="js/main.js?v=202611030901" defer></script>
 </body>
 </html>

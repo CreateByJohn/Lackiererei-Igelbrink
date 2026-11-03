@@ -919,9 +919,38 @@ html:has(.lightbox[open]){overflow:hidden}
 .marquee:not(.is-ready){overflow-x:auto}   /* ohne JavaScript (und bei reduzierter Bewegung) seitlich scrollbar statt abgeschnitten */
 
 /* ---------- Kontakt-Bereich der Startseite: Kontaktdaten links, Karte rechts ---------- */
-.kt--home{grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);align-items:stretch}
-.kt--home .kt-map{margin-top:0}
-.kt--home .kt-map__box{aspect-ratio:auto;height:100%;min-height:var(--map-min-h)}
+/* „So erreichen Sie uns“ (Startseite): eine Fläche, links groß die Karte, rechts die Kontaktwege als Liste */
+.kx{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);border-radius:var(--radius-lg);overflow:hidden;background:var(--surface);box-shadow:var(--sh-3)}
+.kx .kt-map{margin:0}
+.kx .kt-map__box{aspect-ratio:auto;height:100%;min-height:var(--map-min-h);border-radius:0;box-shadow:none}
+.kx__info{display:grid;align-content:start;padding:clamp(24px,3vw,40px)}
+.kx__row{display:grid;grid-template-columns:44px minmax(0,1fr) auto;align-items:center;gap:14px;padding:16px 0;border-bottom:1px solid var(--line);text-decoration:none;color:var(--fg)}
+.kx__row:first-child{padding-top:0}
+.kx__row--static{border-bottom:0;padding-bottom:0}
+.kx__ico{display:grid;place-items:center;width:44px;height:44px;border-radius:var(--radius-md);background:var(--accent-soft);color:var(--accent-strong)}
+.kx__ico svg{width:20px;height:20px}
+.kx__row small{display:block;font-size:.8rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:600}
+.kx__row b{display:block;font-size:1.12rem;font-weight:600;overflow-wrap:anywhere}
+.kx__row address{font-style:normal;font-weight:600;line-height:1.45}
+.kx__go{font-size:.9rem;font-weight:600;color:var(--accent-strong);white-space:nowrap}
+.kx__row b.kx__status{display:inline-flex;align-items:center;gap:8px;font-size:.98rem}
+.kx__row b.kx__status[hidden]{display:none}
+.kx__status.is-open .ft-status__dot{background:var(--ft-open);box-shadow:0 0 0 4px var(--ft-open-glow)}
+.kx__hours{margin:0;padding:16px 0 0 58px;display:grid;gap:6px}
+.kx__hours div{display:flex;justify-content:space-between;gap:12px}
+.kx__hours dt{font-weight:600}
+.kx__hours dd{margin:0;color:var(--fg-soft);text-align:right}
+.kx__hours small{font-size:.85rem}
+.kx__actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:26px}
+@media (max-width:900px){
+  .kx{grid-template-columns:minmax(0,1fr)}
+  .kx .kt-map{order:2}   /* mobil: Liste oben, Karte darunter */
+  .kx .kt-map__box{min-height:320px}
+}
+@media (max-width:520px){
+  .kx__hours{padding-left:0}
+  .kx__hours dt,.kx__hours dd{white-space:nowrap}
+}
 .kt-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px}
 
 /* ---------- ueber-uns.html: Team, Betrieb in Bildern, Angebot, Karriere-Kasten, FAQ ---------- */
@@ -969,8 +998,6 @@ html:has(.lightbox[open]){overflow:hidden}
 @media (max-width:980px){
   .callout--work,.offer,.apply{grid-template-columns:minmax(0,1fr)}
   .pics{grid-template-columns:repeat(2,minmax(0,1fr))}
-  .kt--home{grid-template-columns:minmax(0,1fr)}
-  .kt--home .kt-map__box{height:auto;min-height:0;aspect-ratio:4/3}
 }
 @media (max-width:640px){
   .process{grid-template-columns:minmax(0,1fr)}
