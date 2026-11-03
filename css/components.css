@@ -866,9 +866,7 @@ html:has(.lightbox[open]){overflow:hidden}
 .process__body p{color:var(--fg-soft);font-size:.96rem;line-height:1.5}
 .process__cta{display:flex;flex-wrap:wrap;justify-content:center;gap:12px;margin-top:clamp(24px,3vw,36px)}
 
-/* ---------- Über uns (Startseite und ueber-uns.html): Hard Facts als Kacheln, daneben Bilder ---------- */
-.about{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(24px,4vw,56px);align-items:start}
-.about__facts{display:grid;gap:22px;justify-items:start}
+/* ---------- Über uns (ueber-uns.html): Hard Facts als Kacheln, Bilder ---------- */
 .facts{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;width:100%}
 .facts--3{grid-template-columns:repeat(3,minmax(0,1fr))}
 .facts--4{grid-template-columns:repeat(4,minmax(0,1fr))}
@@ -878,11 +876,39 @@ html:has(.lightbox[open]){overflow:hidden}
 .fact strong{font-family:var(--f-display);font-weight:700;font-size:1.35rem;line-height:1.15;color:var(--heading)}
 .fact>span:not([class]){color:var(--fg-soft)}
 .fact .draft-note{margin-top:8px}
-.about__pics{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
 .about__pic{margin:0;overflow:hidden;aspect-ratio:1;border-radius:var(--radius);background:var(--grad-ph);box-shadow:var(--sh-2)}
-.about__pic--wide{grid-column:1 / -1;aspect-ratio:16/9}
 .about__pic img{width:100%;height:100%;object-fit:cover}
-.about__pics>.draft-note{grid-column:1 / -1}
+
+/* ---------- Über uns (Startseite): Intro „Inhaber zuerst“. Aussage links, beide Inhaber als Porträtkarten rechts, Fakten als Band ---------- */
+.ab2{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:clamp(28px,5vw,64px);align-items:center}
+.ab2__text{display:grid;gap:20px;justify-items:start}
+.ab__lead{margin:0;font-family:var(--f-display);font-stretch:var(--h-stretch);font-weight:500;font-size:clamp(1.35rem,2.2vw,1.75rem);line-height:1.25;color:var(--heading)}
+.ab2__text>p:not(.ab__lead){margin:0;color:var(--fg-soft);max-width:54ch}
+.ab2__people{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.ab2__person{margin:0;position:relative;overflow:hidden;border-radius:var(--radius-lg);aspect-ratio:4/5;background:var(--navy);box-shadow:var(--sh-3)}
+.ab2__person:nth-child(2){translate:0 32px}   /* zweite Karte versetzt */
+.ab2__person img{width:100%;height:100%;object-fit:cover}
+.ab2__person figcaption{position:absolute;left:0;right:0;bottom:0;display:grid;gap:4px;justify-items:start;padding:40px 18px 16px;background:var(--grad-portrait);color:var(--on-image)}
+.ab2__person b{display:block;font-family:var(--f-display);font-stretch:var(--h-stretch);font-size:1.1rem;line-height:1.15}
+.ab2__person small{color:var(--on-image-muted);font-size:.88rem;hyphens:auto;-webkit-hyphens:auto}   /* „Fahrzeuglackierermeister“ darf in schmalen Karten trennen */
+.ab2__person .draft-note{display:inline-block;margin-top:4px}
+.ab2__band{grid-column:1 / -1;list-style:none;margin:clamp(20px,3vw,40px) 0 0;padding:22px 0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border-block:1px solid var(--line)}
+.ab2__band li{display:grid;align-content:start;justify-items:start;gap:2px;padding:0 22px;border-left:1px solid var(--line)}
+.ab2__band li:first-child{border-left:0;padding-left:0}
+.ab2__band b{font-family:var(--f-display);font-stretch:var(--h-stretch);font-size:1.12rem;color:var(--heading);line-height:1.2}
+.ab2__band span{font-size:.92rem;color:var(--muted)}
+.ab2__band .draft-note{display:inline-block;margin-left:4px}
+@media (max-width:900px){
+  .ab2{grid-template-columns:minmax(0,1fr)}
+  .ab2__band{grid-template-columns:1fr 1fr;gap:16px 0}
+  .ab2__band li:nth-child(3){border-left:0;padding-left:0}
+}
+@media (max-width:520px){
+  .ab2__person b{font-size:1rem}   /* „Eszter Gerlach-Igelbrink“ soll nicht unschön umbrechen */
+  .ab2__person:nth-child(2){translate:0 16px}
+  .ab2__person figcaption{padding:32px 12px 12px}
+  .ab2__person small{font-size:.8rem}
+}
 
 /* ---------- Qualität: zwei Karussell-Reihen mit eigener Zwischenüberschrift ---------- */
 .mq-group{scroll-margin-top:calc(var(--hdr) + 16px)}
@@ -941,8 +967,7 @@ html:has(.lightbox[open]){overflow:hidden}
   .facts--3,.facts--4{grid-template-columns:repeat(2,minmax(0,1fr))}
 }
 @media (max-width:980px){
-  .about,.callout--work,.offer,.apply{grid-template-columns:minmax(0,1fr)}
-  .about__pics{width:100%;max-width:640px;justify-self:center}
+  .callout--work,.offer,.apply{grid-template-columns:minmax(0,1fr)}
   .pics{grid-template-columns:repeat(2,minmax(0,1fr))}
   .kt--home{grid-template-columns:minmax(0,1fr)}
   .kt--home .kt-map__box{height:auto;min-height:0;aspect-ratio:4/3}
