@@ -189,10 +189,10 @@
   --infobar-glass:rgba(255,255,255,.72);
 
   /* Karussell Zertifikate und Partner */
-  --mq-w:220px;              /* Breite einer Kachel */
-  --mq-h:200px;              /* Höhe der Bildfläche */
-  --mq-gap:22px;
-  --mq-step:6.3s;            /* Laufzeit je Kachel: eine Runde dauert Anzahl × --mq-step (js/main.js setzt --mq-n) */
+  --mq-w:168px;              /* Breite einer Kachel (mobil kleiner, siehe components.css) */
+  --mq-h:128px;              /* Höhe der Bildfläche */
+  --mq-gap:18px;
+  --mq-step:6s;              /* eine Kachel ≈ 6 s (ca. 31 px/s, mobil ca. 26 px/s) */            /* Laufzeit je Kachel: eine Runde dauert Anzahl × --mq-step (js/main.js setzt --mq-n) */
   --mq-gray:grayscale(1);    /* Bilder der Kachel in Ruhe */
   --grad-career:linear-gradient(100deg,rgba(17,23,38,.95) 0%,rgba(17,23,38,.86) 42%,rgba(31,42,68,.55) 100%);
   --grad-media:linear-gradient(0deg,rgba(17,23,38,.88) 0%,rgba(17,23,38,.35) 50%,rgba(17,23,38,.05) 100%);

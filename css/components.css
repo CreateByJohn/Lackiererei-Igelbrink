@@ -461,22 +461,27 @@ html:has(.contact[open]){overflow:hidden}   /* Seite dahinter scrollt nicht mit 
 .marquee{position:relative;overflow:hidden;padding-block:12px;
   -webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
 .marquee__track{list-style:none;margin:0;padding:0;display:flex;gap:var(--mq-gap);width:max-content}
-.mq-item{flex:none;display:grid;justify-items:center;gap:12px;width:var(--mq-w)}
+.mq-item{flex:none;display:grid;justify-items:center;gap:10px;width:var(--mq-w)}
 /* Glas-Kachel wie bisher bei den Partnern: .mq-item__blur = dasselbe Bild stark unscharf als farbiger Hintergrund,
    .mq-item__glass = halbtransparente Glasfläche mit dem scharfen Bild. In Ruhe sind beide Bilder grau (--mq-gray, direkt am <img>,
    nicht an der ganzen Kachel: so muss beim Hover nur das jeweilige Bild neu gefiltert werden, nicht die ganze verschachtelte Fläche). */
-.mq-item__tile{position:relative;isolation:isolate;overflow:hidden;display:grid;grid-template-rows:minmax(0,1fr);width:100%;height:var(--mq-h);padding:14px;
+.mq-item__tile{position:relative;isolation:isolate;overflow:hidden;display:grid;grid-template-rows:minmax(0,1fr);width:100%;height:var(--mq-h);padding:10px;
   border-radius:var(--radius);background:var(--logo-tile-bg);box-shadow:var(--sh-2)}
 .mq-item__blur{position:absolute;inset:-25%;z-index:-1;pointer-events:none;transform:translateZ(0)}   /* eigene Ebene: der große Weichzeichner wird nicht mit der Kachel neu gerechnet */
 .mq-item__blur img{width:100%;height:100%;max-width:none;object-fit:cover;filter:blur(28px) saturate(1.6) var(--mq-gray);opacity:.85;will-change:filter}
-.mq-item__glass{position:relative;overflow:hidden;display:grid;grid-template-rows:minmax(0,1fr);padding:12px;border-radius:var(--radius-tile);
+.mq-item__glass{position:relative;overflow:hidden;display:grid;grid-template-rows:minmax(0,1fr);padding:8px;border-radius:var(--radius-tile);
   background:var(--glass-logo);box-shadow:var(--sh-glass-logo)}
 .mq-item__glass picture{display:contents}
 .mq-item__glass source{display:none}   /* sonst wird <source> durch display:contents zur eigenen Rasterzeile und drückt das Bild nach unten */
 .mq-item__glass img{width:100%;height:100%;object-fit:contain;border-radius:var(--radius-xs);
   filter:var(--logo-dim) drop-shadow(0 0 0 transparent) var(--mq-gray)}   /* gleiche Filter-Reihenfolge wie --mq-lit, damit der Übergang weich statt sprunghaft ist */
-.mq-item--logo .mq-item__glass{padding:18px 20px}
-.mq-item__name{font-family:var(--f-display);font-weight:700;font-size:1.05rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.mq-item--logo .mq-item__glass{padding:12px 14px}
+/* Beschriftung gut lesbar: Text-Schrift, keine Versalien, kein Sperrsatz. Dass sich ein Zertifikat öffnet, zeigen Zoom-Cursor und aria-label. */
+.mq-item__name{font-family:var(--f-body);font-weight:600;font-size:1.08rem;line-height:1.3;letter-spacing:0;text-transform:none;text-align:center;color:var(--heading);text-wrap:balance}
+@media (max-width:760px){
+  :root{--mq-w:140px;--mq-h:108px}
+  .mq-item__name{font-size:1rem}
+}
 /* Geräte ohne Hover (Touch): Farbe immer sichtbar, sonst bliebe alles grau */
 @media (hover:none){.mq-item__blur img{filter:blur(28px) saturate(1.6)}.mq-item__glass img{filter:var(--logo-dim)}}
 
@@ -913,9 +918,9 @@ html:has(.lightbox[open]){overflow:hidden}
 /* ---------- Qualität: zwei Karussell-Reihen mit eigener Zwischenüberschrift ---------- */
 .mq-group{scroll-margin-top:calc(var(--hdr) + 16px)}
 .mq-group+.mq-group{margin-top:clamp(18px,2.6vw,30px)}
-.mq-group__title{text-align:center;font-size:1.5rem;color:var(--heading)}
+.mq-group__title{text-align:center;font-size:1.2rem;letter-spacing:.02em;color:var(--heading)}
 /* Zertifikat-Kachel ist ein Button (öffnet die Lightbox) und sieht aus wie die übrigen Kacheln */
-.mq-item__open{all:unset;box-sizing:border-box;display:grid;justify-items:center;gap:12px;width:100%;border-radius:var(--radius);cursor:zoom-in}
+.mq-item__open{all:unset;box-sizing:border-box;display:grid;justify-items:center;gap:10px;width:100%;border-radius:var(--radius);cursor:zoom-in}
 .marquee:not(.is-ready){overflow-x:auto}   /* ohne JavaScript (und bei reduzierter Bewegung) seitlich scrollbar statt abgeschnitten */
 
 /* ---------- Kontakt-Bereich der Startseite: Kontaktdaten links, Karte rechts ---------- */

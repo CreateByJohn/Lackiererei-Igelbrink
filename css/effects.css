@@ -116,6 +116,7 @@ a.kx__row:hover b,a.kx__row:hover address{color:var(--accent-strong)}
    .marquee--reverse läuft in Gegenrichtung (Partner). */
 @keyframes marquee{to{transform:translateX(calc(var(--mq-shift,0px) * -1))}}
 .marquee.is-ready .marquee__track{animation:marquee calc(var(--mq-n,9) * var(--mq-step)) linear infinite}
+.marquee:hover .marquee__track,.marquee:focus-within .marquee__track{animation-play-state:paused}   /* anhalten zum Lesen und Anklicken */
 .marquee--reverse.is-ready .marquee__track{animation-direction:reverse}
 .marquee:hover .marquee__track,.marquee:focus-within .marquee__track{animation-play-state:paused}
 .mq-item__tile{transition:transform var(--t-hover) var(--ease-out),box-shadow var(--t-hover) var(--ease-out)}
