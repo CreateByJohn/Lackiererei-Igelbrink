@@ -9,10 +9,10 @@
 <link rel="canonical" href="https://lackiertechnik-igelbrink.de/">
 <link rel="icon" type="image/png" href="assets/img/13-favicon.png">
 <link rel="preload" href="assets/fonts/archivo-latin-standard-normal.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="css/tokens.css?v=202611030501">
-<link rel="stylesheet" href="css/base.css?v=202611030501">
-<link rel="stylesheet" href="css/components.css?v=202611030501">
-<link rel="stylesheet" href="css/effects.css?v=202611030501">
+<link rel="stylesheet" href="css/tokens.css?v=202611030601">
+<link rel="stylesheet" href="css/base.css?v=202611030601">
+<link rel="stylesheet" href="css/components.css?v=202611030601">
+<link rel="stylesheet" href="css/effects.css?v=202611030601">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -360,39 +360,40 @@
     </div>
     <!-- Statisch, ohne Google-API: Zusammenfassung plus bis zu vier ausgewählte Bewertungen (wählt der Kunde aus).
          Werte und Link sind Platzhalter, der Link ist das Google-Profil aus dem Footer. -->
-    <div class="reviews">
-      <div class="rv rv--sum">
+    <div class="rvx">
+      <div class="rvx__sum">
         <div class="stars" aria-hidden="true"><svg viewBox="0 0 24 24"><use href="#stern"/></svg><svg viewBox="0 0 24 24"><use href="#stern"/></svg><svg viewBox="0 0 24 24"><use href="#stern"/></svg><svg viewBox="0 0 24 24"><use href="#stern"/></svg><svg viewBox="0 0 24 24"><use href="#stern"/></svg></div>
-        <strong>Google Bewertung</strong>
-        <p class="rv__score"><b>X,X</b> von 5 Sternen</p>
-        <p class="rv__count">XX Bewertungen</p>
-        <a class="btn btn--glass btn--small" href="https://g.page/r/CeGDcTp7F3GrEBM/" target="_blank" rel="noopener">Alle Google-Bewertungen lesen</a>
-        <span class="draft-note draft-note--small">Platzhalter: Gesamtnote, Anzahl und Link zum Google-Profil bestätigen</span>
+        <p class="rvx__score"><b>X,X</b> von 5</p>
+        <p class="rvx__meta">XX Google-Bewertungen <span class="draft-note draft-note--small">Platzhalter: Note, Anzahl, Link bestätigen</span></p>
+        <a class="btn btn--glass btn--small" href="https://g.page/r/CeGDcTp7F3GrEBM/" target="_blank" rel="noopener">Alle Bewertungen lesen</a>
       </div>
-      <article class="rv">
-        <div class="rv__who" aria-hidden="true"><span class="rv__avatar"></span><span class="sk-lines"><span class="sk sk--60"></span><span class="sk sk--35"></span></span></div>
-        <div class="stars" aria-hidden="true"><svg viewBox="0 0 24 24"><use href="#stern"/></svg><svg viewBox="0 0 24 24"><use href="#stern"/></svg><svg viewBox="0 0 24 24"><use href="#stern"/></svg><svg viewBox="0 0 24 24"><use href="#stern"/></svg><svg viewBox="0 0 24 24"><use href="#stern"/></svg></div>
-        <div class="sk-lines" aria-hidden="true"><span class="sk"></span><span class="sk"></span><span class="sk sk--80"></span><span class="sk sk--55"></span></div>
-        <span class="draft-note draft-note--small">Platzhalter für eine echte Google-Bewertung</span>
-      </article>
-      <article class="rv">
-        <div class="rv__who" aria-hidden="true"><span class="rv__avatar"></span><span class="sk-lines"><span class="sk sk--60"></span><span class="sk sk--35"></span></span></div>
-        <div class="stars" aria-hidden="true"><svg viewBox="0 0 24 24"><use href="#stern"/></svg><svg viewBox="0 0 24 24"><use href="#stern"/></svg><svg viewBox="0 0 24 24"><use href="#stern"/></svg><svg viewBox="0 0 24 24"><use href="#stern"/></svg><svg viewBox="0 0 24 24"><use href="#stern"/></svg></div>
-        <div class="sk-lines" aria-hidden="true"><span class="sk"></span><span class="sk"></span><span class="sk sk--80"></span><span class="sk sk--55"></span></div>
-        <span class="draft-note draft-note--small">Platzhalter für eine echte Google-Bewertung</span>
-      </article>
-      <article class="rv">
-        <div class="rv__who" aria-hidden="true"><span class="rv__avatar"></span><span class="sk-lines"><span class="sk sk--60"></span><span class="sk sk--35"></span></span></div>
-        <div class="stars" aria-hidden="true"><svg viewBox="0 0 24 24"><use href="#stern"/></svg><svg viewBox="0 0 24 24"><use href="#stern"/></svg><svg viewBox="0 0 24 24"><use href="#stern"/></svg><svg viewBox="0 0 24 24"><use href="#stern"/></svg><svg viewBox="0 0 24 24"><use href="#stern"/></svg></div>
-        <div class="sk-lines" aria-hidden="true"><span class="sk"></span><span class="sk"></span><span class="sk sk--80"></span><span class="sk sk--55"></span></div>
-        <span class="draft-note draft-note--small">Platzhalter für eine echte Google-Bewertung</span>
-      </article>
-      <article class="rv">
-        <div class="rv__who" aria-hidden="true"><span class="rv__avatar"></span><span class="sk-lines"><span class="sk sk--60"></span><span class="sk sk--35"></span></span></div>
-        <div class="stars" aria-hidden="true"><svg viewBox="0 0 24 24"><use href="#stern"/></svg><svg viewBox="0 0 24 24"><use href="#stern"/></svg><svg viewBox="0 0 24 24"><use href="#stern"/></svg><svg viewBox="0 0 24 24"><use href="#stern"/></svg><svg viewBox="0 0 24 24"><use href="#stern"/></svg></div>
-        <div class="sk-lines" aria-hidden="true"><span class="sk"></span><span class="sk"></span><span class="sk sk--80"></span><span class="sk sk--55"></span></div>
-        <span class="draft-note draft-note--small">Platzhalter für eine echte Google-Bewertung</span>
-      </article>
+      <!-- Zitatkarten: Initiale statt Foto. Keine erfundenen Bewertungen, Texte und Namen kommen wörtlich aus Google. -->
+      <div class="rvx__grid">
+        <figure class="q">
+          <div class="stars" aria-hidden="true"><svg viewBox="0 0 24 24"><use href="#stern"/></svg><svg viewBox="0 0 24 24"><use href="#stern"/></svg><svg viewBox="0 0 24 24"><use href="#stern"/></svg><svg viewBox="0 0 24 24"><use href="#stern"/></svg><svg viewBox="0 0 24 24"><use href="#stern"/></svg></div>
+          <blockquote><p>Hier steht später der Text einer echten Google-Bewertung. Der Kunde wählt bis zu vier Bewertungen aus, die wörtlich übernommen werden.</p></blockquote>
+          <figcaption><span class="q__avatar" aria-hidden="true">A</span><span><b>Name aus Google</b><small>Google-Bewertung · Datum</small></span></figcaption>
+          <span class="draft-note draft-note--small">Platzhalter</span>
+        </figure>
+        <figure class="q">
+          <div class="stars" aria-hidden="true"><svg viewBox="0 0 24 24"><use href="#stern"/></svg><svg viewBox="0 0 24 24"><use href="#stern"/></svg><svg viewBox="0 0 24 24"><use href="#stern"/></svg><svg viewBox="0 0 24 24"><use href="#stern"/></svg><svg viewBox="0 0 24 24"><use href="#stern"/></svg></div>
+          <blockquote><p>Hier steht später der Text einer echten Google-Bewertung. Der Kunde wählt bis zu vier Bewertungen aus, die wörtlich übernommen werden.</p></blockquote>
+          <figcaption><span class="q__avatar" aria-hidden="true">B</span><span><b>Name aus Google</b><small>Google-Bewertung · Datum</small></span></figcaption>
+          <span class="draft-note draft-note--small">Platzhalter</span>
+        </figure>
+        <figure class="q">
+          <div class="stars" aria-hidden="true"><svg viewBox="0 0 24 24"><use href="#stern"/></svg><svg viewBox="0 0 24 24"><use href="#stern"/></svg><svg viewBox="0 0 24 24"><use href="#stern"/></svg><svg viewBox="0 0 24 24"><use href="#stern"/></svg><svg viewBox="0 0 24 24"><use href="#stern"/></svg></div>
+          <blockquote><p>Hier steht später der Text einer echten Google-Bewertung. Der Kunde wählt bis zu vier Bewertungen aus, die wörtlich übernommen werden.</p></blockquote>
+          <figcaption><span class="q__avatar" aria-hidden="true">C</span><span><b>Name aus Google</b><small>Google-Bewertung · Datum</small></span></figcaption>
+          <span class="draft-note draft-note--small">Platzhalter</span>
+        </figure>
+        <figure class="q">
+          <div class="stars" aria-hidden="true"><svg viewBox="0 0 24 24"><use href="#stern"/></svg><svg viewBox="0 0 24 24"><use href="#stern"/></svg><svg viewBox="0 0 24 24"><use href="#stern"/></svg><svg viewBox="0 0 24 24"><use href="#stern"/></svg><svg viewBox="0 0 24 24"><use href="#stern"/></svg></div>
+          <blockquote><p>Hier steht später der Text einer echten Google-Bewertung. Der Kunde wählt bis zu vier Bewertungen aus, die wörtlich übernommen werden.</p></blockquote>
+          <figcaption><span class="q__avatar" aria-hidden="true">D</span><span><b>Name aus Google</b><small>Google-Bewertung · Datum</small></span></figcaption>
+          <span class="draft-note draft-note--small">Platzhalter</span>
+        </figure>
+      </div>
     </div>
   </section>
 </main>
@@ -732,6 +733,6 @@
 <!-- /DIALOG -->
 
 
-<script src="js/main.js?v=202611030501" defer></script>
+<script src="js/main.js?v=202611030601" defer></script>
 </body>
 </html>

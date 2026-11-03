@@ -67,7 +67,7 @@
   --star-empty:#c9d0dc;
   --star-on-dark:rgba(255,255,255,.35);
   --sk-1:#e9edf3;
-  --sk-2:#f3f5f9;
+  --quote-mark:var(--accent-soft);   /* Anführungszeichen der Zitatkarten */
   --avatar:#e3e8f0;
 
   /* Glas und Overlays */
@@ -126,7 +126,6 @@
   --grad-footer:linear-gradient(160deg,var(--navy-deep) 0%,var(--navy) 55%,var(--navy-mid) 100%);
   --grad-portrait:linear-gradient(0deg,rgba(17,23,38,.88),rgba(17,23,38,0));   /* Porträtkarten: Name und Rolle unten auf dunklem Verlauf */
   --grad-review:radial-gradient(120% 100% at 0% 0%,var(--navy-light) 0%,var(--navy) 60%);
-  --grad-sk:linear-gradient(90deg,var(--sk-1),var(--sk-2),var(--sk-1));
   --grad-rule-in:linear-gradient(90deg,transparent,var(--line) 18%);      /* Trennlinie im Abschnitts-Kopf, links */
   --grad-rule-out:linear-gradient(90deg,var(--line) 82%,transparent);     /* rechts */
   --grad-footer-tint:linear-gradient(0deg,rgba(31,42,68,.78),rgba(31,42,68,.38));

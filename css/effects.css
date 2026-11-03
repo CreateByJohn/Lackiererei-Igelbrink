@@ -18,7 +18,7 @@
 .checks li::after{transition:border-color .18s var(--ease-out)}
 
 /* Kacheln: eigene Ebene, damit beim Anheben nichts neu gezeichnet wird */
-.bt,.rv{transition:transform var(--t-hover) var(--ease-out),box-shadow var(--t-hover) var(--ease-out);will-change:transform}
+.bt{transition:transform var(--t-hover) var(--ease-out),box-shadow var(--t-hover) var(--ease-out);will-change:transform}
 .bt__seal{transition:rotate .3s var(--ease-out),scale .3s var(--ease-out);will-change:transform}
 .bt--logo .glass-in::after{transition:transform .7s var(--ease-out)}
 .bt--logo .glass-in img{transition:filter var(--t-hover) var(--ease-out)}
@@ -73,7 +73,6 @@
 .contact[open]::backdrop{animation:backdrop-in .3s var(--ease)}
 
 /* ---------- Kundenstimmen ---------- */
-.rv:hover{transform:translateY(-4px);box-shadow:var(--sh-3)}
 
 /* ---------- Prozess-Karten und Hard Facts: anheben wie die Kundenstimmen ---------- */
 .process__step,.fact{transition:transform var(--t-hover) var(--ease-out),box-shadow var(--t-hover) var(--ease-out)}
@@ -139,7 +138,7 @@
 @media (prefers-reduced-motion:no-preference){
   @supports ((animation-timeline:view()) and (animation-range:entry)){
     @keyframes rise{from{translate:0 40px}}
-    .svc,.band,.prose,.callout,.bt,.rv,.stack li,.process__step,.fact,.about__pic{animation:rise auto var(--ease) backwards;animation-timeline:view();animation-range:entry 0% entry 55%}
+    .svc,.band,.prose,.callout,.bt,.stack li,.process__step,.fact,.about__pic,.q{animation:rise auto var(--ease) backwards;animation-timeline:view();animation-range:entry 0% entry 55%}
     /* Parallax (neu): Abschnitte gleiten beim Einfahren dezent hoch und wachsen leicht auf */
     @keyframes rise-in{from{translate:0 56px;scale:.965;opacity:.35}}
     .sec-head,.marquee,.exp__item,.social,.career__inner,.kt-card,.kt__cta,.kt-map{animation:rise-in auto var(--ease) backwards;animation-timeline:view();animation-range:entry 0% entry 60%}
@@ -152,7 +151,7 @@
 @media (prefers-reduced-motion:reduce){
   *,*::before,*::after{transition-duration:.01ms!important;transition-delay:0s!important;animation:none!important}
   .btn:hover,.btn:active,
-  .stack li:hover,.checks li:hover,.bt:hover,.rv:hover,.svc:hover .glass-tile,
+  .stack li:hover,.checks li:hover,.bt:hover,.svc:hover .glass-tile,
   .sec-head:hover .sec-head__ico,.contact__close:hover{transform:none}
   .btn:hover::after{transform:rotate(45deg) translate(-2px,2px)}
   .stack li:hover::before{transform:none}
