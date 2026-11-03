@@ -9,10 +9,10 @@
 <link rel="canonical" href="https://lackiertechnik-igelbrink.de/opel-manta">
 <link rel="icon" type="image/png" href="assets/img/13-favicon.png">
 <link rel="preload" href="assets/fonts/archivo-latin-standard-normal.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="css/tokens.css?v=202611030101">
-<link rel="stylesheet" href="css/base.css?v=202611030101">
-<link rel="stylesheet" href="css/components.css?v=202611030101">
-<link rel="stylesheet" href="css/effects.css?v=202611030101">
+<link rel="stylesheet" href="css/tokens.css?v=202611030201">
+<link rel="stylesheet" href="css/base.css?v=202611030201">
+<link rel="stylesheet" href="css/components.css?v=202611030201">
+<link rel="stylesheet" href="css/effects.css?v=202611030201">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -68,15 +68,26 @@
   <nav class="site-nav" aria-label="Hauptnavigation">
     <a class="brand" href="index.html"><picture><source type="image/svg+xml" srcset="assets/img/136-logo-igelbrink-farbig.svg"><img src="assets/img/136-logo-igelbrink-farbig.png" width="1200" height="312" alt="Lackiertechnik Igelbrink"></picture></a>
     <ul class="menu" id="menu">
-      <!-- Anzeigename „Dienstleistungen“, die Unterseite heißt im Link weiterhin /service -->
-      <li><a href="service.html">Dienstleistungen</a>
-        <ul class="submenu">
-          <li><a href="unfallinstandsetzung.html">Unfallinstandsetzung</a></li>
-          <li><a href="wohnmobil-service.html">Caravan</a></li>
-          <li><a href="oldtimerlackierung.html">Classic Cars</a></li>
-          <li><a href="unterbodenschutz.html">Hohlraumkonservierung und Unterbodenschutz</a></li>
-        </ul>
+      <!-- Anzeigename „Serviceleistungen“, die Übersicht heißt im Link weiterhin /service -->
+      <li class="has-mega"><a href="service.html">Serviceleistungen</a>
+        <div class="mega">
+          <p class="mega__label">Leistungen</p>
+          <a class="mega__all" href="service.html">Alle Serviceleistungen</a>
+          <div class="mega__sep" aria-hidden="true"></div>
+          <p class="mega__label">Unser Service</p>
+          <ul class="mega__grid">
+            <li><a href="karosseriebau.html">Karosseriebau</a></li>
+            <li><a href="fahrzeuglackierung.html">Fahrzeuglackierung</a></li>
+            <li><a href="unfallinstandsetzung.html">Unfallinstandsetzung</a></li>
+            <li><a href="wohnmobil-service.html">Wohnmobil &amp; Caravan</a></li>
+            <li><a href="oldtimerlackierung.html">Oldtimer-Restauration</a></li>
+            <li><a href="glas-service.html">Glas-Service</a></li>
+            <li><a href="smart-repair.html">Smart Repair</a></li>
+            <li><a href="unterbodenschutz.html">Hohlraumkonservierung und Unterbodenschutz</a></li>
+          </ul>
+        </div>
       </li>
+      <li><a href="geschaeftskunden.html">Geschäftskunden</a></li>
       <li><a href="projekte.html" aria-current="true">Projekte</a></li>
       <li><a href="ueber-uns.html">Über uns</a></li>
       <li><a href="karriere.html">Karriere</a></li>
@@ -84,7 +95,7 @@
       <li class="menu__cta"><button class="btn btn--small" type="button" data-open-contact aria-haspopup="dialog" aria-controls="kontaktformular">Online-Termin</button></li>
     </ul>
     <div class="nav-actions">
-      <a class="nav-tel" href="tel:+4925947843823" aria-label="Anrufen: 02594 7843823"><svg aria-hidden="true"><use href="#i-tel"/></svg><span>02594 7843823</span></a>
+      <a class="nav-tel" href="tel:+4925947843823" aria-label="Anrufen: 02594 7843823" title="02594 7843823"><svg aria-hidden="true"><use href="#i-tel"/></svg><span>Anrufen</span></a>
       <button class="btn btn--small" type="button" data-open-contact aria-haspopup="dialog" aria-controls="kontaktformular">Online-Termin</button>
       <button class="burger" id="burger" type="button" aria-expanded="false" aria-controls="menu">Menü</button>
     </div>
@@ -333,6 +344,6 @@
 <!-- /DIALOG -->
 
 
-<script src="js/main.js?v=202611030101" defer></script>
+<script src="js/main.js?v=202611030201" defer></script>
 </body>
 </html>

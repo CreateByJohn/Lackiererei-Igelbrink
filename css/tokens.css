@@ -75,7 +75,6 @@
   --nav-glass-line:rgba(255,255,255,.55);
   --nav-glass-shine:linear-gradient(180deg,rgba(255,255,255,.35),rgba(255,255,255,0) 60%);
   --nav-blur:blur(24px) saturate(1.8);   /* Unschärfe hinter Pille und Untermenü */
-  --submenu-glass:rgba(255,255,255,.9);   /* Untermenü fast deckend: die Unschärfe wirkt in der Pille nicht noch einmal */
   --nav-hover:radial-gradient(120% 140% at 50% 120%,rgba(254,80,0,.2),rgba(254,80,0,.05) 70%);   /* orangener Glas-Schimmer (Menü, Glas-Buttons) */
   --nav-hover-line:rgba(254,80,0,.36);
   --nav-hover-glow:0 0 18px -4px rgba(254,80,0,.5);

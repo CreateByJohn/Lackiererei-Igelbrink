@@ -27,10 +27,9 @@
 .site-footer a{transition:color .18s var(--ease-out),background-color .18s var(--ease-out)}
 
 /* ---------- Navigation ---------- */
-/* Leichter orangener Glas-Schimmer statt einer Fläche */
-.menu>li>a:hover,.menu>li:focus-within>a{background:var(--nav-hover),var(--nav-hover-base);color:var(--accent-strong);
-  box-shadow:inset 0 0 0 1px var(--nav-hover-line),inset 0 1px 0 rgba(255,255,255,.5),var(--nav-hover-glow)}
-.submenu a:hover{background:var(--nav-hover),var(--nav-hover-base);color:var(--accent-strong);box-shadow:inset 0 0 0 1px var(--nav-hover-line)}
+/* Dezent: beim Hover wechselt nur die Schriftfarbe, kein Hintergrund, kein Rahmen, kein Glow */
+.menu>li>a:hover,.menu>li:focus-within>a,.mega a:hover{color:var(--accent-strong)}
+.menu>li.has-mega>a::after{transition:transform .18s var(--ease-out)}
 
 /* ---------- Buttons ---------- */
 .btn:hover{transform:translateY(-3px);box-shadow:var(--sh-btn-hover)}
@@ -95,7 +94,8 @@
 
 /* ---------- Neu: Navigation-Telefon, Expertise, Expand-Kacheln, Zertifikate, Banner, Info-Leiste ---------- */
 .nav-tel,.infobar__item,.kt-list a{transition:background .18s var(--ease-out),box-shadow .18s var(--ease-out),color .18s var(--ease-out),transform var(--t-hover) var(--ease-out)}
-.nav-tel:hover,.infobar__item:hover{background:var(--nav-hover),var(--nav-hover-base);color:var(--accent-strong);box-shadow:inset 0 0 0 1px var(--nav-hover-line)}
+.infobar__item:hover{background:var(--nav-hover),var(--nav-hover-base);color:var(--accent-strong);box-shadow:inset 0 0 0 1px var(--nav-hover-line)}
+.nav-tel:hover{color:var(--accent-strong);box-shadow:inset 0 0 0 1.5px var(--accent-strong)}   /* nur Rahmen und Schrift färben sich, kein Glas */
 .infobar__termin:hover{background:var(--grad-accent);color:var(--on-accent);box-shadow:var(--sh-btn)}   /* mobile Floating-Bar: bleibt orange */
 .kt-list a:hover{background:var(--nav-hover),var(--glass-btn-light);color:var(--accent-strong)}
 
@@ -171,9 +171,9 @@
    UNTERSEITEN
    ===================================================================== */
 
-/* Aktiver Menüpunkt (aria-current): dezent, gleiche Optik wie Hover. „true“ = Elternpunkt einer Unterseite */
-.menu>li>a[aria-current]{background:var(--nav-hover),var(--nav-hover-base);color:var(--accent-strong);box-shadow:inset 0 0 0 1px var(--nav-hover-line)}
-.submenu a[aria-current]{background:var(--nav-hover),var(--nav-hover-base);color:var(--accent-strong)}
+/* Aktiver Menüpunkt (aria-current): Schriftfarbe plus 2 px Unterstreichung mit Abstand. „true“ = Elternpunkt einer Unterseite */
+.menu>li>a[aria-current],.mega a[aria-current]{color:var(--accent-strong)}
+.menu>li>a[aria-current]{text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:6px}
 
 /* Galerie: Bild zoomt leicht, Lupe erscheint */
 .steps__open img{transition:transform .5s var(--ease-out);will-change:transform}

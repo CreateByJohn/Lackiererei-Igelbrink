@@ -34,6 +34,26 @@
   });
 })();
 
+// Mega-Menü „Serviceleistungen“ (Desktop): öffnet per CSS bei Hover und :focus-within.
+// Escape schließt es (Klasse is-mega-closed), der Fokus springt auf den Menüpunkt zurück.
+// Geöffnet werden kann es wieder, sobald Maus oder Fokus den Menüpunkt verlassen haben.
+(function () {
+  var items = document.querySelectorAll('.menu > li.has-mega');
+  items.forEach(function (li) {
+    var link = li.querySelector('a');
+    li.addEventListener('keydown', function (e) {
+      if (e.key !== 'Escape' || li.classList.contains('is-mega-closed')) return;
+      if (document.getElementById('menu').classList.contains('is-open')) return;   // mobiles Menü: dort schließt die Menü-Logik oben
+      li.classList.add('is-mega-closed');
+      link.focus();
+    });
+    li.addEventListener('mouseleave', function () { li.classList.remove('is-mega-closed'); });
+    li.addEventListener('focusout', function (e) {
+      if (!li.contains(e.relatedTarget)) li.classList.remove('is-mega-closed');
+    });
+  });
+})();
+
 // Leistungs-Karten: equalize() sorgt dafür, dass Glas-Kacheln und Listen nebeneinander gleich hoch sind.
 (function () {
   var grid = document.querySelector('.cards');
