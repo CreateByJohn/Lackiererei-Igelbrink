@@ -985,3 +985,12 @@ html:has(.lightbox[open]){overflow:hidden}
   .offer__link::after{display:none}
   .kt-actions .btn,.process__cta .btn{flex:1 1 100%}
 }
+
+/* ---------- Logo-Wasserzeichen auf eigenen Bildkacheln ----------
+   Eigenes Element <span class="wm">, kein Pseudo-Element: die Kacheln nutzen ::after schon für Verläufe.
+   Nur auf eigenen Fotos, nicht auf Stockbildern, Zertifikaten, Partner-Logos, Porträts, Seitenköpfen und Projekten. */
+.svc__media,.process__media,.steps__item,.media,.about__pic{position:relative}
+.wm{position:absolute;right:14px;top:14px;z-index:2;width:var(--wm-w);height:var(--wm-h);pointer-events:none;
+  background:url("../assets/img/141-logo-igelbrink-hell.svg") no-repeat right center/contain;opacity:var(--wm-opacity);filter:var(--wm-shadow)}
+.sm-tile .wm{top:auto;bottom:26px;right:26px;width:calc(var(--wm-w) * 1.17);height:calc(var(--wm-h) * 1.17)}   /* Social: unten rechts */
+@media (max-width:760px){.sm-tile .wm{top:84px;bottom:auto;right:20px}}   /* mobil oben unter dem Badge „ohne Ton“ */
