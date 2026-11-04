@@ -959,7 +959,7 @@ html:has(.lightbox[open]){overflow:hidden}
 .cards--4 .svc--link .glass-tile p{font-size:.92rem}
 /* Infoboxen: eine Komponente (.fact), gleiche Höhe je Reihe, Symbol oben links, Titel, Text, Hinweis unten, orange Oberkante */
 .facts--even{grid-auto-rows:1fr;gap:18px}
-.facts--even .fact{min-height:var(--fact-min);padding:24px 24px 22px;gap:6px;border-top:3px solid var(--accent)}
+.facts--even .fact{min-height:var(--fact-min);padding:24px 24px 22px;gap:6px}
 .facts--even .fact strong{font-size:1.25rem}
 .facts--even .fact>span:not([class]){font-size:.98rem;line-height:1.5}
 .facts--even .fact .draft-note{margin-top:auto}
@@ -1009,7 +1009,8 @@ html:has(.lightbox[open]){overflow:hidden}
 
 /* ---------- Bildfuß auf eigenen Fotos: Übergang in Logo-Navy und Logo Orange/Weiß mittig unten (ersetzt das Wasserzeichen oben rechts) ----------
    Eigenes Element <span class="wm">, kein Pseudo-Element: die Kacheln nutzen ::after schon für Verläufe. Es wird zur Fußfläche über die volle Breite.
-   Logo nur auf eigenen Fotos, nicht auf Stock-/KI-Bildern, Zertifikaten, Partner-Logos, Porträts, Hero/Seitenköpfen und Projekten. */
+   Auf allen Bildkacheln mit Foto oder Platzhalter (auch Stock-/KI-Bilder und Porträts, seit Runde 5b).
+   Nicht auf Hero/Seitenköpfen, Projekten, Zertifikaten, Partner-Logos und Karriere-Banner. */
 .svc__media,.process__media,.steps__item,.media{position:relative}
 .wm{position:absolute;left:0;right:0;bottom:0;z-index:1;height:var(--foot-h);pointer-events:none;
   background:var(--foot-logo) no-repeat center bottom var(--foot-logo-gap)/var(--foot-logo-w) auto,var(--foot-grad)}
@@ -1026,3 +1027,13 @@ html:has(.lightbox[open]){overflow:hidden}
 .sm-tile .wm{height:62%}
 .sm-tile__top,.sm-tile__foot{position:relative;z-index:2}
 .sm-tile{padding-bottom:calc(var(--foot-logo-gap) + var(--foot-logo-h) + 22px)}
+/* Porträtkarten Startseite (Über uns): Logo unter Name und Rolle, die Bildunterschrift rückt darüber.
+   .wm liegt über der Bildunterschrift (z-index 1), trägt deshalb hier nur das Logo. */
+.ab2__person figcaption{padding-bottom:calc(var(--foot-logo-gap) + var(--foot-logo-h) + 12px)}
+.ab2__person .wm{background:var(--foot-logo) no-repeat center bottom var(--foot-logo-gap)/var(--foot-logo-w) auto}   /* Verlauf liefert die Bildunterschrift, .wm trägt nur das Logo */
+@media (max-width:520px){.ab2__person{--foot-logo-w:68px;--foot-logo-h:18px;--foot-logo-gap:10px}}
+
+/* ---------- Orange Oberkante auf weißen Inhaltskarten mit Text ----------
+   Infoboxen, Prozess-Karten, Kundenstimmen, Kontakt-Karten, Vor/Zurück-Karten, Ansprechpartnerin, Bewerbungs-Kasten.
+   Nicht auf Formularen und der Kontaktfläche „So erreichen Sie uns“. */
+.fact,.process__step,.q,.kt-card,.pnav__card,.contact-person,.apply__alt{border-top:var(--card-top)}
