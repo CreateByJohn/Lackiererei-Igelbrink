@@ -168,6 +168,8 @@
   --ease-out:cubic-bezier(.22,1,.36,1);   /* schneller Start, weiches Ende: wirkt direkt, ohne zu hängen */
   --t-hover:.22s;            /* Hover: Buttons, Kacheln, Zeilen */
   --t-split:.36s;            /* Aufklappen (Akkordeon .exp) */
+  --hero-zoom:1.08;          /* Slow Zoom Hero (Startseite): Endgröße */
+  --hero-zoom-dur:24s;       /* Slow Zoom Hero: Dauer, läuft einmal beim Laden und bleibt dann stehen */
 
   /* Layout */
   --wrap:1200px;

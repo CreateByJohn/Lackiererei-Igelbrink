@@ -134,6 +134,14 @@ a.kx__row:hover b,a.kx__row:hover address{color:var(--accent-strong)}
 @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(255,255,255,.7)}100%{box-shadow:0 0 0 10px rgba(255,255,255,0)}}
 .career__dot{animation:pulse 1.6s var(--ease-out) infinite}
 
+/* ---------- Hero (nur Startseite): Slow Zoom ----------
+   Zoomt einmal beim Laden langsam von 1 auf --hero-zoom und bleibt dann stehen. Über die eigene Eigenschaft „scale“, nicht transform,
+   damit der Parallax (translate über --py, js/main.js) weiterläuft. Drehpunkt passend zur object-position. Keine Seitenköpfe der Unterseiten. */
+@media (prefers-reduced-motion:no-preference){
+  @keyframes hero-zoom{from{scale:1}to{scale:var(--hero-zoom)}}
+  .hero__img{transform-origin:50% 45%;animation:hero-zoom var(--hero-zoom-dur) cubic-bezier(.22,.6,.36,1) both}
+}
+
 /* ---------- Einblenden beim Scrollen ----------
    Ruhezustand bleibt sichtbar, nur der Einstieg wird animiert.
    Nur mit Browser-Unterstützung und nur ohne Wunsch nach reduzierter Bewegung. */
