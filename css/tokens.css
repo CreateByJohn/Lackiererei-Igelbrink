@@ -149,6 +149,7 @@
   --sh-row-hover:0 12px 28px -10px rgba(0,0,0,.45);
   --sh-glass-logo:inset 0 0 0 1px var(--glass-logo-line),0 12px 28px -14px rgba(22,30,49,.45);
   --sh-ico:var(--sh-2),inset 0 0 0 1px var(--line);
+  --sh-brand:drop-shadow(0 1px 1px rgba(31,42,68,.30)) drop-shadow(0 3px 8px rgba(31,42,68,.16));   /* Logo in der Navigation */
 
   /* Radien */
   --radius:20px;
