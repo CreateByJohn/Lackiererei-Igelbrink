@@ -613,7 +613,7 @@ html:has(.contact[open]){overflow:hidden}   /* Seite dahinter scrollt nicht mit 
   .sm-tile{height:360px}
 }
 @media (max-width:560px){
-  .career__actions .btn{flex:1 0 auto}   /* nie schmaler als der Text (Archivo ist breiter) */
+  .career__actions .btn{flex:1 0 auto}   /* nie schmaler als der Text */
   .exp__pad p{padding-left:18px}
 }
 

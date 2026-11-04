@@ -7,7 +7,7 @@ img{display:block;max-width:100%;height:auto}
 
 h1,h2,h3,h4{font-family:var(--f-display);font-weight:700;line-height:1.08;margin:0;text-wrap:balance;letter-spacing:.005em}
 h1{font-size:calc(clamp(2.5rem,6vw,4.6rem) * var(--h-scale))}
-/* Archivo breit (--h-stretch) für Überschriften, Buttons, Menü und Augenbrauen; Fließtext bleibt in normaler Breite */
+/* Breite (--h-stretch) für Überschriften, Buttons, Menü und Augenbrauen; mit Schibsted Grotesk 100 %, die Regel bleibt für eine spätere Breiten-Schrift */
 :is(h1,h2,h3,h4,.btn,.menu,.eyebrow){font-stretch:var(--h-stretch)}
 h2{font-size:clamp(1.9rem,3.8vw,2.8rem)}
 h3{font-size:1.5rem}

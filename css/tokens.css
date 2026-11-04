@@ -1,23 +1,24 @@
 /* Design-Tokens: Schriften, Farben, Schatten, Radien, Bewegung.
    Nur heller Modus. Komponenten verwenden ausschließlich diese Variablen. */
 
-/* Archivo (Omnibus-Type, SIL OFL 1.1, Lizenz assets/fonts/OFL-archivo.txt), selbst gehostet als variable Schrift
-   mit Gewicht (100–900) und Breite (62–125 %). Dateien und unicode-range aus @fontsource-variable/archivo. */
-@font-face{font-family:"Archivo";font-style:normal;font-weight:100 900;font-stretch:62% 125%;font-display:swap;
-  src:url("../assets/fonts/archivo-latin-ext-standard-normal.woff2") format("woff2");
+/* Schibsted Grotesk (Bakken & Bæck für Schibsted, SIL OFL 1.1, Lizenz assets/fonts/OFL-schibsted-grotesk.txt), selbst gehostet
+   als variable Schrift mit Gewicht (400–900), ohne Breitenachse. Dateien und unicode-range aus @fontsource-variable/schibsted-grotesk 5.3.0.
+   Beide Dateien werden gebraucht: das große ẞ steckt nur in latin-ext. Kein Italic (wird auf der Seite nicht genutzt). */
+@font-face{font-family:"Schibsted Grotesk";font-style:normal;font-weight:400 900;font-display:swap;
+  src:url("../assets/fonts/schibsted-grotesk-latin-ext-wght-normal.woff2") format("woff2");
   unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
-@font-face{font-family:"Archivo";font-style:normal;font-weight:100 900;font-stretch:62% 125%;font-display:swap;
-  src:url("../assets/fonts/archivo-latin-standard-normal.woff2") format("woff2");
+@font-face{font-family:"Schibsted Grotesk";font-style:normal;font-weight:400 900;font-display:swap;
+  src:url("../assets/fonts/schibsted-grotesk-latin-wght-normal.woff2") format("woff2");
   unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
 
 :root{
   color-scheme:light;
 
   /* Schriften */
-  --f-display:"Archivo",Arial,sans-serif;
-  --f-body:"Archivo",system-ui,-apple-system,"Segoe UI",Arial,sans-serif;
-  --h-stretch:112%;          /* Überschriften, Buttons, Menü: breit wie Fahrzeugschriftzüge. Fließtext bleibt 100 % */
-  --h-scale:.84;             /* breite Schrift läuft weiter als die alte Condensed: große Überschriften damit verkleinern */
+  --f-display:"Schibsted Grotesk",Arial,sans-serif;
+  --f-body:"Schibsted Grotesk",system-ui,sans-serif;
+  --h-stretch:100%;          /* Schibsted hat keine Breitenachse; Token bleibt, falls später wieder eine Breiten-Schrift kommt */
+  --h-scale:.94;             /* große Überschriften leicht verkleinern */
 
   /* Flächen und Text */
   --bg:#f4f6f9;
