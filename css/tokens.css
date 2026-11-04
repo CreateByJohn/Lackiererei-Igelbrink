@@ -241,4 +241,5 @@
   --grad-process-ph:linear-gradient(135deg,var(--accent-soft),var(--sk-1));   /* neutrale Fläche, solange das eigene Foto fehlt */
   --map-min-h:360px;                        /* Mindesthöhe der Karte im Kontakt-Bereich der Startseite */
   --fab-h:64px;                             /* Höhe der Floating-Bar unten (mobil) */
+  --ab2-people-h:clamp(360px,34vw,470px);   /* Startseite Über uns: Höhe der Porträt-Reihe (Expand on Hover), bis 900 px siehe components.css */
 }

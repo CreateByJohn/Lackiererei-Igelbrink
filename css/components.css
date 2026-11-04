@@ -867,10 +867,12 @@ html:has(.lightbox[open]){overflow:hidden}
 .ab2__text{display:grid;gap:20px;justify-items:start}
 .ab__lead{margin:0;font-family:var(--f-display);font-stretch:var(--h-stretch);font-weight:500;font-size:clamp(1.35rem,2.2vw,1.75rem);line-height:1.25;color:var(--heading)}
 .ab2__text>p:not(.ab__lead){margin:0;color:var(--fg-soft);max-width:54ch}
-.ab2__people{display:grid;grid-template-columns:1fr 1fr;gap:16px}
-.ab2__person{margin:0;position:relative;overflow:hidden;border-radius:var(--radius-lg);aspect-ratio:4/5;background:var(--navy);box-shadow:var(--sh-3)}
-.ab2__person:nth-child(2){translate:0 32px}   /* zweite Karte versetzt */
-.ab2__person img{width:100%;height:100%;object-fit:cover}
+/* Porträt-Reihe als Flex mit fester Höhe (--ab2-people-h): Grundlage für „Expand on Hover“ (Vorbild Skiper UI 52, Eigenbau nur CSS),
+   die Karte unter der Maus wird breiter, die andere schmaler (Hover-Regeln in effects.css). Kein Seitenverhältnis mehr. */
+.ab2__people{display:flex;gap:16px;height:var(--ab2-people-h)}
+.ab2__person{margin:0;position:relative;overflow:hidden;flex:1 1 0;min-width:0;height:100%;border-radius:var(--radius-lg);background:var(--navy);box-shadow:var(--sh-3)}
+.ab2__person:nth-child(2){translate:0 32px;height:calc(100% - 32px)}   /* zweite Karte versetzt, dafür niedriger: beide enden unten bündig */
+.ab2__person img{width:100%;height:100%;object-fit:cover;object-position:50% 25%}
 .ab2__person figcaption{position:absolute;left:0;right:0;bottom:0;display:grid;gap:4px;justify-items:start;padding:40px 18px 16px;background:var(--grad-portrait);color:var(--on-image)}
 .ab2__person b{display:block;font-family:var(--f-display);font-stretch:var(--h-stretch);font-size:1.1rem;line-height:1.15}
 .ab2__person small{color:var(--on-image-muted);font-size:.88rem;hyphens:auto;-webkit-hyphens:auto}   /* „Fahrzeuglackierermeister“ darf in schmalen Karten trennen */
@@ -882,13 +884,13 @@ html:has(.lightbox[open]){overflow:hidden}
 .ab2__band span{font-size:.92rem;color:var(--muted)}
 .ab2__band .draft-note{display:inline-block;margin-left:4px}
 @media (max-width:900px){
+  :root{--ab2-people-h:clamp(300px,70vw,440px)}
   .ab2{grid-template-columns:minmax(0,1fr)}
   .ab2__band{grid-template-columns:1fr 1fr;gap:16px 0}
   .ab2__band li:nth-child(3){border-left:0;padding-left:0}
 }
 @media (max-width:520px){
-  .ab2__person b{font-size:1rem}   /* „Eszter Gerlach-Igelbrink“ soll nicht unschön umbrechen */
-  .ab2__person:nth-child(2){translate:0 16px}
+  .ab2__person:nth-child(2){translate:0 16px;height:calc(100% - 16px)}
   .ab2__person figcaption{padding:32px 12px 12px}
   .ab2__person small{font-size:.8rem}
 }
