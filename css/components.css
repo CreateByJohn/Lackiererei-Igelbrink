@@ -1002,7 +1002,7 @@ html:has(.lightbox[open]){overflow:hidden}
 }
 @media (max-width:560px){
   .facts,.facts--3,.facts--4{grid-template-columns:minmax(0,1fr)}
-  .facts--even.facts--3,.facts--even.facts--4{grid-auto-rows:auto}
+  .facts--even.facts--3,.facts--even.facts--4{grid-template-columns:minmax(0,1fr);grid-auto-rows:auto}
   .facts--even .fact{min-height:0}
   .kt-actions .btn,.process__cta .btn{flex:1 1 100%}
 }
