@@ -68,10 +68,13 @@
   --star-empty:#c9d0dc;
   --star-on-dark:rgba(255,255,255,.35);
   --sk-1:#e9edf3;
-  --wm-w:72px;               /* Logo-Wasserzeichen auf eigenen Bildkacheln */
-  --wm-h:19px;
-  --wm-opacity:.85;
-  --wm-shadow:drop-shadow(0 1px 3px rgba(17,23,38,.55));
+  /* Bildfuß auf eigenen Fotos: Übergang in den Blauton des Logos (#1F2A44 = --navy) und Logo Orange/Weiß mittig unten */
+  --foot-grad:linear-gradient(0deg,rgba(31,42,68,1) 0%,rgba(31,42,68,.92) 16%,rgba(31,42,68,.55) 36%,rgba(31,42,68,0) 60%);
+  --foot-h:58%;              /* Höhe der Verlaufsfläche (außerhalb der Bildkacheln) */
+  --foot-logo:url("../assets/img/141-logo-igelbrink-hell.svg");
+  --foot-logo-w:104px;       /* Logo 3,86 : 1 */
+  --foot-logo-h:27px;
+  --foot-logo-gap:16px;      /* Abstand Logo zum unteren Rand */
   --mute-badge:rgba(17,23,38,.62);   /* Badge „ohne Ton“ auf den Social-Videos */
   --quote-mark:var(--accent-soft);   /* Anführungszeichen der Zitatkarten */
   --avatar:#e3e8f0;
