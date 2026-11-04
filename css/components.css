@@ -1010,7 +1010,7 @@ html:has(.lightbox[open]){overflow:hidden}
 /* ---------- Bildfuß auf eigenen Fotos: Übergang in Logo-Navy und Logo Orange/Weiß mittig unten (ersetzt das Wasserzeichen oben rechts) ----------
    Eigenes Element <span class="wm">, kein Pseudo-Element: die Kacheln nutzen ::after schon für Verläufe. Es wird zur Fußfläche über die volle Breite.
    Auf allen Bildkacheln mit Foto oder Platzhalter (auch Stock-/KI-Bilder und Porträts, seit Runde 5b).
-   Nicht auf Hero/Seitenköpfen, Projekten, Zertifikaten, Partner-Logos und Karriere-Banner. */
+   Nicht auf Hero/Seitenköpfen, Projekten, Zertifikaten, Partner-Logos, Karriere-Banner und den Porträtkarten der Startseite (Über uns). */
 .svc__media,.process__media,.steps__item,.media{position:relative}
 .wm{position:absolute;left:0;right:0;bottom:0;z-index:1;height:var(--foot-h);pointer-events:none;
   background:var(--foot-logo) no-repeat center bottom var(--foot-logo-gap)/var(--foot-logo-w) auto,var(--foot-grad)}
@@ -1019,6 +1019,7 @@ html:has(.lightbox[open]){overflow:hidden}
 .svc__media .wm{background:var(--foot-logo) no-repeat center bottom var(--foot-logo-gap)/var(--foot-logo-w) auto}
 .svc__media .glass-tile{bottom:calc(var(--foot-logo-gap) + var(--foot-logo-h) + 14px)}
 /* Kleine Bilder (Prozess-Karten, Galerien): kleineres Logo */
+.process__body::before{z-index:2}   /* Nummernkreis liegt über dem Bildfuß der Prozess-Karten */
 .process__media .wm,.steps__item .wm{--foot-logo-w:68px;--foot-logo-h:18px;--foot-logo-gap:10px;--foot-h:70%}
 /* Galerie: Fuß folgt den runden Ecken des Bildes, die Lupe bleibt über dem Fuß */
 .steps__item .wm{border-radius:0 0 var(--radius-tile) var(--radius-tile)}
@@ -1027,11 +1028,6 @@ html:has(.lightbox[open]){overflow:hidden}
 .sm-tile .wm{height:62%}
 .sm-tile__top,.sm-tile__foot{position:relative;z-index:2}
 .sm-tile{padding-bottom:calc(var(--foot-logo-gap) + var(--foot-logo-h) + 22px)}
-/* Porträtkarten Startseite (Über uns): Logo unter Name und Rolle, die Bildunterschrift rückt darüber.
-   .wm liegt über der Bildunterschrift (z-index 1), trägt deshalb hier nur das Logo. */
-.ab2__person figcaption{padding-bottom:calc(var(--foot-logo-gap) + var(--foot-logo-h) + 12px)}
-.ab2__person .wm{background:var(--foot-logo) no-repeat center bottom var(--foot-logo-gap)/var(--foot-logo-w) auto}   /* Verlauf liefert die Bildunterschrift, .wm trägt nur das Logo */
-@media (max-width:520px){.ab2__person{--foot-logo-w:68px;--foot-logo-h:18px;--foot-logo-gap:10px}}
 
 /* ---------- Orange Oberkante auf weißen Inhaltskarten mit Text ----------
    Infoboxen, Prozess-Karten, Kundenstimmen, Kontakt-Karten, Vor/Zurück-Karten, Ansprechpartnerin, Bewerbungs-Kasten.
