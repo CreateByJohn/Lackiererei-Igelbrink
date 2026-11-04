@@ -768,15 +768,6 @@ html:has(.lightbox[open]){overflow:hidden}
   .pnav__card--next small{justify-content:flex-start}
 }
 
-/* ---------- Über uns: Team ---------- */
-.team{list-style:none;margin:0;padding:0;display:grid;gap:16px}
-.team__card{display:grid;grid-template-columns:var(--team-img) minmax(0,1fr);grid-template-rows:auto 1fr;column-gap:20px;row-gap:6px;align-items:start;
-  padding:18px;background:var(--surface);border-radius:var(--radius);box-shadow:var(--sh-2)}
-.team__img{grid-row:1 / span 2}
-.team__img img{width:var(--team-img);height:var(--team-img);border-radius:var(--radius-tile);object-fit:cover;background:var(--sk-1)}
-.team__card h3{align-self:end;font-size:1.5rem;color:var(--heading)}
-.team__card p{color:var(--fg-soft)}
-
 /* ---------- Karriere-Seite: Banner als Seitenkopf, darunter die Inhalte der Live-Seite ---------- */
 .career--head{margin-top:calc(var(--hdr) * -1);padding-top:calc(var(--hdr) + clamp(40px,7vw,96px))}
 .career--head .career__title{font-size:calc(clamp(2.6rem,6vw,4.8rem) * var(--h-scale))}
@@ -836,8 +827,6 @@ html:has(.lightbox[open]){overflow:hidden}
 @media (max-width:560px){
   .cards--4,.steps,.steps--4,.projects,.split--even{grid-template-columns:minmax(0,1fr)}
   .page-hero .btn{width:100%}
-  .team__card{grid-template-columns:96px minmax(0,1fr)}
-  .team__img img{width:96px;height:96px}
   .flow li{padding-left:22px;padding-top:70px}
 }
 
@@ -872,8 +861,6 @@ html:has(.lightbox[open]){overflow:hidden}
 .fact strong{font-family:var(--f-display);font-weight:700;font-size:1.35rem;line-height:1.15;color:var(--heading)}
 .fact>span:not([class]){color:var(--fg-soft)}
 .fact .draft-note{margin-top:8px}
-.about__pic{margin:0;overflow:hidden;aspect-ratio:1;border-radius:var(--radius);background:var(--grad-ph);box-shadow:var(--sh-2)}
-.about__pic img{width:100%;height:100%;object-fit:cover}
 
 /* ---------- Über uns (Startseite): Intro „Inhaber zuerst“. Aussage links, beide Inhaber als Porträtkarten rechts, Fakten als Band ---------- */
 .ab2{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:clamp(28px,5vw,64px);align-items:center}
@@ -950,24 +937,30 @@ html:has(.lightbox[open]){overflow:hidden}
 .kt-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px}
 
 /* ---------- ueber-uns.html: Team, Betrieb in Bildern, Angebot, Karriere-Kasten, FAQ ---------- */
-.team-wrap{display:grid;gap:14px;justify-items:center}
-.team-wrap .team{grid-template-columns:repeat(2,minmax(0,1fr));width:100%;max-width:900px}
-.team-wrap>.draft-note{align-self:auto;margin-top:0}
-.pics{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
-.pics .about__pic{aspect-ratio:4/3}
-.about__pic--ph{display:grid;place-content:center;justify-items:center;gap:10px;background:var(--grad-process-ph);color:var(--accent-strong);box-shadow:inset 0 0 0 1px var(--line)}
-.about__pic--ph svg{width:40px;height:40px;opacity:.75}
-.about__pic--ph figcaption{font-family:var(--f-display);font-weight:700;font-size:1.25rem;color:var(--heading)}
-.pics__note{display:inline-block;margin-top:14px}
-.offer{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
-.offer__link{display:grid;grid-template-columns:auto minmax(0,1fr) auto;align-items:center;gap:16px;height:100%;padding:20px 22px;
-  background:var(--surface);border-radius:var(--radius);box-shadow:var(--sh-2);color:var(--fg-soft);text-decoration:none}
-.offer__link::after{content:"";width:.6em;height:.6em;border-top:2.5px solid var(--accent-strong);border-right:2.5px solid var(--accent-strong);transform:rotate(45deg);margin-right:4px}   /* Pfeil wie bei .btn */
-.offer__ico{display:grid;place-items:center;width:48px;height:48px;border-radius:var(--radius-md);background:var(--accent-soft);color:var(--accent-strong)}
-.offer__ico svg{width:24px;height:24px}
-.offer__txt{display:grid;gap:4px}
-.offer__txt strong{font-family:var(--f-display);font-weight:700;font-size:1.35rem;line-height:1.15;color:var(--heading)}
-.offer__txt span{font-size:.96rem;line-height:1.5}
+/* Bildkacheln: eine Komponente für alles mit Bild (.svc.svc--link wie Schwerpunkte und service.html) = Foto, Navy-Fuß, Glaskachel mit Symbol,
+   Titel, Kurztext, ggf. Button. Unterschiede nur über das Seitenverhältnis: Team (--tile-portrait), Betrieb in Bildern (--tile-pic). */
+.tiles{display:grid;gap:22px}
+.tiles--2{grid-template-columns:repeat(2,minmax(0,1fr));max-width:900px;margin-inline:auto}
+.tiles--3{grid-template-columns:repeat(3,minmax(0,1fr))}
+.tiles__note{display:table;margin:14px auto 0}
+.svc--portrait .svc__media{aspect-ratio:var(--tile-portrait)}
+.svc--portrait .svc__img img{object-position:50% 20%}
+.svc--pic .svc__media{aspect-ratio:var(--tile-pic)}
+.svc--pic .glass-tile{padding:28px 16px 14px}
+.svc--pic .glass-tile h3{font-size:1.25rem}
+/* Platzhalter-Kachel (Foto folgt): großes Symbol, helle Glaskachel */
+.svc__media--ph{display:grid;place-items:center}
+.svc__ph{position:absolute;inset:0;display:grid;place-items:center;padding-bottom:18%;color:var(--accent-strong);opacity:.35}
+.svc__ph svg{width:56px;height:56px;fill:none;stroke:currentColor;stroke-width:1.4}
+.svc__media--ph .glass-tile{color:var(--heading);text-shadow:none;background:var(--glass-tile-light)}
+.svc__media--ph .glass-tile p{color:var(--fg-soft)}
+.cards--4 .svc--link .glass-tile p{font-size:.92rem}
+/* Infoboxen: eine Komponente (.fact), gleiche Höhe je Reihe, Symbol oben links, Titel, Text, Hinweis unten, orange Oberkante */
+.facts--even{grid-auto-rows:1fr;gap:18px}
+.facts--even .fact{min-height:var(--fact-min);padding:24px 24px 22px;gap:6px;border-top:3px solid var(--accent)}
+.facts--even .fact strong{font-size:1.25rem}
+.facts--even .fact>span:not([class]){font-size:.98rem;line-height:1.5}
+.facts--even .fact .draft-note{margin-top:auto}
 .offer__more{display:flex;justify-content:center;margin-top:clamp(20px,3vw,28px)}
 .callout--work{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:clamp(24px,4vw,56px);align-items:center;padding:clamp(26px,4vw,48px);border-radius:var(--radius-lg)}
 .callout--work__text{display:grid;gap:14px;justify-items:start}
@@ -992,10 +985,13 @@ html:has(.lightbox[open]){overflow:hidden}
   .facts--3,.facts--4{grid-template-columns:repeat(2,minmax(0,1fr))}
 }
 @media (max-width:980px){
-  .callout--work,.offer,.apply{grid-template-columns:minmax(0,1fr)}
-  .pics{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .callout--work,.apply{grid-template-columns:minmax(0,1fr)}
+  .tiles--3{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .facts--even.facts--3,.facts--even.facts--4{grid-template-columns:repeat(2,minmax(0,1fr))}
 }
 @media (max-width:640px){
+  .tiles--2,.tiles--3{grid-template-columns:minmax(0,1fr)}
+  .svc--portrait .svc__media{aspect-ratio:4/4.4}
   .process{grid-template-columns:minmax(0,1fr)}
   .process__step{grid-template-columns:112px minmax(0,1fr);grid-template-rows:auto}
   .process__media{aspect-ratio:auto;min-height:112px}
@@ -1003,16 +999,16 @@ html:has(.lightbox[open]){overflow:hidden}
   .process__body::before{position:static;width:36px;height:36px;margin-bottom:4px;font-size:1.1rem;box-shadow:none}
 }
 @media (max-width:560px){
-  .facts,.facts--3,.facts--4,.pics,.team-wrap .team{grid-template-columns:minmax(0,1fr)}
-  .offer__link{grid-template-columns:auto minmax(0,1fr);padding:18px}
-  .offer__link::after{display:none}
+  .facts,.facts--3,.facts--4{grid-template-columns:minmax(0,1fr)}
+  .facts--even.facts--3,.facts--even.facts--4{grid-auto-rows:auto}
+  .facts--even .fact{min-height:0}
   .kt-actions .btn,.process__cta .btn{flex:1 1 100%}
 }
 
 /* ---------- Bildfuß auf eigenen Fotos: Übergang in Logo-Navy und Logo Orange/Weiß mittig unten (ersetzt das Wasserzeichen oben rechts) ----------
    Eigenes Element <span class="wm">, kein Pseudo-Element: die Kacheln nutzen ::after schon für Verläufe. Es wird zur Fußfläche über die volle Breite.
    Logo nur auf eigenen Fotos, nicht auf Stock-/KI-Bildern, Zertifikaten, Partner-Logos, Porträts, Hero/Seitenköpfen und Projekten. */
-.svc__media,.process__media,.steps__item,.media,.about__pic{position:relative}
+.svc__media,.process__media,.steps__item,.media{position:relative}
 .wm{position:absolute;left:0;right:0;bottom:0;z-index:1;height:var(--foot-h);pointer-events:none;
   background:var(--foot-logo) no-repeat center bottom var(--foot-logo-gap)/var(--foot-logo-w) auto,var(--foot-grad)}
 /* Bildkacheln (.svc__media): Navy-Fuß auf ALLEN Kacheln (auch Stockbild, Porträt, Platzhalter), damit alle Glaskacheln gleich hoch sitzen.

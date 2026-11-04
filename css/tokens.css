@@ -99,6 +99,7 @@
   --glass-btn-light:rgba(31,42,68,.06);         /* Glas-Button auf hellen Flächen */
   --glass-btn-light-line:rgba(31,42,68,.22);
   --glass-tile-tint:rgba(17,23,38,.22); /* leichtere Tönung der Glas-Kacheln auf den Kartenbildern */
+  --glass-tile-light:rgba(255,255,255,.55);   /* helle Glaskachel auf Platzhalter-Kacheln (Foto folgt) */
   --toggle-bg:rgba(255,255,255,.92);
   --logo-tile-bg:#e9edf3;                 /* Grundfläche unter dem unscharfen Logo */
   --glass-logo:rgba(255,255,255,.5);      /* Glasfläche auf den Partner-Kacheln */
@@ -212,7 +213,9 @@
   --steps-gap:clamp(12px,1.6vw,18px);       /* Abstand in der Bildergalerie .steps */
   --lightbox-bg:rgba(10,16,32,.92);         /* Hintergrund der Lightbox */
   --legal-w:72ch;                           /* Spaltenbreite der Rechtstexte */
-  --team-img:132px;                         /* Porträts auf „Über uns“ */
+  --tile-portrait:4/5;                      /* Über uns: Porträt-Kacheln der Inhaber */
+  --tile-pic:5/4;                           /* Über uns: Betrieb in Bildern */
+  --fact-min:178px;                         /* Über uns: Mindesthöhe der Infoboxen */
   /* Projekt-Timeline „Lackstab“ (.steps--rail) und Projekt-Navigation (.pnav) */
   --rail-w:4px;                             /* Breite des Stabs */
   --rail-node:46px;                         /* Knoten mit Schrittnummer */

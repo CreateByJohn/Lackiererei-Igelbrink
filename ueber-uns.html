@@ -9,10 +9,10 @@
 <link rel="canonical" href="https://lackiertechnik-igelbrink.de/ueber-uns">
 <link rel="icon" type="image/png" href="assets/img/13-favicon.png">
 <link rel="preload" href="assets/fonts/schibsted-grotesk-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="css/tokens.css?v=202611041904">
-<link rel="stylesheet" href="css/base.css?v=202611041904">
-<link rel="stylesheet" href="css/components.css?v=202611041904">
-<link rel="stylesheet" href="css/effects.css?v=202611041904">
+<link rel="stylesheet" href="css/tokens.css?v=202611041905">
+<link rel="stylesheet" href="css/base.css?v=202611041905">
+<link rel="stylesheet" href="css/components.css?v=202611041905">
+<link rel="stylesheet" href="css/effects.css?v=202611041905">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -177,7 +177,7 @@
       <p class="eyebrow">Unser Betrieb</p>
       <h2 id="wir-title">Das sind wir</h2>
     </div>
-    <ul class="facts facts--3">
+    <ul class="facts facts--3 facts--even">
       <li class="fact"><span class="fact__ico" aria-hidden="true"><svg><use href="#i-schild"/></svg></span><strong>Meisterbetrieb in Dülmen</strong><span>seit 2022, geführt von Lackierermeister Marko Igelbrink</span></li>
       <li class="fact"><span class="fact__ico" aria-hidden="true"><svg><use href="#i-schluessel"/></svg></span><strong>Freie Full-Service-Werkstatt</strong><span>nicht markengebunden, von der Schadenaufnahme bis zur Übergabe – inklusive Versicherungsabwicklung</span></li>
       <li class="fact"><span class="fact__ico" aria-hidden="true"><svg><use href="#i-team"/></svg></span><strong>Kleines, familiäres Team</strong><span>2 Inhaber, 1 Fachkraft, 2 Auszubildende</span></li>
@@ -188,54 +188,162 @@
     <!-- Alttext: Unser Schwerpunkt liegt auf der professionellen Instandsetzung von Unfall- und Versicherungsschäden für PKW, Wohnwagen und Wohnmobile. Wir sorgen dafür, dass Ihr Fahrzeug nach einem Schaden wieder aussieht wie neu – fachgerecht, termingerecht und mit modernster Lackiertechnik. Zu unseren Leistungen zählen neben der Unfallinstandsetzung von Fahrzeugen auch die Restauration von Old- und Youngtimern sowie verschiedene Serviceleistungen wie Unterbodenversiegelung oder Hohlraumkonservierung. Diesem Service vertrauen neben vielen Stammkunden im Privatbereich mittlerweile auch zahlreiche Kfz-Versicherer und Leasinggesellschaften. Bei allen Fragen rund um die Lackierung sind wir gerne Ihr Ansprechpartner.Kommen Sie vorbei – wir freuen uns darauf, Sie zu überzeugen! -->
   </section>
 
-  <!-- TEAM: nur die beiden Inhaber, keine Fotos von Angestellten -->
+  <!-- TEAM: die beiden Inhaber als Bildkacheln mit Glaskachel (gleiche Komponente wie Schwerpunkte und service.html).
+       Porträts ohne Logo-Fuß. Keine Fotos von Angestellten. -->
   <section class="zone" id="team" aria-labelledby="team-title">
     <div class="sec-head">
       <div class="sec-head__divider" aria-hidden="true"><span class="sec-head__ico"><svg viewBox="0 0 24 24"><use href="#i-team"/></svg></span></div>
       <p class="eyebrow">Team</p>
       <h2 id="team-title">Die Inhaber</h2>
     </div>
-    <div class="team-wrap">
-      <ul class="team">
-        <li class="team__card"><picture class="team__img"><source type="image/webp" srcset="assets/img/129-team-marko-igelbrink-400.webp 400w, assets/img/129-team-marko-igelbrink-800.webp 800w" sizes="160px"><img src="assets/img/129-team-marko-igelbrink-800.jpg" srcset="assets/img/129-team-marko-igelbrink-400.jpg 400w, assets/img/129-team-marko-igelbrink-800.jpg 800w" sizes="160px" width="800" height="800" loading="lazy" decoding="async" alt="Marko Igelbrink"></picture><h3>Marko Igelbrink</h3><p>Geschäftsführer/Inhaber<br>Lackierermeister</p></li>
-        <li class="team__card"><picture class="team__img"><source type="image/webp" srcset="assets/img/130-team-eszter-gerlach-igelbrink-400.webp 400w, assets/img/130-team-eszter-gerlach-igelbrink-800.webp 800w" sizes="160px"><img src="assets/img/130-team-eszter-gerlach-igelbrink-800.jpg" srcset="assets/img/130-team-eszter-gerlach-igelbrink-400.jpg 400w, assets/img/130-team-eszter-gerlach-igelbrink-800.jpg 800w" sizes="160px" width="800" height="800" loading="lazy" decoding="async" alt="Eszter Gerlach-Igelbrink"></picture><h3>Eszter Gerlach-Igelbrink</h3><p>Administration</p></li>
-      </ul>
-      <span class="draft-note draft-note--small">Gemeinsames Foto der Inhaber folgt</span>
+    <div class="tiles tiles--2">
+      <article class="svc svc--link svc--portrait">
+        <div class="svc__media">
+          <picture class="svc__img"><source type="image/webp" srcset="assets/img/129-team-marko-igelbrink-400.webp 400w, assets/img/129-team-marko-igelbrink-800.webp 800w" sizes="(max-width: 640px) calc(100vw - 32px), 420px"><img src="assets/img/129-team-marko-igelbrink-800.jpg" width="800" height="800" loading="lazy" decoding="async" alt="Marko Igelbrink"></picture>
+          <div class="glass-tile">
+            <span class="glass-tile__ico" aria-hidden="true"><svg viewBox="0 0 24 24"><use href="#i-team"/></svg></span>
+            <h3>Marko Igelbrink</h3>
+            <p>Geschäftsführer/Inhaber, Lackierermeister</p>
+          </div>
+        </div>
+      </article>
+      <article class="svc svc--link svc--portrait">
+        <div class="svc__media">
+          <picture class="svc__img"><source type="image/webp" srcset="assets/img/130-team-eszter-gerlach-igelbrink-400.webp 400w, assets/img/130-team-eszter-gerlach-igelbrink-800.webp 800w" sizes="(max-width: 640px) calc(100vw - 32px), 420px"><img src="assets/img/130-team-eszter-gerlach-igelbrink-800.jpg" width="800" height="800" loading="lazy" decoding="async" alt="Eszter Gerlach-Igelbrink"></picture>
+          <div class="glass-tile">
+            <span class="glass-tile__ico" aria-hidden="true"><svg viewBox="0 0 24 24"><use href="#i-team"/></svg></span>
+            <h3>Eszter Gerlach-Igelbrink</h3>
+            <p>Administration</p>
+          </div>
+        </div>
+      </article>
     </div>
+    <span class="draft-note draft-note--small tiles__note">Gemeinsames Foto der Inhaber folgt</span>
   </section>
 
-  <!-- UNSER BETRIEB IN BILDERN: Raster für 3–6 Betriebsfotos. Vorerst vorhandene Werkstattbilder plus zwei neutrale Platzhalter. -->
+  <!-- UNSER BETRIEB IN BILDERN: gleiche Bildkachel mit Glaskachel und Logo-Fuß. Vorerst vorhandene Werkstattbilder plus zwei neutrale Platzhalter. -->
   <section class="zone" id="betrieb" aria-labelledby="betrieb-title">
     <div class="sec-head">
       <div class="sec-head__divider" aria-hidden="true"><span class="sec-head__ico"><svg viewBox="0 0 24 24"><use href="#i-pin"/></svg></span></div>
       <p class="eyebrow">Werkstatt</p>
       <h2 id="betrieb-title">Unser Betrieb in Bildern</h2>
     </div>
-    <div class="pics">
-      <figure class="about__pic"><span class="wm" aria-hidden="true"></span><picture><source type="image/webp" srcset="assets/img/20-service-oldtimer-600.webp 600w, assets/img/20-service-oldtimer-764.webp 764w" sizes="(max-width: 560px) calc(100vw - 32px), (max-width: 980px) calc((100vw - 48px) / 2), 390px"><img src="assets/img/20-service-oldtimer-600.jpg" width="600" height="594" loading="lazy" decoding="async" alt="Grundierter Ferrari in der Lackierkabine"></picture></figure>
-      <figure class="about__pic"><span class="wm" aria-hidden="true"></span><picture><source type="image/webp" srcset="assets/img/24-service-galerie-abklebung-600.webp 600w, assets/img/24-service-galerie-abklebung-1200.webp 1200w" sizes="(max-width: 560px) calc(100vw - 32px), (max-width: 980px) calc((100vw - 48px) / 2), 390px"><img src="assets/img/24-service-galerie-abklebung-600.jpg" width="600" height="450" loading="lazy" decoding="async" alt="Abgeklebtes Fahrzeug, Detailansicht"></picture></figure>
-      <figure class="about__pic"><span class="wm" aria-hidden="true"></span><picture><source type="image/webp" srcset="assets/img/22-service-unfallinstandsetzung-600.webp 600w, assets/img/22-service-unfallinstandsetzung-1200.webp 1200w" sizes="(max-width: 560px) calc(100vw - 32px), (max-width: 980px) calc((100vw - 48px) / 2), 390px"><img src="assets/img/22-service-unfallinstandsetzung-600.jpg" width="600" height="397" loading="lazy" decoding="async" alt="VW Golf bei der Achsvermessung in der Werkstatt"></picture></figure>
-      <figure class="about__pic"><span class="wm" aria-hidden="true"></span><picture><source type="image/webp" srcset="assets/img/04-schwerpunkte-unfallinstandsetzung-600.webp 600w, assets/img/04-schwerpunkte-unfallinstandsetzung-1200.webp 1200w" sizes="(max-width: 560px) calc(100vw - 32px), (max-width: 980px) calc((100vw - 48px) / 2), 390px"><img src="assets/img/04-schwerpunkte-unfallinstandsetzung-600.jpg" width="600" height="450" loading="lazy" decoding="async" alt="Unfallschaden am Heck eines BMW in der Werkstatt"></picture></figure>
-      <figure class="about__pic about__pic--ph"><svg aria-hidden="true"><use href="#i-uhr"/></svg><figcaption>Wartebereich</figcaption></figure>
-      <figure class="about__pic about__pic--ph"><svg aria-hidden="true"><use href="#i-doc"/></svg><figcaption>Büro</figcaption></figure>
+    <div class="tiles tiles--3">
+      <article class="svc svc--link svc--pic">
+        <div class="svc__media"><span class="wm" aria-hidden="true"></span>
+          <picture class="svc__img"><source type="image/webp" srcset="assets/img/20-service-oldtimer-600.webp 600w, assets/img/20-service-oldtimer-764.webp 764w" sizes="(max-width: 640px) calc(100vw - 32px), (max-width: 980px) calc(50vw - 30px), 386px"><img src="assets/img/20-service-oldtimer-600.jpg" width="600" height="594" loading="lazy" decoding="async" alt="Grundierter Ferrari in der Lackierkabine"></picture>
+          <div class="glass-tile">
+            <span class="glass-tile__ico" aria-hidden="true"><svg viewBox="0 0 24 24"><use href="#i-klassik"/></svg></span>
+            <h3>Lackierkabine</h3>
+          </div>
+        </div>
+      </article>
+      <article class="svc svc--link svc--pic">
+        <div class="svc__media"><span class="wm" aria-hidden="true"></span>
+          <picture class="svc__img"><source type="image/webp" srcset="assets/img/24-service-galerie-abklebung-600.webp 600w, assets/img/24-service-galerie-abklebung-1200.webp 1200w" sizes="(max-width: 640px) calc(100vw - 32px), (max-width: 980px) calc(50vw - 30px), 386px"><img src="assets/img/24-service-galerie-abklebung-600.jpg" width="600" height="450" loading="lazy" decoding="async" alt="Abgeklebtes Fahrzeug, Detailansicht"></picture>
+          <div class="glass-tile">
+            <span class="glass-tile__ico" aria-hidden="true"><svg viewBox="0 0 24 24"><use href="#i-schild"/></svg></span>
+            <h3>Vorbereitung</h3>
+          </div>
+        </div>
+      </article>
+      <article class="svc svc--link svc--pic">
+        <div class="svc__media"><span class="wm" aria-hidden="true"></span>
+          <picture class="svc__img"><source type="image/webp" srcset="assets/img/22-service-unfallinstandsetzung-600.webp 600w, assets/img/22-service-unfallinstandsetzung-1200.webp 1200w" sizes="(max-width: 640px) calc(100vw - 32px), (max-width: 980px) calc(50vw - 30px), 386px"><img src="assets/img/22-service-unfallinstandsetzung-600.jpg" width="600" height="397" loading="lazy" decoding="async" alt="VW Golf bei der Achsvermessung in der Werkstatt"></picture>
+          <div class="glass-tile">
+            <span class="glass-tile__ico" aria-hidden="true"><svg viewBox="0 0 24 24"><use href="#i-auto"/></svg></span>
+            <h3>Achsvermessung</h3>
+          </div>
+        </div>
+      </article>
+      <article class="svc svc--link svc--pic">
+        <div class="svc__media"><span class="wm" aria-hidden="true"></span>
+          <picture class="svc__img"><source type="image/webp" srcset="assets/img/04-schwerpunkte-unfallinstandsetzung-600.webp 600w, assets/img/04-schwerpunkte-unfallinstandsetzung-1200.webp 1200w" sizes="(max-width: 640px) calc(100vw - 32px), (max-width: 980px) calc(50vw - 30px), 386px"><img src="assets/img/04-schwerpunkte-unfallinstandsetzung-600.jpg" width="600" height="450" loading="lazy" decoding="async" alt="Unfallschaden am Heck eines BMW in der Werkstatt"></picture>
+          <div class="glass-tile">
+            <span class="glass-tile__ico" aria-hidden="true"><svg viewBox="0 0 24 24"><use href="#i-auto"/></svg></span>
+            <h3>Halle</h3>
+          </div>
+        </div>
+      </article>
+      <article class="svc svc--link svc--pic">
+        <div class="svc__media svc__media--ph">
+          <span class="svc__ph" aria-hidden="true"><svg viewBox="0 0 24 24"><use href="#i-uhr"/></svg></span>
+          <div class="glass-tile">
+            <span class="glass-tile__ico" aria-hidden="true"><svg viewBox="0 0 24 24"><use href="#i-uhr"/></svg></span>
+            <h3>Wartebereich</h3>
+            <span class="draft-note draft-note--small">Foto folgt</span>
+          </div>
+        </div>
+      </article>
+      <article class="svc svc--link svc--pic">
+        <div class="svc__media svc__media--ph">
+          <span class="svc__ph" aria-hidden="true"><svg viewBox="0 0 24 24"><use href="#i-doc"/></svg></span>
+          <div class="glass-tile">
+            <span class="glass-tile__ico" aria-hidden="true"><svg viewBox="0 0 24 24"><use href="#i-doc"/></svg></span>
+            <h3>Büro</h3>
+            <span class="draft-note draft-note--small">Foto folgt</span>
+          </div>
+        </div>
+      </article>
     </div>
-    <span class="draft-note draft-note--small pics__note">Platzhalter: Fotos von Wartebereich, Büro, Spritzkabine und Halle folgen</span>
+    <span class="draft-note draft-note--small tiles__note">Platzhalter: Fotos von Wartebereich, Büro, Spritzkabine und Halle folgen</span>
+    <span class="draft-note draft-note--small tiles__note">Bildtitel (Lackierkabine, Vorbereitung, Achsvermessung, Halle) sind Vorschläge, bitte vom Kunden bestätigen</span>
   </section>
 
-  <!-- WAS WIR ANBIETEN: kompakte Übersicht mit Links auf die Leistungsseiten (Kurztexte aus service.html) -->
+  <!-- WAS WIR ANBIETEN: dieselben Bildkacheln wie auf service.html (Bild, Glaskachel, „Mehr erfahren“) statt Textzeilen -->
   <section class="zone" id="angebot" aria-labelledby="angebot-title">
     <div class="sec-head">
       <div class="sec-head__divider" aria-hidden="true"><span class="sec-head__ico"><svg viewBox="0 0 24 24"><use href="#i-liste"/></svg></span></div>
       <p class="eyebrow">Serviceleistungen</p>
       <h2 id="angebot-title">Was wir anbieten</h2>
     </div>
-    <ul class="offer">
-      <li><a class="offer__link" href="unfallinstandsetzung.html"><span class="offer__ico" aria-hidden="true"><svg><use href="#i-auto"/></svg></span><span class="offer__txt"><strong>Unfallinstandsetzung</strong><span>Karosserie-, Richt- und Lackarbeiten nach Herstellervorgaben – die komplette Abwicklung mit Ihrer Versicherung übernehmen wir.</span></span></a></li>
-      <li><a class="offer__link" href="wohnmobil-service.html"><span class="offer__ico" aria-hidden="true"><svg><use href="#i-caravan"/></svg></span><span class="offer__txt"><strong>Wohnmobil &amp; Caravan</strong><span>Hagelschaden, Riss im GFK oder Delle im Strukturblech – wir bringen Ihr Wohnmobil oder Ihren Wohnwagen wieder in Bestform.</span></span></a></li>
-      <li><a class="offer__link" href="oldtimerlackierung.html"><span class="offer__ico" aria-hidden="true"><svg><use href="#i-klassik"/></svg></span><span class="offer__txt"><strong>Oldtimer-Restauration</strong><span>Originalgetreue Karosserie- und Lackarbeiten mit Liebe zum Detail – Erhaltung statt Austausch, wo immer möglich.</span></span></a></li>
-      <li><a class="offer__link" href="unterbodenschutz.html"><span class="offer__ico" aria-hidden="true"><svg><use href="#i-schild"/></svg></span><span class="offer__txt"><strong>Hohlraumkonservierung und Unterbodenschutz</strong><span>Dauerhafter Schutz vor Rost an Unterboden und Hohlräumen – für den Werterhalt Ihres Fahrzeugs.</span></span></a></li>
-    </ul>
-    <p class="offer__more"><a class="btn btn--glass-light" href="service.html">Alle Leistungen</a></p>
+    <div class="cards cards--4">
+      <article class="svc svc--link ">
+        <div class="svc__media"><span class="wm" aria-hidden="true"></span>
+          <picture class="svc__img"><source type="image/webp" srcset="assets/img/04-schwerpunkte-unfallinstandsetzung-600.webp 600w, assets/img/04-schwerpunkte-unfallinstandsetzung-1200.webp 1200w" sizes="(max-width: 640px) calc(100vw - 32px), (max-width: 1100px) calc(50vw - 30px), 290px"><img src="assets/img/04-schwerpunkte-unfallinstandsetzung-600.jpg" width="600" height="450" loading="lazy" decoding="async" alt="Unfallschaden am Heck eines BMW in der Werkstatt"></picture>
+          <div class="glass-tile">
+            <span class="glass-tile__ico" aria-hidden="true"><svg viewBox="0 0 24 24"><use href="#i-auto"/></svg></span>
+            <h3 id="ang-1">Unfallinstandsetzung</h3>
+            <p>Inklusive kompletter Versicherungsabwicklung.</p>
+            <a class="btn btn--glass btn--small" href="unfallinstandsetzung.html" aria-describedby="ang-1">Mehr erfahren</a>
+          </div>
+        </div>
+      </article>
+      <article class="svc svc--link ">
+        <div class="svc__media"><span class="wm" aria-hidden="true"></span>
+          <picture class="svc__img"><source type="image/webp" srcset="assets/img/05-schwerpunkte-wohnmobil-600.webp 600w, assets/img/05-schwerpunkte-wohnmobil-1080.webp 1080w" sizes="(max-width: 640px) calc(100vw - 32px), (max-width: 1100px) calc(50vw - 30px), 290px"><img src="assets/img/05-schwerpunkte-wohnmobil-600.jpg" width="600" height="600" loading="lazy" decoding="async" alt="Wohnmobil an einem See"></picture>
+          <div class="glass-tile">
+            <span class="glass-tile__ico" aria-hidden="true"><svg viewBox="0 0 24 24"><use href="#i-caravan"/></svg></span>
+            <h3 id="ang-2">Wohnmobil &amp; Caravan</h3>
+            <p>GFK, Strukturblech und Hagelschäden.</p>
+            <a class="btn btn--glass btn--small" href="wohnmobil-service.html" aria-describedby="ang-2">Mehr erfahren</a>
+          </div>
+        </div>
+      </article>
+      <article class="svc svc--link ">
+        <div class="svc__media"><span class="wm" aria-hidden="true"></span>
+          <picture class="svc__img"><source type="image/webp" srcset="assets/img/06-schwerpunkte-oldtimer-600.webp 600w, assets/img/06-schwerpunkte-oldtimer-1200.webp 1200w" sizes="(max-width: 640px) calc(100vw - 32px), (max-width: 1100px) calc(50vw - 30px), 290px"><img src="assets/img/06-schwerpunkte-oldtimer-600.jpg" width="600" height="450" loading="lazy" decoding="async" alt="Mercedes W123 während der Restaurierung"></picture>
+          <div class="glass-tile">
+            <span class="glass-tile__ico" aria-hidden="true"><svg viewBox="0 0 24 24"><use href="#i-klassik"/></svg></span>
+            <h3 id="ang-3">Oldtimer-Restauration</h3>
+            <p>Erhaltung statt Austausch, wo immer möglich.</p>
+            <a class="btn btn--glass btn--small" href="oldtimerlackierung.html" aria-describedby="ang-3">Mehr erfahren</a>
+          </div>
+        </div>
+      </article>
+      <article class="svc svc--link ">
+        <div class="svc__media">
+          <picture class="svc__img"><source type="image/webp" srcset="assets/img/23-service-unterbodenschutz-600.webp 600w, assets/img/23-service-unterbodenschutz-1200.webp 1200w" sizes="(max-width: 640px) calc(100vw - 32px), (max-width: 1100px) calc(50vw - 30px), 290px"><img src="assets/img/23-service-unterbodenschutz-600.jpg" width="600" height="397" loading="lazy" decoding="async" alt="Unterboden und Auspuffanlage eines Autos"></picture>
+          <div class="glass-tile">
+            <span class="glass-tile__ico" aria-hidden="true"><svg viewBox="0 0 24 24"><use href="#i-schild"/></svg></span>
+            <h3 id="ang-4">Hohlraum&shy;konservierung und Unterbodenschutz</h3>
+            <p>Dauerhafter Schutz vor Rost.</p>
+            <a class="btn btn--glass btn--small" href="unterbodenschutz.html" aria-describedby="ang-4">Mehr erfahren</a>
+          </div>
+        </div>
+      </article>
+    </div>
+    <p class="offer__more"><a class="btn btn--glass-light" href="service.html">Alle Serviceleistungen</a></p>
   </section>
 
   <!-- FÜR WEN WIR ARBEITEN: Zielgruppen, bewusst ohne Namen von Autohäusern oder Versicherungen -->
@@ -245,9 +353,9 @@
       <p class="eyebrow">Kunden</p>
       <h2 id="kunden-title">Für wen wir arbeiten</h2>
     </div>
-    <ul class="facts facts--4">
+    <ul class="facts facts--4 facts--even">
       <li class="fact"><span class="fact__ico" aria-hidden="true"><svg><use href="#i-team"/></svg></span><strong>Privatkunden</strong><span>viele Stammkunden im Privatbereich</span></li>
-      <li class="fact"><span class="fact__ico" aria-hidden="true"><svg><use href="#i-auto"/></svg></span><strong>Autohäuser</strong></li>
+      <li class="fact"><span class="fact__ico" aria-hidden="true"><svg><use href="#i-auto"/></svg></span><strong>Autohäuser</strong><span class="draft-note draft-note--small">Text folgt vom Kunden</span></li>
       <li class="fact"><span class="fact__ico" aria-hidden="true"><svg><use href="#i-schild"/></svg></span><strong>Versicherungen</strong><span>Kfz-Versicherer und Leasinggesellschaften</span></li>
       <li class="fact"><span class="fact__ico" aria-hidden="true"><svg><use href="#i-klassik"/></svg></span><strong>Classic-Car-Enthusiasten</strong><span>Old- und Youngtimer</span></li>
     </ul>
@@ -566,6 +674,6 @@
 <!-- /DIALOG -->
 
 
-<script src="js/main.js?v=202611041904" defer></script>
+<script src="js/main.js?v=202611041905" defer></script>
 </body>
 </html>
