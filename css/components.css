@@ -356,6 +356,8 @@ html:has(.contact[open]){overflow:hidden}   /* Seite dahinter scrollt nicht mit 
   .menu{display:none;position:absolute;left:0;right:0;top:calc(100% + 8px);flex-direction:column;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:10px;box-shadow:var(--sh-3);
     max-height:calc(100dvh - 120px);overflow-y:auto}
   .menu.is-open{display:flex}
+  /* offenes Menü: untere Info-Leiste ausblenden, sonst verdeckt sie die unteren Menüeinträge */
+  body:has(.menu.is-open) .infobar{opacity:0;visibility:hidden;pointer-events:none}
   /* Mega-Menü im aufgeklappten Menü: statisch eingerückt, einspaltig */
   .mega{display:block;position:static;width:auto;padding:0 0 0 14px;background:none;box-shadow:none}
   .mega::before{content:none}
