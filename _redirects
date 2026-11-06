@@ -23,3 +23,7 @@
 /widerruf/                            /widerruf                 301
 /widerrufsformular/                   /widerrufsformular        301
 /kopie-datenschutz/                   /vertrag-widerrufen       301
+
+# Arbeitsordner nicht ausliefern (liegen im Repo, gehören nicht zur Website): immer 404, auch wenn die Datei existiert (!)
+/archiv/*                             /404.html                 404!
+/_archive/*                           /404.html                 404!

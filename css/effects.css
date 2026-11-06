@@ -10,25 +10,15 @@
 .stack li{transition:background-color var(--t-hover) var(--ease-out),transform var(--t-hover) var(--ease-out),box-shadow var(--t-hover) var(--ease-out)}
 .stack li::before{transition:transform var(--t-hover) var(--ease-out)}
 
-/* Klappkarten: Zeilenhöhe animieren, Ecken ohne Animation (das Neuzeichnen der Rundung über dem Foto ruckelt).
-   Beim Öffnen runden sich die Ecken sofort, beim Schließen erst, wenn die Karte zu ist. */
-.svc{transition:grid-template-rows var(--t-split) var(--ease-out),row-gap var(--t-split) var(--ease-out)}
-.svc__media,.svc__list{transition:border-radius 0s linear var(--t-split)}
-.svc.is-open .svc__media,.svc.is-open .svc__list{transition-delay:0s}
+/* Leistungs-Karten */
 .svc__img img{transition:transform .5s var(--ease-out);will-change:transform}
 .glass-tile{transition:transform var(--t-hover) var(--ease-out);will-change:transform}
-.svc__toggle{transition:transform var(--t-split) var(--ease-out),background-color .18s var(--ease-out)}
-.svc__toggle::before,.svc__toggle::after{transition:background-color .18s var(--ease-out)}
-.svc__more{transition:visibility 0s linear var(--t-split)}          /* erst nach dem Zuklappen verstecken */
-.svc.is-open .svc__more{transition-delay:0s}
-.svc__more-pad{transition:opacity .18s var(--ease-out),translate var(--t-split) var(--ease-out)}
-.svc.is-open .svc__more-pad{transition:opacity .24s var(--ease-out) .08s,translate var(--t-split) var(--ease-out)}
 .checks li{transition:transform .18s var(--ease-out)}
 .checks li::before{transition:background-color .18s var(--ease-out)}
 .checks li::after{transition:border-color .18s var(--ease-out)}
 
 /* Kacheln: eigene Ebene, damit beim Anheben nichts neu gezeichnet wird */
-.bt,.rv{transition:transform var(--t-hover) var(--ease-out),box-shadow var(--t-hover) var(--ease-out);will-change:transform}
+.bt{transition:transform var(--t-hover) var(--ease-out),box-shadow var(--t-hover) var(--ease-out);will-change:transform}
 .bt__seal{transition:rotate .3s var(--ease-out),scale .3s var(--ease-out);will-change:transform}
 .bt--logo .glass-in::after{transition:transform .7s var(--ease-out)}
 .bt--logo .glass-in img{transition:filter var(--t-hover) var(--ease-out)}
@@ -37,10 +27,9 @@
 .site-footer a{transition:color .18s var(--ease-out),background-color .18s var(--ease-out)}
 
 /* ---------- Navigation ---------- */
-/* Leichter orangener Glas-Schimmer statt einer Fläche */
-.menu>li>a:hover,.menu>li:focus-within>a{background:var(--nav-hover);color:var(--accent-strong);
-  box-shadow:inset 0 0 0 1px var(--nav-hover-line),inset 0 1px 0 rgba(255,255,255,.5),var(--nav-hover-glow)}
-.submenu a:hover{background:var(--nav-hover);color:var(--accent-strong);box-shadow:inset 0 0 0 1px var(--nav-hover-line)}
+/* Dezent: beim Hover wechselt nur die Schriftfarbe, kein Hintergrund, kein Rahmen, kein Glow */
+.menu>li>a:hover,.menu>li:focus-within>a,.mega a:hover{color:var(--accent-strong)}
+.menu>li.has-mega>a::after{transition:transform .18s var(--ease-out)}
 
 /* ---------- Buttons ---------- */
 .btn:hover{transform:translateY(-3px);box-shadow:var(--sh-btn-hover)}
@@ -59,11 +48,9 @@
   box-shadow:inset 0 0 0 1px var(--glass-line-row-hover),inset 0 1px 0 rgba(255,255,255,.35),var(--sh-row-hover)}
 .stack li:hover::before{transform:translateX(3px);color:var(--accent-2)}
 
-/* ---------- Klappkarten ---------- */
+/* ---------- Leistungs-Karten ---------- */
 .svc:hover .svc__img img{transform:scale(1.04)}
 .svc:hover .glass-tile{transform:translateY(-4px)}
-.svc__toggle:hover{background:var(--accent)}
-.svc__toggle:hover::before,.svc__toggle:hover::after{background:var(--white)}
 .checks li:hover{transform:translateX(4px)}
 .checks li:hover::before{background:var(--accent)}
 .checks li:hover::after{border-color:var(--white)}
@@ -86,7 +73,19 @@
 .contact[open]::backdrop{animation:backdrop-in .3s var(--ease)}
 
 /* ---------- Kundenstimmen ---------- */
-.rv:hover{transform:translateY(-4px);box-shadow:var(--sh-3)}
+
+/* ---------- Prozess-Karten und Hard Facts: anheben wie die Kundenstimmen ---------- */
+.process__step,.fact{transition:transform var(--t-hover) var(--ease-out),box-shadow var(--t-hover) var(--ease-out)}
+.process__step:hover,.fact:hover{transform:translateY(-4px);box-shadow:var(--sh-3)}
+/* Infoboxen als Link (Startseite „Weitere Leistungen“): wie die Vor/Zurück-Karten, Titel in Akzentfarbe */
+.fact--link strong{transition:color .18s var(--ease-out)}
+.fact--link:focus-visible{transform:translateY(-4px);box-shadow:var(--sh-3)}
+.fact--link:hover strong,.fact--link:focus-visible strong{color:var(--accent-strong)}
+.process__media img{transition:transform .5s var(--ease-out)}
+.process__step:hover .process__media img{transform:scale(1.04)}
+
+/* Zertifikat-Kachel als Button: Fokus wie Hover (Farbe, Anheben), dazu der Fokusrahmen */
+.mq-item__open:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
 
 /* ---------- Footer ---------- */
 .legal a:hover{color:var(--white)}
@@ -98,7 +97,12 @@
 
 /* ---------- Neu: Navigation-Telefon, Expertise, Expand-Kacheln, Zertifikate, Banner, Info-Leiste ---------- */
 .nav-tel,.infobar__item,.kt-list a{transition:background .18s var(--ease-out),box-shadow .18s var(--ease-out),color .18s var(--ease-out),transform var(--t-hover) var(--ease-out)}
-.nav-tel:hover,.infobar__item:hover{background:var(--nav-hover);color:var(--accent-strong);box-shadow:inset 0 0 0 1px var(--nav-hover-line)}
+.infobar__item:hover{background:var(--nav-hover),var(--nav-hover-base);color:var(--accent-strong);box-shadow:inset 0 0 0 1px var(--nav-hover-line)}
+.nav-tel:hover{color:var(--accent-strong);box-shadow:inset 0 0 0 1.5px var(--accent-strong)}   /* nur Rahmen und Schrift färben sich, kein Glas */
+.infobar__termin:hover{background:var(--grad-accent);color:var(--on-accent);box-shadow:var(--sh-btn)}   /* mobile Floating-Bar: bleibt orange */
+/* Kontaktwege (Startseite): beim Hover nur Farbwechsel */
+a.kx__row b,a.kx__row .kx__go{transition:color .18s var(--ease-out)}
+a.kx__row:hover b,a.kx__row:hover address{color:var(--accent-strong)}
 .kt-list a:hover{background:var(--nav-hover),var(--glass-btn-light);color:var(--accent-strong)}
 
 .exp__item{transition:background-color var(--t-hover) var(--ease-out),box-shadow var(--t-hover) var(--ease-out),transform var(--t-hover) var(--ease-out)}
@@ -108,14 +112,16 @@
 .exp__item:not(.is-open):hover{background:var(--glass-row-hover);box-shadow:inset 0 0 0 1px var(--glass-line-row-hover)}
 
 /* Social-Kacheln: Bild bewegt sich langsam (Platzhalter für das spätere Video), beim Hover hebt sich die Kachel */
-@keyframes drift{from{scale:1.04;translate:-1.5% 0}to{scale:1.12;translate:1.5% -1%}}
-.sm-tile__media img{animation:drift 18s ease-in-out infinite alternate;will-change:transform}
 .sm-tile{transition:transform var(--t-hover) var(--ease-out),box-shadow var(--t-hover) var(--ease-out)}
 .sm-tile:hover{transform:translateY(-4px);box-shadow:inset 0 0 0 1px var(--nav-hover-line),var(--nav-hover-glow),var(--sh-3)}
 
-/* Karussell: läuft endlos, hält beim Hover oder Tastatur-Fokus an; die Kachel unter der Maus wird farbig und hebt sich */
-@keyframes marquee{to{transform:translateX(calc(-50% - var(--mq-gap) / 2))}}
-.marquee__track{animation:marquee var(--mq-speed) linear infinite}
+/* Karussell: läuft endlos, hält beim Hover oder Tastatur-Fokus an; die Kachel unter der Maus wird farbig und hebt sich.
+   Erst mit .is-ready (js/main.js hat die Kopien angehängt): Verschiebung um genau eine Runde (--mq-shift), Dauer je Kachel (--mq-step).
+   .marquee--reverse läuft in Gegenrichtung (Partner). */
+@keyframes marquee{to{transform:translateX(calc(var(--mq-shift,0px) * -1))}}
+.marquee.is-ready .marquee__track{animation:marquee calc(var(--mq-n,9) * var(--mq-step)) linear infinite}
+.marquee:hover .marquee__track,.marquee:focus-within .marquee__track{animation-play-state:paused}   /* anhalten zum Lesen und Anklicken */
+.marquee--reverse.is-ready .marquee__track{animation-direction:reverse}
 .marquee:hover .marquee__track,.marquee:focus-within .marquee__track{animation-play-state:paused}
 .mq-item__tile{transition:transform var(--t-hover) var(--ease-out),box-shadow var(--t-hover) var(--ease-out)}
 .mq-item__blur img,.mq-item__glass img{transition:filter var(--t-hover) var(--ease-out)}
@@ -124,7 +130,7 @@
 .mq-item:hover .mq-item__tile,.mq-item:focus-within .mq-item__tile{transform:translateY(-4px);box-shadow:var(--sh-3)}
 .mq-item:hover .mq-item__blur img,.mq-item:focus-within .mq-item__blur img{filter:blur(28px) saturate(1.6)}
 .mq-item:hover .mq-item__glass img,.mq-item:focus-within .mq-item__glass img{filter:var(--mq-lit)}
-.mq-item:hover .mq-item__name{color:var(--accent-strong)}
+.mq-item:hover .mq-item__name,.mq-item:focus-within .mq-item__name{color:var(--accent-strong)}
 
 .infobar{transition:opacity .3s var(--ease-out),transform .4s var(--ease-out)}
 
@@ -132,13 +138,30 @@
 @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(255,255,255,.7)}100%{box-shadow:0 0 0 10px rgba(255,255,255,0)}}
 .career__dot{animation:pulse 1.6s var(--ease-out) infinite}
 
+/* ---------- Startseite Über uns: Expand on Hover ----------
+   Vorbild Skiper UI 52 „ExpandOnHover“, Eigenbau in reinem CSS (kein Code übernommen). Die Porträt-Karte unter der Maus wird breiter,
+   die andere schmaler. Nur mit echter Maus und ab 521 px; bei reduzierter Bewegung greift die globale Regel unten (Breite springt ohne Animation). */
+@media (hover:hover) and (min-width:521px){
+  .ab2__person{transition:flex-grow .6s cubic-bezier(.22,.6,.36,1)}
+  .ab2__people:hover .ab2__person{flex-grow:.72}
+  .ab2__people .ab2__person:hover{flex-grow:1.45}
+}
+
+/* ---------- Hero (nur Startseite): Slow Zoom ----------
+   Zoomt einmal beim Laden langsam von 1 auf --hero-zoom und bleibt dann stehen. Über die eigene Eigenschaft „scale“, nicht transform,
+   damit der Parallax (translate über --py, js/main.js) weiterläuft. Drehpunkt passend zur object-position. Keine Seitenköpfe der Unterseiten. */
+@media (prefers-reduced-motion:no-preference){
+  @keyframes hero-zoom{from{scale:1}to{scale:var(--hero-zoom)}}
+  .hero__img{transform-origin:50% 45%;animation:hero-zoom var(--hero-zoom-dur) cubic-bezier(.22,.6,.36,1) both}
+}
+
 /* ---------- Einblenden beim Scrollen ----------
    Ruhezustand bleibt sichtbar, nur der Einstieg wird animiert.
    Nur mit Browser-Unterstützung und nur ohne Wunsch nach reduzierter Bewegung. */
 @media (prefers-reduced-motion:no-preference){
   @supports ((animation-timeline:view()) and (animation-range:entry)){
     @keyframes rise{from{translate:0 40px}}
-    .svc,.band,.prose,.callout,.bt,.rv,.stack li{animation:rise auto var(--ease) backwards;animation-timeline:view();animation-range:entry 0% entry 55%}
+    .svc,.band,.prose,.callout,.bt,.stack li,.process__step,.fact,.q{animation:rise auto var(--ease) backwards;animation-timeline:view();animation-range:entry 0% entry 55%}
     /* Parallax (neu): Abschnitte gleiten beim Einfahren dezent hoch und wachsen leicht auf */
     @keyframes rise-in{from{translate:0 56px;scale:.965;opacity:.35}}
     .sec-head,.marquee,.exp__item,.social,.career__inner,.kt-card,.kt__cta,.kt-map{animation:rise-in auto var(--ease) backwards;animation-timeline:view();animation-range:entry 0% entry 60%}
@@ -151,26 +174,28 @@
 @media (prefers-reduced-motion:reduce){
   *,*::before,*::after{transition-duration:.01ms!important;transition-delay:0s!important;animation:none!important}
   .btn:hover,.btn:active,
-  .stack li:hover,.checks li:hover,.bt:hover,.rv:hover,.svc:hover .glass-tile,
+  .stack li:hover,.checks li:hover,.bt:hover,.svc:hover .glass-tile,
   .sec-head:hover .sec-head__ico,.contact__close:hover{transform:none}
   .btn:hover::after{transform:rotate(45deg) translate(-2px,2px)}
   .stack li:hover::before{transform:none}
   .svc:hover .svc__img img{transform:none}
   .bt--eco:hover .bt__seal{rotate:-2deg;scale:none}
-  .svc__more-pad{translate:none}
   .bt--logo .glass-in::after{display:none}
   [data-px]{translate:none!important}
   .sm-tile:hover,.mq-item:hover .mq-item__tile,.mq-item:focus-within .mq-item__tile{transform:none}
+  .process__step:hover .process__media img{transform:none}
   .marquee{overflow-x:auto;-webkit-mask-image:none;mask-image:none}
+  .marquee__track{margin-inline:auto}   /* kurzes Band (Partner) steht mittig */
+  .process__step:hover,.fact:hover,.fact--link:focus-visible{transform:none}
 }
 
 /* =====================================================================
    UNTERSEITEN
    ===================================================================== */
 
-/* Aktiver Menüpunkt (aria-current): dezent, gleiche Optik wie Hover. „true“ = Elternpunkt einer Unterseite */
-.menu>li>a[aria-current]{background:var(--nav-hover);color:var(--accent-strong);box-shadow:inset 0 0 0 1px var(--nav-hover-line)}
-.submenu a[aria-current]{background:var(--nav-hover);color:var(--accent-strong)}
+/* Aktiver Menüpunkt (aria-current): Schriftfarbe plus 2 px Unterstreichung mit Abstand. „true“ = Elternpunkt einer Unterseite */
+.menu>li>a[aria-current],.mega a[aria-current]{color:var(--accent-strong)}
+.menu>li>a[aria-current]{text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:6px}
 
 /* Galerie: Bild zoomt leicht, Lupe erscheint */
 .steps__open img{transition:transform .5s var(--ease-out);will-change:transform}
@@ -211,13 +236,13 @@
 .pnav__card:hover strong,.pnav__card:focus-visible strong{color:var(--accent-strong)}
 
 /* Karten auf Unterseiten: anheben wie die Kundenstimmen */
-.flow li,.team__card{transition:transform var(--t-hover) var(--ease-out),box-shadow var(--t-hover) var(--ease-out),color .18s var(--ease-out)}
-.flow li:hover,.team__card:hover{transform:translateY(-4px);box-shadow:var(--sh-3)}
+.flow li{transition:transform var(--t-hover) var(--ease-out),box-shadow var(--t-hover) var(--ease-out),color .18s var(--ease-out)}
+.flow li:hover{transform:translateY(-4px);box-shadow:var(--sh-3)}
 
 /* Einblenden beim Scrollen (wie auf der Startseite) */
 @media (prefers-reduced-motion:no-preference){
   @supports ((animation-timeline:view()) and (animation-range:entry)){
-    .proj,.steps__item,.flow li,.team__card,.contact-person,.form-card{animation:rise auto var(--ease) backwards;animation-timeline:view();animation-range:entry 0% entry 55%}
+    .proj,.steps__item,.flow li,.contact-person,.form-card,.callout--work{animation:rise auto var(--ease) backwards;animation-timeline:view();animation-range:entry 0% entry 55%}
     .steps--rail .steps__item{animation:none}   /* die Timeline hat ihr eigenes Einblenden (is-on) */
   }
 }
@@ -225,11 +250,11 @@
 /* Reduzierte Bewegung: kein Zoom, kein Anheben, kein Übergang in der Lightbox */
 @media (prefers-reduced-motion:reduce){
   .steps__open:hover img,.steps__open:focus-visible img,.proj:hover,.proj:focus-visible,.proj:hover .proj__img img,.proj:focus-visible .proj__img img,
-  .proj:hover .glass-tile,.proj:focus-visible .glass-tile,.flow li:hover,.team__card:hover,.lightbox__close:hover{transform:none}
+  .proj:hover .glass-tile,.proj:focus-visible .glass-tile,.flow li:hover,.lightbox__close:hover{transform:none}
   .steps__open::before,.steps__open::after{transform:none}
   .pnav__card:hover,.pnav__card:focus-visible{transform:none}
   /* Timeline: Stab voll, alle Knoten orange, Bilder sofort sichtbar, kein Tropfen und kein Spritzer */
-  .steps--rail>li .rail__node{border-color:var(--accent);background:var(--accent);color:var(--on-accent);box-shadow:0 0 0 8px var(--rail-ring)}
+  .steps--rail>li .rail__node{border-color:var(--accent-strong);background:var(--accent-strong);color:var(--on-accent);box-shadow:0 0 0 8px var(--rail-ring)}
   .steps--rail>li .rail__node::after{animation:none}
   .steps--rail .steps__item{transform:none!important;opacity:1!important;transition:none}
   .rail__fill{height:var(--rail-len,0px)}

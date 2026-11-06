@@ -4,23 +4,36 @@
 
 /* ---------- Header und Navigation ---------- */
 .site-header{position:sticky;top:calc(env(safe-area-inset-top,0px) + 10px);z-index:20;max-width:var(--wrap);margin:12px auto 0}
-.site-nav{position:relative;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:8px 10px 8px 20px;
+.site-nav{position:relative;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:8px 10px 8px 20px;
   background:var(--nav-glass-shine),var(--nav-glass);-webkit-backdrop-filter:var(--nav-blur);backdrop-filter:var(--nav-blur);
   border:1px solid var(--nav-glass-line);border-radius:var(--radius-pill);box-shadow:inset 0 1px 0 rgba(255,255,255,.6),var(--sh-2)}
 .brand{display:block;flex:none}
-.brand img{height:44px;width:auto}
+.brand img{height:38px;width:auto;filter:var(--sh-brand)}   /* leichter Schatten nur in der Navigation, nicht im Footer. Logo ist eng zugeschnitten (ca. 3,9 : 1), deshalb etwas niedriger als das alte PNG mit Rand */
 
-.menu{display:flex;gap:2px;list-style:none;margin:0;padding:0;font-weight:500;font-size:.88rem;text-transform:uppercase;letter-spacing:.02em}
+.menu{display:flex;gap:2px;list-style:none;margin:0;padding:0;font-weight:500;font-size:.82rem;text-transform:uppercase;letter-spacing:.02em}
 .menu>li{position:relative}
 .menu a{display:block;text-decoration:none;padding:10px;border-radius:var(--radius-pill);white-space:nowrap}
-.submenu{display:none;position:absolute;left:0;top:calc(100% + 6px);min-width:280px;list-style:none;margin:0;padding:8px;
-  background:var(--submenu-glass);-webkit-backdrop-filter:var(--nav-blur);backdrop-filter:var(--nav-blur);
-  border:1px solid var(--nav-glass-line);border-radius:var(--radius-row);box-shadow:var(--sh-3);text-transform:none;font-size:.97rem;letter-spacing:0}
-.submenu::before{content:"";position:absolute;left:0;right:0;top:-8px;height:8px}  /* Brücke, damit das Untermenü beim Hinüberfahren offen bleibt */
-.submenu a{white-space:normal;border-radius:var(--radius-sm)}
-.menu li:hover>.submenu,.menu li:focus-within>.submenu{display:block}
+.menu>li>a{padding-inline:8px}
+/* Pfeil am Menüpunkt mit Mega-Menü, dreht sich beim Öffnen (Übergang in effects.css) */
+.menu>li.has-mega>a::after{content:"";display:inline-block;width:.38em;height:.38em;margin-left:.45em;border-right:1.5px solid currentColor;border-bottom:1.5px solid currentColor;
+  transform:translateY(-.2em) rotate(45deg);opacity:.6}
+.menu>li.has-mega:hover>a::after,.menu>li.has-mega:focus-within>a::after{transform:translateY(.05em) rotate(-135deg)}
 
-.nav-actions{display:flex;gap:10px;align-items:center}
+/* Mega-Menü „Serviceleistungen“ (Vorbild Nalbach-Hinkel): Kopf „Alle Serviceleistungen“, darunter zwei Spalten.
+   Deckende Fläche statt Glas: in der Pille wirkt die Unschärfe nicht, Text darunter schiene sonst durch. */
+.mega{display:none;position:absolute;left:-12px;top:calc(100% + 10px);width:min(560px,80vw);padding:22px 26px;z-index:20;
+  background:var(--surface);border-radius:var(--radius);box-shadow:var(--sh-3);text-transform:none;letter-spacing:0}
+.mega::before{content:"";position:absolute;left:0;right:0;top:-12px;height:12px}  /* Brücke, damit das Menü beim Hinüberfahren offen bleibt */
+.menu li:hover>.mega,.menu li:focus-within>.mega{display:block}
+.menu li.is-mega-closed>.mega{display:none}
+.menu>li.has-mega.is-mega-closed>a::after{transform:translateY(-.2em) rotate(45deg)}   /* nach Escape geschlossen, bis Maus oder Fokus den Menüpunkt verlassen (js/main.js) */
+.mega__label{margin:0 0 6px;font-size:.72rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
+.mega a{padding:7px 0;border-radius:0;font-size:.98rem;font-weight:500;color:var(--fg);white-space:normal}
+.mega a.mega__all{display:inline-block;font-size:1.05rem}
+.mega__sep{height:1px;background:var(--line);margin:14px 0 16px}
+.mega__grid{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:1fr 1fr;column-gap:32px}
+
+.nav-actions{display:flex;gap:8px;align-items:center;flex:none}
 .burger{display:none;font:600 .95rem var(--f-body);background:transparent;border:2px solid var(--fg);color:var(--fg);border-radius:var(--radius-pill);padding:9px 16px;cursor:pointer}
 
 /* ---------- Buttons ---------- */
@@ -46,19 +59,15 @@
 
 .hero__frame{position:relative;overflow:hidden;display:flex;align-items:center;width:100vw;margin-left:calc(50% - 50vw);
   min-height:100vh;min-height:100svh;background:var(--navy)}
-.hero__img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 58%}
-/* Spray-Intro (js/hero-spray.js). Ebenen von unten nach oben: Foto, dunkle Deckfläche, Verlauf, Sprühnebel, Spritzpistole, Text.
-   Ohne JavaScript bleibt die Deckfläche leer, das Foto ist dann sofort zu sehen. */
-.hero__cover,.hero__mist{position:absolute;inset:0;width:100%;height:100%;display:block;pointer-events:none}
-.hero__mist{z-index:1}
-.hero__gun{position:absolute;left:0;top:0;z-index:2;display:none;width:clamp(150px,20vw,320px);height:auto;max-width:none;
-  pointer-events:none;will-change:transform;transform:translate3d(-999px,0,0)}
-@media (prefers-reduced-motion:reduce){.hero__gun{display:none!important}}
+.hero__img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 45%}
+/* Ebenen von unten nach oben: Foto, Verlauf, Text. Die frühere Spray-Animation liegt in archiv/hero-spray-animation/. */
 .hero__frame::after{content:"";position:absolute;inset:0;background:var(--grad-hero)}
 .hero__body{position:relative;z-index:3;width:100%;max-width:var(--wrap);margin-inline:auto;padding:calc(var(--hdr) + var(--hero-top-gap)) var(--gutter) clamp(72px,16vh,180px);
   display:flex;flex-wrap:wrap;gap:28px;align-items:flex-end;justify-content:space-between}
 .hero__text{max-width:640px;min-width:0;color:var(--on-image)}
 .hero__text .hero__lead{color:var(--on-image-muted)}
+/* Unterzeile im <h1> (Runde 6): kleiner, eigene Zeile, trägt Ort und Suchbegriffe */
+.hero__sub{display:block;margin-top:.55em;font-size:clamp(1.15rem,2.1vw,1.6rem);font-weight:600;line-height:1.25;letter-spacing:0;color:var(--on-image)}
 
 /* Glas-Pille auf Fotos */
 .chip{display:flex;flex-wrap:wrap;align-items:center;gap:12px 16px;padding:14px 14px 14px 22px;border-radius:var(--radius-pill);color:var(--on-image);
@@ -91,7 +100,7 @@
 .sec-head__divider::after{background:var(--grad-rule-out)}
 .sec-head__ico{display:grid;place-items:center;flex:none;width:60px;height:60px;border-radius:50%;background:var(--surface);box-shadow:var(--sh-ico)}
 .sec-head__ico svg{width:28px;height:28px}
-.sec-head h2{font-size:clamp(2.1rem,4.4vw,3.4rem)}
+.sec-head h2{font-size:calc(clamp(2.1rem,4.4vw,3.4rem) * var(--h-scale))}
 
 /* Augenbraue: kleine orange Zeile mit Strichen links und rechts */
 .eyebrow{display:inline-flex;align-items:center;gap:12px;margin:0;font-weight:600;font-size:.85rem;letter-spacing:.16em;text-transform:uppercase;color:var(--accent-strong)}
@@ -112,26 +121,22 @@
 .callout p{color:var(--on-navy-muted)}
 .callout p+p{margin-top:14px}
 
-/* ---------- Leistungs-Karten (Klappkarte) ----------
-   Drei Zeilen: Bild | Beschreibung | Liste. Die Beschreibung ist geschlossen 0 hoch und wächst beim Öffnen auf.
-   Jede Karte klappt einzeln auf (.svc.is-open). Die Karten stehen oben bündig,
-   damit eine offene Karte die anderen nicht mit in die Länge zieht.
-   js/main.js schaltet .is-open und gleicht die Höhen von Glas-Kacheln und Listen an. */
+/* ---------- Leistungs-Karten ----------
+   Zwei Zeilen: Bild mit Glas-Kachel (Titel, Kurzzeile, Link) | Stichpunktliste.
+   js/main.js gleicht die Höhen von Glas-Kacheln und Listen an. */
 .cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px;align-items:start}
-.svc{display:grid;grid-template-rows:auto 0fr auto;row-gap:0;min-width:0}
-.svc.is-open{grid-template-rows:auto 1fr auto;row-gap:12px}
+.svc{display:grid;min-width:0}
 
-.svc__media{position:relative;overflow:hidden;width:100%;aspect-ratio:3/4;max-height:600px;cursor:pointer;
+.svc__media{position:relative;overflow:hidden;width:100%;aspect-ratio:3/4;max-height:600px;
   border-radius:var(--radius) var(--radius) 0 0;background:var(--grad-ph);box-shadow:var(--sh-2)}
-.svc.is-open .svc__media{border-radius:var(--radius)}
 .svc__img,.svc__img img{position:absolute;inset:0;width:100%;height:100%}
 .svc__img img{object-fit:cover}
-.svc__media::after{content:"";position:absolute;inset:0;background:var(--grad-svc);pointer-events:none}
+.svc__media::after{content:"";position:absolute;inset:0;background:var(--foot-grad);pointer-events:none}   /* Navy-Fuß, siehe „Bildfuß auf eigenen Fotos“ */
 
 /* Glas-Kachel auf dem Bild: kompakt und recht durchsichtig, damit mehr vom Foto sichtbar bleibt.
    Der Textschatten hält die weiße Schrift auch auf hellen Bildstellen lesbar. */
 .glass-tile{position:absolute;left:14px;right:14px;bottom:14px;z-index:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;gap:8px;
-  padding:32px 20px 18px;border-radius:var(--radius-tile);text-align:center;color:var(--on-image);text-shadow:0 1px 10px rgba(14,22,42,.55);
+  padding:32px 20px 18px;border-radius:var(--radius-tile);text-align:center;color:var(--on-image);text-shadow:0 1px 10px rgba(17,23,38,.55);
   background:linear-gradient(var(--glass-row),var(--glass-row)),var(--glass-tile-tint);-webkit-backdrop-filter:blur(8px) saturate(1.3);backdrop-filter:blur(8px) saturate(1.3);box-shadow:var(--sh-glass)}
 .glass-tile__ico{position:absolute;top:-24px;left:50%;translate:-50% 0;display:grid;place-items:center;width:48px;height:48px;
   border-radius:var(--radius-row);background:var(--surface);color:var(--accent);box-shadow:var(--sh-2)}
@@ -140,22 +145,7 @@
 .glass-tile p{color:var(--on-glass-muted);font-size:.98rem}
 .glass-tile .btn{align-self:center;margin-top:auto;text-shadow:none}   /* sitzt immer unten; ohne Link bleibt der Platz leer */
 
-/* Runder "+"-Button, dreht sich beim Öffnen zum "×" */
-.svc__toggle{position:absolute;top:14px;right:14px;z-index:2;display:grid;place-items:center;width:46px;height:46px;border:0;border-radius:50%;
-  background:var(--toggle-bg);box-shadow:var(--sh-2);cursor:pointer}
-.svc__toggle::before,.svc__toggle::after{content:"";position:absolute;width:16px;height:2.5px;border-radius:var(--radius-2xs);background:var(--accent)}
-.svc__toggle::after{rotate:90deg}
-.svc.is-open .svc__toggle{transform:rotate(135deg)}
-
-/* Beschreibung: geschlossen unsichtbar, auch für Screenreader */
-.svc__more{min-height:0;overflow:hidden;visibility:hidden}
-.svc.is-open .svc__more{visibility:visible}
-.svc__more-pad{display:grid;gap:14px;padding:22px 24px;border-radius:var(--radius);background:var(--accent-soft);color:var(--fg-soft);opacity:0;translate:0 -14px}
-.svc.is-open .svc__more-pad{opacity:1;translate:0 0}
-.svc__more-pad p{font-size:1rem;line-height:1.65}
-
 .svc__list{display:grid;align-content:start;gap:14px;padding:22px 22px 24px;background:var(--surface);border-radius:0 0 var(--radius) var(--radius);box-shadow:var(--sh-2)}
-.svc.is-open .svc__list{border-radius:var(--radius)}
 .svc__list h4{font:600 .9rem var(--f-body);text-transform:uppercase;letter-spacing:.06em;color:var(--fg)}
 
 /* Häkchen-Liste */
@@ -163,6 +153,23 @@
 .checks li{position:relative;min-width:0;padding:3px 0 3px 34px}
 .checks li::before{content:"";position:absolute;left:0;top:4px;width:22px;height:22px;border-radius:50%;background:var(--accent-soft)}
 .checks li::after{content:"";position:absolute;left:8px;top:8px;width:5px;height:9px;border-right:2.5px solid var(--accent);border-bottom:2.5px solid var(--accent);transform:rotate(40deg)}
+
+/* Fünf Schwerpunkte (Startseite, Runde 6): 6er-Raster, jede Karte über 2 Spalten → 3 + 2, die untere Reihe mittig.
+   Seit Runde 6b nur das Bild mit Glas-Kachel, ohne Textbereich darunter: Bild unten ebenfalls rund.
+   Gleich hoch je Reihe über das Seitenverhältnis von .svc__media (gleiche Spaltenbreite). */
+.cards--5{grid-template-columns:repeat(6,minmax(0,1fr))}
+.cards--5>.svc{grid-column:span 2}
+.cards--5>.svc:nth-child(4){grid-column:2/span 2}
+.cards--5 .svc__media{border-radius:var(--radius)}
+
+/* Weitere Leistungen (Startseite, Runde 6): Überschrift, Einleitung, vier Infoboxen als Links */
+.more{display:grid;gap:14px;margin-top:clamp(44px,5vw,68px)}
+.more__title{font-size:clamp(1.5rem,2.4vw,2rem);color:var(--heading)}
+.more__lead{max-width:62ch;font-size:1.05rem;line-height:1.6;color:var(--fg-soft)}
+.facts--more{margin-top:8px}
+.facts--more>li{display:grid;min-width:0}
+.facts--more .fact{min-height:0}
+.fact--link{text-decoration:none;color:inherit}
 
 /* ---------- Glas-Kacheln (Zertifikat, Partner) ----------
    .bt__blur = dasselbe Bild noch einmal, stark unscharf und vergrößert, als farbiger Hintergrund.
@@ -201,30 +208,37 @@
 .bt--logo .glass-in img{filter:var(--logo-dim)}
 /* DEKRA: rundes Siegel (transparent freigestellt), größer als die Logos und mit eigenem Schatten */
 .bt--dek .glass-in{padding:6px}
-.bt--dek .glass-in img{height:calc(var(--logo-h) + 46px);max-height:100%;width:auto;aspect-ratio:1;filter:drop-shadow(0 6px 14px rgba(20,32,58,.25))}
+.bt--dek .glass-in img{height:calc(var(--logo-h) + 46px);max-height:100%;width:auto;aspect-ratio:1;filter:drop-shadow(0 6px 14px rgba(22,30,49,.25))}
 
 /* ---------- Kundenstimmen (Google Bewertung) ----------
    Dunkle Übersichtskachel + Bewertungskarten. Solange keine echten Daten angebunden sind: Skelett-Platzhalter. */
-.reviews{display:grid;grid-template-columns:minmax(0,1fr) repeat(3,minmax(0,1.2fr));gap:16px;align-items:stretch}
-.rv{display:flex;flex-direction:column;gap:14px;min-width:0;padding:24px;background:var(--surface);border-radius:var(--radius);box-shadow:var(--sh-2)}
-.rv--sum{justify-content:center;background:var(--grad-review);color:var(--on-navy)}
-.rv--sum strong{font-family:var(--f-display);font-size:1.7rem;font-weight:700}
-.rv--sum .stars svg{width:28px;height:28px;color:var(--star-on-dark)}
-.rv .stars svg{width:22px;height:22px}
-.rv__who{display:flex;align-items:center;gap:12px}
-.rv__avatar{flex:none;width:42px;height:42px;border-radius:50%;background:var(--avatar)}
-.sk-lines{display:grid;gap:9px}
-.rv__who .sk-lines{flex:1}
-.sk{display:block;height:10px;border-radius:6px;background:var(--grad-sk)}
-.sk--60{width:60%}
-.sk--35{width:35%}
-.sk--80{width:80%}
-.sk--55{width:55%}
-
+/* Zusammenfassung links über zwei Zeilen, daneben vier Bewertungen im 2 × 2-Raster (980 px: Zusammenfassung oben, 560 px: einspaltig) */
+/* Kundenstimmen: schmale Leiste mit Gesamtnote, darunter 2 × 2 Zitatkarten (kleine Avatare, größerer Text) */
+.rvx{display:grid;gap:18px}
+.rvx__sum{display:flex;flex-wrap:wrap;align-items:center;gap:14px 28px;padding:18px 24px;border-radius:var(--radius);background:var(--grad-review);color:var(--on-navy);box-shadow:var(--sh-2)}
+.rvx__sum .stars svg{width:22px;height:22px;color:var(--star-on-dark)}
+.rvx__score{display:flex;align-items:baseline;gap:10px;margin:0;color:var(--on-navy-muted)}
+.rvx__score b{font-family:var(--f-display);font-stretch:var(--h-stretch);font-size:2.4rem;line-height:1;color:var(--white)}
+.rvx__meta{display:flex;flex-wrap:wrap;align-items:center;gap:8px 10px;margin:0;color:var(--on-navy-muted)}
+.rvx__meta .draft-note{margin:0}
+.rvx__sum .btn{margin-left:auto}
+.rvx__grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
+.q{margin:0;display:grid;grid-template-rows:auto 1fr auto;gap:16px;padding:clamp(22px,2.6vw,32px);background:var(--surface);border-radius:var(--radius);box-shadow:var(--sh-2);position:relative}
+.q::before{content:"“";position:absolute;right:24px;top:6px;font-family:Georgia,serif;font-size:4.6rem;line-height:1;color:var(--quote-mark)}   /* dezentes typografisches Anführungszeichen */
+.q .stars svg{width:16px;height:16px}
+.q blockquote{margin:0;position:relative}
+.q blockquote p{margin:0;font-size:clamp(1.1rem,1.4vw,1.24rem);line-height:1.55;color:var(--fg)}
+.q figcaption{display:flex;align-items:center;gap:10px;padding-top:14px;border-top:1px solid var(--line)}
+.q__avatar{flex:none;display:grid;place-items:center;width:32px;height:32px;border-radius:50%;background:var(--avatar);font-size:.8rem;font-weight:600;color:var(--muted)}
+.q figcaption b{display:block;font-size:.95rem;line-height:1.2}
+.q figcaption small{color:var(--muted);font-size:.82rem}
+.q .draft-note{position:absolute;right:16px;bottom:16px;margin:0}
+@media (max-width:760px){.rvx__grid{grid-template-columns:minmax(0,1fr)}.rvx__sum .btn{margin-left:0}}
 .stars{display:flex;gap:4px}
 .stars svg{width:28px;height:28px;color:var(--star-empty)}
 
-/* Gelber Platzhalter-Hinweis (bleibt sichtbar, bis echte Inhalte vorliegen) */
+/* Gelber Platzhalter-Hinweis: seit Runde 6 auf keiner Seite mehr im Einsatz (offene Stellen stehen als <!-- OFFEN: … --> im HTML).
+   Die Regeln bleiben für den Fall, dass er später wieder gebraucht wird. */
 .draft-note{max-width:100%;padding:8px 12px;border-radius:var(--radius-sm);background:var(--note);color:var(--note-fg);font-size:.85rem;font-weight:600}
 .draft-note--small{align-self:flex-start;margin-top:auto;padding:6px 10px;font-size:.78rem}
 
@@ -277,7 +291,7 @@ html:has(.contact[open]){overflow:hidden}   /* Seite dahinter scrollt nicht mit 
 .field--check a{color:var(--accent-strong);font-weight:600}
 .form__actions{display:flex;justify-content:flex-start;margin-top:6px}
 
-/* Eintrag "Online-Termin" im mobilen Menü (nur, wenn der Button in der Pille ausgeblendet ist) */
+/* Eintrag "Online-Termin" im mobilen Menü (nur bis 760 px, dort ist der Button in der Pille ausgeblendet) */
 .menu__cta{display:none}
 
 /* ---------- Footer (Bild rechts, blendet nach links aus) ---------- */
@@ -290,14 +304,14 @@ html:has(.contact[open]){overflow:hidden}   /* Seite dahinter scrollt nicht mit 
 .site-footer a{text-decoration:none;color:inherit}
 .site-footer ul{list-style:none;margin:0;padding:0}
 
-/* Kopfzeile: Logo auf Glas, kurzer Satz, Karriere-Hinweis, Nach-oben-Button */
+/* Kopfzeile: weißes Logo, kurzer Satz, Karriere-Hinweis, Nach-oben-Button */
 .ft-top{display:flex;flex-wrap:wrap;align-items:center;gap:14px 22px}
-.ft-logo{display:inline-block;padding:10px 16px;border-radius:var(--radius-row);background:var(--ft-logo-bg);box-shadow:var(--sh-2)}
-.ft-logo img{height:40px;width:auto}
+.ft-logo{display:inline-block;border-radius:var(--radius-xs)}   /* weißes Logo direkt auf dem dunklen Grund, ohne Kasten */
+.ft-logo img{height:44px;width:auto}
 .ft-claim{flex:1;min-width:200px;line-height:1.2;font-family:var(--f-display);font-size:1.35rem;font-weight:600;color:var(--on-navy)}
 .ft-hiring{display:inline-flex;align-items:center;gap:10px;padding:10px 16px;border-radius:var(--radius-pill);font-weight:600;font-size:.92rem;color:var(--on-navy);
   background:var(--glass-row);box-shadow:inset 0 0 0 1px var(--glass-line-row)}
-.ft-hiring__dot{width:8px;height:8px;border-radius:50%;background:var(--accent-2);box-shadow:0 0 0 4px rgba(232,98,46,.22)}
+.ft-hiring__dot{width:8px;height:8px;border-radius:50%;background:var(--accent-2);box-shadow:0 0 0 4px var(--accent-ring)}
 .ft-up{margin-left:auto;display:grid;place-items:center;width:46px;height:46px;border-radius:50%;color:var(--on-navy);background:var(--glass-chip);box-shadow:inset 0 0 0 1px var(--glass-line)}
 .ft-up svg{width:20px;height:20px}
 
@@ -347,11 +361,8 @@ html:has(.contact[open]){overflow:hidden}   /* Seite dahinter scrollt nicht mit 
 /* ---------- Responsive ---------- */
 @media (min-width:640px){.prose::before{display:block}}
 
-/* Schmale Desktop-Breiten: Menü etwas enger, damit nichts überläuft */
-@media (min-width:1061px) and (max-width:1180px){
-  .site-nav{gap:10px;padding-left:16px}
-  .menu>li>a{padding-inline:7px}
-}
+/* Schmale Desktop-Breiten: Seit Runde 5 (ohne „Geschäftskunden“, schmalere Schrift) passt das Menü in voller Größe bis 1061 px
+   (≥ 69 px zwischen „Karriere“ und „Anrufen“), die Engstellen-Regeln aus Runde 4 sind entfallen. */
 
 /* Drei schmale Karten nebeneinander: Glas-Kachel-Text etwas kleiner, damit die Kacheln kompakt bleiben */
 @media (min-width:981px) and (max-width:1099px){
@@ -365,38 +376,52 @@ html:has(.contact[open]){overflow:hidden}   /* Seite dahinter scrollt nicht mit 
   .menu{display:none;position:absolute;left:0;right:0;top:calc(100% + 8px);flex-direction:column;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:10px;box-shadow:var(--sh-3);
     max-height:calc(100dvh - 120px);overflow-y:auto}
   .menu.is-open{display:flex}
-  .submenu{display:block;position:static;box-shadow:none;border:0;padding:0 0 0 14px;min-width:0}
-  .submenu::before{content:none}
+  /* offenes Menü: untere Info-Leiste ausblenden, sonst verdeckt sie die unteren Menüeinträge */
+  body:has(.menu.is-open) .infobar{opacity:0;visibility:hidden;pointer-events:none}
+  /* Mega-Menü im aufgeklappten Menü: statisch eingerückt, einspaltig */
+  .mega{display:block;position:static;width:auto;padding:0 0 0 14px;background:none;box-shadow:none}
+  .mega::before{content:none}
+  .mega__grid{grid-template-columns:1fr}
+  .mega__sep{margin:8px 0}
+  .menu>li.has-mega>a::after{content:none}
   .site-nav{border-radius:26px}
 }
 
 @media (max-width:980px){
   /* Karten einzeln untereinander */
   .cards{grid-template-columns:minmax(0,1fr);max-width:620px;margin-inline:auto}
+  /* Ausnahme fünf Schwerpunkte: zwei Spalten (2 + 2 + 1, die letzte mittig) */
+  .cards--5{grid-template-columns:repeat(4,minmax(0,1fr));max-width:none}
+  .cards--5>.svc:nth-child(4){grid-column:span 2}
+  .cards--5>.svc:nth-child(5){grid-column:2/span 2}
   .svc__media{aspect-ratio:4/3}
   .hero__frame::after{background:var(--grad-hero-narrow)}
   .split,.band{grid-template-columns:minmax(0,1fr)}
   .bt--eco .glass-in{grid-template-columns:minmax(0,1fr);justify-items:start}
   .bento{grid-template-columns:repeat(2,minmax(0,1fr));grid-template-areas:"gla hbc" "tmx dek"}
-  .reviews{grid-template-columns:repeat(2,minmax(0,1fr))}
   .ft-cards{grid-template-columns:repeat(2,minmax(0,1fr))}
   .ft-claim{flex-basis:100%;order:3}
   .site-footer__img{width:100%;-webkit-mask-image:var(--mask-fade-down);mask-image:var(--mask-fade-down);opacity:.6}
 }
 
-@media (max-width:560px){
-  .brand img{height:36px}
-  .nav-actions .btn{display:none}
+/* Mobil: in der Pille nur Logo und Menü-Button. Telefon und Online-Termin stehen in der Floating-Bar unten (.infobar), Online-Termin zusätzlich im Menü. */
+@media (max-width:760px){
+  .nav-actions .btn,.nav-actions .nav-tel{display:none}
   .menu__cta{display:block;padding-top:8px}
   .menu__cta .btn{width:100%;text-transform:none;letter-spacing:.01em}
+}
+
+@media (max-width:560px){
+  .brand img{height:32px}
   .hero__text .btn{width:100%}
   .chip{border-radius:var(--radius-lg)}
   .svc__media{aspect-ratio:4/5}
+  .cards--5{grid-template-columns:minmax(0,1fr);max-width:620px}
+  .cards--5>.svc:nth-child(n){grid-column:auto}
   .bento{grid-template-columns:minmax(0,1fr);grid-template-areas:"gla" "hbc" "tmx" "dek"}
   .form{grid-template-columns:minmax(0,1fr)}
   .contact{border-radius:var(--radius-lg)}
   .form__actions .btn{width:100%}
-  .reviews{grid-template-columns:minmax(0,1fr)}
   .ft-hiring{order:4}
   .ft-cards{grid-template-columns:minmax(0,1fr)}
 }
@@ -414,10 +439,11 @@ html:has(.contact[open]){overflow:hidden}   /* Seite dahinter scrollt nicht mit 
 .band__img img[data-px],.career__img img{inset:-14% 0;height:128%}
 
 /* ---------- Navigation: Telefonnummer ---------- */
-.nav-tel{display:inline-flex;align-items:center;gap:8px;padding:10px 12px;border-radius:var(--radius-pill);font-weight:600;font-size:.92rem;
-  color:var(--fg);text-decoration:none;white-space:nowrap}
+/* Kurzer Button „Anrufen“ mit feinem Rahmen, klar untergeordnet zum orangenen „Online-Termin“. Die Nummer steht im title. */
+.nav-tel{display:inline-flex;align-items:center;gap:8px;padding:9px 14px;border-radius:var(--radius-pill);font-weight:600;font-size:.92rem;
+  color:var(--fg);text-decoration:none;white-space:nowrap;box-shadow:inset 0 0 0 1.5px var(--line)}
 .nav-tel svg{width:18px;height:18px;color:var(--accent)}
-@media (max-width:1240px){
+@media (max-width:1060px){   /* erst mit Menü-Button nur das Symbol, darüber passt „Anrufen“ (Runde 5) */
   .nav-tel{width:44px;height:44px;justify-content:center;padding:0;box-shadow:inset 0 0 0 1px var(--glass-btn-light-line)}
   .nav-tel span{display:none}
 }
@@ -454,22 +480,27 @@ html:has(.contact[open]){overflow:hidden}   /* Seite dahinter scrollt nicht mit 
 .marquee{position:relative;overflow:hidden;padding-block:12px;
   -webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
 .marquee__track{list-style:none;margin:0;padding:0;display:flex;gap:var(--mq-gap);width:max-content}
-.mq-item{flex:none;display:grid;justify-items:center;gap:12px;width:var(--mq-w)}
+.mq-item{flex:none;display:grid;justify-items:center;gap:10px;width:var(--mq-w)}
 /* Glas-Kachel wie bisher bei den Partnern: .mq-item__blur = dasselbe Bild stark unscharf als farbiger Hintergrund,
    .mq-item__glass = halbtransparente Glasfläche mit dem scharfen Bild. In Ruhe sind beide Bilder grau (--mq-gray, direkt am <img>,
    nicht an der ganzen Kachel: so muss beim Hover nur das jeweilige Bild neu gefiltert werden, nicht die ganze verschachtelte Fläche). */
-.mq-item__tile{position:relative;isolation:isolate;overflow:hidden;display:grid;grid-template-rows:minmax(0,1fr);width:100%;height:var(--mq-h);padding:14px;
+.mq-item__tile{position:relative;isolation:isolate;overflow:hidden;display:grid;grid-template-rows:minmax(0,1fr);width:100%;height:var(--mq-h);padding:10px;
   border-radius:var(--radius);background:var(--logo-tile-bg);box-shadow:var(--sh-2)}
 .mq-item__blur{position:absolute;inset:-25%;z-index:-1;pointer-events:none;transform:translateZ(0)}   /* eigene Ebene: der große Weichzeichner wird nicht mit der Kachel neu gerechnet */
 .mq-item__blur img{width:100%;height:100%;max-width:none;object-fit:cover;filter:blur(28px) saturate(1.6) var(--mq-gray);opacity:.85;will-change:filter}
-.mq-item__glass{position:relative;overflow:hidden;display:grid;grid-template-rows:minmax(0,1fr);padding:12px;border-radius:var(--radius-tile);
+.mq-item__glass{position:relative;overflow:hidden;display:grid;grid-template-rows:minmax(0,1fr);padding:8px;border-radius:var(--radius-tile);
   background:var(--glass-logo);box-shadow:var(--sh-glass-logo)}
 .mq-item__glass picture{display:contents}
 .mq-item__glass source{display:none}   /* sonst wird <source> durch display:contents zur eigenen Rasterzeile und drückt das Bild nach unten */
 .mq-item__glass img{width:100%;height:100%;object-fit:contain;border-radius:var(--radius-xs);
   filter:var(--logo-dim) drop-shadow(0 0 0 transparent) var(--mq-gray)}   /* gleiche Filter-Reihenfolge wie --mq-lit, damit der Übergang weich statt sprunghaft ist */
-.mq-item--logo .mq-item__glass{padding:18px 20px}
-.mq-item__name{font-family:var(--f-display);font-weight:700;font-size:1.05rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.mq-item--logo .mq-item__glass{padding:12px 14px}
+/* Beschriftung gut lesbar: Text-Schrift, keine Versalien, kein Sperrsatz. Dass sich ein Zertifikat öffnet, zeigen Zoom-Cursor und aria-label. */
+.mq-item__name{font-family:var(--f-body);font-weight:600;font-size:1.08rem;line-height:1.3;letter-spacing:0;text-transform:none;text-align:center;color:var(--heading);text-wrap:balance}
+@media (max-width:760px){
+  :root{--mq-w:140px;--mq-h:108px}
+  .mq-item__name{font-size:1rem}
+}
 /* Geräte ohne Hover (Touch): Farbe immer sichtbar, sonst bliebe alles grau */
 @media (hover:none){.mq-item__blur img{filter:blur(28px) saturate(1.6)}.mq-item__glass img{filter:var(--logo-dim)}}
 
@@ -485,7 +516,7 @@ html:has(.contact[open]){overflow:hidden}   /* Seite dahinter scrollt nicht mit 
 .career__badge{display:inline-flex;align-items:center;gap:10px;padding:8px 16px;border-radius:var(--radius-pill);background:var(--grad-accent);color:var(--on-accent);
   font-weight:600;font-size:.88rem;letter-spacing:.14em;text-transform:uppercase;box-shadow:var(--sh-btn)}
 .career__dot{width:9px;height:9px;border-radius:50%;background:var(--white)}
-.career__title{font-size:clamp(2.8rem,6.4vw,5.2rem);line-height:.98;color:var(--white)}
+.career__title{font-size:calc(clamp(2.8rem,6.4vw,5.2rem) * var(--h-scale));line-height:.98;color:var(--white)}
 .career__title span{display:block;margin-top:10px;font-size:.5em;line-height:1.1;color:var(--accent-2)}
 .career__lead{font-size:clamp(1.05rem,1.5vw,1.2rem);color:var(--on-navy-muted);max-width:40ch}
 .career__actions{display:flex;flex-wrap:wrap;gap:12px}
@@ -493,7 +524,7 @@ html:has(.contact[open]){overflow:hidden}   /* Seite dahinter scrollt nicht mit 
 .career__contact b{color:var(--on-navy)}
 .career__contact a{color:var(--on-navy)}
 .career__cols{display:grid;gap:14px}
-.career .job__col{background:linear-gradient(var(--glass-row),var(--glass-row)),rgba(14,22,42,.35);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
+.career .job__col{background:linear-gradient(var(--glass-row),var(--glass-row)),rgba(17,23,38,.35);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
 
 /* ---------- Social-Media-Banner: zwei große Kacheln mit Bild/Video im Hintergrund ---------- */
 .pb-0{padding-bottom:0}
@@ -507,14 +538,18 @@ html:has(.contact[open]){overflow:hidden}   /* Seite dahinter scrollt nicht mit 
   height:clamp(340px,40vw,480px);padding:20px;border-radius:var(--radius);text-decoration:none;color:var(--on-image);background:var(--navy-deep);
   box-shadow:inset 0 0 0 1px var(--glass-line-row),var(--sh-2)}
 .sm-tile__media{position:absolute;inset:0;z-index:-2}
-.sm-tile__media img,.sm-tile__media video{width:100%;height:100%;object-fit:cover}
+.sm-tile__media video{display:block;width:100%;height:100%;object-fit:cover}
 .sm-tile::after{content:"";position:absolute;inset:0;z-index:-1;background:var(--grad-media)}
-.sm-tile__top{display:flex;flex-direction:column;align-items:flex-start;gap:12px}
-.sm-tile__top .draft-note{margin-top:0}
+.sm-tile__top{display:flex;align-items:center;justify-content:space-between;gap:12px;width:100%}
+/* Kennzeichnung „ohne Ton“ oben rechts */
+.sm-tile__mute{display:inline-flex;align-items:center;gap:6px;padding:5px 10px;border-radius:var(--radius-pill);background:var(--mute-badge);color:var(--white);
+  font-size:.78rem;font-weight:600;letter-spacing:.02em;-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px)}
+.sm-tile__mute svg{width:14px;height:14px}
+.social>.draft-note{justify-self:start;margin:0}
 .sm-tile__ico{display:grid;place-items:center;width:52px;height:52px;border-radius:var(--radius-row);background:var(--surface);color:var(--accent);box-shadow:var(--sh-2)}
 .sm-tile__ico svg{width:26px;height:26px}
 .sm-tile__foot{display:grid;justify-items:start;gap:14px}
-.sm-tile__foot>span:first-child{display:grid;gap:2px;text-shadow:0 1px 10px rgba(14,22,42,.55);min-width:0}
+.sm-tile__foot>span:first-child{display:grid;gap:2px;text-shadow:0 1px 10px rgba(17,23,38,.55);min-width:0}
 .sm-tile__foot small{font-size:.85rem;letter-spacing:.14em;text-transform:uppercase;color:var(--accent-2);font-weight:600}
 .sm-tile__foot b{font-family:var(--f-display);font-size:clamp(1.4rem,2.4vw,1.9rem);line-height:1.1;overflow-wrap:anywhere}
 
@@ -524,17 +559,29 @@ html:has(.contact[open]){overflow:hidden}   /* Seite dahinter scrollt nicht mit 
   background:var(--nav-glass-shine),var(--infobar-glass);-webkit-backdrop-filter:var(--nav-blur);backdrop-filter:var(--nav-blur);
   border:1px solid var(--nav-glass-line);box-shadow:inset 0 1px 0 rgba(255,255,255,.6),var(--sh-3);transform:translate(-50%,0)}
 .infobar:not(.is-visible){opacity:0;transform:translate(-50%,140%);pointer-events:none}
-.infobar__item{display:inline-flex;align-items:center;gap:8px;padding:8px 12px;border-radius:var(--radius-pill);text-decoration:none;color:inherit;white-space:nowrap;font-weight:500;margin:0}
+.infobar__item{display:inline-flex;align-items:center;gap:8px;padding:8px 12px;border-radius:var(--radius-pill);text-decoration:none;color:inherit;white-space:nowrap;font-weight:500;margin:0;
+  font:inherit;font-weight:500;background:none;border:0;cursor:pointer}
+.infobar__item[hidden]{display:none}   /* WhatsApp bleibt aus, bis die Nummer da ist */
 .infobar__item svg{flex:none;width:18px;height:18px;color:var(--accent)}
+.infobar__short,.infobar__termin{display:none}   /* nur in der mobilen Floating-Bar */
 .infobar__status{font-size:.84rem;color:var(--fg-soft)}
 .infobar__status[hidden]{display:none}
 .infobar .ft-status__dot{width:8px;height:8px;border-radius:50%;background:var(--ft-closed)}
 .infobar__status.is-open .ft-status__dot{background:var(--ft-open);box-shadow:0 0 0 4px var(--ft-open-glow)}
 @media (max-width:860px){.infobar__status{display:none!important}}
-@media (max-width:560px){
-  .infobar{left:var(--gutter);right:var(--gutter);justify-content:space-between;transform:none;max-width:none}
+/* Mobil: Floating-Bar über die ganze Breite, gleich breite Tap-Flächen (Symbol über kurzer Beschriftung), mindestens --fab-h hoch */
+@media (max-width:760px){
+  .infobar{left:var(--gutter);right:var(--gutter);bottom:calc(env(safe-area-inset-bottom,0px) + 10px);justify-content:space-between;gap:4px;
+    max-width:none;padding:5px;border-radius:var(--radius);transform:none}
   .infobar:not(.is-visible){transform:translateY(140%)}
-  .infobar__item{flex:1;justify-content:center}
+  .infobar__item{flex:1 1 0;flex-direction:column;justify-content:center;gap:3px;min-width:0;min-height:var(--fab-h);padding:6px 4px;
+    border-radius:var(--radius-row);font-size:.8rem;font-weight:600;line-height:1.1}
+  .infobar__item svg{width:22px;height:22px}
+  .infobar__long{display:none}
+  .infobar__short{display:inline}
+  .infobar__termin{display:inline-flex;background:var(--grad-accent);color:var(--on-accent)}
+  .infobar__termin svg{color:var(--on-accent)}
+  .page{padding-bottom:calc(var(--section-gap) + var(--fab-h))}   /* letzter Inhalt nicht unter der Leiste */
 }
 
 /* ---------- Kontaktseite ---------- */
@@ -585,10 +632,9 @@ html:has(.contact[open]){overflow:hidden}   /* Seite dahinter scrollt nicht mit 
   .sm-tile{height:360px}
 }
 @media (max-width:560px){
-  .career__actions .btn{flex:1}
+  .career__actions .btn{flex:1 0 auto}   /* nie schmaler als der Text */
   .exp__pad p{padding-left:18px}
 }
-.sm-tile__media picture{display:block;height:100%}
 
 /* =====================================================================
    UNTERSEITEN
@@ -605,9 +651,11 @@ html:has(.contact[open]){overflow:hidden}   /* Seite dahinter scrollt nicht mit 
 .page-hero__frame::after{content:"";position:absolute;inset:0;z-index:-1;background:var(--grad-page-hero)}
 .page-hero__body{width:100%;max-width:var(--wrap);margin-inline:auto;padding:calc(var(--hdr) + var(--hero-top-gap)) var(--gutter) clamp(36px,7vh,64px);
   display:grid;justify-items:start;gap:18px;color:var(--on-image)}
-.page-hero h1{max-width:20em;font-size:clamp(2.2rem,4.8vw,3.8rem)}
+.page-hero h1{max-width:20em;font-size:calc(clamp(2.2rem,4.8vw,3.8rem) * var(--h-scale))}
 .page-hero__lead{max-width:62ch;font-size:clamp(1rem,1.4vw,1.15rem);line-height:1.6;color:var(--on-image-muted)}
 .page-hero__lead strong{color:var(--on-image);font-weight:600}
+.page-hero .eyebrow{color:var(--accent-on-image);margin-bottom:-8px}   /* Leistungsname über der Überschrift, helles Orange direkt auf dem Foto-Verlauf */
+.page-hero__actions{display:flex;flex-wrap:wrap;gap:12px}
 
 /* Fließtext ohne große erste Zeile (Unterseiten: der erste Absatz ist dort normaler Text) */
 .prose--plain p:first-of-type{font-family:var(--f-body);font-weight:400;font-size:1.1rem;line-height:1.75;color:var(--fg-soft)}
@@ -664,7 +712,7 @@ html:has(.contact[open]){overflow:hidden}   /* Seite dahinter scrollt nicht mit 
 .rail__node{position:absolute;z-index:2;left:var(--rail-x);top:50%;translate:-50% -50%;display:grid;place-items:center;width:var(--rail-node);height:var(--rail-node);
   border:3px solid var(--line);border-radius:50%;background:var(--surface);color:var(--muted);font-family:var(--f-display);font-weight:700;font-size:1.15rem;line-height:1}
 .rail__node::after{content:"";position:absolute;inset:-3px;border:2px solid var(--accent);border-radius:50%;opacity:0;pointer-events:none}   /* Spritzer-Ring (effects.css) */
-.steps--rail>li.is-on .rail__node{border-color:var(--accent);background:var(--accent);color:var(--on-accent);box-shadow:0 0 0 8px var(--rail-ring)}
+.steps--rail>li.is-on .rail__node{border-color:var(--accent-strong);background:var(--accent-strong);color:var(--on-accent);box-shadow:0 0 0 8px var(--rail-ring)}
 .steps--rail.is-ready>li:not(.is-on) .steps__item{transform:scale(.94);opacity:.35}
 /* Deko-Zeile: grauer Stab, orange Füllung, Lacktropfen am Ende der Füllung, End-Pille */
 .rail__deco{position:absolute;inset:0;pointer-events:none}
@@ -748,22 +796,9 @@ html:has(.lightbox[open]){overflow:hidden}
   .pnav__card--next small{justify-content:flex-start}
 }
 
-/* ---------- Über uns: Team, Zertifikate, Partner ---------- */
-.team{list-style:none;margin:0;padding:0;display:grid;gap:16px}
-.team__card{display:grid;grid-template-columns:var(--team-img) minmax(0,1fr);grid-template-rows:auto 1fr;column-gap:20px;row-gap:6px;align-items:start;
-  padding:18px;background:var(--surface);border-radius:var(--radius);box-shadow:var(--sh-2)}
-.team__img{grid-row:1 / span 2}
-.team__img img{width:var(--team-img);height:var(--team-img);border-radius:var(--radius-tile);object-fit:cover;background:var(--sk-1)}
-.team__card h3{align-self:end;font-size:1.5rem;color:var(--heading)}
-.team__card p{color:var(--fg-soft)}
-.band--certs{margin-top:clamp(24px,3vw,36px);justify-items:start}
-.exp--single{grid-template-columns:minmax(0,1fr);width:100%}
-.exp__media{padding:0 18px 18px 66px}
-.exp__media img{width:min(100%,420px);height:auto;border-radius:var(--radius-md);box-shadow:var(--sh-3);background:var(--white)}
-
 /* ---------- Karriere-Seite: Banner als Seitenkopf, darunter die Inhalte der Live-Seite ---------- */
 .career--head{margin-top:calc(var(--hdr) * -1);padding-top:calc(var(--hdr) + clamp(40px,7vw,96px))}
-.career--head .career__title{font-size:clamp(2.6rem,6vw,4.8rem)}
+.career--head .career__title{font-size:calc(clamp(2.6rem,6vw,4.8rem) * var(--h-scale))}
 .prose--career p{font-size:1.05rem}
 .split--career{margin-top:clamp(28px,4vw,48px)}
 .callout--apply{display:grid;gap:14px;justify-items:start}
@@ -784,7 +819,7 @@ html:has(.lightbox[open]){overflow:hidden}
 .field ::placeholder{color:var(--muted);opacity:1}
 
 /* ---------- Rechtstexte .legal-text: schmale, gut lesbare Spalte, druckfreundlich ---------- */
-.zone--legal .sec-head h1{font-size:clamp(2.1rem,4.4vw,3.4rem);color:var(--heading)}
+.zone--legal .sec-head h1{font-size:calc(clamp(2.1rem,4.4vw,3.4rem) * var(--h-scale));color:var(--heading)}
 .legal-text{max-width:var(--legal-w);margin-inline:auto;color:var(--fg-soft);font-size:1.02rem;line-height:1.7}
 .legal-text>*+*{margin-top:14px}
 .legal-text h2{margin-top:44px;font-size:clamp(1.6rem,2.6vw,2rem);color:var(--heading)}
@@ -820,8 +855,220 @@ html:has(.lightbox[open]){overflow:hidden}
 @media (max-width:560px){
   .cards--4,.steps,.steps--4,.projects,.split--even{grid-template-columns:minmax(0,1fr)}
   .page-hero .btn{width:100%}
-  .exp__media{padding-left:18px}
-  .team__card{grid-template-columns:96px minmax(0,1fr)}
-  .team__img img{width:96px;height:96px}
   .flow li{padding-left:22px;padding-top:70px}
 }
+
+/* =====================================================================
+   FEEDBACK MEETING 1: Prozess Versicherungsschaden, Hard Facts, Karussell-Gruppen, Kontakt-Bereich
+   ===================================================================== */
+
+/* ---------- Prozess „Versicherungsschaden“ (.process, wiederverwendbar: Startseite und unfallinstandsetzung.html) ----------
+   Geordnete Liste, die Nummer setzt der CSS-Zähler in den Kreis an der Kante zwischen Bild und Text.
+   5 Spalten, ab 1100 px 3 (3 + 2), ab 640 px einspaltig mit Bild links. */
+.process{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:var(--process-gap);counter-reset:process}
+.process__step{position:relative;display:grid;grid-template-rows:auto 1fr;min-width:0;overflow:hidden;background:var(--surface);border-radius:var(--radius);box-shadow:var(--sh-2);counter-increment:process}
+.process__media{position:relative;overflow:hidden;aspect-ratio:4/3;background:var(--grad-ph)}
+.process__media img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.process__media--ph{display:grid;place-items:center;background:var(--grad-process-ph);color:var(--accent-strong)}
+.process__media--ph svg{width:44px;height:44px;opacity:.75}
+.process__body{position:relative;display:flex;flex-direction:column;align-items:flex-start;gap:6px;padding:calc(var(--process-badge) / 2 + 14px) 18px 18px}
+.process__body::before{content:counter(process);position:absolute;left:16px;top:calc(var(--process-badge) / -2);display:grid;place-items:center;
+  width:var(--process-badge);height:var(--process-badge);border-radius:50%;background:var(--accent-strong);color:var(--on-accent);
+  font-family:var(--f-display);font-weight:700;font-size:1.35rem;line-height:1;box-shadow:0 0 0 4px var(--surface),var(--sh-2)}
+.process__body h3{font-size:1.3rem;color:var(--heading);hyphens:manual;-webkit-hyphens:manual}   /* lange Wörter mit &shy; im HTML */
+.process__body p{color:var(--fg-soft);font-size:.96rem;line-height:1.5}
+.process__cta{display:flex;flex-wrap:wrap;justify-content:center;gap:12px;margin-top:clamp(24px,3vw,36px)}
+/* Acht Schritte (unfallinstandsetzung.html, Runde 6): 4 Spalten, bis 1100 px 2, bis 640 px einspaltig wie oben */
+.process--8{grid-template-columns:repeat(4,minmax(0,1fr))}
+.process--8 .process__body p+p{margin-top:4px}
+
+/* ---------- Über uns (ueber-uns.html): Hard Facts als Kacheln, Bilder ---------- */
+.facts{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;width:100%}
+.facts--3{grid-template-columns:repeat(3,minmax(0,1fr))}
+.facts--4{grid-template-columns:repeat(4,minmax(0,1fr))}
+.fact{display:flex;flex-direction:column;align-items:flex-start;gap:4px;min-width:0;padding:20px;background:var(--surface);border-radius:var(--radius);box-shadow:var(--sh-2)}
+.fact__ico{display:grid;place-items:center;width:44px;height:44px;margin-bottom:8px;border-radius:var(--radius-md);background:var(--accent-soft);color:var(--accent-strong)}
+.fact__ico svg{width:22px;height:22px}
+.fact strong{font-family:var(--f-display);font-weight:700;font-size:1.35rem;line-height:1.15;color:var(--heading)}
+.fact>span:not([class]){color:var(--fg-soft)}
+.fact .draft-note{margin-top:8px}
+
+/* ---------- Über uns (Startseite): Intro „Inhaber zuerst“. Aussage links, beide Inhaber als Porträtkarten rechts, Fakten als Band ---------- */
+.ab2{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:clamp(28px,5vw,64px);align-items:center}
+.ab2__text{display:grid;gap:20px;justify-items:start}
+.ab__lead{margin:0;font-family:var(--f-display);font-stretch:var(--h-stretch);font-weight:500;font-size:clamp(1.35rem,2.2vw,1.75rem);line-height:1.25;color:var(--heading)}
+.ab2__text>p:not(.ab__lead){margin:0;color:var(--fg-soft);max-width:54ch}
+/* Porträt-Reihe als Flex mit fester Höhe (--ab2-people-h): Grundlage für „Expand on Hover“ (Vorbild Skiper UI 52, Eigenbau nur CSS),
+   die Karte unter der Maus wird breiter, die andere schmaler (Hover-Regeln in effects.css). Kein Seitenverhältnis mehr. */
+.ab2__people{display:flex;gap:16px;height:var(--ab2-people-h)}
+.ab2__person{margin:0;position:relative;overflow:hidden;flex:1 1 0;min-width:0;height:100%;border-radius:var(--radius-lg);background:var(--navy);box-shadow:var(--sh-3)}
+.ab2__person:nth-child(2){translate:0 32px;height:calc(100% - 32px)}   /* zweite Karte versetzt, dafür niedriger: beide enden unten bündig */
+.ab2__person img{width:100%;height:100%;object-fit:cover;object-position:50% 25%}
+.ab2__person figcaption{position:absolute;left:0;right:0;bottom:0;display:grid;gap:4px;justify-items:start;padding:40px 18px 16px;background:var(--grad-portrait);color:var(--on-image)}
+.ab2__person b{display:block;font-family:var(--f-display);font-stretch:var(--h-stretch);font-size:1.1rem;line-height:1.15}
+.ab2__person small{color:var(--on-image-muted);font-size:.88rem;hyphens:auto;-webkit-hyphens:auto}   /* „Fahrzeuglackierermeister“ darf in schmalen Karten trennen */
+.ab2__person .draft-note{display:inline-block;margin-top:4px}
+.ab2__band{grid-column:1 / -1;list-style:none;margin:clamp(20px,3vw,40px) 0 0;padding:22px 0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border-block:1px solid var(--line)}
+.ab2__band li{display:grid;align-content:start;justify-items:start;gap:2px;padding:0 22px;border-left:1px solid var(--line)}
+.ab2__band li:first-child{border-left:0;padding-left:0}
+.ab2__band b{font-family:var(--f-display);font-stretch:var(--h-stretch);font-size:1.12rem;color:var(--heading);line-height:1.2}
+.ab2__band span{font-size:.92rem;color:var(--muted)}
+.ab2__band .draft-note{display:inline-block;margin-left:4px}
+@media (max-width:900px){
+  :root{--ab2-people-h:clamp(300px,70vw,440px)}
+  .ab2{grid-template-columns:minmax(0,1fr)}
+  .ab2__band{grid-template-columns:1fr 1fr;gap:16px 0}
+  .ab2__band li:nth-child(3){border-left:0;padding-left:0}
+}
+@media (max-width:520px){
+  .ab2__person:nth-child(2){translate:0 16px;height:calc(100% - 16px)}
+  .ab2__person figcaption{padding:32px 12px 12px}
+  .ab2__person small{font-size:.8rem}
+}
+
+/* ---------- Qualität: zwei Karussell-Reihen mit eigener Zwischenüberschrift ---------- */
+.mq-group{scroll-margin-top:calc(var(--hdr) + 16px)}
+.mq-group+.mq-group{margin-top:clamp(18px,2.6vw,30px)}
+.mq-group__title{text-align:center;font-size:1.2rem;letter-spacing:.02em;color:var(--heading)}
+/* Zertifikat-Kachel ist ein Button (öffnet die Lightbox) und sieht aus wie die übrigen Kacheln */
+.mq-item__open{all:unset;box-sizing:border-box;display:grid;justify-items:center;gap:10px;width:100%;border-radius:var(--radius);cursor:zoom-in}
+.marquee:not(.is-ready){overflow-x:auto}   /* ohne JavaScript (und bei reduzierter Bewegung) seitlich scrollbar statt abgeschnitten */
+
+/* ---------- Kontakt-Bereich der Startseite: Kontaktdaten links, Karte rechts ---------- */
+/* „So erreichen Sie uns“ (Startseite): eine Fläche, links groß die Karte, rechts die Kontaktwege als Liste */
+.kx{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);border-radius:var(--radius-lg);overflow:hidden;background:var(--surface);box-shadow:var(--sh-3)}
+.kx .kt-map{margin:0}
+.kx .kt-map__box{aspect-ratio:auto;height:100%;min-height:var(--map-min-h);border-radius:0;box-shadow:none}
+.kx__info{display:grid;align-content:start;padding:clamp(24px,3vw,40px)}
+.kx__row{display:grid;grid-template-columns:44px minmax(0,1fr) auto;align-items:center;gap:14px;padding:16px 0;border-bottom:1px solid var(--line);text-decoration:none;color:var(--fg)}
+.kx__row:first-child{padding-top:0}
+.kx__row--static{border-bottom:0;padding-bottom:0}
+.kx__ico{display:grid;place-items:center;width:44px;height:44px;border-radius:var(--radius-md);background:var(--accent-soft);color:var(--accent-strong)}
+.kx__ico svg{width:20px;height:20px}
+.kx__row small{display:block;font-size:.8rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:600}
+.kx__row b{display:block;font-size:1.12rem;font-weight:600;overflow-wrap:anywhere}
+.kx__row address{font-style:normal;font-weight:600;line-height:1.45}
+.kx__go{font-size:.9rem;font-weight:600;color:var(--accent-strong);white-space:nowrap}
+.kx__row b.kx__status{display:inline-flex;align-items:center;gap:8px;font-size:.98rem}
+.kx__row b.kx__status[hidden]{display:none}
+.kx__status.is-open .ft-status__dot{background:var(--ft-open);box-shadow:0 0 0 4px var(--ft-open-glow)}
+.kx__hours{margin:0;padding:16px 0 0 58px;display:grid;gap:6px}
+.kx__hours div{display:flex;justify-content:space-between;gap:12px}
+.kx__hours dt{font-weight:600}
+.kx__hours dd{margin:0;color:var(--fg-soft);text-align:right}
+.kx__hours small{font-size:.85rem}
+.kx__actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:26px}
+@media (max-width:900px){
+  .kx{grid-template-columns:minmax(0,1fr)}
+  .kx .kt-map{order:2}   /* mobil: Liste oben, Karte darunter */
+  .kx .kt-map__box{min-height:320px}
+}
+@media (max-width:520px){
+  .kx__hours{padding-left:0}
+  .kx__hours dt,.kx__hours dd{white-space:nowrap}
+}
+.kt-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px}
+
+/* ---------- ueber-uns.html: Team, Betrieb in Bildern, Angebot, Karriere-Kasten, FAQ ---------- */
+/* Bildkacheln: eine Komponente für alles mit Bild (.svc.svc--link wie Schwerpunkte und service.html) = Foto, Navy-Fuß, Glaskachel mit Symbol,
+   Titel, Kurztext, ggf. Button. Unterschiede nur über das Seitenverhältnis: Team (--tile-portrait), Betrieb in Bildern (--tile-pic). */
+.tiles{display:grid;gap:22px}
+.tiles--2{grid-template-columns:repeat(2,minmax(0,1fr));max-width:900px;margin-inline:auto}
+.tiles--3{grid-template-columns:repeat(3,minmax(0,1fr))}
+.tiles__note{display:table;margin:14px auto 0}
+.svc--portrait .svc__media{aspect-ratio:var(--tile-portrait)}
+.svc--portrait .svc__img img{object-position:50% 20%}
+.svc--pic .svc__media{aspect-ratio:var(--tile-pic)}
+.svc--pic .glass-tile{padding:28px 16px 14px}
+.svc--pic .glass-tile h3{font-size:1.25rem}
+/* Platzhalter-Kachel (Foto folgt): großes Symbol, helle Glaskachel */
+.svc__media--ph{display:grid;place-items:center}
+.svc__ph{position:absolute;inset:0;display:grid;place-items:center;padding-bottom:18%;color:var(--accent-strong);opacity:.35}
+.svc__ph svg{width:56px;height:56px;fill:none;stroke:currentColor;stroke-width:1.4}
+.svc__media--ph .glass-tile{color:var(--heading);text-shadow:none;background:var(--glass-tile-light)}
+.svc__media--ph .glass-tile p{color:var(--fg-soft)}
+.cards--4 .svc--link .glass-tile p{font-size:.92rem}
+/* Infoboxen: eine Komponente (.fact), gleiche Höhe je Reihe, Symbol oben links, Titel, Text, Hinweis unten, orange Oberkante */
+.facts--even{grid-auto-rows:1fr;gap:18px}
+.facts--even .fact{min-height:var(--fact-min);padding:24px 24px 22px;gap:6px}
+.facts--even .fact strong{font-size:1.25rem}
+.facts--even .fact>span:not([class]){font-size:.98rem;line-height:1.5}
+.facts--even .fact .draft-note{margin-top:auto}
+/* Leistungsseiten (Runde 6): Leistungen als Infoboxen unter der Einleitung, Schlusssätze darunter */
+.facts--services{margin-top:clamp(20px,2.5vw,28px)}
+.facts--services .fact{min-height:0}
+.prose--after{margin-top:clamp(28px,3.5vw,44px)}
+/* Aufzählung mit fettem Stichwort (wohnmobil-service.html) */
+.checks--wide{max-width:78ch;gap:12px;font-size:1.02rem;line-height:1.6;color:var(--fg-soft)}
+.checks--wide strong{color:var(--fg);font-weight:600}
+.offer__more{display:flex;justify-content:center;margin-top:clamp(20px,3vw,28px)}
+.callout--work{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:clamp(24px,4vw,56px);align-items:center;padding:clamp(26px,4vw,48px);border-radius:var(--radius-lg)}
+.callout--work__text{display:grid;gap:14px;justify-items:start}
+.callout--work h2{color:var(--white)}
+.callout--work .eyebrow--on-dark{color:var(--accent-2)}
+.callout--work .job__list{gap:12px}
+.band--faq{justify-items:start}   /* ohne Foto: dunkles Band (Hintergrund --navy mit --grad-band) */
+
+/* ---------- karriere.html: Bewerbungsformular mit Bild und Alternativen daneben ---------- */
+#bewerbung{scroll-margin-top:calc(var(--hdr) + 8px)}
+.apply{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(0,1fr);gap:clamp(20px,3vw,32px);align-items:start}
+.apply .form-card{max-width:none;margin:0;display:grid;gap:14px}
+.apply__aside{display:grid;gap:16px}
+.apply__aside .media img{aspect-ratio:4/3;object-fit:cover}
+.apply__alt{display:grid;gap:10px;padding:clamp(20px,3vw,28px);background:var(--surface);border-radius:var(--radius);box-shadow:var(--sh-2);color:var(--fg-soft)}
+.apply__alt h3{font-size:1.35rem;color:var(--heading)}
+.apply__alt a{color:var(--accent-strong);font-weight:600;overflow-wrap:anywhere}
+.apply__alt address{font-style:normal;line-height:1.6}
+
+@media (max-width:1100px){
+  .process{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .process--8{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .facts--3,.facts--4{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media (max-width:980px){
+  .callout--work,.apply{grid-template-columns:minmax(0,1fr)}
+  .tiles--3{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .facts--even.facts--3,.facts--even.facts--4{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media (max-width:640px){
+  .tiles--2,.tiles--3{grid-template-columns:minmax(0,1fr)}
+  .svc--portrait .svc__media{aspect-ratio:4/4.4}
+  .process{grid-template-columns:minmax(0,1fr)}
+  .process__step{grid-template-columns:112px minmax(0,1fr);grid-template-rows:auto}
+  .process__media{aspect-ratio:auto;min-height:112px}
+  .process__body{padding:16px}
+  .process__body::before{position:static;width:36px;height:36px;margin-bottom:4px;font-size:1.1rem;box-shadow:none}
+}
+@media (max-width:560px){
+  .facts,.facts--3,.facts--4{grid-template-columns:minmax(0,1fr)}
+  .facts--even.facts--3,.facts--even.facts--4{grid-template-columns:minmax(0,1fr);grid-auto-rows:auto}
+  .facts--even .fact{min-height:0}
+  .kt-actions .btn,.process__cta .btn{flex:1 1 100%}
+}
+
+/* ---------- Bildfuß auf eigenen Fotos: Übergang in Logo-Navy und Logo Orange/Weiß mittig unten (ersetzt das Wasserzeichen oben rechts) ----------
+   Eigenes Element <span class="wm">, kein Pseudo-Element: die Kacheln nutzen ::after schon für Verläufe. Es wird zur Fußfläche über die volle Breite.
+   Auf allen Bildkacheln mit Foto oder Platzhalter (auch Stock-/KI-Bilder und Porträts, seit Runde 5b).
+   Nicht auf Hero/Seitenköpfen, Projekten, Zertifikaten, Partner-Logos, Karriere-Banner und den Porträtkarten der Startseite (Über uns). */
+.svc__media,.process__media,.steps__item,.media{position:relative}
+.wm{position:absolute;left:0;right:0;bottom:0;z-index:1;height:var(--foot-h);pointer-events:none;
+  background:var(--foot-logo) no-repeat center bottom var(--foot-logo-gap)/var(--foot-logo-w) auto,var(--foot-grad)}
+/* Bildkacheln (.svc__media): Navy-Fuß auf ALLEN Kacheln (auch Stockbild, Porträt, Platzhalter), damit alle Glaskacheln gleich hoch sitzen.
+   Den Verlauf liefert hier ::after (oben), .wm trägt nur das Logo. Die Glaskachel rückt über das Logo. */
+.svc__media .wm{background:var(--foot-logo) no-repeat center bottom var(--foot-logo-gap)/var(--foot-logo-w) auto}
+.svc__media .glass-tile{bottom:calc(var(--foot-logo-gap) + var(--foot-logo-h) + 14px)}
+/* Kleine Bilder (Prozess-Karten, Galerien): kleineres Logo */
+.process__body::before{z-index:2}   /* Nummernkreis liegt über dem Bildfuß der Prozess-Karten */
+.process__media .wm,.steps__item .wm{--foot-logo-w:68px;--foot-logo-h:18px;--foot-logo-gap:10px;--foot-h:70%}
+/* Galerie: Fuß folgt den runden Ecken des Bildes, die Lupe bleibt über dem Fuß */
+.steps__item .wm{border-radius:0 0 var(--radius-tile) var(--radius-tile)}
+.steps__open::before,.steps__open::after{z-index:2}
+/* Social: Fuß unter dem Text, Inhalt darüber, unten Platz fürs Logo */
+.sm-tile .wm{height:62%}
+.sm-tile__top,.sm-tile__foot{position:relative;z-index:2}
+.sm-tile{padding-bottom:calc(var(--foot-logo-gap) + var(--foot-logo-h) + 22px)}
+
+/* ---------- Orange Oberkante auf weißen Inhaltskarten mit Text ----------
+   Infoboxen, Prozess-Karten, Arbeitsablauf (.flow, Oldtimer), Kundenstimmen, Kontakt-Karten, Vor/Zurück-Karten, Ansprechpartnerin, Bewerbungs-Kasten.
+   Nicht auf Formularen und der Kontaktfläche „So erreichen Sie uns“. */
+.fact,.process__step,.flow li,.q,.kt-card,.pnav__card,.contact-person,.apply__alt{border-top:var(--card-top)}

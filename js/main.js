@@ -34,32 +34,31 @@
   });
 })();
 
-// Klappkarten: Klick auf das Bild oder den "+"-Button teilt die Karte und zeigt ihre Beschreibung.
-// Jede Karte klappt einzeln auf, auf allen Breiten. Ein Klick auf einen Link in der Glas-Kachel klappt nicht auf.
-// Die Karten sind voneinander unabhängig; equalize() sorgt dafür, dass Glas-Kacheln und Listen trotzdem gleich hoch sind.
+// Mega-Menü „Serviceleistungen“ (Desktop): öffnet per CSS bei Hover und :focus-within.
+// Escape schließt es (Klasse is-mega-closed), der Fokus springt auf den Menüpunkt zurück.
+// Geöffnet werden kann es wieder, sobald Maus oder Fokus den Menüpunkt verlassen haben.
+(function () {
+  var items = document.querySelectorAll('.menu > li.has-mega');
+  items.forEach(function (li) {
+    var link = li.querySelector('a');
+    li.addEventListener('keydown', function (e) {
+      if (e.key !== 'Escape' || li.classList.contains('is-mega-closed')) return;
+      if (document.getElementById('menu').classList.contains('is-open')) return;   // mobiles Menü: dort schließt die Menü-Logik oben
+      li.classList.add('is-mega-closed');
+      link.focus();
+    });
+    li.addEventListener('mouseleave', function () { li.classList.remove('is-mega-closed'); });
+    li.addEventListener('focusout', function (e) {
+      if (!li.contains(e.relatedTarget)) li.classList.remove('is-mega-closed');
+    });
+  });
+})();
+
+// Leistungs-Karten: equalize() sorgt dafür, dass Glas-Kacheln und Listen nebeneinander gleich hoch sind.
 (function () {
   var grid = document.querySelector('.cards');
   if (!grid) return;
-  var cards = grid.querySelectorAll('.svc');
   var wide = window.matchMedia('(min-width: 981px)');
-
-  function setCard(card, open) {
-    var btn = card.querySelector('.svc__toggle');
-    card.classList.toggle('is-open', open);
-    if (!btn) return;
-    btn.setAttribute('aria-expanded', open ? 'true' : 'false');
-    btn.setAttribute('aria-label', open ? 'Beschreibung ausblenden' : 'Beschreibung einblenden');
-  }
-
-  cards.forEach(function (card) {
-    var media = card.querySelector('.svc__media');
-    if (!media || !card.querySelector('.svc__toggle')) return;   // Karten ohne „+“ (service.html) klappen nicht auf
-    // Der Button liegt im Bildbereich, sein Klick (auch per Tastatur) landet ebenfalls hier.
-    media.addEventListener('click', function (e) {
-      if (e.target.closest('a')) return;
-      setCard(card, !card.classList.contains('is-open'));
-    });
-  });
 
   // Macht alle passenden Elemente so hoch wie das höchste (über min-height).
   // Vorher zurücksetzen, sonst misst man die alte, angeglichene Höhe.
@@ -80,7 +79,7 @@
   }
 
   // Neu messen, sobald die Schriften geladen sind (Text wird dadurch oft höher)
-  // und wenn sich die Breite ändert. Das Aufklappen ändert nur die Höhe, dann wird nicht gemessen.
+  // und wenn sich die Breite ändert (reine Höhenänderungen lösen keine neue Messung aus).
   // Der ResizeObserver misst außerdem sofort einmal beim Start.
   document.fonts.ready.then(update);
   var lastWidth = 0;
@@ -167,10 +166,12 @@
 
 // Kontaktformular: alle Elemente mit data-open-contact öffnen das <dialog> per showModal().
 // Schließen per X, Escape (nativ) oder Klick auf den Hintergrund; der Fokus geht zurück an den Auslöser.
+// Ein Auslöser mit data-anliegen="unfall" (Wert einer Option) wählt das Anliegen beim Öffnen vor („Schaden melden“).
 (function () {
   var dialog = document.getElementById('kontaktformular');
   if (!dialog || typeof dialog.showModal !== 'function') return;
   var form = dialog.querySelector('form');
+  var topic = dialog.querySelector('#kf-anliegen');
   var opener = null;
 
   document.addEventListener('click', function (e) {
@@ -178,6 +179,8 @@
     if (!trigger) return;
     e.preventDefault();
     opener = trigger;
+    var pre = trigger.getAttribute('data-anliegen');
+    if (pre && topic) topic.value = pre;
     if (!dialog.open) dialog.showModal();
   });
 
@@ -205,11 +208,7 @@
   });
 
   if (!form) return;
-  var tel = form.querySelector('#kf-tel');
-  var mail = form.querySelector('#kf-mail');
-  var error = form.querySelector('#kf-kanal-error');
   var date = form.querySelector('#kf-termin');
-  var checked = false;
 
   // Wunschtermin nicht in der Vergangenheit
   if (date) {
@@ -218,29 +217,57 @@
     date.min = d.toISOString().slice(0, 10);
   }
 
-  // Telefon oder E-Mail: eines von beiden muss ausgefüllt sein. Der Fehler steht direkt unter den beiden Feldern;
-  // setCustomValidity sorgt dafür, dass die eingebaute Prüfung das Absenden ebenfalls stoppt.
-  function checkChannel() {
-    var missing = !tel.value.trim() && !mail.value.trim();
-    var show = missing && checked;
-    tel.setCustomValidity(missing ? error.textContent : '');
-    error.hidden = !show;
-    tel.setAttribute('aria-invalid', show ? 'true' : 'false');
-    mail.setAttribute('aria-invalid', show ? 'true' : 'false');
-    return !missing;
-  }
-
-  tel.addEventListener('input', checkChannel);
-  mail.addEventListener('input', checkChannel);
-  form.querySelector('[type="submit"]').addEventListener('click', function () {
-    checked = true;
-    checkChannel();
-  });
-  checkChannel();
-
   form.addEventListener('submit', function (e) {
     // TODO: Formular-Versand anbinden (serverseitig, mit Spam-Schutz). Bis dahin wird nichts gesendet.
     e.preventDefault();
+  });
+})();
+
+// Formulare mit data-kanal (Kontaktformular im Dialog, Bewerbung auf karriere.html):
+// Telefon oder E-Mail, eines von beiden muss ausgefüllt sein. Der Fehler ([data-kanal-error]) steht direkt unter den beiden Feldern
+// und erscheint erst nach dem ersten Absenden; setCustomValidity sorgt dafür, dass die eingebaute Prüfung das Absenden ebenfalls stoppt.
+// Datei-Felder mit data-max-mb: jede Datei höchstens so groß, nur die erlaubten Endungen aus accept (Fehler im .field__error danach).
+(function () {
+  document.querySelectorAll('form[data-kanal]').forEach(function (form) {
+    var tel = form.querySelector('input[type="tel"]');
+    var mail = form.querySelector('input[type="email"]');
+    var error = form.querySelector('[data-kanal-error]');
+    if (!tel || !mail || !error) return;
+    var checked = false;
+
+    function checkChannel() {
+      var missing = !tel.value.trim() && !mail.value.trim();
+      var show = missing && checked;
+      tel.setCustomValidity(missing ? error.textContent : '');
+      error.hidden = !show;
+      tel.setAttribute('aria-invalid', show ? 'true' : 'false');
+      mail.setAttribute('aria-invalid', show ? 'true' : 'false');
+    }
+
+    tel.addEventListener('input', checkChannel);
+    mail.addEventListener('input', checkChannel);
+    form.querySelector('[type="submit"]').addEventListener('click', function () {
+      checked = true;
+      checkChannel();
+    });
+    checkChannel();
+  });
+
+  document.querySelectorAll('input[type="file"][data-max-mb]').forEach(function (input) {
+    var max = parseFloat(input.getAttribute('data-max-mb')) * 1024 * 1024;
+    var allowed = (input.getAttribute('accept') || '').split(',').filter(function (a) { return a.charAt(0) === '.'; });
+    var error = document.getElementById(input.id + '-error');
+    input.addEventListener('change', function () {
+      var msg = '';
+      Array.prototype.forEach.call(input.files, function (file) {
+        var ext = '.' + file.name.split('.').pop().toLowerCase();
+        if (allowed.length && allowed.indexOf(ext) < 0) msg = '„' + file.name + '“ hat ein anderes Format. Bitte nur PDF, JPG oder PNG.';
+        else if (file.size > max) msg = '„' + file.name + '“ ist größer als ' + input.getAttribute('data-max-mb') + ' MB. Bitte eine kleinere Datei wählen.';
+      });
+      input.setCustomValidity(msg);
+      input.setAttribute('aria-invalid', msg ? 'true' : 'false');
+      if (error) { error.textContent = msg; error.hidden = !msg; }
+    });
   });
 })();
 
@@ -292,16 +319,18 @@
 })();
 
 // Info-Leiste: erscheint nach dem ersten Bildschirm und verschwindet, sobald der echte Footer ins Bild kommt.
+// Mobil (Floating-Bar, bis 760 px) ist sie von Anfang an sichtbar: Telefon und Online-Termin stehen dort nicht mehr im Header.
 (function () {
   var bar = document.querySelector('.infobar');
   var footer = document.querySelector('.site-footer');
   if (!bar || !footer) return;
+  var mobile = window.matchMedia('(max-width: 760px)');
   var ticking = false;
   function update() {
     ticking = false;
     var y = window.scrollY, vh = window.innerHeight;
     var docH = document.documentElement.scrollHeight;
-    var start = document.querySelector('.hero') ? vh * 0.6 : 40;   // Seiten ohne Hero (z. B. Kontakt): sofort nach dem ersten Scrollen
+    var start = mobile.matches ? -1 : document.querySelector('.hero') ? vh * 0.6 : 40;   // Seiten ohne Hero (z. B. Kontakt): sofort nach dem ersten Scrollen
     var nearFooter = y + vh > docH - footer.offsetHeight * 0.85;
     bar.classList.toggle('is-visible', y > start && !nearFooter);
   }
@@ -324,17 +353,43 @@
   });
 })();
 
-// Karussell Zertifikate und Partner: zweite Kopie der Liste anhängen, damit das Band nahtlos endlos läuft.
-// Die Kopie ist für Screenreader unsichtbar (aria-hidden). Bei reduzierter Bewegung keine Kopie: das Band steht still.
+// Karussells (Zertifikate, Partner): so viele Kopien der Liste anhängen, dass das Band auch bei wenigen Kacheln nahtlos endlos läuft
+// (Band mindestens Fensterbreite plus eine Runde). Eine Runde (--mq-shift) wird gemessen: Abstand vom ersten Original zur ersten Kopie.
+// Die Dauer wächst mit der Zahl der Kacheln (--mq-n × --mq-step), damit beide Bänder gleich schnell laufen. Erst dann startet die Animation (.is-ready).
+// Kopien sind für Screenreader unsichtbar (aria-hidden) und nicht per Tab erreichbar. Bei reduzierter Bewegung keine Kopien: das Band steht still.
 (function () {
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-  document.querySelectorAll('.marquee__track').forEach(function (track) {
-    Array.prototype.slice.call(track.children).forEach(function (item) {
-      var copy = item.cloneNode(true);
-      copy.setAttribute('aria-hidden', 'true');
-      copy.querySelectorAll('img').forEach(function (img) { img.alt = ''; });
-      track.appendChild(copy);
-    });
+  document.querySelectorAll('.marquee').forEach(function (box) {
+    var track = box.querySelector('.marquee__track');
+    if (!track || !track.children.length) return;
+    var items = Array.prototype.slice.call(track.children);
+    var lastWidth = 0;
+
+    function fill() {
+      var w = box.clientWidth;
+      if (!w || w === lastWidth) return;
+      lastWidth = w;
+      track.querySelectorAll('[data-mq-copy]').forEach(function (c) { c.remove(); });
+      var copies = 0, round = 0;
+      do {
+        items.forEach(function (item) {
+          var copy = item.cloneNode(true);
+          copy.setAttribute('aria-hidden', 'true');
+          copy.setAttribute('data-mq-copy', '');
+          copy.querySelectorAll('img').forEach(function (img) { img.alt = ''; });
+          copy.querySelectorAll('a, button').forEach(function (el) { el.tabIndex = -1; });
+          track.appendChild(copy);
+        });
+        copies++;
+        if (!round) round = track.children[items.length].offsetLeft - items[0].offsetLeft;
+      } while (round * copies < w && copies < 20);
+      track.style.setProperty('--mq-shift', round + 'px');
+      track.style.setProperty('--mq-n', items.length);
+      box.classList.add('is-ready');
+    }
+
+    fill();
+    if ('ResizeObserver' in window) new ResizeObserver(fill).observe(box);
   });
 })();
 
@@ -425,12 +480,14 @@
   relayout();
 })();
 
-// Galerie .steps: Klick auf ein Bild öffnet die Lightbox (natives <dialog>).
-// Pfeile und Tastatur ←/→ blättern, Escape schließt (nativ), danach geht der Fokus zurück an das angeklickte Bild.
-// Läuft nur, wenn es eine Galerie gibt. Das <dialog> wird hier erzeugt, damit es nicht in jeder Seite stehen muss.
+// Lightbox (natives <dialog>) für die Galerie .steps und die Zertifikate im Karussell (.mq-item__open).
+// Klick oder Enter öffnet das Bild groß. Pfeile und Tastatur ←/→ blättern innerhalb derselben Gruppe, Escape schließt (nativ),
+// danach geht der Fokus zurück an das angeklickte Bild bzw. die Kachel. Kopien im Karussell (aria-hidden) zählen nicht mit,
+// ein Klick darauf öffnet das passende Original. Läuft nur, wenn es etwas zu öffnen gibt; das <dialog> wird hier erzeugt.
 (function () {
-  var openers = Array.prototype.slice.call(document.querySelectorAll('.steps__open'));
-  if (!openers.length) return;
+  var SEL = '.steps__open, .mq-item__open';
+  if (!document.querySelector(SEL)) return;
+  var openers = [];
   var ARROW = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">';
   var box = document.createElement('dialog');
   box.className = 'lightbox';
@@ -452,10 +509,10 @@
     var b = openers[index];
     img.classList.remove('is-new');
     img.src = (webp && b.getAttribute('data-full-webp')) || b.getAttribute('data-full');
-    img.alt = (b.querySelector('img') || {}).alt || '';
+    img.alt = (b.querySelector('img:not([alt=""])') || {}).alt || '';   // Karussell: das scharfe Bild, nicht den unscharfen Hintergrund
     void img.offsetWidth;   // Animation bei jedem Wechsel neu starten
     img.classList.add('is-new');
-    count.textContent = 'Bild ' + (index + 1) + ' von ' + openers.length;
+    count.textContent = (b.classList.contains('mq-item__open') ? 'Zertifikat ' : 'Bild ') + (index + 1) + ' von ' + openers.length;
     // Nachbarbilder vorladen, damit das Blättern ohne Wartezeit klappt
     [index + 1, index - 1].forEach(function (n) {
       var nb = openers[(n + openers.length) % openers.length];
@@ -463,13 +520,22 @@
     });
   }
 
-  openers.forEach(function (b, i) {
-    b.addEventListener('click', function () {
-      opener = b;
-      show(i);
-      box.showModal();
-      box.querySelector('.lightbox__close').focus();
-    });
+  // Alle Bilder derselben Art auf der Seite bilden eine Gruppe (ohne Karussell-Kopien)
+  function group(b) {
+    var sel = b.classList.contains('mq-item__open') ? '.mq-item__open' : '.steps__open';
+    return Array.prototype.slice.call(document.querySelectorAll(sel)).filter(function (el) { return !el.closest('[aria-hidden="true"]'); });
+  }
+
+  document.addEventListener('click', function (e) {
+    var b = e.target.closest(SEL);
+    if (!b || box.contains(b)) return;
+    openers = group(b);
+    var orig = openers.indexOf(b) >= 0 ? b : openers.filter(function (o) { return o.getAttribute('data-full') === b.getAttribute('data-full'); })[0];
+    if (!orig) return;
+    opener = orig;
+    show(openers.indexOf(orig));
+    box.showModal();
+    box.querySelector('.lightbox__close').focus();
   });
   box.querySelector('.lightbox__prev').addEventListener('click', function () { show(index - 1); });
   box.querySelector('.lightbox__next').addEventListener('click', function () { show(index + 1); });
@@ -483,7 +549,7 @@
     if (e.target === box || e.target.classList.contains('lightbox__stage')) box.close();
   });
   box.addEventListener('close', function () {
-    if (opener) opener.focus();   // Fokus zurück an das angeklickte Bild
+    if (opener) opener.focus({ preventScroll: true });   // Fokus zurück an das angeklickte Bild (ohne das Karussell zu verschieben)
   });
 })();
 
@@ -495,4 +561,89 @@
       e.preventDefault();
     });
   });
+})();
+
+// Social-Kacheln: stumme Videos nur abspielen, solange mind. 25 % sichtbar sind (spart Akku und Datenvolumen).
+// Bei „Bewegung reduzieren“ wird nicht abgespielt, dann bleibt das Poster. Ohne IntersectionObserver: einfach abspielen.
+(function () {
+  var videos = document.querySelectorAll('.sm-tile video');
+  if (!videos.length) return;
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  function play(v) { v.muted = true; var r = v.play(); if (r && r.catch) r.catch(function () {}); }
+  if (!('IntersectionObserver' in window)) { videos.forEach(play); return; }
+  var io = new IntersectionObserver(function (eintraege) {
+    eintraege.forEach(function (e) { if (e.isIntersecting) play(e.target); else e.target.pause(); });
+  }, { threshold: 0.25 });
+  videos.forEach(function (v) { io.observe(v); });
+})();
+
+// Kontaktformular, Modell-Vorschläge: passend zur gewählten Marke (#kf-marke) füllt sich die Liste #kf-modelle.
+// Groß-/Kleinschreibung egal, freie Eingabe bleibt möglich, Marken ohne Liste: keine Vorschläge.
+// Gängige Modelle in Deutschland (PKW, Transporter) und Caravan-/Wohnmobil-Baureihen; Schlüssel = Optionen der <datalist id="kf-marken">.
+(function () {
+  var marke = document.getElementById('kf-marke');
+  var liste = document.getElementById('kf-modelle');
+  var modell = document.getElementById('kf-modell');
+  if (!marke || !liste) return;
+
+  var M = {
+    'Audi': ['A1', 'A3', 'A4', 'A5', 'A6', 'A7', 'A8', 'Q2', 'Q3', 'Q4 e-tron', 'Q5', 'Q7', 'Q8', 'e-tron GT', 'TT'],
+    'BMW': ['1er', '2er', '3er', '4er', '5er', '7er', 'X1', 'X2', 'X3', 'X4', 'X5', 'X6', 'X7', 'Z4', 'i3', 'i4', 'iX', 'iX1', 'iX3'],
+    'Citroën': ['C1', 'C3', 'C3 Aircross', 'C4', 'C5 Aircross', 'C5 X', 'Berlingo', 'Jumpy', 'Jumper', 'SpaceTourer'],
+    'Cupra': ['Born', 'Formentor', 'Leon', 'Ateca', 'Tavascan', 'Terramar'],
+    'Dacia': ['Sandero', 'Duster', 'Jogger', 'Spring', 'Logan', 'Bigster'],
+    'Fiat': ['500', '500e', '500X', 'Panda', 'Tipo', 'Doblò', 'Ducato', 'Scudo', '600'],
+    'Ford': ['Fiesta', 'Focus', 'Puma', 'Kuga', 'Mustang', 'Mustang Mach-E', 'Explorer', 'Ranger', 'Transit', 'Transit Custom', 'Tourneo', 'S-Max', 'Galaxy'],
+    'Honda': ['Jazz', 'Civic', 'HR-V', 'CR-V', 'ZR-V', 'e:Ny1'],
+    'Hyundai': ['i10', 'i20', 'i30', 'Bayon', 'Kona', 'Tucson', 'Santa Fe', 'Ioniq 5', 'Ioniq 6'],
+    'Jeep': ['Avenger', 'Renegade', 'Compass', 'Wrangler', 'Grand Cherokee'],
+    'Kia': ['Picanto', 'Rio', 'Ceed', 'XCeed', 'Stonic', 'Niro', 'Sportage', 'Sorento', 'EV3', 'EV6', 'EV9'],
+    'Land Rover': ['Defender', 'Discovery', 'Discovery Sport', 'Range Rover', 'Range Rover Sport', 'Range Rover Evoque', 'Range Rover Velar'],
+    'Mazda': ['Mazda2', 'Mazda3', 'CX-3', 'CX-30', 'CX-5', 'CX-60', 'MX-5', 'MX-30'],
+    'Mercedes-Benz': ['A-Klasse', 'B-Klasse', 'C-Klasse', 'E-Klasse', 'S-Klasse', 'CLA', 'GLA', 'GLB', 'GLC', 'GLE', 'G-Klasse', 'EQA', 'EQB', 'EQE', 'EQS', 'V-Klasse', 'Vito', 'Sprinter', 'Citan'],
+    'Mini': ['Cooper', 'Countryman', 'Clubman', 'Aceman', 'Cabrio'],
+    'Mitsubishi': ['Space Star', 'ASX', 'Colt', 'Eclipse Cross', 'Outlander', 'L200'],
+    'Nissan': ['Micra', 'Juke', 'Qashqai', 'X-Trail', 'Leaf', 'Ariya', 'Townstar', 'Primastar'],
+    'Opel': ['Corsa', 'Astra', 'Mokka', 'Frontera', 'Grandland', 'Crossland', 'Insignia', 'Zafira', 'Combo', 'Vivaro', 'Movano'],
+    'Peugeot': ['208', '2008', '308', '3008', '408', '508', '5008', 'Rifter', 'Partner', 'Expert', 'Boxer'],
+    'Porsche': ['911', '718 Boxster', '718 Cayman', 'Macan', 'Cayenne', 'Panamera', 'Taycan'],
+    'Renault': ['Clio', 'Captur', 'Mégane', 'Austral', 'Arkana', 'Scénic', 'Kangoo', 'Trafic', 'Master', 'Twingo', 'Zoe'],
+    'Seat': ['Ibiza', 'Arona', 'Leon', 'Ateca', 'Tarraco'],
+    'Škoda': ['Fabia', 'Scala', 'Octavia', 'Superb', 'Kamiq', 'Karoq', 'Kodiaq', 'Enyaq', 'Elroq'],
+    'Smart': ['fortwo', 'forfour', '#1', '#3'],
+    'Subaru': ['Impreza', 'XV / Crosstrek', 'Forester', 'Outback', 'Solterra'],
+    'Suzuki': ['Swift', 'Ignis', 'Vitara', 'S-Cross', 'Jimny', 'Swace', 'Across'],
+    'Tesla': ['Model 3', 'Model Y', 'Model S', 'Model X'],
+    'Toyota': ['Aygo X', 'Yaris', 'Yaris Cross', 'Corolla', 'C-HR', 'RAV4', 'bZ4X', 'Prius', 'Hilux', 'Proace', 'Land Cruiser'],
+    'Volkswagen': ['Polo', 'Golf', 'T-Cross', 'T-Roc', 'Taigo', 'Tiguan', 'Touareg', 'Passat', 'Arteon', 'Touran', 'ID.3', 'ID.4', 'ID.5', 'ID.7', 'ID. Buzz', 'Up!', 'Caddy', 'Transporter / Multivan', 'California', 'Crafter', 'Amarok'],
+    'Volvo': ['EX30', 'XC40', 'EX40', 'XC60', 'XC90', 'EX90', 'V60', 'V90', 'S60', 'S90'],
+    // Caravan und Wohnmobil: Baureihen
+    'Adria': ['Action', 'Adora', 'Alpina', 'Altea', 'Coral', 'Compact', 'Matrix', 'Sonic', 'Twin', 'Aviva'],
+    'Bürstner': ['Averso', 'Premio', 'Lyseo', 'Ixeo', 'Delfin', 'Campeo', 'Habiton'],
+    'Carado': ['A-Serie', 'I-Serie', 'T-Serie', 'V-Serie', 'CV-Serie'],
+    'Dethleffs': ['Camper', 'Nomad', 'c\'go', 'Globebus', 'Trend', 'Pulse', 'Globetrotter XL', 'Just Go'],
+    'Fendt': ['Bianco', 'Tendenza', 'Opal', 'Diamant', 'Saphir', 'Apero'],
+    'Hobby': ['De Luxe', 'Excellent', 'Prestige', 'Premium', 'Ontour', 'Maxia', 'Optima', 'Vantana', 'Beachy'],
+    'Hymer': ['Eriba Touring', 'Eriba Nova', 'B-Klasse', 'Exsis', 'ML-T', 'Grand Canyon S', 'Free', 'Yosemite'],
+    'Knaus': ['Sport', 'Südwind', 'Deseo', 'Sky TI', 'Van TI', 'BoxStar', 'Live Wave', 'L!VE Traveller'],
+    'LMC': ['Style', 'Sassino', 'Musica', 'Vivo', 'Tourer', 'Cruiser'],
+    'Pössl': ['2Win', 'Summit', 'Roadcamp', 'D-Line', 'Campster'],
+    'Sunlight': ['Cliff', 'T-Serie', 'I-Serie', 'A-Serie'],
+    'Tabbert': ['Rossini', 'Da Vinci', 'Puccini', 'Pantera', 'Cellini'],
+    'Weinsberg': ['CaraOne', 'CaraCito', 'CaraCompact', 'CaraBus', 'CaraSuite', 'CaraHome']
+  };
+
+  function fuellen() {
+    var wert = marke.value.trim().toLowerCase();
+    var key = Object.keys(M).filter(function (k) { return k.toLowerCase() === wert; })[0];
+    liste.textContent = '';
+    (key ? M[key] : []).forEach(function (name) {
+      var o = document.createElement('option');
+      o.value = name;
+      liste.appendChild(o);
+    });
+    if (modell) modell.placeholder = key ? 'z. B. ' + M[key][0] : '';
+  }
+  marke.addEventListener('input', fuellen);
+  marke.addEventListener('change', fuellen);
 })();

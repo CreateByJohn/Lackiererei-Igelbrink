@@ -1,0 +1,23 @@
+<!-- Archiv: Hero der Startseite mit Spray-Animation (Stand vor Runde 4, aus index.html).
+     Die drei Ebenen hero__cover, hero__mist und hero__gun liegen zwischen <picture> und .hero__body.
+     Das Skript wurde am Ende von index.html geladen: <script src="js/hero-spray.js?v=…" defer></script> -->
+  <section class="hero">
+    <div class="hero__frame">
+      <picture>
+        <source type="image/webp" srcset="assets/img/02-hero-startseite-800.webp 800w, assets/img/02-hero-startseite-1400.webp 1400w, assets/img/02-hero-startseite-2400.webp 2400w" sizes="100vw">
+        <img class="hero__img" data-px=".18" src="assets/img/02-hero-startseite-1600.jpg" width="2400" height="1600" fetchpriority="high"
+             alt="Lackierer mit Spritzpistole über frisch lackierten Karosserieteilen in der Lackierkabine">
+      </picture>
+      <canvas class="hero__cover" aria-hidden="true"></canvas>
+      <canvas class="hero__mist" aria-hidden="true"></canvas>
+      <img class="hero__gun" src="assets/img/02-hero-spraygun.svg" width="800" height="620" decoding="async" alt="" aria-hidden="true">
+      <div class="hero__body">
+        <div class="hero__text">
+          <h1>Herzlich willkommen bei Lackiertechnik Igelbrink</h1>
+          <p class="hero__lead">Lackiertechnik Igelbrink – Ihre Fachwerkstatt für Lackierung, Karosserie- und Unfallinstandsetzung in Dülmen.</p>
+          <button class="btn" type="button" data-open-contact aria-haspopup="dialog" aria-controls="kontaktformular">Online-Termin</button>
+        </div>
+        <div class="chip"><strong id="chip-classic">Classic Cars Spezialist</strong><a class="btn btn--glass btn--small" href="oldtimerlackierung.html" aria-describedby="chip-classic">Mehr erfahren</a></div>
+      </div>
+    </div>
+  </section>

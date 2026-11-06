@@ -1,0 +1,10 @@
+/* Archiv: CSS der Spray-Animation im Hero der Startseite (bis Runde 4 in css/components.css).
+   Benutzte Tokens (stehen weiterhin in css/tokens.css): --navy-deep (Farbe der Deckfläche, liest hero-spray.js aus).
+   Zum Wiedereinbau unter die Regel .hero__img in css/components.css setzen. */
+/* Spray-Intro (js/hero-spray.js). Ebenen von unten nach oben: Foto, dunkle Deckfläche, Verlauf, Sprühnebel, Spritzpistole, Text.
+   Ohne JavaScript bleibt die Deckfläche leer, das Foto ist dann sofort zu sehen. */
+.hero__cover,.hero__mist{position:absolute;inset:0;width:100%;height:100%;display:block;pointer-events:none}
+.hero__mist{z-index:1}
+.hero__gun{position:absolute;left:0;top:0;z-index:2;display:none;width:clamp(150px,20vw,320px);height:auto;max-width:none;
+  pointer-events:none;will-change:transform;transform:translate3d(-999px,0,0)}
+@media (prefers-reduced-motion:reduce){.hero__gun{display:none!important}}
