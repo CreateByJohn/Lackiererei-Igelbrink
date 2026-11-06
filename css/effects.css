@@ -77,6 +77,10 @@
 /* ---------- Prozess-Karten und Hard Facts: anheben wie die Kundenstimmen ---------- */
 .process__step,.fact{transition:transform var(--t-hover) var(--ease-out),box-shadow var(--t-hover) var(--ease-out)}
 .process__step:hover,.fact:hover{transform:translateY(-4px);box-shadow:var(--sh-3)}
+/* Infoboxen als Link (Startseite „Weitere Leistungen“): wie die Vor/Zurück-Karten, Titel in Akzentfarbe */
+.fact--link strong{transition:color .18s var(--ease-out)}
+.fact--link:focus-visible{transform:translateY(-4px);box-shadow:var(--sh-3)}
+.fact--link:hover strong,.fact--link:focus-visible strong{color:var(--accent-strong)}
 .process__media img{transition:transform .5s var(--ease-out)}
 .process__step:hover .process__media img{transform:scale(1.04)}
 
@@ -182,7 +186,7 @@ a.kx__row:hover b,a.kx__row:hover address{color:var(--accent-strong)}
   .process__step:hover .process__media img{transform:none}
   .marquee{overflow-x:auto;-webkit-mask-image:none;mask-image:none}
   .marquee__track{margin-inline:auto}   /* kurzes Band (Partner) steht mittig */
-  .process__step:hover,.fact:hover{transform:none}
+  .process__step:hover,.fact:hover,.fact--link:focus-visible{transform:none}
 }
 
 /* =====================================================================
