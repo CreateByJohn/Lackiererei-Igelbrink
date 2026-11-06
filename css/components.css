@@ -992,6 +992,10 @@ html:has(.lightbox[open]){overflow:hidden}
 .facts--even .fact strong{font-size:1.25rem}
 .facts--even .fact>span:not([class]){font-size:.98rem;line-height:1.5}
 .facts--even .fact .draft-note{margin-top:auto}
+/* Leistungsseiten (Runde 6): Leistungen als Infoboxen unter der Einleitung, Schlusssätze darunter */
+.facts--services{margin-top:clamp(20px,2.5vw,28px)}
+.facts--services .fact{min-height:0}
+.prose--after{margin-top:clamp(28px,3.5vw,44px)}
 .offer__more{display:flex;justify-content:center;margin-top:clamp(20px,3vw,28px)}
 .callout--work{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:clamp(24px,4vw,56px);align-items:center;padding:clamp(26px,4vw,48px);border-radius:var(--radius-lg)}
 .callout--work__text{display:grid;gap:14px;justify-items:start}
