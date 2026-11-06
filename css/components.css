@@ -996,6 +996,9 @@ html:has(.lightbox[open]){overflow:hidden}
 .facts--services{margin-top:clamp(20px,2.5vw,28px)}
 .facts--services .fact{min-height:0}
 .prose--after{margin-top:clamp(28px,3.5vw,44px)}
+/* Aufzählung mit fettem Stichwort (wohnmobil-service.html) */
+.checks--wide{max-width:78ch;gap:12px;font-size:1.02rem;line-height:1.6;color:var(--fg-soft)}
+.checks--wide strong{color:var(--fg);font-weight:600}
 .offer__more{display:flex;justify-content:center;margin-top:clamp(20px,3vw,28px)}
 .callout--work{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:clamp(24px,4vw,56px);align-items:center;padding:clamp(26px,4vw,48px);border-radius:var(--radius-lg)}
 .callout--work__text{display:grid;gap:14px;justify-items:start}
