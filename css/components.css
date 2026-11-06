@@ -155,11 +155,12 @@
 .checks li::after{content:"";position:absolute;left:8px;top:8px;width:5px;height:9px;border-right:2.5px solid var(--accent);border-bottom:2.5px solid var(--accent);transform:rotate(40deg)}
 
 /* Fünf Schwerpunkte (Startseite, Runde 6): 6er-Raster, jede Karte über 2 Spalten → 3 + 2, die untere Reihe mittig.
-   Karten einer Reihe gleich hoch, Text unter dem Bild statt Aufzählung (.svc__list--text). */
-.cards--5{grid-template-columns:repeat(6,minmax(0,1fr));align-items:stretch}
-.cards--5>.svc{grid-column:span 2;grid-template-rows:auto 1fr}
+   Seit Runde 6b nur das Bild mit Glas-Kachel, ohne Textbereich darunter: Bild unten ebenfalls rund.
+   Gleich hoch je Reihe über das Seitenverhältnis von .svc__media (gleiche Spaltenbreite). */
+.cards--5{grid-template-columns:repeat(6,minmax(0,1fr))}
+.cards--5>.svc{grid-column:span 2}
 .cards--5>.svc:nth-child(4){grid-column:2/span 2}
-.svc__list--text p{color:var(--fg-soft);font-size:.98rem;line-height:1.55}
+.cards--5 .svc__media{border-radius:var(--radius)}
 
 /* Weitere Leistungen (Startseite, Runde 6): Überschrift, Einleitung, vier Infoboxen als Links */
 .more{display:grid;gap:14px;margin-top:clamp(44px,5vw,68px)}
