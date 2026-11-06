@@ -876,6 +876,9 @@ html:has(.lightbox[open]){overflow:hidden}
 .process__body h3{font-size:1.3rem;color:var(--heading);hyphens:manual;-webkit-hyphens:manual}   /* lange Wörter mit &shy; im HTML */
 .process__body p{color:var(--fg-soft);font-size:.96rem;line-height:1.5}
 .process__cta{display:flex;flex-wrap:wrap;justify-content:center;gap:12px;margin-top:clamp(24px,3vw,36px)}
+/* Acht Schritte (unfallinstandsetzung.html, Runde 6): 4 Spalten, bis 1100 px 2, bis 640 px einspaltig wie oben */
+.process--8{grid-template-columns:repeat(4,minmax(0,1fr))}
+.process--8 .process__body p+p{margin-top:4px}
 
 /* ---------- Über uns (ueber-uns.html): Hard Facts als Kacheln, Bilder ---------- */
 .facts{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;width:100%}
@@ -1010,6 +1013,7 @@ html:has(.lightbox[open]){overflow:hidden}
 
 @media (max-width:1100px){
   .process{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .process--8{grid-template-columns:repeat(2,minmax(0,1fr))}
   .facts--3,.facts--4{grid-template-columns:repeat(2,minmax(0,1fr))}
 }
 @media (max-width:980px){
