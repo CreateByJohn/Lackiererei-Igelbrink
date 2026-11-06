@@ -1068,6 +1068,6 @@ html:has(.lightbox[open]){overflow:hidden}
 .sm-tile{padding-bottom:calc(var(--foot-logo-gap) + var(--foot-logo-h) + 22px)}
 
 /* ---------- Orange Oberkante auf weißen Inhaltskarten mit Text ----------
-   Infoboxen, Prozess-Karten, Kundenstimmen, Kontakt-Karten, Vor/Zurück-Karten, Ansprechpartnerin, Bewerbungs-Kasten.
+   Infoboxen, Prozess-Karten, Arbeitsablauf (.flow, Oldtimer), Kundenstimmen, Kontakt-Karten, Vor/Zurück-Karten, Ansprechpartnerin, Bewerbungs-Kasten.
    Nicht auf Formularen und der Kontaktfläche „So erreichen Sie uns“. */
-.fact,.process__step,.q,.kt-card,.pnav__card,.contact-person,.apply__alt{border-top:var(--card-top)}
+.fact,.process__step,.flow li,.q,.kt-card,.pnav__card,.contact-person,.apply__alt{border-top:var(--card-top)}
