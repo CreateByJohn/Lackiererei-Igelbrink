@@ -236,7 +236,8 @@
 .stars{display:flex;gap:4px}
 .stars svg{width:28px;height:28px;color:var(--star-empty)}
 
-/* Gelber Platzhalter-Hinweis (bleibt sichtbar, bis echte Inhalte vorliegen) */
+/* Gelber Platzhalter-Hinweis: seit Runde 6 auf keiner Seite mehr im Einsatz (offene Stellen stehen als <!-- OFFEN: … --> im HTML).
+   Die Regeln bleiben für den Fall, dass er später wieder gebraucht wird. */
 .draft-note{max-width:100%;padding:8px 12px;border-radius:var(--radius-sm);background:var(--note);color:var(--note-fg);font-size:.85rem;font-weight:600}
 .draft-note--small{align-self:flex-start;margin-top:auto;padding:6px 10px;font-size:.78rem}
 
