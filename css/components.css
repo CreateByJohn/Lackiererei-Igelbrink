@@ -60,12 +60,18 @@
 .hero{padding:0;margin-top:calc(var(--hdr) * -1)}
 .hero__lead{font-size:clamp(1.05rem,1.6vw,1.25rem);margin:20px 0 30px;max-width:36em}
 
-.hero__frame{position:relative;overflow:hidden;display:flex;align-items:center;width:100vw;margin-left:calc(50% - 50vw);
-  min-height:100vh;min-height:100svh;background:var(--navy)}
+.hero__frame{position:relative;overflow:hidden;width:100vw;margin-left:calc(50% - 50vw);
+  min-height:100vh;min-height:var(--page-hero-h);background:var(--navy)}
+/* Runde 7b: alle Köpfe (.hero__frame, .page-hero__frame, .career--head) setzen den Text gleich: senkrecht zwischen Navigation (--head-pad-t)
+   und Scroll-Hinweis (--head-pad-b), leicht über der Mitte (--head-rows: 45 : 55). min-height statt height: bei niedrigen Fenstern wächst der Kopf mit,
+   der Text rutscht nie in den Platz des Scroll-Hinweises. */
+.hero__frame,.page-hero__frame,.career--head{display:grid;grid-template-columns:minmax(0,1fr);grid-template-rows:var(--head-rows);
+  padding-top:var(--head-pad-t);padding-bottom:var(--head-pad-b)}
+.hero__body,.page-hero__body,.career--head>.career__inner{grid-row:2}
 .hero__img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 45%}
 /* Hero-Slider (Runde 7): fünf Bilder übereinander, nur das aktive ist sichtbar. Der Stapel verschiebt sich beim Scrollen (Parallax, --py),
    der Zoom liegt am Bild (effects.css), damit sich beides nicht überschreibt. */
-.hero__slides{position:absolute;inset:0;overflow:hidden;transform:translate3d(0,var(--py,0px),0);will-change:transform}
+.hero__slides{position:absolute;inset:-1px;overflow:hidden;transform:translate3d(0,var(--py,0px),0);will-change:transform}
 .hero__slide{position:absolute;inset:0;opacity:0}
 .hero__slide.is-active{opacity:1;z-index:1}
 .hero__slide .hero__img{transform-origin:50% 45%}
@@ -82,7 +88,7 @@
 /* Ebenen von unten nach oben: Foto, Verlauf, Text. Die frühere Spray-Animation liegt in archiv/hero-spray-animation/. */
 .hero__frame::after{content:"";position:absolute;inset:0;z-index:2;background:var(--grad-hero)}
 /* Text mit eigenem linken Randabstand zum Fensterrand (Runde 7), nicht mehr bündig zur Navigationspille */
-.hero__body{position:relative;z-index:3;width:100%;padding:calc(var(--hdr) + var(--hero-top-gap)) var(--hero-pad-r) clamp(72px,16vh,180px) var(--hero-pad-l);
+.hero__body{position:relative;z-index:3;width:100%;padding:0 var(--hero-pad-r) 0 var(--hero-pad-l);
   display:flex;flex-wrap:wrap;gap:28px;align-items:flex-end;justify-content:space-between}
 .hero__text{max-width:700px;min-width:0;color:var(--on-image)}
 .hero .chip{margin-left:auto}
@@ -550,7 +556,7 @@ html:has(.contact[open]){overflow:hidden}   /* Seite dahinter scrollt nicht mit 
   background:var(--navy-deep);color:var(--on-navy)}
 .career::before{content:"";position:absolute;left:0;right:0;top:0;height:6px;background:var(--grad-accent-bar);z-index:1}
 .career::after{content:"";position:absolute;inset:0;z-index:-1;background:var(--grad-career)}
-.career__img{position:absolute;inset:0;z-index:-2;overflow:hidden}
+.career__img{position:absolute;inset:-1px;z-index:-2;overflow:hidden}
 .career__img img{position:absolute;left:0;width:100%;max-width:none;object-fit:cover;object-position:70% 50%}
 .career__inner{max-width:var(--wrap);margin-inline:auto;display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:clamp(28px,5vw,64px);align-items:center}
 .career__intro{display:grid;gap:20px;justify-items:start}
@@ -683,14 +689,14 @@ html:has(.contact[open]){overflow:hidden}   /* Seite dahinter scrollt nicht mit 
 
 /* ---------- Seitenkopf .page-hero ----------
    Wie der Hero der Startseite: Bild über die volle Fensterbreite mit Verlauf, rutscht unter die Navigationspille (--hdr).
-   Seit Runde 7 ebenfalls bildschirmfüllend (--page-hero-h), Text unten mit Platz für den Scroll-Hinweis. Das Bild ist etwas höher als der Rahmen (Parallax, js/main.js). */
+   Seit Runde 7 ebenfalls bildschirmfüllend (--page-hero-h), seit Runde 7b Text senkrecht mittig (siehe Hero). Das Bild ist etwas höher als der Rahmen (Parallax, js/main.js). */
 .page-hero{padding:0;margin-top:calc(var(--hdr) * -1)}
-.page-hero__frame{position:relative;isolation:isolate;overflow:hidden;display:flex;align-items:flex-end;width:100vw;margin-left:calc(50% - 50vw);
+.page-hero__frame{position:relative;isolation:isolate;overflow:hidden;width:100vw;margin-left:calc(50% - 50vw);
   min-height:100vh;min-height:var(--page-hero-h);background:var(--navy)}
-.page-hero__img{position:absolute;inset:0;z-index:-2;overflow:hidden}
+.page-hero__img{position:absolute;inset:-1px;z-index:-2;overflow:hidden}
 .page-hero__img img{position:absolute;left:0;inset:-14% 0;width:100%;height:128%;max-width:none;object-fit:cover;object-position:50% 50%}
 .page-hero__frame::after{content:"";position:absolute;inset:0;z-index:-1;background:var(--grad-page-hero)}
-.page-hero__body{width:100%;max-width:var(--wrap);margin-inline:auto;padding:calc(var(--hdr) + var(--hero-top-gap)) var(--gutter) var(--hint-room);
+.page-hero__body{width:100%;max-width:var(--wrap);margin-inline:auto;padding:0 var(--gutter);
   display:grid;justify-items:start;gap:18px;color:var(--on-image)}
 .page-hero h1{max-width:20em;font-size:calc(clamp(2.2rem,4.8vw,3.8rem) * var(--h-scale))}
 .page-hero__lead{max-width:62ch;font-size:clamp(1rem,1.4vw,1.15rem);line-height:1.6;color:var(--on-image-muted)}
@@ -847,7 +853,7 @@ html:has(.lightbox[open]){overflow:hidden}
 }
 
 /* ---------- Karriere-Seite: Banner als Seitenkopf, darunter die Inhalte der Live-Seite ---------- */
-.career--head{margin-top:calc(var(--hdr) * -1);padding-top:calc(var(--hdr) + clamp(40px,7vw,96px))}
+.career--head{margin-top:calc(var(--hdr) * -1);min-height:100vh;min-height:var(--page-hero-h);padding-top:var(--head-pad-t);padding-bottom:var(--head-pad-b)}   /* Runde 7b: bildschirmfüllend, Text mittig (Regel beim Hero) */
 .career--head::before{display:none}   /* Runde 7b: keine orange Linie über der Navigationspille; das Banner der Startseite behält sie */
 .career--head .career__title{font-size:calc(clamp(2.6rem,6vw,4.8rem) * var(--h-scale))}
 .prose--career p{font-size:1.05rem}
@@ -1134,14 +1140,12 @@ html:has(.lightbox[open]){overflow:hidden}
 .scroll-hint__mouse{position:relative;width:24px;height:38px;border:2px solid currentColor;border-radius:14px;box-shadow:0 1px 8px rgba(17,23,38,.5)}
 .scroll-hint__mouse::after{content:"";position:absolute;left:50%;top:7px;width:3px;height:7px;margin-left:-1.5px;border-radius:2px;background:currentColor}
 .scroll-hint:focus-visible{outline:3px solid var(--accent-2);outline-offset:2px}
-.career--head{padding-bottom:calc(clamp(56px,9vw,120px) + 64px)}
 @media (max-width:760px){
   .hero__dots{right:auto;left:50%;translate:-50% 0;top:calc(var(--hdr) + 8px);bottom:auto}
   .hero__dot{width:32px}
   .hero .scroll-hint{display:none}   /* Startseite: zu wenig Platz neben Text und Slider-Anzeige */
   .page-hero .scroll-hint,.career--head .scroll-hint{bottom:calc(var(--fab-h) + 20px)}   /* über der Info-Leiste */
-  .page-hero__body{padding-bottom:calc(var(--fab-h) + 104px)}
-  .career--head{padding-bottom:calc(var(--fab-h) + 120px)}
+  :root{--head-pad-b:calc(var(--fab-h) + 104px)}   /* Kopf-Text endet über Scroll-Hinweis und Info-Leiste (alle Köpfe gleich) */
 }
 
 /* ---------- Leistungsübersicht (service.html): Querkarten .lk ----------

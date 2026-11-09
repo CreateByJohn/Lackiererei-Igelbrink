@@ -106,7 +106,9 @@
   }
 
   watch(document.querySelector('.site-header'), '--hdr', function (el) {
-    return el.offsetHeight + (parseFloat(getComputedStyle(el).marginTop) || 0);
+    // Ohne Rundung (Runde 7b): offsetHeight liefert ganze Pixel, die Pille ist aber z. B. 72,45 px hoch.
+    // Sonst endet der Kopf einen halben Pixel über der Fensterkante und unten blitzt ein heller Strich.
+    return el.getBoundingClientRect().height + (parseFloat(getComputedStyle(el).marginTop) || 0);
   });
   watch(document.querySelector('.site-footer'), '--fh', function (el) {
     // Passt der Footer nicht ganz ins Fenster, wird er nicht freigelegt, sondern scrollt normal mit (.footer-static).

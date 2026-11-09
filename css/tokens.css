@@ -210,7 +210,8 @@
   --grad-media:linear-gradient(0deg,rgba(17,23,38,.88) 0%,rgba(17,23,38,.35) 50%,rgba(17,23,38,.05) 100%);
 
   /* Unterseiten: Seitenkopf, Galerie mit Lightbox, Projekt-Kacheln, Rechtstexte */
-  --page-hero-h:100svh;                     /* Höhe des Seitenkopfs (.page-hero): bildschirmfüllend (Runde 7), 100vh als Rückfall in components.css */
+  --page-hero-h:calc(100svh + 1px);         /* Höhe aller Köpfe (Hero, Seitenkopf, Karriere-Kopf): bildschirmfüllend (Runde 7), 100vh als Rückfall in components.css.
+                                            Runde 7b: + 1 px, WebKit rechnet 100svh sonst als 843,98 statt 844 px und unten bleibt ein Haarstrich frei */
   --grad-page-hero:linear-gradient(90deg,rgba(17,23,38,.9) 0%,rgba(17,23,38,.82) 50%,rgba(17,23,38,.45) 80%,rgba(17,23,38,.25) 100%),
                    linear-gradient(0deg,rgba(17,23,38,.7) 0%,rgba(17,23,38,0) 60%);   /* wie --grad-hero, aber dunkler: die Texte der Unterseiten sind länger */
   --grad-page-hero-narrow:linear-gradient(0deg,rgba(17,23,38,.9) 0%,rgba(17,23,38,.78) 55%,rgba(17,23,38,.6) 100%);   /* schmal: Text über die ganze Breite */
@@ -255,6 +256,9 @@
   --hero-pad-r:clamp(20px,4vw,64px);
   --hint-gap:clamp(18px,4vh,36px);          /* Scroll-Hinweis: Abstand zum unteren Rand des Kopfs */
   --hint-room:clamp(96px,16vh,150px);       /* Platz unter dem Kopf-Text für den Scroll-Hinweis */
+  --head-pad-t:calc(var(--hdr) + var(--hero-top-gap));   /* Runde 7b, alle Köpfe: Text beginnt frühestens unter der Navigation … */
+  --head-pad-b:var(--hint-room);                          /* … und endet spätestens über dem Scroll-Hinweis (mobil siehe components.css) */
+  --head-rows:minmax(0,45fr) auto minmax(0,55fr);         /* freier Platz 45 : 55 über/unter dem Text: optisch leicht über der Mitte */
   --hint-wheel-dur:1.8s;
   --chip-check:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'%3E%3Cpath d='M2.5 6.2 5 8.6l4.6-5' fill='none' stroke='%23fff' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");   /* Haken im angehakten Chip */
   --hgal-gap:18px;                         /* Galerie „Betrieb in Bildern“: Abstand der Bilder */
