@@ -1254,3 +1254,8 @@ html:has(.lightbox[open]){overflow:hidden}
 .mq-group--docs .mq-item__tile{padding:8px;background:var(--surface)}
 .mq-group--docs .mq-item__glass{padding:0;background:none;box-shadow:none}
 .mq-group--docs .mq-item__glass img{filter:none}
+
+/* ---------- Google-Bewertung (Runde 7): Stand-Datum mit Uhr-Symbol, Hinweis auf die Auswahl unter den Karten ---------- */
+.rvx__stamp{display:inline-flex;align-items:center;gap:6px;margin:0;font-size:.85rem;color:var(--on-navy-muted)}
+.rvx__stamp svg{width:15px;height:15px}
+.rvx__picked{margin:0;text-align:center;font-size:.88rem;color:var(--muted)}
