@@ -262,5 +262,6 @@
   --lb-pad-y:clamp(56px,8vh,80px);         /* Lightbox: Abstand oben/unten, das Bild ist höchstens Fensterhöhe minus 2 × diesen Wert */
   --tap:44px;                              /* Mindestgröße für Tap-Flächen (Hamburger, Route-Auswahl) */
   --burger-bg:rgba(22,30,49,.06);          /* Hamburger-Button: leichte Fläche in der Pille */
-  --grad-mbanner:linear-gradient(90deg,rgba(14,20,36,.95) 0%,rgba(14,20,36,.82) 45%,rgba(14,20,36,.25) 100%);   /* Banner Marko: links dunkel für den Text */                    /* Rad im Maus-Symbol: eine Bewegung */
+  --grad-mbanner:linear-gradient(90deg,rgba(14,20,36,.95) 0%,rgba(14,20,36,.82) 45%,rgba(14,20,36,.25) 100%);   /* Banner Marko: links dunkel für den Text */
+  --grad-mbanner-narrow:linear-gradient(180deg,rgba(14,20,36,.92) 0%,rgba(14,20,36,.88) 55%,rgba(14,20,36,.55) 100%);   /* … schmal: Text oben über ganzer Breite */                    /* Rad im Maus-Symbol: eine Bewegung */
 }
