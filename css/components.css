@@ -159,7 +159,8 @@
 .glass-tile__ico{position:absolute;top:-24px;left:50%;translate:-50% 0;display:grid;place-items:center;width:48px;height:48px;
   border-radius:var(--radius-row);background:var(--surface);color:var(--accent);box-shadow:var(--sh-2)}
 .glass-tile__ico svg{width:24px;height:24px}
-.glass-tile h3{font-size:1.45rem}
+/* Titel ruhig und klein (Runde 7), eine Regel für Startseite, Leistungen und Über uns */
+.glass-tile h3{font-size:clamp(1rem,1.15vw,1.12rem);font-weight:600;line-height:1.25;text-wrap:balance}
 .glass-tile p{color:var(--on-glass-muted);font-size:.98rem}
 .glass-tile .btn{align-self:center;margin-top:auto;text-shadow:none}   /* sitzt immer unten; ohne Link bleibt der Platz leer */
 
@@ -172,13 +173,23 @@
 .checks li::before{content:"";position:absolute;left:0;top:4px;width:22px;height:22px;border-radius:50%;background:var(--accent-soft)}
 .checks li::after{content:"";position:absolute;left:8px;top:8px;width:5px;height:9px;border-right:2.5px solid var(--accent);border-bottom:2.5px solid var(--accent);transform:rotate(40deg)}
 
-/* Fünf Schwerpunkte (Startseite, Runde 6): 6er-Raster, jede Karte über 2 Spalten → 3 + 2, die untere Reihe mittig.
+/* Fünf Schwerpunkte (Startseite, Runde 6): seit Runde 7 ab 1100 px in einer Reihe, darunter 4er-Raster, jede Karte über 2 Spalten → 2 + 2 + 1 (mittig).
    Seit Runde 6b nur das Bild mit Glas-Kachel, ohne Textbereich darunter: Bild unten ebenfalls rund.
    Gleich hoch je Reihe über das Seitenverhältnis von .svc__media (gleiche Spaltenbreite). */
-.cards--5{grid-template-columns:repeat(6,minmax(0,1fr))}
-.cards--5>.svc{grid-column:span 2}
-.cards--5>.svc:nth-child(4){grid-column:2/span 2}
 .cards--5 .svc__media{border-radius:var(--radius)}
+/* Runde 7: ab 1100 px alle fünf in einer Reihe (schmale Hochformat-Kacheln, Glas-Kachel und Button kompakter), darunter 2 + 2 + 1 */
+@media (min-width:1100px){
+  .cards--5{grid-template-columns:repeat(5,minmax(0,1fr));gap:14px}
+  .cards--5 .svc__media{aspect-ratio:3/4.6}
+  .cards--5 .glass-tile{left:10px;right:10px;bottom:10px;padding:28px 12px 14px}
+  .cards--5 .glass-tile .btn--small{font-size:.78rem;padding:7px 12px}
+}
+@media (max-width:1099px){
+  .cards.cards--5{grid-template-columns:repeat(4,minmax(0,1fr));max-width:none}
+  .cards--5>.svc{grid-column:span 2}
+  .cards--5>.svc:nth-child(5){grid-column:2/span 2}
+  .cards--5 .svc__media{aspect-ratio:4/3}
+}
 
 /* Weitere Leistungen (Startseite, Runde 6): Überschrift, Einleitung, vier Infoboxen als Links */
 .more{display:grid;gap:14px;margin-top:clamp(44px,5vw,68px)}
@@ -385,7 +396,6 @@ html:has(.contact[open]){overflow:hidden}   /* Seite dahinter scrollt nicht mit 
 /* Drei schmale Karten nebeneinander: Glas-Kachel-Text etwas kleiner, damit die Kacheln kompakt bleiben */
 @media (min-width:981px) and (max-width:1099px){
   .glass-tile{padding-inline:16px}
-  .glass-tile h3{font-size:1.35rem}
   .glass-tile p{font-size:.93rem}
 }
 
@@ -408,10 +418,6 @@ html:has(.contact[open]){overflow:hidden}   /* Seite dahinter scrollt nicht mit 
 @media (max-width:980px){
   /* Karten einzeln untereinander */
   .cards{grid-template-columns:minmax(0,1fr);max-width:620px;margin-inline:auto}
-  /* Ausnahme fünf Schwerpunkte: zwei Spalten (2 + 2 + 1, die letzte mittig) */
-  .cards--5{grid-template-columns:repeat(4,minmax(0,1fr));max-width:none}
-  .cards--5>.svc:nth-child(4){grid-column:span 2}
-  .cards--5>.svc:nth-child(5){grid-column:2/span 2}
   .svc__media{aspect-ratio:4/3}
   .hero__frame::after{background:var(--grad-hero-narrow)}
   .split,.band{grid-template-columns:minmax(0,1fr)}
@@ -436,6 +442,7 @@ html:has(.contact[open]){overflow:hidden}   /* Seite dahinter scrollt nicht mit 
   .svc__media{aspect-ratio:4/5}
   .cards--5{grid-template-columns:minmax(0,1fr);max-width:620px}
   .cards--5>.svc:nth-child(n){grid-column:auto}
+  .cards--5 .svc__media{aspect-ratio:4/5}
   .bento{grid-template-columns:minmax(0,1fr);grid-template-areas:"gla" "hbc" "tmx" "dek"}
   .form{grid-template-columns:minmax(0,1fr)}
   .contact{border-radius:var(--radius-lg)}
@@ -689,7 +696,6 @@ html:has(.contact[open]){overflow:hidden}   /* Seite dahinter scrollt nicht mit 
    Gleiche Optik wie die Schwerpunkt-Klappkarten, nur Bild mit Glas-Kachel und Link. */
 .cards--4{grid-template-columns:repeat(4,minmax(0,1fr));gap:18px}
 .svc--link .svc__media{border-radius:var(--radius);cursor:default}
-.svc--link .glass-tile h3{font-size:1.35rem}
 .callout--price{margin-top:clamp(24px,3vw,36px);text-align:center}
 .callout--price h3{margin:0;font-size:clamp(1.5rem,2.6vw,2rem)}
 .callout--price+.steps{margin-top:clamp(24px,3vw,36px)}
@@ -996,7 +1002,6 @@ html:has(.lightbox[open]){overflow:hidden}
 .svc--portrait .svc__img img{object-position:50% 20%}
 .svc--pic .svc__media{aspect-ratio:var(--tile-pic)}
 .svc--pic .glass-tile{padding:28px 16px 14px}
-.svc--pic .glass-tile h3{font-size:1.25rem}
 /* Platzhalter-Kachel (Foto folgt): großes Symbol, helle Glaskachel */
 .svc__media--ph{display:grid;place-items:center}
 .svc__ph{position:absolute;inset:0;display:grid;place-items:center;padding-bottom:18%;color:var(--accent-strong);opacity:.35}
