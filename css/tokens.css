@@ -27,6 +27,7 @@
   --fg-soft:#2e3952;
   --muted:#4a566e;
   --line:#d9dfe9;
+  --line-strong:#b9c1cf;     /* Rahmen des Linien-Buttons (Runde 7) */
   --white:#ffffff;
 
   /* Dunkle Bänder: Marken-Dunkelblau (IL Farbdefinition: HTML 1F2A44, RGB 31/42/68, Pantone 533) und Abstufungen im gleichen Farbton */

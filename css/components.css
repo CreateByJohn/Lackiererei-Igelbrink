@@ -49,6 +49,8 @@
 .btn--glass{color:var(--on-image);background:var(--glass-chip);box-shadow:inset 0 0 0 1px var(--glass-line)}
 /* Variante auf hellen Flächen */
 .btn--glass-light{color:var(--fg);background:var(--glass-btn-light);box-shadow:inset 0 0 0 1px var(--glass-btn-light-line),inset 0 1px 0 rgba(255,255,255,.7)}
+/* Linien-Button (Runde 7): Neben-Aktion auf weißen Karten, z. B. „Termin anfragen“ in den Leistungskarten */
+.btn--line{color:var(--fg);background:transparent;box-shadow:inset 0 0 0 1.5px var(--line-strong)}
 
 /* ---------- Hero ----------
    Füllt den ganzen ersten Bildschirm, von Rand zu Rand und ohne runde Ecken.
@@ -1115,4 +1117,29 @@ html:has(.lightbox[open]){overflow:hidden}
   .page-hero .scroll-hint,.career--head .scroll-hint{bottom:calc(var(--fab-h) + 20px)}   /* über der Info-Leiste */
   .page-hero__body{padding-bottom:calc(var(--fab-h) + 104px)}
   .career--head{padding-bottom:calc(var(--fab-h) + 120px)}
+}
+
+/* ---------- Leistungsübersicht (service.html): Querkarten .lk ----------
+   Bild im linken Drittel (füllt die Kartenhöhe), rechts Symbol + Titel, Was / Warum / Buchen als <dl>, darunter zwei Aktionen.
+   2 Spalten, bis 1100 px eine, bis 560 px Bild oben (16:9) und Begriffe über dem Text. */
+.lk-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}
+.lk{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,2fr);overflow:hidden;background:var(--surface);border-radius:var(--radius);border-top:var(--card-top);box-shadow:var(--sh-2)}
+.lk__img{position:relative;min-height:100%;background:var(--grad-ph)}
+.lk__img img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.lk__body{display:flex;flex-direction:column;gap:10px;padding:22px 24px}
+.lk__body h3{display:flex;align-items:center;gap:10px;margin:0;font-size:1.18rem;line-height:1.25;color:var(--heading)}
+.lk__ico{flex:none;display:grid;place-items:center;width:34px;height:34px;border-radius:50%;background:var(--accent-soft);color:var(--accent-strong)}
+.lk__ico svg{width:18px;height:18px}
+.lk__rows{display:grid;gap:8px;margin:0;font-size:.92rem;line-height:1.45}
+.lk__rows div{display:grid;grid-template-columns:62px minmax(0,1fr);gap:10px}
+.lk__rows dt{padding-top:.2em;font-weight:600;font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--accent-strong)}
+.lk__rows dd{margin:0;color:var(--muted)}
+.lk__actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:auto;padding-top:6px}
+.lk__actions .btn{gap:10px;padding:11px 16px;font-size:.9rem}
+@media (max-width:1100px){.lk-list{grid-template-columns:minmax(0,1fr)}}
+@media (max-width:560px){
+  .lk{grid-template-columns:minmax(0,1fr)}
+  .lk__img{aspect-ratio:16/9;min-height:0}
+  .lk__rows div{grid-template-columns:minmax(0,1fr);gap:2px}
+  .lk__actions .btn{flex:1 1 auto}
 }

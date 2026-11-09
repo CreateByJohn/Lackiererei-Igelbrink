@@ -273,3 +273,8 @@ a.kx__row:hover b,a.kx__row:hover address{color:var(--accent-strong)}
   @keyframes hint-wheel{0%{opacity:0;transform:translateY(-3px)}30%{opacity:1}70%{opacity:1;transform:translateY(9px)}100%{opacity:0;transform:translateY(12px)}}
   .scroll-hint__mouse::after{animation:hint-wheel var(--hint-wheel-dur) cubic-bezier(.5,0,.3,1) infinite}
 }
+
+/* ---------- Leistungskarten .lk (Runde 7): Bild zoomt beim Hover leicht, Linien-Button färbt sich orange ---------- */
+.lk__img img{transition:transform .6s var(--ease-out)}
+.btn--line:hover{color:var(--accent-strong);box-shadow:inset 0 0 0 1.5px var(--accent-strong)}
+@media (hover:hover) and (prefers-reduced-motion:no-preference){.lk:hover .lk__img img{transform:scale(1.05)}}
