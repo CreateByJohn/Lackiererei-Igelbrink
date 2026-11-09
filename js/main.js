@@ -576,12 +576,12 @@
   relayout();
 })();
 
-// Lightbox (natives <dialog>) für die Galerie .steps und die Zertifikate im Karussell (.mq-item__open).
+// Lightbox (natives <dialog>) für die Galerie .steps, die Zertifikate im Karussell (.mq-item__open) und die Zertifikat-Karten (.cert, fahrzeuglackierung.html).
 // Klick oder Enter öffnet das Bild groß. Pfeile und Tastatur ←/→ blättern innerhalb derselben Gruppe, Escape schließt (nativ),
 // danach geht der Fokus zurück an das angeklickte Bild bzw. die Kachel. Kopien im Karussell (aria-hidden) zählen nicht mit,
 // ein Klick darauf öffnet das passende Original. Läuft nur, wenn es etwas zu öffnen gibt; das <dialog> wird hier erzeugt.
 (function () {
-  var SEL = '.steps__open, .mq-item__open';
+  var SEL = '.steps__open, .mq-item__open, .cert';
   if (!document.querySelector(SEL)) return;
   var openers = [];
   var ARROW = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">';
@@ -608,7 +608,7 @@
     img.alt = (b.querySelector('img:not([alt=""])') || {}).alt || '';   // Karussell: das scharfe Bild, nicht den unscharfen Hintergrund
     void img.offsetWidth;   // Animation bei jedem Wechsel neu starten
     img.classList.add('is-new');
-    count.textContent = (b.classList.contains('mq-item__open') ? 'Zertifikat ' : 'Bild ') + (index + 1) + ' von ' + openers.length;
+    count.textContent = (b.matches('.mq-item__open, .cert') ? 'Zertifikat ' : 'Bild ') + (index + 1) + ' von ' + openers.length;
     // Nachbarbilder vorladen, damit das Blättern ohne Wartezeit klappt
     [index + 1, index - 1].forEach(function (n) {
       var nb = openers[(n + openers.length) % openers.length];
@@ -618,7 +618,7 @@
 
   // Alle Bilder derselben Art auf der Seite bilden eine Gruppe (ohne Karussell-Kopien)
   function group(b) {
-    var sel = b.classList.contains('mq-item__open') ? '.mq-item__open' : '.steps__open';
+    var sel = b.classList.contains('mq-item__open') ? '.mq-item__open' : b.classList.contains('cert') ? '.cert' : '.steps__open';
     return Array.prototype.slice.call(document.querySelectorAll(sel)).filter(function (el) { return !el.closest('[aria-hidden="true"]'); });
   }
 

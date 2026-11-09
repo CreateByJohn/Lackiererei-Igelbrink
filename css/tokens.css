@@ -255,5 +255,6 @@
   --hero-pad-r:clamp(20px,4vw,64px);
   --hint-gap:clamp(18px,4vh,36px);          /* Scroll-Hinweis: Abstand zum unteren Rand des Kopfs */
   --hint-room:clamp(96px,16vh,150px);       /* Platz unter dem Kopf-Text für den Scroll-Hinweis */
-  --hint-wheel-dur:1.8s;                    /* Rad im Maus-Symbol: eine Bewegung */
+  --hint-wheel-dur:1.8s;
+  --grad-mbanner:linear-gradient(90deg,rgba(14,20,36,.95) 0%,rgba(14,20,36,.82) 45%,rgba(14,20,36,.25) 100%);   /* Banner Marko: links dunkel für den Text */                    /* Rad im Maus-Symbol: eine Bewegung */
 }
