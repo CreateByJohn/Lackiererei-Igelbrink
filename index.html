@@ -9,10 +9,10 @@
 <link rel="canonical" href="https://lackiertechnik-igelbrink.de/">
 <link rel="icon" type="image/png" href="assets/img/13-favicon.png">
 <link rel="preload" href="assets/fonts/schibsted-grotesk-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="css/tokens.css?v=202611091947">
-<link rel="stylesheet" href="css/base.css?v=202611091947">
-<link rel="stylesheet" href="css/components.css?v=202611091947">
-<link rel="stylesheet" href="css/effects.css?v=202611091947">
+<link rel="stylesheet" href="css/tokens.css?v=202611091950">
+<link rel="stylesheet" href="css/base.css?v=202611091950">
+<link rel="stylesheet" href="css/components.css?v=202611091950">
+<link rel="stylesheet" href="css/effects.css?v=202611091950">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -112,12 +112,23 @@
 
   <section class="hero">
     <div class="hero__frame">
-      <!-- Original-Hero der alten Website: Firmenwagen und Werbebanner vor der Halle (nur 1600 px breit, höhere Auflösung beim Kunden anfragen) -->
-      <picture>
-        <source type="image/webp" srcset="assets/img/138-hero-startseite-betrieb-800.webp 800w, assets/img/138-hero-startseite-betrieb-1400.webp 1400w, assets/img/138-hero-startseite-betrieb-1600.webp 1600w" sizes="100vw">
-        <img class="hero__img" src="assets/img/138-hero-startseite-betrieb-1600.jpg" width="1600" height="1034" fetchpriority="high"
-             alt="Firmenwagen und Werbebanner vor der Werkstatt von Lackiertechnik Igelbrink am Telgenkamp in Dülmen">
-      </picture>
+      <!-- Hero-Slider (Runde 7): Bild 1 = Original-Hero der alten Website (Firmenwagen und Werbebanner vor der Halle, nur 1600 px breit,
+           höhere Auflösung beim Kunden anfragen), 2–5 Stockfotos. Überblendung, Ken-Burns-Zoom und Fortschritt: effects.css + js/main.js („Hero-Slider“).
+           Nur Bild 1 lädt sofort (LCP), die übrigen sind für Screenreader ausgeblendet. Ohne JS bleibt Bild 1 stehen. -->
+      <div class="hero__slides">
+        <div class="hero__slide is-active"><picture><source type="image/webp" srcset="assets/img/138-hero-startseite-betrieb-800.webp 800w, assets/img/138-hero-startseite-betrieb-1400.webp 1400w, assets/img/138-hero-startseite-betrieb-1600.webp 1600w" sizes="100vw"><img class="hero__img" src="assets/img/138-hero-startseite-betrieb-1600.jpg" width="1600" height="1034" fetchpriority="high" alt="Firmenwagen und Werbebanner vor der Werkstatt von Lackiertechnik Igelbrink am Telgenkamp in Dülmen"></picture></div>
+        <div class="hero__slide" aria-hidden="true"><picture><source type="image/webp" srcset="assets/img/142-hero-lackierkabine-karosse-800.webp 800w, assets/img/142-hero-lackierkabine-karosse-1200.webp 1200w, assets/img/142-hero-lackierkabine-karosse-1600.webp 1600w" sizes="100vw"><img class="hero__img" src="assets/img/142-hero-lackierkabine-karosse-1600.jpg" width="1600" height="1067" loading="lazy" decoding="async" alt="Lackierte Karosserie in der Lackierkabine"></picture></div>
+        <div class="hero__slide" aria-hidden="true"><picture><source type="image/webp" srcset="assets/img/143-hero-werkstatthalle-hebebuehne-800.webp 800w, assets/img/143-hero-werkstatthalle-hebebuehne-1200.webp 1200w, assets/img/143-hero-werkstatthalle-hebebuehne-1600.webp 1600w" sizes="100vw"><img class="hero__img" src="assets/img/143-hero-werkstatthalle-hebebuehne-1600.jpg" width="1600" height="1067" loading="lazy" decoding="async" alt="Helle Werkstatthalle mit Fahrzeug auf der Hebebühne"></picture></div>
+        <div class="hero__slide" aria-hidden="true"><picture><source type="image/webp" srcset="assets/img/02-hero-startseite-800.webp 800w, assets/img/02-hero-startseite-1400.webp 1400w, assets/img/02-hero-startseite-2400.webp 2400w" sizes="100vw"><img class="hero__img" src="assets/img/02-hero-startseite-1600.jpg" width="1600" height="1066" loading="lazy" decoding="async" alt="Lackierpistole beim Lackieren eines Bauteils"></picture></div>
+        <div class="hero__slide" aria-hidden="true"><picture><source type="image/webp" srcset="assets/img/148-schwerpunkte-oldtimer-hebebuehne-800.webp 800w, assets/img/148-schwerpunkte-oldtimer-hebebuehne-1200.webp 1200w, assets/img/148-schwerpunkte-oldtimer-hebebuehne-1600.webp 1600w" sizes="100vw"><img class="hero__img" src="assets/img/148-schwerpunkte-oldtimer-hebebuehne-1600.jpg" width="1600" height="1067" loading="lazy" decoding="async" alt="Mercedes-Oldtimer auf der Hebebühne"></picture></div>
+      </div>
+      <div class="hero__dots" role="group" aria-label="Bilder im Kopfbereich" hidden>
+        <button class="hero__dot" type="button" aria-label="Bild 1 von 5 zeigen"></button>
+        <button class="hero__dot" type="button" aria-label="Bild 2 von 5 zeigen"></button>
+        <button class="hero__dot" type="button" aria-label="Bild 3 von 5 zeigen"></button>
+        <button class="hero__dot" type="button" aria-label="Bild 4 von 5 zeigen"></button>
+        <button class="hero__dot" type="button" aria-label="Bild 5 von 5 zeigen"></button>
+      </div>
       <div class="hero__body">
         <div class="hero__text">
           <!-- Unterzeile gehört mit ins <h1>, sie trägt die Suchbegriffe (Runde 6) -->
@@ -734,6 +745,6 @@
 <!-- /DIALOG -->
 
 
-<script src="js/main.js?v=202611091947" defer></script>
+<script src="js/main.js?v=202611091950" defer></script>
 </body>
 </html>

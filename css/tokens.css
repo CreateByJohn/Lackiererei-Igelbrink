@@ -173,8 +173,10 @@
   --ease-out:cubic-bezier(.22,1,.36,1);   /* schneller Start, weiches Ende: wirkt direkt, ohne zu hängen */
   --t-hover:.22s;            /* Hover: Buttons, Kacheln, Zeilen */
   --t-split:.36s;            /* Aufklappen (Akkordeon .exp) */
-  --hero-zoom:1.08;          /* Slow Zoom Hero (Startseite): Endgröße */
-  --hero-zoom-dur:24s;       /* Slow Zoom Hero: Dauer, läuft einmal beim Laden und bleibt dann stehen */
+  --slide-ms:7000ms;         /* Hero-Slider (Startseite): Wechsel alle 7 s, so lange füllt sich auch die aktive Linie (js/main.js liest den Wert) */
+  --slide-fade:1.4s;         /* Hero-Slider: Überblendung */
+  --kb-dur:8.5s;             /* Ken-Burns-Zoom je Bild, läuft über die Überblendung hinaus */
+  --kb-scale:1.12;           /* Ken-Burns: ungerade Bilder 1 → 1,12, gerade 1,12 → 1 */
 
   /* Layout */
   --wrap:1200px;
@@ -248,6 +250,8 @@
   --scrollbar-thumb:rgba(31,42,68,.22);     /* Daumen in Navy, halbtransparent */
   --scrollbar-thumb-hover:rgba(31,42,68,.42);
   --scrollbar-track:transparent;
+  --hero-pad-l:clamp(20px,5.5vw,96px);     /* Startseite: linker Randabstand des Hero-Texts vom Fensterrand */
+  --hero-pad-r:clamp(20px,4vw,64px);
   --hint-gap:clamp(18px,4vh,36px);          /* Scroll-Hinweis: Abstand zum unteren Rand des Kopfs */
   --hint-room:clamp(96px,16vh,150px);       /* Platz unter dem Kopf-Text für den Scroll-Hinweis */
   --hint-wheel-dur:1.8s;                    /* Rad im Maus-Symbol: eine Bewegung */

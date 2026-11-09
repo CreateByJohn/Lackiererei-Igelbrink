@@ -344,6 +344,48 @@
   kick();
 })();
 
+// Hero-Slider (Startseite): Überblendung alle --slide-ms (7 s), Ken-Burns-Zoom und Fortschrittslinien über CSS (effects.css).
+// Das ausblendende Bild behält .is-leaving, damit sein Zoom während der Überblendung weiterläuft. Klick auf eine Linie springt zum Bild.
+// Pausiert bei verstecktem Tab (startet beim Zurückkommen das aktuelle Bild neu). Reduzierte Bewegung: kein Autoplay, Linien springen nur.
+(function () {
+  var box = document.querySelector('.hero__slides');
+  var dotsBox = document.querySelector('.hero__dots');
+  if (!box || !dotsBox) return;
+  var slides = Array.prototype.slice.call(box.children);
+  var dots = Array.prototype.slice.call(dotsBox.children);
+  if (slides.length < 2) return;
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var MS = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--slide-ms')) || 7000;
+  var i = 0, timer = 0;
+  dotsBox.hidden = false;
+
+  // Animation eines Elements neu starten (Klasse kurz entfernen, Reflow erzwingen)
+  function restart(el, cls) { el.classList.remove(cls); void el.offsetWidth; el.classList.add(cls); }
+
+  function go(n) {
+    var prev = slides[i];
+    i = (n + slides.length) % slides.length;
+    slides.forEach(function (s) { s.classList.remove('is-leaving'); });
+    if (prev !== slides[i]) { prev.classList.remove('is-active'); prev.classList.add('is-leaving'); }
+    restart(slides[i], 'is-active');
+    dots.forEach(function (d, k) {
+      d.classList.toggle('is-done', k < i);
+      d.classList.remove('is-active');
+      if (k === i) d.setAttribute('aria-current', 'true'); else d.removeAttribute('aria-current');
+    });
+    restart(dots[i], 'is-active');
+    clearTimeout(timer);
+    if (!reduce && !document.hidden) timer = setTimeout(function () { go(i + 1); }, MS);
+  }
+
+  dots.forEach(function (d, k) { d.addEventListener('click', function () { go(k); }); });
+  document.addEventListener('visibilitychange', function () {
+    if (document.hidden) { clearTimeout(timer); dotsBox.classList.add('is-paused'); }
+    else { dotsBox.classList.remove('is-paused'); go(i); }
+  });
+  go(0);
+})();
+
 // Scroll-Hinweis in den Köpfen: Klick scrollt weich bis knapp unter den Kopf (abzüglich der schwebenden Navigation, --hdr)
 // und setzt den Fokus auf den ersten Abschnitt danach (Tastatur). html.is-scrolled blendet den Hinweis ab 60 px Scrollen aus (effects.css).
 (function () {

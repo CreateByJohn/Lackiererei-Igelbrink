@@ -147,12 +147,18 @@ a.kx__row:hover b,a.kx__row:hover address{color:var(--accent-strong)}
   .ab2__people .ab2__person:hover{flex-grow:1.45}
 }
 
-/* ---------- Hero (nur Startseite): Slow Zoom ----------
-   Zoomt einmal beim Laden langsam von 1 auf --hero-zoom und bleibt dann stehen. Über die eigene Eigenschaft „scale“, nicht transform,
-   damit der Parallax (translate über --py, js/main.js) weiterläuft. Drehpunkt passend zur object-position. Keine Seitenköpfe der Unterseiten. */
+/* ---------- Hero-Slider (nur Startseite, Runde 7): Überblendung, Ken-Burns-Zoom, Fortschrittslinien ----------
+   Ungerade Bilder zoomen von 1 auf --kb-scale, gerade zurück (bei 1440 px Breite ca. 20 px/s). Das ausblendende Bild (.is-leaving) zoomt weiter.
+   Die aktive Linie füllt sich in --slide-ms. Bei reduzierter Bewegung: kein Zoom, kein Überblenden, kein Autoplay (js/main.js). */
 @media (prefers-reduced-motion:no-preference){
-  @keyframes hero-zoom{from{scale:1}to{scale:var(--hero-zoom)}}
-  .hero__img{transform-origin:50% 45%;animation:hero-zoom var(--hero-zoom-dur) cubic-bezier(.22,.6,.36,1) both}
+  .hero__slide{transition:opacity var(--slide-fade) ease-in-out}
+  @keyframes kb-in{from{transform:scale(1)}to{transform:scale(var(--kb-scale))}}
+  @keyframes kb-out{from{transform:scale(var(--kb-scale))}to{transform:scale(1)}}
+  .hero__slide.is-active .hero__img,.hero__slide.is-leaving .hero__img{animation:kb-in var(--kb-dur) linear both}
+  .hero__slide:nth-child(even).is-active .hero__img,.hero__slide:nth-child(even).is-leaving .hero__img{animation-name:kb-out}
+  @keyframes dot-fill{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+  .hero__dot.is-active::after{animation:dot-fill var(--slide-ms) linear both}
+  .hero__dots.is-paused .hero__dot::after{animation-play-state:paused}
 }
 
 /* ---------- Einblenden beim Scrollen ----------

@@ -60,11 +60,29 @@
 .hero__frame{position:relative;overflow:hidden;display:flex;align-items:center;width:100vw;margin-left:calc(50% - 50vw);
   min-height:100vh;min-height:100svh;background:var(--navy)}
 .hero__img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 45%}
+/* Hero-Slider (Runde 7): fünf Bilder übereinander, nur das aktive ist sichtbar. Der Stapel verschiebt sich beim Scrollen (Parallax, --py),
+   der Zoom liegt am Bild (effects.css), damit sich beides nicht überschreibt. */
+.hero__slides{position:absolute;inset:0;overflow:hidden;transform:translate3d(0,var(--py,0px),0);will-change:transform}
+.hero__slide{position:absolute;inset:0;opacity:0}
+.hero__slide.is-active{opacity:1;z-index:1}
+.hero__slide .hero__img{transform-origin:50% 45%}
+/* Fortschritt: fünf Linien unten rechts (mobil oben unter der Navigation), die aktive füllt sich; Klick springt zum Bild.
+   Die sichtbare Linie ist 3 px hoch, die Tap-Fläche 24 px. */
+.hero__dots{position:absolute;z-index:4;right:clamp(20px,4vw,64px);bottom:clamp(28px,5vh,44px);display:flex;gap:6px}
+.hero__dots[hidden]{display:none}
+.hero__dot{position:relative;width:44px;height:24px;padding:0;border:0;background:none;cursor:pointer}
+.hero__dot::before,.hero__dot::after{content:"";position:absolute;left:0;right:0;top:50%;height:3px;margin-top:-1.5px;border-radius:3px}
+.hero__dot::before{background:rgba(255,255,255,.35)}
+.hero__dot::after{background:var(--white);transform:scaleX(0);transform-origin:left}
+.hero__dot.is-done::after,.hero__dot.is-active::after{transform:scaleX(1)}
+.hero__dot:focus-visible{outline:3px solid var(--accent-2);outline-offset:2px;border-radius:var(--radius-xs)}
 /* Ebenen von unten nach oben: Foto, Verlauf, Text. Die frühere Spray-Animation liegt in archiv/hero-spray-animation/. */
-.hero__frame::after{content:"";position:absolute;inset:0;background:var(--grad-hero)}
-.hero__body{position:relative;z-index:3;width:100%;max-width:var(--wrap);margin-inline:auto;padding:calc(var(--hdr) + var(--hero-top-gap)) var(--gutter) clamp(72px,16vh,180px);
+.hero__frame::after{content:"";position:absolute;inset:0;z-index:2;background:var(--grad-hero)}
+/* Text mit eigenem linken Randabstand zum Fensterrand (Runde 7), nicht mehr bündig zur Navigationspille */
+.hero__body{position:relative;z-index:3;width:100%;padding:calc(var(--hdr) + var(--hero-top-gap)) var(--hero-pad-r) clamp(72px,16vh,180px) var(--hero-pad-l);
   display:flex;flex-wrap:wrap;gap:28px;align-items:flex-end;justify-content:space-between}
-.hero__text{max-width:640px;min-width:0;color:var(--on-image)}
+.hero__text{max-width:700px;min-width:0;color:var(--on-image)}
+.hero .chip{margin-left:auto}
 .hero__text .hero__lead{color:var(--on-image-muted)}
 /* Unterzeile im <h1> (Runde 6): kleiner, eigene Zeile, trägt Ort und Suchbegriffe */
 .hero__sub{display:block;margin-top:.55em;font-size:clamp(1.15rem,2.1vw,1.6rem);font-weight:600;line-height:1.25;letter-spacing:0;color:var(--on-image)}
@@ -1086,6 +1104,8 @@ html:has(.lightbox[open]){overflow:hidden}
 .scroll-hint:focus-visible{outline:3px solid var(--accent-2);outline-offset:2px}
 .career--head{padding-bottom:calc(clamp(56px,9vw,120px) + 64px)}
 @media (max-width:760px){
+  .hero__dots{right:auto;left:50%;translate:-50% 0;top:calc(var(--hdr) + 8px);bottom:auto}
+  .hero__dot{width:32px}
   .hero .scroll-hint{display:none}   /* Startseite: zu wenig Platz neben Text und Slider-Anzeige */
   .page-hero .scroll-hint,.career--head .scroll-hint{bottom:calc(var(--fab-h) + 20px)}   /* über der Info-Leiste */
   .page-hero__body{padding-bottom:calc(var(--fab-h) + 104px)}
