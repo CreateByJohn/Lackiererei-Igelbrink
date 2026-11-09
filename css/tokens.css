@@ -242,4 +242,10 @@
   --map-min-h:360px;                        /* Mindesthöhe der Karte im Kontakt-Bereich der Startseite */
   --fab-h:64px;                             /* Höhe der Floating-Bar unten (mobil) */
   --ab2-people-h:clamp(360px,34vw,470px);   /* Startseite Über uns: Höhe der Porträt-Reihe (Expand on Hover), bis 900 px siehe components.css */
+
+  /* Runde 7 */
+  --scrollbar-w:8px;                        /* dezente Scrollbar (base.css) */
+  --scrollbar-thumb:rgba(31,42,68,.22);     /* Daumen in Navy, halbtransparent */
+  --scrollbar-thumb-hover:rgba(31,42,68,.42);
+  --scrollbar-track:transparent;
 }

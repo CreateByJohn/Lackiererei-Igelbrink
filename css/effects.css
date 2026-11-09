@@ -181,7 +181,6 @@ a.kx__row:hover b,a.kx__row:hover address{color:var(--accent-strong)}
   .svc:hover .svc__img img{transform:none}
   .bt--eco:hover .bt__seal{rotate:-2deg;scale:none}
   .bt--logo .glass-in::after{display:none}
-  [data-px]{translate:none!important}
   .sm-tile:hover,.mq-item:hover .mq-item__tile,.mq-item:focus-within .mq-item__tile{transform:none}
   .process__step:hover .process__media img{transform:none}
   .marquee{overflow-x:auto;-webkit-mask-image:none;mask-image:none}

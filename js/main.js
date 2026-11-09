@@ -283,39 +283,65 @@
   });
 })();
 
-// Parallax: Bilder mit data-px verschieben sich beim Scrollen leicht gegen die Scrollrichtung.
-// Der Hero bewegt sich mit der Scrollposition, alle anderen Bilder relativ zur Fenstermitte,
-// begrenzt auf den Überstand des Bildes über seinen Rahmen (kein sichtbarer Rand).
-// Nur mit requestAnimationFrame und nur für Bilder im Fenster; aus bei reduzierter Bewegung.
+// Parallax: Bilder verschieben sich beim Scrollen leicht gegen die Scrollrichtung, weich nachgezogen (Lerp).
+// Köpfe (Hero-Slider, Seitenköpfe, Karriere-Kopf) bewegen sich mit der Scrollposition (Faktor .2),
+// Bilder im Inhalt (Bänder, Banner, Fachwissen, Karriere-Banner der Startseite) relativ zur Fenstermitte (Faktor .1, max. ±50 px
+// und nie mehr als der Überstand des Bildes über seinen Rahmen, damit kein Rand sichtbar wird).
+// Der Rahmen wird über closest() bestimmt (nicht parentElement: das ist oft <picture> mit Höhe 0).
+// Ein requestAnimationFrame-Loop läuft nur, solange sich etwas bewegt; gerechnet wird nur für Rahmen im Fenster (IntersectionObserver).
+// Ausgegeben wird --py, das CSS setzt es als transform: translate3d(). Aus bei reduzierter Bewegung.
 (function () {
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-  var els = Array.prototype.slice.call(document.querySelectorAll('[data-px]'));
-  if (!els.length) return;
-  var ticking = false;
+  var FRAME = '.hero__frame, .page-hero__frame, .career, .band, .mbanner, .know__media';
+  var HEAD = '.hero__frame, .page-hero__frame, .career--head';
+  var items = [];
+  document.querySelectorAll('.hero__slides, .page-hero__img img, .career__img img, .band__img img, .mbanner__bg img, .know__media img').forEach(function (el) {
+    var frame = el.closest(FRAME);
+    if (!frame) return;
+    var head = frame.matches(HEAD);
+    items.push({ el: el, frame: frame, head: head, speed: head ? 0.2 : 0.1, cur: 0, on: false });
+  });
+  if (!items.length) return;
+  var running = false;
 
-  function update() {
-    ticking = false;
-    var vh = window.innerHeight;
-    els.forEach(function (img) {
-      var speed = parseFloat(img.getAttribute('data-px')) || 0;
-      var box = img.parentElement.getBoundingClientRect();
-      if (box.bottom < -100 || box.top > vh + 100 || box.height === 0) return;
-      var y;
-      if (img.classList.contains('hero__img')) {
-        y = Math.max(0, -box.top) * speed;
-      } else {
-        var room = Math.max(0, (img.offsetHeight - box.height) / 2);
-        y = -(box.top + box.height / 2 - vh / 2) * speed;
-        y = Math.max(-room, Math.min(room, y));
-      }
-      img.style.setProperty('--py', y.toFixed(1) + 'px');
-    });
+  function target(o) {
+    var box = o.frame.getBoundingClientRect();
+    if (o.head) return Math.max(0, -box.top) * o.speed;
+    var room = Math.max(0, (o.el.offsetHeight - box.height) / 2);
+    var max = Math.min(50, room);
+    var y = -(box.top + box.height / 2 - window.innerHeight / 2) * o.speed;
+    return Math.max(-max, Math.min(max, y));
   }
-  function request() { if (!ticking) { ticking = true; requestAnimationFrame(update); } }
-  window.addEventListener('scroll', request, { passive: true });
-  window.addEventListener('resize', request);
-  window.addEventListener('load', request);
-  update();
+
+  function frame() {
+    var moving = false;
+    items.forEach(function (o) {
+      if (!o.on) return;
+      var t = target(o);
+      o.cur += (t - o.cur) * 0.12;
+      if (Math.abs(t - o.cur) < 0.05) o.cur = t; else moving = true;
+      o.el.style.setProperty('--py', o.cur.toFixed(2) + 'px');
+    });
+    running = moving;
+    if (moving) requestAnimationFrame(frame);
+  }
+  function kick() { if (!running) { running = true; requestAnimationFrame(frame); } }
+
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        items.forEach(function (o) { if (o.frame === e.target) o.on = e.isIntersecting; });
+      });
+      kick();
+    }, { rootMargin: '100px 0px' });
+    items.forEach(function (o) { io.observe(o.frame); });
+  } else {
+    items.forEach(function (o) { o.on = true; });
+  }
+  window.addEventListener('scroll', kick, { passive: true });
+  window.addEventListener('resize', kick);
+  window.addEventListener('load', kick);
+  kick();
 })();
 
 // Info-Leiste: erscheint nach dem ersten Bildschirm und verschwindet, sobald der echte Footer ins Bild kommt.

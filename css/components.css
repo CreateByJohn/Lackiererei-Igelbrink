@@ -433,10 +433,10 @@ html:has(.contact[open]){overflow:hidden}   /* Seite dahinter scrollt nicht mit 
 /* ---------- Überschriften in Logo-Blau ---------- */
 .sec-head h2,.prose p:first-of-type,.bt__title,.contact__title,.kt-block h3,.kt-map__title{color:var(--heading)}
 
-/* ---------- Parallax: Bilder mit data-px (Faktor) verschieben sich beim Scrollen über translate (js/main.js).
-   Die Bilder sind etwas höher als ihr Rahmen, damit beim Verschieben kein Rand sichtbar wird. ---------- */
-[data-px]{translate:0 var(--py,0px)}
-.band__img img[data-px],.career__img img{inset:-14% 0;height:128%}
+/* ---------- Parallax (js/main.js, Abschnitt „Parallax“): --py verschiebt das Bild über transform: translate3d(), weich nachgezogen.
+   Die Bilder sind etwas höher als ihr Rahmen, damit beim Verschieben kein Rand sichtbar wird. Ohne JS bzw. bei reduzierter Bewegung bleibt --py 0. ---------- */
+.page-hero__img img,.career__img img,.band__img img,.mbanner__bg img,.know__media img{transform:translate3d(0,var(--py,0px),0);will-change:transform}
+.band__img img,.career__img img{inset:-14% 0;height:128%}
 
 /* ---------- Navigation: Telefonnummer ---------- */
 /* Kurzer Button „Anrufen“ mit feinem Rahmen, klar untergeordnet zum orangenen „Online-Termin“. Die Nummer steht im title. */
@@ -642,7 +642,7 @@ html:has(.contact[open]){overflow:hidden}   /* Seite dahinter scrollt nicht mit 
 
 /* ---------- Seitenkopf .page-hero ----------
    Wie der Hero der Startseite: Bild über die volle Fensterbreite mit Verlauf, rutscht unter die Navigationspille (--hdr).
-   Kürzer (--page-hero-h) und ohne Spray-Animation. Das Bild ist etwas höher als der Rahmen (Parallax über data-px). */
+   Kürzer (--page-hero-h) und ohne Spray-Animation. Das Bild ist etwas höher als der Rahmen (Parallax, js/main.js). */
 .page-hero{padding:0;margin-top:calc(var(--hdr) * -1)}
 .page-hero__frame{position:relative;isolation:isolate;overflow:hidden;display:flex;align-items:flex-end;width:100vw;margin-left:calc(50% - 50vw);
   min-height:var(--page-hero-h);background:var(--navy)}

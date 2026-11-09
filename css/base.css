@@ -2,6 +2,14 @@
 
 *,*::before,*::after{box-sizing:border-box}
 html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+
+/* Dezente Scrollbar: schmal, Daumen in Navy, Spur durchsichtig. Firefox und neuere Chromium-Versionen nutzen scrollbar-width/-color,
+   Safari die ::-webkit-scrollbar-Regeln (dort auch mit Hover-Farbe). */
+html{scrollbar-width:thin;scrollbar-color:var(--scrollbar-thumb) var(--scrollbar-track)}
+::-webkit-scrollbar{width:var(--scrollbar-w);height:var(--scrollbar-w)}
+::-webkit-scrollbar-track{background:var(--scrollbar-track)}
+::-webkit-scrollbar-thumb{background:var(--scrollbar-thumb);border-radius:var(--scrollbar-w);border:2px solid transparent;background-clip:padding-box}
+::-webkit-scrollbar-thumb:hover{background:var(--scrollbar-thumb-hover);background-clip:padding-box}
 body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--f-body);font-size:17px;line-height:1.6;padding-inline:var(--gutter);overflow-wrap:break-word;overflow-x:clip}
 img{display:block;max-width:100%;height:auto}
 
