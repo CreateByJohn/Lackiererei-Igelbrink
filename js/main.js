@@ -70,9 +70,18 @@
 
   // --sbw: Breite eines klassischen Scrollbalkens (Runde 7b). Die Köpfe sind 100vw breit (inklusive Balken), der Inhalt nicht;
   // mit --sbw rechnet tokens.css die Kopf-Textkante genau auf die Inhaltskante. Überlagernde Balken (macOS-Standard) = 0.
-  watch(root, '--sbw', function () {
-    return Math.max(0, window.innerWidth - root.clientWidth);
-  });
+  // Gemessen beim Start, nach dem Laden und bei Fenstergrößenänderung, gesetzt nur bei Änderung. Bewusst kein ResizeObserver auf <html>/<body>:
+  // der stößt mit dem --hdr-Beobachter (ändert die Seitenhöhe) zusammen, WebKit meldet dann „ResizeObserver loop completed …“.
+  var sbw = 0;
+  function measureSbw() {
+    var v = Math.max(0, window.innerWidth - root.clientWidth);
+    if (v === sbw) return;
+    sbw = v;
+    root.style.setProperty('--sbw', v + 'px');
+  }
+  measureSbw();
+  window.addEventListener('load', measureSbw);
+  window.addEventListener('resize', measureSbw);
   watch(document.querySelector('.site-header'), '--hdr', function (el) {
     // Ohne Rundung (Runde 7b): offsetHeight liefert ganze Pixel, die Pille ist aber z. B. 72,45 px hoch.
     // Sonst endet der Kopf einen halben Pixel über der Fensterkante und unten blitzt ein heller Strich.
