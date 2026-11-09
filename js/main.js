@@ -166,12 +166,11 @@
 
 // Kontaktformular: alle Elemente mit data-open-contact öffnen das <dialog> per showModal().
 // Schließen per X, Escape (nativ) oder Klick auf den Hintergrund; der Fokus geht zurück an den Auslöser.
-// Ein Auslöser mit data-anliegen="unfall" (Wert einer Option) wählt das Anliegen beim Öffnen vor („Schaden melden“).
+// Ein Auslöser mit data-anliegen="unfall" (Wert einer Leistung) hakt diese Leistung beim Öffnen an („Schaden melden“); andere Häkchen bleiben.
 (function () {
   var dialog = document.getElementById('kontaktformular');
   if (!dialog || typeof dialog.showModal !== 'function') return;
   var form = dialog.querySelector('form');
-  var topic = dialog.querySelector('#kf-anliegen');
   var opener = null;
 
   document.addEventListener('click', function (e) {
@@ -180,7 +179,8 @@
     e.preventDefault();
     opener = trigger;
     var pre = trigger.getAttribute('data-anliegen');
-    if (pre && topic) topic.value = pre;
+    var box = pre && dialog.querySelector('[data-leistungen] input[value="' + pre + '"]');
+    if (box) { box.checked = true; box.dispatchEvent(new Event('change', { bubbles: true })); }
     if (!dialog.open) dialog.showModal();
   });
 
@@ -268,6 +268,32 @@
       input.setAttribute('aria-invalid', msg ? 'true' : 'false');
       if (error) { error.textContent = msg; error.hidden = !msg; }
     });
+  });
+})();
+
+// Gewünschte Leistungen (fieldset[data-leistungen], Kontaktformular im Dialog und online-termin.html): mindestens ein Häkchen.
+// Wie bei data-kanal: Der Fehler ([data-leistungen-error], per aria-describedby am fieldset) erscheint erst nach dem ersten Absenden,
+// setCustomValidity an der ersten Checkbox stoppt das Absenden; ist sie das erste ungültige Feld, setzt der Browser dorthin den Fokus.
+(function () {
+  document.querySelectorAll('fieldset[data-leistungen]').forEach(function (set) {
+    var form = set.closest('form');
+    var boxes = Array.prototype.slice.call(set.querySelectorAll('input[type="checkbox"]'));
+    var error = set.querySelector('[data-leistungen-error]');
+    var submit = form && form.querySelector('[type="submit"]');
+    if (!boxes.length || !error || !submit) return;
+    var checked = false;
+    function check() {
+      var missing = !boxes.some(function (b) { return b.checked; });
+      var show = missing && checked;
+      boxes[0].setCustomValidity(missing ? error.textContent : '');
+      error.hidden = !show;
+      set.setAttribute('aria-invalid', show ? 'true' : 'false');
+    }
+    set.addEventListener('change', check);
+    submit.addEventListener('click', function () { checked = true; check(); });
+    // Kein eigener Fehler-Tooltip des Browsers zusätzlich zur sichtbaren Meldung: nur Fokus setzen
+    boxes[0].addEventListener('invalid', function (e) { e.preventDefault(); checked = true; check(); boxes[0].focus(); });
+    check();
   });
 })();
 

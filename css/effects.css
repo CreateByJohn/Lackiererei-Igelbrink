@@ -278,3 +278,7 @@ a.kx__row:hover b,a.kx__row:hover address{color:var(--accent-strong)}
 .lk__img img{transition:transform .6s var(--ease-out)}
 .btn--line:hover{color:var(--accent-strong);box-shadow:inset 0 0 0 1.5px var(--accent-strong)}
 @media (hover:hover) and (prefers-reduced-motion:no-preference){.lk:hover .lk__img img{transform:scale(1.05)}}
+
+/* ---------- Checkbox-Chips (Runde 7) ---------- */
+.chip-opt span,.chip-opt span::before{transition:background-color .2s var(--ease-out),border-color .2s var(--ease-out)}
+.chip-opt:hover span{border-color:var(--accent-strong)}

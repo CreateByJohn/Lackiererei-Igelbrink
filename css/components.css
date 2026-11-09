@@ -1202,3 +1202,20 @@ html:has(.lightbox[open]){overflow:hidden}
 .mbanner__pic{align-self:end;justify-self:center;width:min(360px,90%);margin-top:28px}
 .mbanner__pic img{display:block;width:100%;height:auto;border-radius:22px 22px 0 0}
 @media (max-width:820px){.mbanner{grid-template-columns:minmax(0,1fr)}.mbanner__pic{width:min(300px,80%)}}
+
+/* ---------- Formular: Gewünschte Leistungen als Checkbox-Chips (Runde 7) ----------
+   Echte Checkboxen (unsichtbar über dem Chip, per Tastatur wie gewohnt), Haken im Kästchen beim Anhaken, sichtbarer Fokus am Chip. */
+.chips{margin:0;padding:0;border:0;min-width:0}
+.chips legend{padding:0;margin-bottom:6px;font-weight:600;font-size:.95rem}
+.chips__hint{margin:0 0 10px;font-size:.88rem;color:var(--muted)}
+.chips__grid{display:flex;flex-wrap:wrap;gap:8px}
+.chips .field__error{margin-top:10px}
+.chip-opt{position:relative;display:inline-flex}
+.field .chip-opt input{position:absolute;inset:0;width:100%;height:100%;min-height:0;margin:0;padding:0;opacity:0;cursor:pointer}
+.chip-opt span{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:9px 14px;border:1.5px solid var(--line);border-radius:var(--radius-pill);background:var(--surface);
+  font-size:.92rem;line-height:1.25;color:var(--fg);cursor:pointer}
+.chip-opt span::before{content:"";flex:none;width:16px;height:16px;border:1.5px solid var(--line-strong);border-radius:5px;background:var(--surface) center/11px no-repeat}
+.chip-opt input:checked+span{border-color:var(--accent-strong);background:var(--accent-soft)}
+.chip-opt input:checked+span::before{border-color:var(--accent-strong);background-color:var(--accent-strong);background-image:var(--chip-check)}
+.chip-opt input:focus-visible+span{outline:3px solid var(--accent);outline-offset:2px}
+.chips[aria-invalid="true"] .chip-opt span{border-color:var(--error)}
