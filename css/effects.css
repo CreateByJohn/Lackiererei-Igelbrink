@@ -259,3 +259,11 @@ a.kx__row:hover b,a.kx__row:hover address{color:var(--accent-strong)}
   .rail__fill{height:var(--rail-len,0px)}
   .rail__drop{display:none}
 }
+
+/* ---------- Scroll-Hinweis (Runde 7): Rad im Maus-Symbol läuft nach unten, Hinweis blendet nach 60 px Scrollen aus ---------- */
+.scroll-hint{transition:opacity .3s var(--ease-out),visibility .3s}
+.is-scrolled .scroll-hint{opacity:0;visibility:hidden;pointer-events:none}
+@media (prefers-reduced-motion:no-preference){
+  @keyframes hint-wheel{0%{opacity:0;transform:translateY(-3px)}30%{opacity:1}70%{opacity:1;transform:translateY(9px)}100%{opacity:0;transform:translateY(12px)}}
+  .scroll-hint__mouse::after{animation:hint-wheel var(--hint-wheel-dur) cubic-bezier(.5,0,.3,1) infinite}
+}

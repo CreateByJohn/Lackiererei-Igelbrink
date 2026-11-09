@@ -642,14 +642,14 @@ html:has(.contact[open]){overflow:hidden}   /* Seite dahinter scrollt nicht mit 
 
 /* ---------- Seitenkopf .page-hero ----------
    Wie der Hero der Startseite: Bild über die volle Fensterbreite mit Verlauf, rutscht unter die Navigationspille (--hdr).
-   Kürzer (--page-hero-h) und ohne Spray-Animation. Das Bild ist etwas höher als der Rahmen (Parallax, js/main.js). */
+   Seit Runde 7 ebenfalls bildschirmfüllend (--page-hero-h), Text unten mit Platz für den Scroll-Hinweis. Das Bild ist etwas höher als der Rahmen (Parallax, js/main.js). */
 .page-hero{padding:0;margin-top:calc(var(--hdr) * -1)}
 .page-hero__frame{position:relative;isolation:isolate;overflow:hidden;display:flex;align-items:flex-end;width:100vw;margin-left:calc(50% - 50vw);
-  min-height:var(--page-hero-h);background:var(--navy)}
+  min-height:100vh;min-height:var(--page-hero-h);background:var(--navy)}
 .page-hero__img{position:absolute;inset:0;z-index:-2;overflow:hidden}
 .page-hero__img img{position:absolute;left:0;inset:-14% 0;width:100%;height:128%;max-width:none;object-fit:cover;object-position:50% 50%}
 .page-hero__frame::after{content:"";position:absolute;inset:0;z-index:-1;background:var(--grad-page-hero)}
-.page-hero__body{width:100%;max-width:var(--wrap);margin-inline:auto;padding:calc(var(--hdr) + var(--hero-top-gap)) var(--gutter) clamp(36px,7vh,64px);
+.page-hero__body{width:100%;max-width:var(--wrap);margin-inline:auto;padding:calc(var(--hdr) + var(--hero-top-gap)) var(--gutter) var(--hint-room);
   display:grid;justify-items:start;gap:18px;color:var(--on-image)}
 .page-hero h1{max-width:20em;font-size:calc(clamp(2.2rem,4.8vw,3.8rem) * var(--h-scale))}
 .page-hero__lead{max-width:62ch;font-size:clamp(1rem,1.4vw,1.15rem);line-height:1.6;color:var(--on-image-muted)}
@@ -1070,3 +1070,24 @@ html:has(.lightbox[open]){overflow:hidden}
    Infoboxen, Prozess-Karten, Arbeitsablauf (.flow, Oldtimer), Kundenstimmen, Kontakt-Karten, Vor/Zurück-Karten, Ansprechpartnerin, Bewerbungs-Kasten.
    Nicht auf Formularen und der Kontaktfläche „So erreichen Sie uns“. */
 .fact,.process__step,.flow li,.q,.kt-card,.pnav__card,.contact-person,.apply__alt{border-top:var(--card-top)}
+
+/* =====================================================================
+   RUNDE 7
+   ===================================================================== */
+
+/* ---------- Scroll-Hinweis unten mittig in den Köpfen (.hero__frame, .page-hero__frame, .career--head) ----------
+   Maus-Symbol mit laufendem Rad (effects.css) und „Scrollen“. Klick scrollt weich bis unter den Kopf (js/main.js),
+   ohne JS springt der Link zu #inhalt. Ab 60 px Scrollen ausgeblendet (html.is-scrolled). */
+.scroll-hint{position:absolute;left:50%;bottom:var(--hint-gap);translate:-50% 0;z-index:4;display:flex;flex-direction:column;align-items:center;gap:8px;
+  padding:6px 10px;border-radius:var(--radius-md);color:var(--on-image);text-decoration:none;text-shadow:0 1px 8px rgba(17,23,38,.8);
+  font:600 .72rem/1 var(--f-body);letter-spacing:.2em;text-transform:uppercase}
+.scroll-hint__mouse{position:relative;width:24px;height:38px;border:2px solid currentColor;border-radius:14px;box-shadow:0 1px 8px rgba(17,23,38,.5)}
+.scroll-hint__mouse::after{content:"";position:absolute;left:50%;top:7px;width:3px;height:7px;margin-left:-1.5px;border-radius:2px;background:currentColor}
+.scroll-hint:focus-visible{outline:3px solid var(--accent-2);outline-offset:2px}
+.career--head{padding-bottom:calc(clamp(56px,9vw,120px) + 64px)}
+@media (max-width:760px){
+  .hero .scroll-hint{display:none}   /* Startseite: zu wenig Platz neben Text und Slider-Anzeige */
+  .page-hero .scroll-hint,.career--head .scroll-hint{bottom:calc(var(--fab-h) + 20px)}   /* über der Info-Leiste */
+  .page-hero__body{padding-bottom:calc(var(--fab-h) + 104px)}
+  .career--head{padding-bottom:calc(var(--fab-h) + 120px)}
+}

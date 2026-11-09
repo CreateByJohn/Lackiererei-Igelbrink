@@ -344,6 +344,34 @@
   kick();
 })();
 
+// Scroll-Hinweis in den Köpfen: Klick scrollt weich bis knapp unter den Kopf (abzüglich der schwebenden Navigation, --hdr)
+// und setzt den Fokus auf den ersten Abschnitt danach (Tastatur). html.is-scrolled blendet den Hinweis ab 60 px Scrollen aus (effects.css).
+(function () {
+  var root = document.documentElement;
+  function scrolled() { root.classList.toggle('is-scrolled', window.scrollY > 60); }
+  window.addEventListener('scroll', scrolled, { passive: true });
+  scrolled();
+  document.querySelectorAll('.scroll-hint').forEach(function (a) {
+    a.addEventListener('click', function (e) {
+      var frame = a.closest('.hero__frame, .page-hero__frame, .career--head');
+      if (!frame) return;
+      e.preventDefault();
+      var hdr = parseFloat(getComputedStyle(root).getPropertyValue('--hdr')) || 78;
+      var top = frame.getBoundingClientRect().bottom + window.scrollY - hdr;
+      var smooth = !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      window.scrollTo({ top: top, behavior: smooth ? 'smooth' : 'auto' });
+      var head = frame.closest('section') || frame;
+      var next = head.nextElementSibling;
+      while (next && next.offsetParent === null) next = next.nextElementSibling;
+      if (!next && head.nextElementSibling === null) next = document.getElementById('inhalt');
+      if (next) {
+        if (!next.hasAttribute('tabindex')) next.setAttribute('tabindex', '-1');
+        next.focus({ preventScroll: true });
+      }
+    });
+  });
+})();
+
 // Info-Leiste: erscheint nach dem ersten Bildschirm und verschwindet, sobald der echte Footer ins Bild kommt.
 // Mobil (Floating-Bar, bis 760 px) ist sie von Anfang an sichtbar: Telefon und Online-Termin stehen dort nicht mehr im Header.
 (function () {

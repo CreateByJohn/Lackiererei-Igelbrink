@@ -207,7 +207,7 @@
   --grad-media:linear-gradient(0deg,rgba(17,23,38,.88) 0%,rgba(17,23,38,.35) 50%,rgba(17,23,38,.05) 100%);
 
   /* Unterseiten: Seitenkopf, Galerie mit Lightbox, Projekt-Kacheln, Rechtstexte */
-  --page-hero-h:clamp(380px,60vh,560px);    /* Höhe des Seitenkopfs (.page-hero) */
+  --page-hero-h:100svh;                     /* Höhe des Seitenkopfs (.page-hero): bildschirmfüllend (Runde 7), 100vh als Rückfall in components.css */
   --grad-page-hero:linear-gradient(90deg,rgba(17,23,38,.9) 0%,rgba(17,23,38,.82) 50%,rgba(17,23,38,.45) 80%,rgba(17,23,38,.25) 100%),
                    linear-gradient(0deg,rgba(17,23,38,.7) 0%,rgba(17,23,38,0) 60%);   /* wie --grad-hero, aber dunkler: die Texte der Unterseiten sind länger */
   --grad-page-hero-narrow:linear-gradient(0deg,rgba(17,23,38,.9) 0%,rgba(17,23,38,.78) 55%,rgba(17,23,38,.6) 100%);   /* schmal: Text über die ganze Breite */
@@ -248,4 +248,7 @@
   --scrollbar-thumb:rgba(31,42,68,.22);     /* Daumen in Navy, halbtransparent */
   --scrollbar-thumb-hover:rgba(31,42,68,.42);
   --scrollbar-track:transparent;
+  --hint-gap:clamp(18px,4vh,36px);          /* Scroll-Hinweis: Abstand zum unteren Rand des Kopfs */
+  --hint-room:clamp(96px,16vh,150px);       /* Platz unter dem Kopf-Text für den Scroll-Hinweis */
+  --hint-wheel-dur:1.8s;                    /* Rad im Maus-Symbol: eine Bewegung */
 }
