@@ -105,6 +105,11 @@
     }).observe(el);
   }
 
+  // --sbw: Breite eines klassischen Scrollbalkens (Runde 7b). Die Köpfe sind 100vw breit (inklusive Balken), der Inhalt nicht;
+  // mit --sbw rechnet tokens.css die Kopf-Textkante genau auf die Inhaltskante. Überlagernde Balken (macOS-Standard) = 0.
+  watch(root, '--sbw', function () {
+    return Math.max(0, window.innerWidth - root.clientWidth);
+  });
   watch(document.querySelector('.site-header'), '--hdr', function (el) {
     // Ohne Rundung (Runde 7b): offsetHeight liefert ganze Pixel, die Pille ist aber z. B. 72,45 px hoch.
     // Sonst endet der Kopf einen halben Pixel über der Fensterkante und unten blitzt ein heller Strich.

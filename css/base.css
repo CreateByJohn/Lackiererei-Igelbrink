@@ -22,7 +22,7 @@ h3{font-size:1.5rem}
 p{margin:0}
 a{color:inherit}
 
-.wrap{max-width:var(--wrap);margin-inline:auto}
+.wrap{max-width:var(--wrap-wide);margin-inline:auto}   /* Runde 7b: breiter als die Pille, Fließtext behält sein max-width in ch */
 section{padding-block:var(--section-gap)}
 /* Abschnitt mit Kopf-Baustein .sec-head: bewusst kompakter Abstand */
 .zone{position:relative;padding-block:var(--zone-gap)}

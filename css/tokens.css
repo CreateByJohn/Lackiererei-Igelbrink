@@ -180,7 +180,12 @@
   --kb-scale:1.12;           /* Ken-Burns: ungerade Bilder 1 → 1,12, gerade 1,12 → 1 */
 
   /* Layout */
-  --wrap:1200px;
+  --wrap:1200px;             /* Breite der Navigationspille (.site-header) */
+  /* Runde 7b: Inhalte (main, Seitenköpfe, Karriere, Footer) dürfen die Hälfte des freien Rands neben der Pille mitnutzen:
+     1440 px Fenster → ca. 1320 px, 1920 px → ca. 1560 px; unter ca. 1232 px wie bisher volle Breite minus Rand.
+     --sbw = Breite eines klassischen Scrollbalkens (js/main.js misst, sonst 0), damit Kopf-Text und Inhalt auf derselben Kante liegen. */
+  --sbw:0px;
+  --wrap-wide:min(calc(100vw - var(--sbw) - 2 * var(--gutter)),calc((100vw - var(--sbw) + var(--wrap)) / 2));
   --gutter:16px;
   --section-gap:clamp(36px,6vw,80px);
   --section-gap-s:clamp(24px,4vw,48px);
@@ -252,7 +257,7 @@
   --scrollbar-thumb:rgba(31,42,68,.22);     /* Daumen in Navy, halbtransparent */
   --scrollbar-thumb-hover:rgba(31,42,68,.42);
   --scrollbar-track:transparent;
-  --hero-pad-l:clamp(20px,5.5vw,96px);     /* Startseite: linker Randabstand des Hero-Texts vom Fensterrand */
+  --hero-pad-l:calc((100vw - var(--sbw) - var(--wrap-wide)) / 2);   /* Kopf-Text (Startseite und Seitenköpfe): linke Kante = Inhaltskante (Runde 7b, vorher clamp(20px,5.5vw,96px)) */
   --hero-pad-r:clamp(20px,4vw,64px);
   --hint-gap:clamp(18px,4vh,36px);          /* Scroll-Hinweis: Abstand zum unteren Rand des Kopfs */
   --hint-room:clamp(96px,16vh,150px);       /* Platz unter dem Kopf-Text für den Scroll-Hinweis */
