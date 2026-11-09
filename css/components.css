@@ -766,8 +766,18 @@ html:has(.contact[open]){overflow:hidden}   /* Seite dahinter scrollt nicht mit 
 /* Lightbox (natives <dialog>, wird von js/main.js erzeugt) */
 .lightbox{width:100%;height:100%;max-width:none;max-height:none;margin:0;padding:0;border:0;background:transparent;color:var(--on-image);overflow:hidden}
 .lightbox::backdrop{background:var(--lightbox-bg)}
-.lightbox__stage{position:absolute;inset:0;display:grid;place-items:center;padding:clamp(56px,8vh,80px) clamp(16px,7vw,96px)}
-.lightbox__stage img{max-width:100%;max-height:100%;width:auto;height:auto;border-radius:var(--radius-md);box-shadow:var(--sh-3)}
+/* Bühne: Grid mit minmax(0,1fr), sonst wächst die auto-Zeile mit dem Bild und max-height greift nicht (hohe Zertifikate wurden abgeschnitten).
+   Das Bild sitzt in einem Button: Klick schaltet die Vergrößerung (max. 1200 px breit), dann scrollt die Bühne. */
+.lightbox__stage{position:absolute;inset:0;display:grid;grid-template:minmax(0,1fr)/minmax(0,1fr);place-items:center;padding:var(--lb-pad-y) clamp(16px,7vw,96px);overscroll-behavior:contain}
+.lightbox__zoom{display:grid;max-width:100%;max-height:100%;padding:0;border:0;border-radius:var(--radius-md);background:none;cursor:zoom-in}
+.lightbox__zoom:focus-visible{outline:3px solid var(--accent-2);outline-offset:3px}
+.lightbox__stage img{max-width:100%;max-height:calc(100svh - 2 * var(--lb-pad-y));width:auto;height:auto;object-fit:contain;border-radius:var(--radius-md);background:var(--white);box-shadow:var(--sh-3)}
+.lightbox.is-zoom .lightbox__stage{overflow:auto;place-items:start}
+/* vergrößert: bis 1200 px breit, auf schmalen Fenstern mindestens 720 px (dann auch seitlich scrollbar); margin-inline:auto zentriert, ohne links abzuschneiden */
+.lightbox.is-zoom .lightbox__zoom{width:max(min(1200px,100%),720px);max-width:none;max-height:none;margin-inline:auto;cursor:zoom-out}
+.lightbox.is-zoom .lightbox__stage img{width:100%;max-width:none;max-height:none}
+.lightbox__tip{position:absolute;left:50%;top:clamp(14px,3vh,26px);translate:-50% 0;max-width:calc(100% - 140px);margin:0;padding:6px 14px;border-radius:var(--radius-pill);
+  background:var(--glass-chip);font-size:.82rem;text-align:center;color:var(--on-image)}
 .lightbox__btn{position:absolute;display:grid;place-items:center;width:52px;height:52px;border:0;border-radius:50%;cursor:pointer;color:var(--on-image);
   background:var(--glass-chip);box-shadow:inset 0 0 0 1px var(--glass-line)}
 .lightbox__btn svg{width:24px;height:24px}
@@ -1237,3 +1247,10 @@ html:has(.lightbox[open]){overflow:hidden}
 .hgal__btn[hidden]{display:none}
 @media (max-width:980px){.hgal__track{grid-auto-columns:calc((100% - var(--hgal-gap)) / 2.25)}}
 @media (max-width:560px){.hgal__track{grid-auto-columns:82%}}
+
+/* ---------- Zertifikate im Karussell (Runde 7, Startseite und Über uns): größere Dokument-Kacheln, weißer Grund, in Farbe, ohne Blur-Hintergrund ---------- */
+.mq-group--docs{--mq-w:clamp(170px,16vw,220px);--mq-h:clamp(220px,21vw,290px)}
+.mq-group--docs .mq-item__blur{display:none}
+.mq-group--docs .mq-item__tile{padding:8px;background:var(--surface)}
+.mq-group--docs .mq-item__glass{padding:0;background:none;box-shadow:none}
+.mq-group--docs .mq-item__glass img{filter:none}

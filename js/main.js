@@ -637,7 +637,7 @@
 
 // Lightbox (natives <dialog>) für die Galerie .steps, die Zertifikate im Karussell (.mq-item__open) und die Zertifikat-Karten (.cert, fahrzeuglackierung.html).
 // Klick oder Enter öffnet das Bild groß. Pfeile und Tastatur ←/→ blättern innerhalb derselben Gruppe, Escape schließt (nativ),
-// danach geht der Fokus zurück an das angeklickte Bild bzw. die Kachel. Kopien im Karussell (aria-hidden) zählen nicht mit,
+// danach geht der Fokus zurück an das angeklickte Bild bzw. die Kachel. Klick aufs Bild vergrößert es (Hinweis oben). Kopien im Karussell (aria-hidden) zählen nicht mit,
 // ein Klick darauf öffnet das passende Original. Läuft nur, wenn es etwas zu öffnen gibt; das <dialog> wird hier erzeugt.
 (function () {
   var SEL = '.steps__open, .mq-item__open, .cert';
@@ -648,7 +648,8 @@
   box.className = 'lightbox';
   box.setAttribute('aria-label', 'Bildansicht');
   box.innerHTML =
-    '<div class="lightbox__stage"><img alt=""></div>' +
+    '<div class="lightbox__stage"><button class="lightbox__zoom" type="button" aria-pressed="false"><img alt=""></button></div>' +
+    '<p class="lightbox__tip"></p>' +
     '<button class="lightbox__btn lightbox__prev" type="button" aria-label="Vorheriges Bild">' + ARROW + '<path d="m15 5-7 7 7 7"/></svg></button>' +
     '<button class="lightbox__btn lightbox__next" type="button" aria-label="Nächstes Bild">' + ARROW + '<path d="m9 5 7 7-7 7"/></svg></button>' +
     '<button class="lightbox__btn lightbox__close" type="button" aria-label="Bildansicht schließen">' + ARROW + '<path d="M6 6l12 12M18 6 6 18"/></svg></button>' +
@@ -656,11 +657,24 @@
   document.body.appendChild(box);
   var img = box.querySelector('img');
   var count = box.querySelector('.lightbox__count');
+  var zoomBtn = box.querySelector('.lightbox__zoom');
+  var tip = box.querySelector('.lightbox__tip');
+  var stage = box.querySelector('.lightbox__stage');
+
+  // Vergrößern: Klick aufs Bild schaltet um (max. 1200 px breit, Bühne scrollbar). Zurückgesetzt bei Bildwechsel und Schließen.
+  function zoom(on) {
+    box.classList.toggle('is-zoom', on);
+    zoomBtn.setAttribute('aria-pressed', on ? 'true' : 'false');
+    tip.textContent = on ? 'Scrollen zum Lesen · Klicken zum Verkleinern' : 'Klicken zum Vergrößern';
+    if (!on) stage.scrollTop = 0;
+  }
+  zoomBtn.addEventListener('click', function (e) { e.stopPropagation(); zoom(!box.classList.contains('is-zoom')); });
   var webp = document.createElement('canvas').toDataURL('image/webp').indexOf('data:image/webp') === 0;
   var index = 0, opener = null;
 
   function show(i) {
     index = (i + openers.length) % openers.length;
+    zoom(false);
     var b = openers[index];
     img.classList.remove('is-new');
     img.src = (webp && b.getAttribute('data-full-webp')) || b.getAttribute('data-full');
@@ -704,6 +718,7 @@
     if (e.target === box || e.target.classList.contains('lightbox__stage')) box.close();
   });
   box.addEventListener('close', function () {
+    zoom(false);
     if (opener) opener.focus({ preventScroll: true });   // Fokus zurück an das angeklickte Bild (ohne das Karussell zu verschieben)
   });
 })();
