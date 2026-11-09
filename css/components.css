@@ -1262,13 +1262,6 @@ html:has(.lightbox[open]){overflow:hidden}
 @media (max-width:980px){.hgal__track{grid-auto-columns:calc((100% - var(--hgal-gap)) / 2.25)}}
 @media (max-width:560px){.hgal__track{grid-auto-columns:82%}}
 
-/* ---------- Zertifikate im Karussell (Runde 7, Startseite und Über uns): größere Dokument-Kacheln, weißer Grund, in Farbe, ohne Blur-Hintergrund ---------- */
-.mq-group--docs{--mq-w:clamp(170px,16vw,220px);--mq-h:clamp(220px,21vw,290px)}
-.mq-group--docs .mq-item__blur{display:none}
-.mq-group--docs .mq-item__tile{padding:8px;background:var(--surface)}
-.mq-group--docs .mq-item__glass{padding:0;background:none;box-shadow:none}
-.mq-group--docs .mq-item__glass img{filter:none}
-
 /* ---------- Google-Bewertung (Runde 7): Stand-Datum mit Uhr-Symbol, Hinweis auf die Auswahl unter den Karten ---------- */
 .rvx__stamp{display:inline-flex;align-items:center;gap:6px;margin:0;font-size:.85rem;color:var(--on-navy-muted)}
 .rvx__stamp svg{width:15px;height:15px}
