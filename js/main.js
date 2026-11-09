@@ -54,43 +54,6 @@
   });
 })();
 
-// Leistungs-Karten: equalize() sorgt dafür, dass Glas-Kacheln und Listen nebeneinander gleich hoch sind.
-(function () {
-  var grid = document.querySelector('.cards');
-  if (!grid) return;
-  var wide = window.matchMedia('(min-width: 981px)');
-
-  // Macht alle passenden Elemente so hoch wie das höchste (über min-height).
-  // Vorher zurücksetzen, sonst misst man die alte, angeglichene Höhe.
-  // Mit active = false wird nur zurückgesetzt (z. B. Listen, wenn die Karten untereinander stehen).
-  function equalize(selector, active) {
-    var els = grid.querySelectorAll(selector);
-    els.forEach(function (el) { el.style.minHeight = ''; });
-    if (!active) return;
-    var max = 0;
-    els.forEach(function (el) { max = Math.max(max, el.getBoundingClientRect().height); });
-    els.forEach(function (el) { el.style.minHeight = max + 'px'; });
-  }
-
-  // Kacheln immer gleich hoch, Listen nur nebeneinander (ab 981 px).
-  function update() {
-    equalize('.glass-tile', true);
-    equalize('.svc__list', wide.matches);
-  }
-
-  // Neu messen, sobald die Schriften geladen sind (Text wird dadurch oft höher)
-  // und wenn sich die Breite ändert (reine Höhenänderungen lösen keine neue Messung aus).
-  // Der ResizeObserver misst außerdem sofort einmal beim Start.
-  document.fonts.ready.then(update);
-  var lastWidth = 0;
-  new ResizeObserver(function (entries) {
-    var w = Math.round(entries[0].contentRect.width);
-    if (w === lastWidth) return;
-    lastWidth = w;
-    update();
-  }).observe(grid);
-})();
-
 // Höhen von Header und Footer als CSS-Variablen am <html>, damit das CSS damit rechnen kann.
 // --hdr: Header samt Abstand oben. Um so viel rutscht der Hero unter die schwebende Navigation.
 // --fh:  Footer-Höhe. Auf großen Bildschirmen liegt der Footer hinter dem Inhalt, .page lässt unten so viel Platz frei.

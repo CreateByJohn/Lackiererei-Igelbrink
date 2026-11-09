@@ -245,8 +245,19 @@
   --pnav-img-sm:96px;                       /* … auf dem Handy */
   --print-ink:#000;                         /* Textfarbe beim Drucken der Rechtstexte */
 
+  /* Runde 7b: Karten – gleiche Abstände je Komponente (Infoboxen, Prozess, Querkarten, Zertifikate, Bewertungen, Ablauf, Vor/Zurück).
+     Gleiche Höhen über CSS Subgrid: Symbol, Titel, Text und Button liegen in jeder Kartenreihe auf einer Linie (components.css). */
+  --card-gap:clamp(14px,1.6vw,18px);        /* Lücke zwischen den Karten */
+  --card-gap-s:12px;                        /* … bei kleinen Kacheln (Kennzahlen, Farbton-Schritte) */
+  --card-pad:clamp(20px,2vw,24px);          /* Innenabstand weißer Karten */
+  --card-ico-gap:14px;                      /* Symbol → Titel */
+  --card-title-gap:8px;                     /* Titel → Text */
+  --card-action-gap:16px;                   /* Text → Button am Kartenende (mindestens) */
+  --tile-est:180px;                         /* Bildkacheln: so weit ragt das Foto in die Glas-Kachel (typische Kachelhöhe), siehe .svc__media::before;
+                                            Über uns „Was wir anbieten“ (mit Kurztext) 255 px, Team-Porträts 160 px (components.css) */
+
   /* Feedback Meeting 1: Prozess-Karten, Hard Facts, Bilder „Über uns“, Floating-Bar mobil */
-  --process-gap:clamp(12px,1.6vw,18px);     /* Abstand der Prozess-Karten */
+  --process-gap:var(--card-gap);            /* Abstand der Prozess-Karten (seit Runde 7b = --card-gap) */
   --process-badge:46px;                     /* Nummernkreis auf den Prozess-Karten */
   --map-min-h:360px;                        /* Mindesthöhe der Karte im Kontakt-Bereich der Startseite */
   --fab-h:64px;                             /* Höhe der Floating-Bar unten (mobil) */
