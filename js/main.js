@@ -495,6 +495,68 @@
   update();
 })();
 
+// Route: Alle Links auf google.com/maps/dir (Footer, Info-Leiste, Startseite, Kontaktseite) öffnen eine kleine Auswahl
+// „Route öffnen mit: Google Maps / Apple Karten“ (mobil als Leiste unten). Ohne JS bleibt der direkte Google-Link.
+// Escape, Klick außerhalb oder Tab aus der Auswahl heraus schließt sie; Escape setzt den Fokus zurück auf den Link.
+(function () {
+  var links = document.querySelectorAll('a[href*="google.com/maps/dir"]');
+  if (!links.length) return;
+  var APPLE = 'https://maps.apple.com/?daddr=Telgenkamp+31,+48249+D%C3%BClmen&dirflg=d';
+  var PIN = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-6.5-6.1-6.5-11a6.5 6.5 0 0 1 13 0c0 4.9-6.5 11-6.5 11z"/><circle cx="12" cy="10" r="2.3"/></svg>';
+  var MAP = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.5 6.5 9 4l6 2.5 5.5-2.5v13.5L15 20l-6-2.5-5.5 2.5z"/><path d="M9 4v13.5M15 6.5V20"/></svg>';
+  var box = document.createElement('div');
+  box.className = 'route-menu';
+  box.id = 'route-menu';
+  box.hidden = true;
+  box.setAttribute('role', 'dialog');
+  box.setAttribute('aria-labelledby', 'route-menu-title');
+  box.innerHTML = '<p class="route-menu__title" id="route-menu-title">Route öffnen mit</p>' +
+    '<a data-route="google" target="_blank" rel="noopener">' + PIN + 'Google Maps</a>' +
+    '<a href="' + APPLE + '" target="_blank" rel="noopener">' + MAP + 'Apple Karten</a>';
+  document.body.appendChild(box);
+  var google = box.querySelector('[data-route="google"]');
+  var mobile = window.matchMedia('(max-width: 760px)');
+  var opener = null;
+
+  function close(refocus) {
+    if (box.hidden) return;
+    box.hidden = true;
+    if (opener) { opener.setAttribute('aria-expanded', 'false'); if (refocus) opener.focus(); }
+    opener = null;
+  }
+  function open(a) {
+    opener = a;
+    google.href = a.href;
+    a.setAttribute('aria-expanded', 'true');
+    box.hidden = false;
+    if (!mobile.matches) {
+      var r = a.getBoundingClientRect(), w = box.offsetWidth, h = box.offsetHeight;
+      var top = r.bottom + 8;
+      if (top + h > window.innerHeight - 8) top = Math.max(8, r.top - h - 8);
+      box.style.left = Math.max(8, Math.min(window.innerWidth - w - 8, r.left)) + 'px';
+      box.style.top = top + 'px';
+    }
+    google.focus();
+  }
+
+  links.forEach(function (a) {
+    a.setAttribute('aria-haspopup', 'dialog');
+    a.setAttribute('aria-expanded', 'false');
+    a.setAttribute('aria-controls', 'route-menu');
+    a.addEventListener('click', function (e) {
+      e.preventDefault();
+      e.stopPropagation();
+      if (opener === a) close(false); else { close(false); open(a); }
+    });
+  });
+  box.querySelectorAll('a').forEach(function (l) { l.addEventListener('click', function () { close(false); }); });
+  document.addEventListener('click', function (e) { if (!box.contains(e.target)) close(false); });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !box.hidden) { e.preventDefault(); close(true); } });
+  box.addEventListener('focusout', function (e) { if (e.relatedTarget && !box.contains(e.relatedTarget)) close(false); });
+  window.addEventListener('scroll', function () { if (!mobile.matches) close(false); }, { passive: true });
+  window.addEventListener('resize', function () { close(false); });
+})();
+
 // Kontaktseite, Karte: Google Maps lädt erst nach Klick (Zwei-Klick-Lösung, DSGVO).
 (function () {
   document.querySelectorAll('[data-map]').forEach(function (wrap) {

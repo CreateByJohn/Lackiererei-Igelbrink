@@ -288,3 +288,9 @@ a.kx__row:hover b,a.kx__row:hover address{color:var(--accent-strong)}
 .hgal__btn{transition:border-color .2s var(--ease-out),color .2s var(--ease-out)}
 .hgal__btn:not(:disabled):hover{border-color:var(--accent-strong);color:var(--accent-strong)}
 @media (hover:hover) and (prefers-reduced-motion:no-preference){.hgal__item:hover img{transform:scale(1.05)}}
+
+/* ---------- Hamburger (Runde 7, bis 760 px): Striche drehen sich zum X ---------- */
+@media (prefers-reduced-motion:no-preference){
+  .burger__lines{transition:background-color .2s var(--ease-out)}
+  .burger__lines::before,.burger__lines::after{transition:top .25s var(--ease-out),transform .3s var(--ease-out)}
+}
