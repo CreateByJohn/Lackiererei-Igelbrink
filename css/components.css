@@ -848,6 +848,7 @@ html:has(.lightbox[open]){overflow:hidden}
 
 /* ---------- Karriere-Seite: Banner als Seitenkopf, darunter die Inhalte der Live-Seite ---------- */
 .career--head{margin-top:calc(var(--hdr) * -1);padding-top:calc(var(--hdr) + clamp(40px,7vw,96px))}
+.career--head::before{display:none}   /* Runde 7b: keine orange Linie über der Navigationspille; das Banner der Startseite behält sie */
 .career--head .career__title{font-size:calc(clamp(2.6rem,6vw,4.8rem) * var(--h-scale))}
 .prose--career p{font-size:1.05rem}
 .split--career{margin-top:clamp(28px,4vw,48px)}
