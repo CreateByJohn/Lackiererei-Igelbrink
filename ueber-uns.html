@@ -9,10 +9,10 @@
 <link rel="canonical" href="https://lackiertechnik-igelbrink.de/ueber-uns">
 <link rel="icon" type="image/png" href="assets/img/13-favicon.png">
 <link rel="preload" href="assets/fonts/schibsted-grotesk-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="css/tokens.css?v=202611091957">
-<link rel="stylesheet" href="css/base.css?v=202611091957">
-<link rel="stylesheet" href="css/components.css?v=202611091957">
-<link rel="stylesheet" href="css/effects.css?v=202611091957">
+<link rel="stylesheet" href="css/tokens.css?v=202611091959">
+<link rel="stylesheet" href="css/base.css?v=202611091959">
+<link rel="stylesheet" href="css/components.css?v=202611091959">
+<link rel="stylesheet" href="css/effects.css?v=202611091959">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -222,73 +222,32 @@
     <!-- OFFEN: Gemeinsames Foto der Inhaber folgt -->
   </section>
 
-  <!-- UNSER BETRIEB IN BILDERN: gleiche Bildkachel mit Glaskachel und Logo-Fuß. Vorerst vorhandene Werkstattbilder plus zwei neutrale Platzhalter. -->
+  <!-- UNSER BETRIEB IN BILDERN (Runde 7): waagerechte Galerie .hgal mit scroll-snap, Bildunterschrift als Glas-Leiste, Pfeile unter der Galerie (js/main.js).
+       3 eigene Werkstattfotos + 5 Stockfotos. Die Leiste lässt sich auch per Tastatur scrollen (fokussierbar, Pfeiltasten). -->
   <section class="zone" id="betrieb" aria-labelledby="betrieb-title">
     <div class="sec-head">
       <div class="sec-head__divider" aria-hidden="true"><span class="sec-head__ico"><svg viewBox="0 0 24 24"><use href="#i-pin"/></svg></span></div>
       <p class="eyebrow">Werkstatt</p>
       <h2 id="betrieb-title">Unser Betrieb in Bildern</h2>
     </div>
-    <div class="tiles tiles--3">
-      <article class="svc svc--link svc--pic">
-        <div class="svc__media"><span class="wm" aria-hidden="true"></span>
-          <picture class="svc__img"><source type="image/webp" srcset="assets/img/20-service-oldtimer-600.webp 600w, assets/img/20-service-oldtimer-764.webp 764w" sizes="(max-width: 640px) calc(100vw - 32px), (max-width: 980px) calc(50vw - 30px), 386px"><img src="assets/img/20-service-oldtimer-600.jpg" width="600" height="594" loading="lazy" decoding="async" alt="Grundierter Ferrari in der Lackierkabine"></picture>
-          <div class="glass-tile">
-            <span class="glass-tile__ico" aria-hidden="true"><svg viewBox="0 0 24 24"><use href="#i-klassik"/></svg></span>
-            <h3>Lackierkabine</h3>
-          </div>
-        </div>
-      </article>
-      <article class="svc svc--link svc--pic">
-        <div class="svc__media"><span class="wm" aria-hidden="true"></span>
-          <picture class="svc__img"><source type="image/webp" srcset="assets/img/24-service-galerie-abklebung-600.webp 600w, assets/img/24-service-galerie-abklebung-1200.webp 1200w" sizes="(max-width: 640px) calc(100vw - 32px), (max-width: 980px) calc(50vw - 30px), 386px"><img src="assets/img/24-service-galerie-abklebung-600.jpg" width="600" height="450" loading="lazy" decoding="async" alt="Abgeklebtes Fahrzeug, Detailansicht"></picture>
-          <div class="glass-tile">
-            <span class="glass-tile__ico" aria-hidden="true"><svg viewBox="0 0 24 24"><use href="#i-schild"/></svg></span>
-            <h3>Vorbereitung</h3>
-          </div>
-        </div>
-      </article>
-      <article class="svc svc--link svc--pic">
-        <div class="svc__media"><span class="wm" aria-hidden="true"></span>
-          <picture class="svc__img"><source type="image/webp" srcset="assets/img/22-service-unfallinstandsetzung-600.webp 600w, assets/img/22-service-unfallinstandsetzung-1200.webp 1200w" sizes="(max-width: 640px) calc(100vw - 32px), (max-width: 980px) calc(50vw - 30px), 386px"><img src="assets/img/22-service-unfallinstandsetzung-600.jpg" width="600" height="397" loading="lazy" decoding="async" alt="VW Golf bei der Achsvermessung in der Werkstatt"></picture>
-          <div class="glass-tile">
-            <span class="glass-tile__ico" aria-hidden="true"><svg viewBox="0 0 24 24"><use href="#i-auto"/></svg></span>
-            <h3>Achsvermessung</h3>
-          </div>
-        </div>
-      </article>
-      <article class="svc svc--link svc--pic">
-        <div class="svc__media"><span class="wm" aria-hidden="true"></span>
-          <picture class="svc__img"><source type="image/webp" srcset="assets/img/04-schwerpunkte-unfallinstandsetzung-600.webp 600w, assets/img/04-schwerpunkte-unfallinstandsetzung-1200.webp 1200w" sizes="(max-width: 640px) calc(100vw - 32px), (max-width: 980px) calc(50vw - 30px), 386px"><img src="assets/img/04-schwerpunkte-unfallinstandsetzung-600.jpg" width="600" height="450" loading="lazy" decoding="async" alt="Unfallschaden am Heck eines BMW in der Werkstatt"></picture>
-          <div class="glass-tile">
-            <span class="glass-tile__ico" aria-hidden="true"><svg viewBox="0 0 24 24"><use href="#i-auto"/></svg></span>
-            <h3>Halle</h3>
-          </div>
-        </div>
-      </article>
-      <article class="svc svc--link svc--pic">
-        <div class="svc__media svc__media--ph"><span class="wm" aria-hidden="true"></span>
-          <span class="svc__ph" aria-hidden="true"><svg viewBox="0 0 24 24"><use href="#i-uhr"/></svg></span>
-          <div class="glass-tile">
-            <span class="glass-tile__ico" aria-hidden="true"><svg viewBox="0 0 24 24"><use href="#i-uhr"/></svg></span>
-            <h3>Wartebereich</h3>
-            <!-- OFFEN: Foto folgt -->
-          </div>
-        </div>
-      </article>
-      <article class="svc svc--link svc--pic">
-        <div class="svc__media svc__media--ph"><span class="wm" aria-hidden="true"></span>
-          <span class="svc__ph" aria-hidden="true"><svg viewBox="0 0 24 24"><use href="#i-doc"/></svg></span>
-          <div class="glass-tile">
-            <span class="glass-tile__ico" aria-hidden="true"><svg viewBox="0 0 24 24"><use href="#i-doc"/></svg></span>
-            <h3>Büro</h3>
-            <!-- OFFEN: Foto folgt -->
-          </div>
-        </div>
-      </article>
+    <div class="hgal">
+      <div class="hgal__track" id="betrieb-galerie" tabindex="0" role="group" aria-label="Bilder aus dem Betrieb, waagerecht scrollbar">
+        <figure class="hgal__item"><picture><source type="image/webp" srcset="assets/img/20-service-oldtimer-600.webp 600w, assets/img/20-service-oldtimer-764.webp 764w" sizes="(max-width: 560px) 82vw, (max-width: 980px) calc((100vw - 50px) / 2.25), 340px"><img src="assets/img/20-service-oldtimer-600.jpg" width="600" height="594" loading="lazy" decoding="async" alt="Grundierter Ferrari in der Lackierkabine"></picture><figcaption>Lackierkabine</figcaption></figure>
+        <figure class="hgal__item"><picture><source type="image/webp" srcset="assets/img/24-service-galerie-abklebung-600.webp 600w, assets/img/24-service-galerie-abklebung-1200.webp 1200w" sizes="(max-width: 560px) 82vw, (max-width: 980px) calc((100vw - 50px) / 2.25), 340px"><img src="assets/img/24-service-galerie-abklebung-600.jpg" width="600" height="450" loading="lazy" decoding="async" alt="Abgeklebtes Fahrzeug, Detailansicht"></picture><figcaption>Vorbereitung</figcaption></figure>
+        <figure class="hgal__item"><picture><source type="image/webp" srcset="assets/img/22-service-unfallinstandsetzung-600.webp 600w, assets/img/22-service-unfallinstandsetzung-1200.webp 1200w" sizes="(max-width: 560px) 82vw, (max-width: 980px) calc((100vw - 50px) / 2.25), 340px"><img src="assets/img/22-service-unfallinstandsetzung-600.jpg" width="600" height="397" loading="lazy" decoding="async" alt="VW Golf bei der Achsvermessung in der Werkstatt"></picture><figcaption>Achsvermessung</figcaption></figure>
+        <figure class="hgal__item"><picture><source type="image/webp" srcset="assets/img/143-hero-werkstatthalle-hebebuehne-600.webp 600w, assets/img/143-hero-werkstatthalle-hebebuehne-800.webp 800w" sizes="(max-width: 560px) 82vw, (max-width: 980px) calc((100vw - 50px) / 2.25), 340px"><img src="assets/img/143-hero-werkstatthalle-hebebuehne-600.jpg" srcset="assets/img/143-hero-werkstatthalle-hebebuehne-600.jpg 600w, assets/img/143-hero-werkstatthalle-hebebuehne-800.jpg 800w" sizes="(max-width: 560px) 82vw, (max-width: 980px) calc((100vw - 50px) / 2.25), 340px" width="600" height="400" loading="lazy" decoding="async" alt="Helle Werkstatthalle mit Fahrzeug auf der Hebebühne"></picture><figcaption>Halle</figcaption></figure>
+        <figure class="hgal__item"><picture><source type="image/webp" srcset="assets/img/154-betrieb-lackierer-karosse-600.webp 600w, assets/img/154-betrieb-lackierer-karosse-800.webp 800w" sizes="(max-width: 560px) 82vw, (max-width: 980px) calc((100vw - 50px) / 2.25), 340px"><img src="assets/img/154-betrieb-lackierer-karosse-600.jpg" srcset="assets/img/154-betrieb-lackierer-karosse-600.jpg 600w, assets/img/154-betrieb-lackierer-karosse-800.jpg 800w" sizes="(max-width: 560px) 82vw, (max-width: 980px) calc((100vw - 50px) / 2.25), 340px" width="600" height="450" loading="lazy" decoding="async" alt="Lackierer an einer grundierten Karosserie in der Lackierkabine"></picture><figcaption>Lackierung</figcaption></figure>
+        <figure class="hgal__item"><picture><source type="image/webp" srcset="assets/img/150-prozess-werkstatt-hell-600.webp 600w, assets/img/150-prozess-werkstatt-hell-800.webp 800w" sizes="(max-width: 560px) 82vw, (max-width: 980px) calc((100vw - 50px) / 2.25), 340px"><img src="assets/img/150-prozess-werkstatt-hell-600.jpg" srcset="assets/img/150-prozess-werkstatt-hell-600.jpg 600w, assets/img/150-prozess-werkstatt-hell-800.jpg 800w" sizes="(max-width: 560px) 82vw, (max-width: 980px) calc((100vw - 50px) / 2.25), 340px" width="600" height="400" loading="lazy" decoding="async" alt="Helle Werkstatt mit Motor-Schnittmodell und Werkbänken"></picture><figcaption>Werkstatt</figcaption></figure>
+        <figure class="hgal__item"><picture><source type="image/webp" srcset="assets/img/155-betrieb-karosse-grundiert-600.webp 600w, assets/img/155-betrieb-karosse-grundiert-800.webp 800w" sizes="(max-width: 560px) 82vw, (max-width: 980px) calc((100vw - 50px) / 2.25), 340px"><img src="assets/img/155-betrieb-karosse-grundiert-600.jpg" srcset="assets/img/155-betrieb-karosse-grundiert-600.jpg 600w, assets/img/155-betrieb-karosse-grundiert-800.jpg 800w" sizes="(max-width: 560px) 82vw, (max-width: 980px) calc((100vw - 50px) / 2.25), 340px" width="600" height="309" loading="lazy" decoding="async" alt="Grundierte Karosserie in der Lackierkabine"></picture><figcaption>Grundierte Karosserie</figcaption></figure>
+        <figure class="hgal__item"><picture><source type="image/webp" srcset="assets/img/149-prozess-beratung-fahrzeug-600.webp 600w, assets/img/149-prozess-beratung-fahrzeug-800.webp 800w" sizes="(max-width: 560px) 82vw, (max-width: 980px) calc((100vw - 50px) / 2.25), 340px"><img src="assets/img/149-prozess-beratung-fahrzeug-600.jpg" srcset="assets/img/149-prozess-beratung-fahrzeug-600.jpg 600w, assets/img/149-prozess-beratung-fahrzeug-800.jpg 800w" sizes="(max-width: 560px) 82vw, (max-width: 980px) calc((100vw - 50px) / 2.25), 340px" width="600" height="400" loading="lazy" decoding="async" alt="Mitarbeiter bearbeitet eine abgeklebte Fahrzeugtür, ein Kollege schaut zu"></picture><figcaption>Beratung</figcaption></figure>
+      </div>
+      <div class="hgal__nav">
+        <button class="hgal__btn" type="button" data-dir="-1" aria-controls="betrieb-galerie" aria-label="Vorherige Bilder"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 5-7 7 7 7"/></svg></button>
+        <button class="hgal__btn" type="button" data-dir="1" aria-controls="betrieb-galerie" aria-label="Weitere Bilder"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 5 7 7-7 7"/></svg></button>
+      </div>
     </div>
-    <!-- OFFEN: Platzhalter: Fotos von Wartebereich, Büro, Spritzkabine und Halle folgen -->
-    <!-- OFFEN: Bildtitel (Lackierkabine, Vorbereitung, Achsvermessung, Halle) sind Vorschläge, bitte vom Kunden bestätigen -->
+    <!-- OFFEN: Halle, Lackierung, Werkstatt, Grundierte Karosserie und Beratung sind Stockfotos (Runde 7); eigene Fotos folgen (auch Wartebereich, Büro, Spritzkabine) -->
+    <!-- OFFEN: Bildtitel (Lackierkabine, Vorbereitung, Achsvermessung) sind Vorschläge, bitte vom Kunden bestätigen -->
   </section>
 
   <!-- WAS WIR ANBIETEN: dieselben Bildkacheln wie auf service.html (Bild, Glaskachel, „Mehr erfahren“) statt Textzeilen -->
@@ -674,6 +633,6 @@
 <!-- /DIALOG -->
 
 
-<script src="js/main.js?v=202611091957" defer></script>
+<script src="js/main.js?v=202611091959" defer></script>
 </body>
 </html>

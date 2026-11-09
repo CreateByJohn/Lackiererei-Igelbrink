@@ -1219,3 +1219,21 @@ html:has(.lightbox[open]){overflow:hidden}
 .chip-opt input:checked+span::before{border-color:var(--accent-strong);background-color:var(--accent-strong);background-image:var(--chip-check)}
 .chip-opt input:focus-visible+span{outline:3px solid var(--accent);outline-offset:2px}
 .chips[aria-invalid="true"] .chip-opt span{border-color:var(--error)}
+
+/* ---------- Über uns: „Unser Betrieb in Bildern“ als waagerechte Galerie (Runde 7) ----------
+   scroll-snap, 3,4 Bilder sichtbar (bis 980 px 2,25, bis 560 px 82 %), Bildunterschrift als Glas-Leiste, Pfeile rechts darunter (js/main.js). */
+.hgal{position:relative}
+.hgal__track{display:grid;grid-auto-flow:column;grid-auto-columns:calc((100% - 3 * var(--hgal-gap)) / 3.4);gap:var(--hgal-gap);overflow-x:auto;overscroll-behavior-x:contain;
+  scroll-snap-type:x mandatory;padding:4px 0 18px;scrollbar-width:thin}
+.hgal__track:focus-visible{outline:3px solid var(--accent);outline-offset:4px;border-radius:var(--radius-sm)}
+.hgal__item{position:relative;overflow:hidden;margin:0;aspect-ratio:4/5;border-radius:var(--radius);background:var(--navy);scroll-snap-align:start}
+.hgal__item img{width:100%;height:100%;object-fit:cover}
+.hgal__item figcaption{position:absolute;left:12px;right:12px;bottom:12px;padding:10px 14px;border-radius:var(--radius-row);color:var(--on-image);font-weight:600;font-size:.98rem;
+  background:var(--glass-caption);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);box-shadow:inset 0 0 0 1px var(--glass-line-chip)}
+.hgal__nav{display:flex;justify-content:flex-end;gap:8px;margin-top:4px}
+.hgal__btn{display:grid;place-items:center;width:46px;height:46px;padding:0;border:1.5px solid var(--line);border-radius:50%;background:var(--surface);color:var(--fg);cursor:pointer}
+.hgal__btn svg{width:20px;height:20px}
+.hgal__btn:disabled{opacity:.35;cursor:default}
+.hgal__btn[hidden]{display:none}
+@media (max-width:980px){.hgal__track{grid-auto-columns:calc((100% - var(--hgal-gap)) / 2.25)}}
+@media (max-width:560px){.hgal__track{grid-auto-columns:82%}}

@@ -297,6 +297,39 @@
   });
 })();
 
+// Galerie „Betrieb in Bildern“ (.hgal): Pfeile scrollen um ein Bild weiter (weich, bei reduzierter Bewegung sofort),
+// am Anfang bzw. Ende ist der jeweilige Pfeil deaktiviert. Passt alles ins Fenster, werden die Pfeile ausgeblendet.
+(function () {
+  var smooth = !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  document.querySelectorAll('.hgal').forEach(function (g) {
+    var track = g.querySelector('.hgal__track');
+    var prev = g.querySelector('[data-dir="-1"]'), next = g.querySelector('[data-dir="1"]');
+    if (!track || !prev || !next) return;
+    function update() {
+      var max = track.scrollWidth - track.clientWidth;
+      prev.disabled = track.scrollLeft < 4;
+      next.disabled = track.scrollLeft > max - 4;
+      prev.hidden = next.hidden = max < 4;
+    }
+    function go(dir) {
+      var item = track.querySelector('.hgal__item');
+      var step = item.offsetWidth + (parseFloat(getComputedStyle(track).columnGap) || 0);
+      track.scrollBy({ left: step * dir, behavior: smooth ? 'smooth' : 'auto' });
+    }
+    [prev, next].forEach(function (b) {
+      b.addEventListener('click', function () { go(+b.getAttribute('data-dir')); });
+    });
+    // Tastatur auf der fokussierten Leiste: ←/→ ein Bild weiter (mit scroll-snap sonst nur wenige Pixel), Pos1/Ende an den Anfang/das Ende
+    track.addEventListener('keydown', function (e) {
+      if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') { e.preventDefault(); go(e.key === 'ArrowRight' ? 1 : -1); }
+      else if (e.key === 'Home' || e.key === 'End') { e.preventDefault(); track.scrollTo({ left: e.key === 'Home' ? 0 : track.scrollWidth, behavior: smooth ? 'smooth' : 'auto' }); }
+    });
+    track.addEventListener('scroll', update, { passive: true });
+    if ('ResizeObserver' in window) new ResizeObserver(update).observe(track);
+    update();
+  });
+})();
+
 // Unsere Expertise: Zeilen einzeln aufklappen (Akkordeon).
 (function () {
   document.querySelectorAll('.exp__head').forEach(function (head) {
