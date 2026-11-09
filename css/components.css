@@ -869,8 +869,6 @@ html:has(.lightbox[open]){overflow:hidden}
 .process__step{position:relative;display:grid;grid-template-rows:auto 1fr;min-width:0;overflow:hidden;background:var(--surface);border-radius:var(--radius);box-shadow:var(--sh-2);counter-increment:process}
 .process__media{position:relative;overflow:hidden;aspect-ratio:4/3;background:var(--grad-ph)}
 .process__media img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
-.process__media--ph{display:grid;place-items:center;background:var(--grad-process-ph);color:var(--accent-strong)}
-.process__media--ph svg{width:44px;height:44px;opacity:.75}
 .process__body{position:relative;display:flex;flex-direction:column;align-items:flex-start;gap:6px;padding:calc(var(--process-badge) / 2 + 14px) 18px 18px}
 .process__body::before{content:counter(process);position:absolute;left:16px;top:calc(var(--process-badge) / -2);display:grid;place-items:center;
   width:var(--process-badge);height:var(--process-badge);border-radius:50%;background:var(--accent-strong);color:var(--on-accent);
