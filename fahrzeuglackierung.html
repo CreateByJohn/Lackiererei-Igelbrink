@@ -9,10 +9,10 @@
 <link rel="canonical" href="https://lackiertechnik-igelbrink.de/fahrzeuglackierung">
 <link rel="icon" type="image/png" href="assets/img/13-favicon.png">
 <link rel="preload" href="assets/fonts/schibsted-grotesk-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="css/tokens.css?v=202611060553">
-<link rel="stylesheet" href="css/base.css?v=202611060553">
-<link rel="stylesheet" href="css/components.css?v=202611060553">
-<link rel="stylesheet" href="css/effects.css?v=202611060553">
+<link rel="stylesheet" href="css/tokens.css?v=202611092240">
+<link rel="stylesheet" href="css/base.css?v=202611092240">
+<link rel="stylesheet" href="css/components.css?v=202611092240">
+<link rel="stylesheet" href="css/effects.css?v=202611092240">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -44,6 +44,7 @@
 
 <!-- Wiederverwendbare Symbole: einmal definiert, per <use href="#…"> eingesetzt (nur die, die diese Seite nutzt) -->
 <svg hidden>
+  <symbol id="i-schild" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v5.5c0 4.4-3 8-7 9.5-4-1.5-7-5.1-7-9.5V6l7-3z"/><path d="m9 12 2 2 4-4"/></g></symbol>
   <symbol id="i-tel" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="M5 4h3.2l1.6 4-2 1.3a10.5 10.5 0 0 0 4.9 4.9l1.3-2 4 1.6V17a2 2 0 0 1-2 2A14 14 0 0 1 3 6a2 2 0 0 1 2-2z"/></symbol>
   <symbol id="i-pin" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-6.5-5.6-6.5-11a6.5 6.5 0 0 1 13 0C18.5 15.4 12 21 12 21z"/><circle cx="12" cy="10" r="2.4"/></g></symbol>
   <symbol id="i-wa" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20l1.3-4A8.5 8.5 0 1 1 8.4 19z"/><path d="M9 8.6c0 3.4 2.9 6.4 6.3 6.4l1-1.4-2-1.1-1 .9a5 5 0 0 1-2.2-2.2l.9-1-1.1-2z"/></g></symbol>
@@ -88,7 +89,7 @@
     <div class="nav-actions">
       <a class="nav-tel" href="tel:+4925947843823" aria-label="Anrufen: 02594 7843823" title="02594 7843823"><svg aria-hidden="true"><use href="#i-tel"/></svg><span>Anrufen</span></a>
       <button class="btn btn--small" type="button" data-open-contact aria-haspopup="dialog" aria-controls="kontaktformular">Online-Termin</button>
-      <button class="burger" id="burger" type="button" aria-expanded="false" aria-controls="menu">Menü</button>
+      <button class="burger" id="burger" type="button" aria-expanded="false" aria-controls="menu" aria-label="Menü"><span class="burger__lines" aria-hidden="true"></span><span class="burger__txt">Menü</span></button>
     </div>
   </nav>
 </header>
@@ -99,13 +100,14 @@
   <!-- Leistungsseite (Runde 4), Texte aus dem Kundentext seit Runde 6 -->
   <section class="page-hero" aria-labelledby="seitenkopf-titel">
     <div class="page-hero__frame">
-      <picture class="page-hero__img"><source type="image/webp" srcset="assets/img/32-seitenkopf-lackierkabine-800.webp 800w, assets/img/32-seitenkopf-lackierkabine-1400.webp 1400w, assets/img/32-seitenkopf-lackierkabine-2400.webp 2400w" sizes="100vw"><img src="assets/img/32-seitenkopf-lackierkabine-800.jpg" srcset="assets/img/32-seitenkopf-lackierkabine-800.jpg 800w, assets/img/32-seitenkopf-lackierkabine-1400.jpg 1400w, assets/img/32-seitenkopf-lackierkabine-2400.jpg 2400w" sizes="100vw" data-px=".12" width="800" height="600" fetchpriority="high" decoding="async" alt=""></picture>
+      <picture class="page-hero__img"><source type="image/webp" srcset="assets/img/32-seitenkopf-lackierkabine-800.webp 800w, assets/img/32-seitenkopf-lackierkabine-1400.webp 1400w, assets/img/32-seitenkopf-lackierkabine-2400.webp 2400w" sizes="100vw"><img src="assets/img/32-seitenkopf-lackierkabine-800.jpg" srcset="assets/img/32-seitenkopf-lackierkabine-800.jpg 800w, assets/img/32-seitenkopf-lackierkabine-1400.jpg 1400w, assets/img/32-seitenkopf-lackierkabine-2400.jpg 2400w" sizes="100vw" width="800" height="600" fetchpriority="high" decoding="async" alt=""></picture>
       <div class="page-hero__body">
         <p class="eyebrow eyebrow--on-dark">Serviceleistungen</p>
         <h1 id="seitenkopf-titel">Fahrzeug&shy;lackierung in Dülmen</h1>
         <p class="page-hero__lead">Ob kleiner Kratzer, Unfallschaden oder Komplettlackierung – Lackiertechnik Igelbrink in Dülmen sorgt mit eigener Lackierkabine, Glasurit-Lacksystemen und handwerklicher Präzision für ein erstklassiges Lackierergebnis – bei Pkw ebenso wie bei Wohnmobilen und Oldtimern.</p>
         <button class="btn" type="button" data-open-contact aria-haspopup="dialog" aria-controls="kontaktformular">Online-Termin</button>
       </div>
+      <a class="scroll-hint" href="#inhalt"><span class="scroll-hint__mouse" aria-hidden="true"></span><span>Scrollen<span class="visually-hidden"> zum Inhalt</span></span></a>
     </div>
   </section>
   <section class="zone zone--first" id="leistungen" aria-labelledby="leistungen-titel">
@@ -137,7 +139,7 @@
     <!-- Ablauf mit der Komponente .process (fünf Karten wie auf der Startseite), Bild oder Symbolfläche je Karte -->
     <ol class="process">
       <li class="process__step">
-        <div class="process__media process__media--ph"><span class="wm" aria-hidden="true"></span><svg aria-hidden="true"><use href="#i-team"/></svg></div>
+        <div class="process__media"><span class="wm" aria-hidden="true"></span><picture><source type="image/webp" srcset="assets/img/149-prozess-beratung-fahrzeug-600.webp 600w, assets/img/149-prozess-beratung-fahrzeug-1200.webp 1200w" sizes="(max-width: 640px) 112px, (max-width: 1100px) calc((100vw - 64px) / 3), 230px"><img src="assets/img/149-prozess-beratung-fahrzeug-600.jpg" srcset="assets/img/149-prozess-beratung-fahrzeug-600.jpg 600w, assets/img/149-prozess-beratung-fahrzeug-1200.jpg 1200w" sizes="(max-width: 640px) 112px, (max-width: 1100px) calc((100vw - 64px) / 3), 230px" width="600" height="400" loading="lazy" decoding="async" alt="Mitarbeiter bearbeitet eine abgeklebte Fahrzeugtür, ein Kollege schaut zu"></picture></div>
         <div class="process__body">
           <h3>Beratung &amp; Begutachtung</h3>
           <p>Wir begutachten den Lackschaden, beraten Sie persönlich und besprechen die passende Lösung.</p>
@@ -151,7 +153,7 @@
         </div>
       </li>
       <li class="process__step">
-        <div class="process__media process__media--ph"><span class="wm" aria-hidden="true"></span><svg aria-hidden="true"><use href="#i-spot"/></svg></div>
+        <div class="process__media"><span class="wm" aria-hidden="true"></span><picture><source type="image/webp" srcset="assets/img/152-lack-farbmuster-spritzen-600.webp 600w, assets/img/152-lack-farbmuster-spritzen-1200.webp 1200w" sizes="(max-width: 640px) 112px, (max-width: 1100px) calc((100vw - 64px) / 3), 230px"><img src="assets/img/152-lack-farbmuster-spritzen-600.jpg" srcset="assets/img/152-lack-farbmuster-spritzen-600.jpg 600w, assets/img/152-lack-farbmuster-spritzen-1200.jpg 1200w" sizes="(max-width: 640px) 112px, (max-width: 1100px) calc((100vw - 64px) / 3), 230px" width="600" height="900" loading="lazy" decoding="async" alt="Lackierpistole beim Spritzen eines Farbmusters"></picture></div>
         <div class="process__body">
           <h3>Farbton&shy;bestimmung</h3>
           <p>Wir ermitteln den Farbton Ihres Fahrzeugs per Farbmessung und mischen ihn passgenau an – damit die neue Lackierung exakt zur Originalfarbe passt.</p>
@@ -165,7 +167,7 @@
         </div>
       </li>
       <li class="process__step">
-        <div class="process__media process__media--ph"><span class="wm" aria-hidden="true"></span><svg aria-hidden="true"><use href="#i-schluessel"/></svg></div>
+        <div class="process__media"><span class="wm" aria-hidden="true"></span><picture><source type="image/webp" srcset="assets/img/153-lack-politur-600.webp 600w, assets/img/153-lack-politur-1200.webp 1200w" sizes="(max-width: 640px) 112px, (max-width: 1100px) calc((100vw - 64px) / 3), 230px"><img src="assets/img/153-lack-politur-600.jpg" srcset="assets/img/153-lack-politur-600.jpg 600w, assets/img/153-lack-politur-1200.jpg 1200w" sizes="(max-width: 640px) 112px, (max-width: 1100px) calc((100vw - 64px) / 3), 230px" width="600" height="398" loading="lazy" decoding="async" alt="Polieren des Lacks mit der Poliermaschine"></picture></div>
         <div class="process__body">
           <h3>Qualitäts&shy;kontrolle &amp; Übergabe</h3>
           <p>Nach sorgfältiger Prüfung übergeben wir Ihnen Ihr frisch lackiertes Fahrzeug.</p>
@@ -176,11 +178,87 @@
       <p><strong>Unser Anspruch: Höchste Qualität und Präzision – bis ins kleinste Detail.</strong></p>
     </div>
   </section>
+  <!-- FACHWISSEN (Runde 7): Farbtonfindung, Lacke, Zertifikate, Banner Marko. Aufbau und Text aus der abgestimmten Vorschau.
+       Bilder im Fachwissen verschieben sich leicht beim Scrollen (Parallax, js/main.js). -->
+  <section class="zone" id="farbton" aria-labelledby="farbton-titel">
+    <div class="sec-head"><div class="sec-head__divider" aria-hidden="true"><span class="sec-head__ico"><svg viewBox="0 0 24 24"><use href="#i-spot"/></svg></span></div>
+      <p class="eyebrow">Fachwissen</p>
+      <h2 id="farbton-titel">So finden wir Ihren exakten Farbton</h2>
+    </div>
+    <div class="know">
+      <div class="know__media"><picture><source type="image/webp" srcset="assets/img/146-schwerpunkte-lackierer-schutzanzug-600.webp 600w, assets/img/146-schwerpunkte-lackierer-schutzanzug-800.webp 800w, assets/img/146-schwerpunkte-lackierer-schutzanzug-1200.webp 1200w" sizes="(max-width: 980px) calc(100vw - 32px), 520px"><img src="assets/img/146-schwerpunkte-lackierer-schutzanzug-600.jpg" srcset="assets/img/146-schwerpunkte-lackierer-schutzanzug-600.jpg 600w, assets/img/146-schwerpunkte-lackierer-schutzanzug-800.jpg 800w, assets/img/146-schwerpunkte-lackierer-schutzanzug-1200.jpg 1200w" sizes="(max-width: 980px) calc(100vw - 32px), 520px" width="600" height="900" loading="lazy" decoding="async" alt="Lackierer im Schutzanzug beim Lackieren eines Stoßfängers"></picture></div>
+      <div class="know__body">
+        <h3>Vom Farbcode bis zum unsichtbaren Übergang</h3>
+        <p>Ein Farbcode allein reicht selten: Derselbe Farbton fällt je nach Baujahr, Werk und Alter des Lacks leicht unterschiedlich aus. Deshalb prüfen wir mehrfach.</p>
+        <ol class="steps-v">
+          <li><div><b>Farbcode ermitteln</b><span>Vom Typenschild oder Farbaufkleber – meist in der B-Säule, im Türrahmen, im Motorraum oder unter dem Kofferraumboden.</span></div></li>
+          <li><div><b>Farbe messen</b><span>Ein Spektralfotometer misst den Lack Ihres Fahrzeugs aus mehreren Winkeln – wichtig bei Metallic- und Perleffekt.</span></div></li>
+          <li><div><b>Rezeptur wählen und mischen</b><span>Aus der Glasurit-Farbtondatenbank wählen wir die passende Farbtonvariante und mischen sie grammgenau an.</span></div></li>
+          <li><div><b>Musterblech vergleichen</b><span>Ein Probemuster wird gespritzt und bei Tageslicht direkt am Fahrzeug abgeglichen.</span></div></li>
+          <li><div><b>Beilackieren</b><span>Wir lackieren weich in angrenzende Teile aus – so entsteht kein sichtbarer Übergang.</span></div></li>
+        </ol>
+        <!-- OFFEN: Kunde bestätigen, welches Messgerät genutzt wird (z. B. Glasurit RATIO Scan) -->
+      </div>
+    </div>
+  </section>
+
+  <!-- Glasurit Reihe 100: Kennzahlen laut Hersteller. Keine Herstellerfreigaben (OEM) nennen, dafür gibt es keine Quelle.
+       Quellen: basf.com, Pressemitteilungen P-20-293 und P-24-188; glasurit.com/…/glasurit-100-line -->
+  <section class="zone" id="lacke" aria-labelledby="lacke-titel">
+    <div class="sec-head"><div class="sec-head__divider" aria-hidden="true"><span class="sec-head__ico"><svg viewBox="0 0 24 24"><use href="#i-schild"/></svg></span></div>
+      <p class="eyebrow">Unsere Lacke</p>
+      <h2 id="lacke-titel">Glasurit Reihe 100 – Wasserbasislack</h2>
+    </div>
+    <div class="know know--rev">
+      <div class="know__media"><picture><source type="image/webp" srcset="assets/img/02-hero-startseite-800.webp 800w, assets/img/02-hero-startseite-1400.webp 1400w" sizes="(max-width: 980px) calc(100vw - 32px), 640px"><img src="assets/img/02-hero-startseite-1600.jpg" width="1600" height="1066" loading="lazy" decoding="async" alt="Lackierpistole beim Lackieren von Karosserieteilen"></picture></div>
+      <div class="know__body">
+        <h3>Premium-Lacksystem von BASF</h3>
+        <p>Wir arbeiten mit Glasurit, der Premium-Lackmarke von BASF. Die Reihe 100 ist ein Wasserbasislack für die Reparaturlackierung: lösemittelarm, farbtonsicher und für nahezu jeden Fahrzeugfarbton geeignet. Darauf folgt ein Glasurit-Klarlack, der Farbe und Glanz dauerhaft schützt.</p>
+        <dl class="spec">
+          <div><dt>&lt; 250 g/l</dt><dd>VOC – laut Hersteller rund 40 % unter dem EU-Grenzwert</dd></div>
+          <div><dt>≈ 95</dt><dd>Mischlacke als Basis für Millionen Farbtöne</dd></div>
+          <div><dt>bis 35 %</dt><dd>kürzere Prozesszeit (Herstellerangabe)</dd></div>
+          <div><dt>Wasserbasis</dt><dd>weniger Lösemittel – besser für Umwelt und Gesundheit</dd></div>
+        </dl>
+        <p class="src">Angaben laut BASF/Glasurit.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Zertifikate: Klick öffnet die Lightbox (data-full wie im Karussell auf Startseite und Über uns, js/main.js) -->
+  <section class="zone" id="zertifikate-lack" aria-labelledby="zert-titel">
+    <div class="sec-head"><div class="sec-head__divider" aria-hidden="true"><span class="sec-head__ico"><svg viewBox="0 0 24 24"><use href="#i-schild"/></svg></span></div>
+      <p class="eyebrow">Qualität</p>
+      <h2 id="zert-titel">Geprüft und zertifiziert</h2>
+    </div>
+    <div class="cert-row">
+      <button class="cert" type="button" data-full="assets/img/14-qualitaet-meisterbrief-600.jpg" data-full-webp="assets/img/14-qualitaet-meisterbrief-600.webp" aria-label="Meisterbetrieb – groß ansehen"><span class="cert__logo"><picture><source type="image/webp" srcset="assets/img/14-qualitaet-meisterbrief-600.webp"><img src="assets/img/14-qualitaet-meisterbrief-600.jpg" width="600" height="828" loading="lazy" decoding="async" alt="Meisterbrief im Maler- und Lackiererhandwerk von Marko Igelbrink"></picture></span><b>Meisterbetrieb</b><span>Geführt von einem Fahrzeuglackierermeister – Ausbildung und Arbeit nach Handwerksstandard.</span></button>
+      <button class="cert" type="button" data-full="assets/img/07-qualitaet-ecocert100-werkstattschild-960.jpg" data-full-webp="assets/img/07-qualitaet-ecocert100-werkstattschild-960.webp" aria-label="Glasurit ECOcert100 – groß ansehen"><span class="cert__logo"><picture><source type="image/webp" srcset="assets/img/07-qualitaet-ecocert100-werkstattschild-400.webp"><img src="assets/img/07-qualitaet-ecocert100-werkstattschild-400.jpg" width="400" height="300" loading="lazy" decoding="async" alt="ECOcert100 Werkstattschild"></picture></span><b>Glasurit ECOcert100</b><span>Nachhaltigkeitsprogramm von Glasurit für Werkstätten, die ökologisch und sozial verantwortlich arbeiten.</span></button>
+      <button class="cert" type="button" data-full="assets/img/15-qualitaet-dekra-zertifikat-600.jpg" data-full-webp="assets/img/15-qualitaet-dekra-zertifikat-600.webp" aria-label="DEKRA geprüft – groß ansehen"><span class="cert__logo"><picture><source type="image/webp" srcset="assets/img/15-qualitaet-dekra-zertifikat-600.webp"><img src="assets/img/15-qualitaet-dekra-zertifikat-600.jpg" width="600" height="848" loading="lazy" decoding="async" alt="DEKRA Zertifikat Werkstattprüfung für Lackierfachbetriebe"></picture></span><b>DEKRA geprüft</b><span>Unabhängig geprüfte Qualität in Reparatur und Abläufen.</span></button>
+      <button class="cert" type="button" data-full="assets/img/131-zertifikat-pkw-karosserie-1200.jpg" data-full-webp="assets/img/131-zertifikat-pkw-karosserie-1200.webp" aria-label="Karosserie-Instandsetzung – groß ansehen"><span class="cert__logo"><picture><source type="image/webp" srcset="assets/img/131-zertifikat-pkw-karosserie-600.webp"><img src="assets/img/131-zertifikat-pkw-karosserie-600.jpg" width="600" height="860" loading="lazy" decoding="async" alt="Zertifikat PKW-Karosserieinstandsetzung"></picture></span><b>Karosserie-Instandsetzung</b><span>Zertifizierte Fachkenntnis für die Instandsetzung von Pkw-Karosserien.</span></button>
+    </div>
+  </section>
+
+  <!-- Banner Marko: dunkle Fläche, Hintergrund mit Parallax, Porträt bündig unten -->
+  <section class="zone" aria-labelledby="marko-titel">
+    <div class="mbanner">
+      <div class="mbanner__bg" aria-hidden="true"><picture><source type="image/webp" srcset="assets/img/142-hero-lackierkabine-karosse-800.webp 800w, assets/img/142-hero-lackierkabine-karosse-1200.webp 1200w, assets/img/142-hero-lackierkabine-karosse-1600.webp 1600w" sizes="(max-width: 980px) 100vw, 1200px"><img src="assets/img/142-hero-lackierkabine-karosse-800.jpg" srcset="assets/img/142-hero-lackierkabine-karosse-800.jpg 800w, assets/img/142-hero-lackierkabine-karosse-1200.jpg 1200w, assets/img/142-hero-lackierkabine-karosse-1600.jpg 1600w" sizes="(max-width: 980px) 100vw, 1200px" width="800" height="534" loading="lazy" decoding="async" alt=""></picture></div>
+      <div class="mbanner__body">
+        <p class="eyebrow">Ihr Lackierermeister</p>
+        <h2 id="marko-titel">Marko Igelbrink</h2>
+        <!-- OFFEN: Zitat mit Marko abstimmen -->
+        <p class="mbanner__quote">„Ein guter Lack fällt nicht auf – er sieht einfach aus wie ab Werk.“</p>
+        <ul class="mbanner__facts"><li>Fahrzeuglackierermeister</li><li>Vorführmeister / Landestrainer<!-- OFFEN: bestätigen (steht auch auf der Startseite) --></li><li>Inhaber seit 2022</li></ul>
+        <div><button class="btn" type="button" data-open-contact data-anliegen="lack" aria-haspopup="dialog" aria-controls="kontaktformular">Beratung mit Marko</button></div>
+      </div>
+      <div class="mbanner__pic"><picture><source type="image/webp" srcset="assets/img/129-team-marko-igelbrink-400.webp 400w, assets/img/129-team-marko-igelbrink-800.webp 800w" sizes="(max-width: 820px) 300px, 360px"><img src="assets/img/129-team-marko-igelbrink-800.jpg" srcset="assets/img/129-team-marko-igelbrink-400.jpg 400w, assets/img/129-team-marko-igelbrink-800.jpg 800w" sizes="(max-width: 820px) 300px, 360px" width="800" height="800" loading="lazy" decoding="async" alt="Marko Igelbrink, Fahrzeuglackierermeister"></picture></div>
+    </div>
+  </section>
   <nav class="pnav" aria-label="Weitere Leistungen">
     <a class="pnav__back" href="service.html">Alle Leistungen</a>
     <div class="pnav__cards">
       <a class="pnav__card pnav__card--prev" href="karosseriebau.html"><picture><source type="image/webp" srcset="assets/img/04-schwerpunkte-unfallinstandsetzung-600.webp"><img src="assets/img/04-schwerpunkte-unfallinstandsetzung-600.jpg" width="600" height="450" loading="lazy" decoding="async" alt=""></picture><span><small>Vorherige Leistung</small><strong>Karosseriebau</strong></span></a>
-      <a class="pnav__card pnav__card--next" href="unfallinstandsetzung.html"><span><small>Nächste Leistung</small><strong>Unfall&shy;instand&shy;setzung</strong></span><picture><source type="image/webp" srcset="assets/img/22-service-unfallinstandsetzung-600.webp"><img src="assets/img/22-service-unfallinstandsetzung-600.jpg" width="600" height="397" loading="lazy" decoding="async" alt=""></picture></a>
+      <a class="pnav__card pnav__card--next" href="unfallinstandsetzung.html"><span><small>Nächste Leistung</small><strong>Unfall&shy;instand&shy;setzung</strong></span><picture><source type="image/webp" srcset="assets/img/144-schwerpunkte-unfall-werkstatt-600.webp"><img src="assets/img/144-schwerpunkte-unfall-werkstatt-600.jpg" width="600" height="400" loading="lazy" decoding="async" alt=""></picture></a>
     </div>
   </nav>
 </main>
@@ -285,7 +363,7 @@
     <p class="eyebrow">Anfrage</p>
     <h2 class="contact__title" id="kontakt-title">Anfrage stellen</h2>
     <p class="contact__lead">Schildern Sie uns kurz Ihr Anliegen. Wir melden uns bei Ihnen.</p>
-    <p class="contact__hint">Pflichtangaben: Name, Anliegen und Telefon oder E-Mail.</p>
+    <p class="contact__hint">Pflichtangaben: Name, mindestens eine Leistung und Telefon oder E-Mail.</p>
 
     <form class="form" id="kontakt-form" action="#" method="post" data-kanal>
       <!-- TODO: Formular-Versand anbinden (serverseitig, mit Spam-Schutz) -->
@@ -303,25 +381,25 @@
       </div>
       <p class="field--full field__hint" id="kf-kanal-hint">Telefon oder E-Mail – eines von beiden reicht.</p>
       <p class="field--full field__error" id="kf-kanal-error" data-kanal-error hidden>Bitte geben Sie eine Telefonnummer oder eine E-Mail-Adresse an.</p>
-      <div class="field">
-        <label for="kf-anliegen">Anliegen</label>
-        <span class="field__select">
-          <!-- value = Kurzname; Auslöser mit data-anliegen="unfall" (usw.) wählen die Option beim Öffnen vor (js/main.js) -->
-          <select id="kf-anliegen" name="anliegen" autocomplete="off" required>
-            <option value="">Bitte wählen</option>
-            <option value="karosserie">Karosseriebau</option>
-            <option value="lack">Fahrzeuglackierung</option>
-            <option value="unfall">Unfallinstandsetzung / Versicherungsschaden</option>
-            <option value="caravan">Wohnmobil &amp; Caravan</option>
-            <option value="classic">Oldtimer-Restauration</option>
-            <option value="glas">Glas-Service</option>
-            <option value="smart">Smart Repair</option>
-            <option value="unterboden">Hohlraumkonservierung und Unterbodenschutz</option>
-            <option value="geschaeft">Geschäftskunden / Flotte</option>
-            <option value="sonstiges">Sonstiges</option>
-          </select>
-        </span>
-      </div>
+      <!-- Gewünschte Leistungen: Mehrfachauswahl, mindestens eine Pflicht (eigene Prüfung in js/main.js, data-leistungen).
+           value = Kurzname; Auslöser mit data-anliegen="unfall" (usw.) haken die passende Leistung beim Öffnen an. -->
+      <fieldset class="field field--full chips" id="kf-leistungen" data-leistungen aria-describedby="kf-leistungen-hint kf-leistungen-error">
+        <legend>Gewünschte Leistungen</legend>
+        <p class="chips__hint" id="kf-leistungen-hint">Mehrfachauswahl möglich – bitte mindestens eine Leistung wählen.</p>
+        <div class="chips__grid">
+          <label class="chip-opt"><input type="checkbox" name="leistungen[]" value="karosserie" id="kf-karosserie"><span>Karosseriebau</span></label>
+          <label class="chip-opt"><input type="checkbox" name="leistungen[]" value="lack" id="kf-lack"><span>Fahrzeuglackierung</span></label>
+          <label class="chip-opt"><input type="checkbox" name="leistungen[]" value="unfall" id="kf-unfall"><span>Unfallinstandsetzung / Versicherungsschaden</span></label>
+          <label class="chip-opt"><input type="checkbox" name="leistungen[]" value="caravan" id="kf-caravan"><span>Wohnmobil &amp; Caravan</span></label>
+          <label class="chip-opt"><input type="checkbox" name="leistungen[]" value="classic" id="kf-classic"><span>Oldtimer-Restauration</span></label>
+          <label class="chip-opt"><input type="checkbox" name="leistungen[]" value="glas" id="kf-glas"><span>Glas-Service</span></label>
+          <label class="chip-opt"><input type="checkbox" name="leistungen[]" value="smart" id="kf-smart"><span>Smart Repair</span></label>
+          <label class="chip-opt"><input type="checkbox" name="leistungen[]" value="unterboden" id="kf-unterboden"><span>Hohlraum&shy;konservierung / Unterbodenschutz</span></label>
+          <label class="chip-opt"><input type="checkbox" name="leistungen[]" value="geschaeft" id="kf-geschaeft"><span>Geschäftskunden / Flotte</span></label>
+          <label class="chip-opt"><input type="checkbox" name="leistungen[]" value="sonstiges" id="kf-sonstiges"><span>Sonstiges</span></label>
+        </div>
+        <p class="field__error" id="kf-leistungen-error" data-leistungen-error hidden>Bitte wählen Sie mindestens eine Leistung aus.</p>
+      </fieldset>
       <div class="field">
         <label for="kf-termin">Wunschtermin (freiwillig)</label>
         <input id="kf-termin" name="wunschtermin" type="date" autocomplete="off">
@@ -401,6 +479,6 @@
 <!-- /DIALOG -->
 
 
-<script src="js/main.js?v=202611060314" defer></script>
+<script src="js/main.js?v=202611092240" defer></script>
 </body>
 </html>

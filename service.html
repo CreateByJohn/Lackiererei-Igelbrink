@@ -9,10 +9,10 @@
 <link rel="canonical" href="https://lackiertechnik-igelbrink.de/service">
 <link rel="icon" type="image/png" href="assets/img/13-favicon.png">
 <link rel="preload" href="assets/fonts/schibsted-grotesk-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="css/tokens.css?v=202611060553">
-<link rel="stylesheet" href="css/base.css?v=202611060553">
-<link rel="stylesheet" href="css/components.css?v=202611060553">
-<link rel="stylesheet" href="css/effects.css?v=202611060553">
+<link rel="stylesheet" href="css/tokens.css?v=202611092240">
+<link rel="stylesheet" href="css/base.css?v=202611092240">
+<link rel="stylesheet" href="css/components.css?v=202611092240">
+<link rel="stylesheet" href="css/effects.css?v=202611092240">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -44,6 +44,8 @@
 
 <!-- Wiederverwendbare Symbole: einmal definiert, per <use href="#…"> eingesetzt (nur die, die diese Seite nutzt) -->
 <svg hidden>
+  <symbol id="i-glas" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 17.5 6 7.5c.3-1.2 1.3-2 2.5-2h7c1.2 0 2.2.8 2.5 2l2.5 10c-5.6-1.6-11.4-1.6-17 0z"/><path d="m9 12 3-3M11 14.5l4.5-4.5"/></g></symbol>
+  <symbol id="i-spot" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.5 13.6 8 18 9.5l-4.4 1.6L12 15.5l-1.6-4.4L6 9.5 10.4 8z"/><path d="M18.5 15.5l.7 1.8 1.8.7-1.8.7-.7 1.8-.7-1.8-1.8-.7 1.8-.7z"/><path d="M5.5 15.5v3M4 17h3"/></g></symbol>
   <symbol id="i-tel" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="M5 4h3.2l1.6 4-2 1.3a10.5 10.5 0 0 0 4.9 4.9l1.3-2 4 1.6V17a2 2 0 0 1-2 2A14 14 0 0 1 3 6a2 2 0 0 1 2-2z"/></symbol>
   <symbol id="i-schild" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v5.5c0 4.4-3 8-7 9.5-4-1.5-7-5.1-7-9.5V6l7-3z"/><path d="m9 12 2 2 4-4"/></g></symbol>
   <symbol id="i-auto" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 17h14v-5l-2-5H7l-2 5v5z"/><path d="M5 12h14"/><circle cx="8" cy="17" r="2"/><circle cx="16" cy="17" r="2"/></g></symbol>
@@ -91,7 +93,7 @@
     <div class="nav-actions">
       <a class="nav-tel" href="tel:+4925947843823" aria-label="Anrufen: 02594 7843823" title="02594 7843823"><svg aria-hidden="true"><use href="#i-tel"/></svg><span>Anrufen</span></a>
       <button class="btn btn--small" type="button" data-open-contact aria-haspopup="dialog" aria-controls="kontaktformular">Online-Termin</button>
-      <button class="burger" id="burger" type="button" aria-expanded="false" aria-controls="menu">Menü</button>
+      <button class="burger" id="burger" type="button" aria-expanded="false" aria-controls="menu" aria-label="Menü"><span class="burger__lines" aria-hidden="true"></span><span class="burger__txt">Menü</span></button>
     </div>
   </nav>
 </header>
@@ -102,10 +104,11 @@
   <!-- SEITENKOPF: Bild der Seite mit Verlauf, rutscht unter die Navigationspille (wie der Hero der Startseite) -->
   <section class="page-hero" aria-labelledby="seitenkopf-titel">
     <div class="page-hero__frame">
-      <picture class="page-hero__img"><source type="image/webp" srcset="assets/img/02-hero-startseite-800.webp 800w, assets/img/02-hero-startseite-1400.webp 1400w, assets/img/02-hero-startseite-2400.webp 2400w" sizes="100vw"><img data-px=".12" fetchpriority="high" decoding="async" src="assets/img/02-hero-startseite-1600.jpg" width="2400" height="1600" alt=""></picture>
+      <picture class="page-hero__img"><source type="image/webp" srcset="assets/img/02-hero-startseite-800.webp 800w, assets/img/02-hero-startseite-1400.webp 1400w, assets/img/02-hero-startseite-2400.webp 2400w" sizes="100vw"><img fetchpriority="high" decoding="async" src="assets/img/02-hero-startseite-1600.jpg" width="2400" height="1600" alt=""></picture>
       <div class="page-hero__body">
         <h1 id="seitenkopf-titel">Unsere Leistungen im Überblick</h1>
       </div>
+      <a class="scroll-hint" href="#inhalt"><span class="scroll-hint__mouse" aria-hidden="true"></span><span>Scrollen<span class="visually-hidden"> zum Inhalt</span></span></a>
     </div>
   </section>
 
@@ -118,7 +121,7 @@
     <div class="band band--exp">
       <picture class="band__img">
         <source type="image/webp" srcset="assets/img/03-leistungen-lackierkabine-800.webp 800w, assets/img/03-leistungen-lackierkabine-1600.webp 1600w" sizes="(max-width: 1232px) calc(100vw - 32px), 1200px">
-        <img data-px=".12" src="assets/img/03-leistungen-lackierkabine-1600.jpg" width="1600" height="1200" decoding="async" alt="">
+        <img src="assets/img/03-leistungen-lackierkabine-1600.jpg" width="1600" height="1200" decoding="async" alt="">
       </picture>
       <ul class="exp">
         <li class="exp__item">
@@ -153,91 +156,79 @@
     </div>
   </section>
 
-  <!-- LEISTUNGEN: Karten im Stil der Schwerpunkt-Klappkarten, ohne Aufklappen, mit Link zur Leistungsseite -->
-  <section class="zone" id="leistungen" aria-label="Leistungen">
+  <!-- LEISTUNGEN (Runde 7): Querkarten .lk, Bild im linken Drittel, rechts Titel und Was / Warum / Buchen (<dl>), darunter „Mehr erfahren“ und „Termin anfragen“
+       (öffnet das Kontaktformular mit vorausgewählter Leistung, data-anliegen). Texte wörtlich aus der abgestimmten Vorschau. -->
+  <section class="zone" id="leistungen" aria-labelledby="lk-title">
     <div class="sec-head">
       <div class="sec-head__divider" aria-hidden="true"><span class="sec-head__ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a4 4 0 0 0-5.2 5.2L3.6 17.4a1.6 1.6 0 0 0 2.3 2.3l5.9-5.9a4 4 0 0 0 5.2-5.2l-2.5 2.5-2.3-.4-.4-2.3 2.5-2.5z"/></svg></span></div>
       <p class="eyebrow">Serviceleistungen</p>
+      <h2 id="lk-title">Unsere Leistungen</h2>
     </div>
-    <div class="cards cards--4">
-      <article class="svc svc--link">
-        <div class="svc__media"><span class="wm" aria-hidden="true"></span>
-          <picture class="svc__img"><source type="image/webp" srcset="assets/img/04-schwerpunkte-unfallinstandsetzung-600.webp 600w, assets/img/04-schwerpunkte-unfallinstandsetzung-1200.webp 1200w" sizes="(max-width: 560px) calc(100vw - 32px), (max-width: 1100px) calc((100vw - 54px) / 2), 284px"><img src="assets/img/04-schwerpunkte-unfallinstandsetzung-600.jpg" srcset="assets/img/04-schwerpunkte-unfallinstandsetzung-600.jpg 600w, assets/img/04-schwerpunkte-unfallinstandsetzung-1200.jpg 1200w" sizes="(max-width: 560px) calc(100vw - 32px), (max-width: 1100px) calc((100vw - 54px) / 2), 284px" width="600" height="450" loading="lazy" decoding="async" alt="Beschädigtes Heck eines Fahrzeugs auf der Hebebühne"></picture>
-          <div class="glass-tile">
-            <span class="glass-tile__ico" aria-hidden="true"><svg viewBox="0 0 24 24"><use href="#i-auto"/></svg></span>
-            <h3 id="lst-1">Karosseriebau</h3>
-            <a class="btn btn--glass btn--small" href="karosseriebau.html" aria-describedby="lst-1">Mehr erfahren</a>
-          </div>
+    <div class="lk-list">
+      <article class="lk">
+        <div class="lk__img"><picture><source type="image/webp" srcset="assets/img/145-schwerpunkte-karosserie-ausbeulen-600.webp 600w, assets/img/145-schwerpunkte-karosserie-ausbeulen-800.webp 800w, assets/img/145-schwerpunkte-karosserie-ausbeulen-1200.webp 1200w" sizes="(max-width: 560px) calc(100vw - 32px), (max-width: 1100px) calc((100vw - 32px) / 3), 200px"><img src="assets/img/145-schwerpunkte-karosserie-ausbeulen-600.jpg" srcset="assets/img/145-schwerpunkte-karosserie-ausbeulen-600.jpg 600w, assets/img/145-schwerpunkte-karosserie-ausbeulen-800.jpg 800w, assets/img/145-schwerpunkte-karosserie-ausbeulen-1200.jpg 1200w" sizes="(max-width: 560px) calc(100vw - 32px), (max-width: 1100px) calc((100vw - 32px) / 3), 200px" width="600" height="900" loading="lazy" decoding="async" alt=""></picture></div>
+        <div class="lk__body">
+          <h3><span class="lk__ico" aria-hidden="true"><svg viewBox="0 0 24 24"><use href="#i-auto"/></svg></span>Karosseriebau</h3>
+          <dl class="lk__rows"><div><dt>Was</dt><dd>Instandsetzung von Blechschäden, Dellen, Rost und Rahmen – für alle Marken.</dd></div><div><dt>Warum</dt><dd>Eine fachgerechte Karosserie sichert Stabilität, Sicherheit und Wiederverkaufswert.</dd></div><div><dt>Buchen</dt><dd>Online-Termin anfragen oder Fotos über das Formular senden – wir melden uns mit einem Kostenvoranschlag.</dd></div></dl>
+          <div class="lk__actions"><a class="btn btn--small" href="karosseriebau.html">Mehr erfahren</a><button class="btn btn--line btn--small" type="button" data-open-contact data-anliegen="karosserie" aria-haspopup="dialog" aria-controls="kontaktformular">Termin anfragen</button></div>
         </div>
       </article>
-      <article class="svc svc--link">
-        <div class="svc__media"><span class="wm" aria-hidden="true"></span>
-          <picture class="svc__img"><source type="image/webp" srcset="assets/img/32-seitenkopf-lackierkabine-800.webp 800w, assets/img/32-seitenkopf-lackierkabine-1400.webp 1400w" sizes="(max-width: 560px) calc(100vw - 32px), (max-width: 1100px) calc((100vw - 54px) / 2), 284px"><img src="assets/img/32-seitenkopf-lackierkabine-800.jpg" srcset="assets/img/32-seitenkopf-lackierkabine-800.jpg 800w, assets/img/32-seitenkopf-lackierkabine-1400.jpg 1400w" sizes="(max-width: 560px) calc(100vw - 32px), (max-width: 1100px) calc((100vw - 54px) / 2), 284px" width="800" height="600" loading="lazy" decoding="async" alt="Lackierer in der Lackierkabine"></picture>
-          <div class="glass-tile">
-            <span class="glass-tile__ico" aria-hidden="true"><svg viewBox="0 0 24 24"><use href="#i-schild"/></svg></span>
-            <h3 id="lst-2">Fahrzeuglackierung</h3>
-            <a class="btn btn--glass btn--small" href="fahrzeuglackierung.html" aria-describedby="lst-2">Mehr erfahren</a>
-          </div>
+      <article class="lk">
+        <div class="lk__img"><picture><source type="image/webp" srcset="assets/img/146-schwerpunkte-lackierer-schutzanzug-600.webp 600w, assets/img/146-schwerpunkte-lackierer-schutzanzug-800.webp 800w, assets/img/146-schwerpunkte-lackierer-schutzanzug-1200.webp 1200w" sizes="(max-width: 560px) calc(100vw - 32px), (max-width: 1100px) calc((100vw - 32px) / 3), 200px"><img src="assets/img/146-schwerpunkte-lackierer-schutzanzug-600.jpg" srcset="assets/img/146-schwerpunkte-lackierer-schutzanzug-600.jpg 600w, assets/img/146-schwerpunkte-lackierer-schutzanzug-800.jpg 800w, assets/img/146-schwerpunkte-lackierer-schutzanzug-1200.jpg 1200w" sizes="(max-width: 560px) calc(100vw - 32px), (max-width: 1100px) calc((100vw - 32px) / 3), 200px" width="600" height="900" loading="lazy" decoding="async" alt=""></picture></div>
+        <div class="lk__body">
+          <h3><span class="lk__ico" aria-hidden="true"><svg viewBox="0 0 24 24"><use href="#i-schild"/></svg></span>Fahrzeuglackierung</h3>
+          <dl class="lk__rows"><div><dt>Was</dt><dd>Spot-, Teil- und Komplettlackierung mit Glasurit-Lacken in unserer eigenen Lackierkabine.</dd></div><div><dt>Warum</dt><dd>Lack schützt die Karosserie vor Korrosion – und ein exakter Farbton erhält den Wert.</dd></div><div><dt>Buchen</dt><dd>Termin anfragen, Farbcode und Fotos gleich mitschicken.</dd></div></dl>
+          <div class="lk__actions"><a class="btn btn--small" href="fahrzeuglackierung.html">Mehr erfahren</a><button class="btn btn--line btn--small" type="button" data-open-contact data-anliegen="lack" aria-haspopup="dialog" aria-controls="kontaktformular">Termin anfragen</button></div>
         </div>
       </article>
-      <article class="svc svc--link">
-        <div class="svc__media"><span class="wm" aria-hidden="true"></span>
-          <picture class="svc__img"><source type="image/webp" srcset="assets/img/22-service-unfallinstandsetzung-600.webp 600w, assets/img/22-service-unfallinstandsetzung-1200.webp 1200w, assets/img/22-service-unfallinstandsetzung-1280.webp 1280w" sizes="(max-width: 560px) calc(100vw - 32px), (max-width: 1100px) calc((100vw - 54px) / 2), 284px"><img src="assets/img/22-service-unfallinstandsetzung-600.jpg" srcset="assets/img/22-service-unfallinstandsetzung-600.jpg 600w, assets/img/22-service-unfallinstandsetzung-1200.jpg 1200w, assets/img/22-service-unfallinstandsetzung-1280.jpg 1280w" sizes="(max-width: 560px) calc(100vw - 32px), (max-width: 1100px) calc((100vw - 54px) / 2), 284px" width="600" height="397" loading="lazy" decoding="async" alt="VW Golf bei der Achsvermessung in der Werkstatt"></picture>
-          <div class="glass-tile">
-            <span class="glass-tile__ico" aria-hidden="true"><svg viewBox="0 0 24 24"><use href="#i-auto"/></svg></span>
-            <h3 id="lst-3">Unfallinstandsetzung</h3>
-            <a class="btn btn--glass btn--small" href="unfallinstandsetzung.html" aria-describedby="lst-3">Mehr erfahren</a>
-          </div>
+      <article class="lk">
+        <div class="lk__img"><picture><source type="image/webp" srcset="assets/img/144-schwerpunkte-unfall-werkstatt-600.webp 600w, assets/img/144-schwerpunkte-unfall-werkstatt-800.webp 800w, assets/img/144-schwerpunkte-unfall-werkstatt-1200.webp 1200w" sizes="(max-width: 560px) calc(100vw - 32px), (max-width: 1100px) calc((100vw - 32px) / 3), 200px"><img src="assets/img/144-schwerpunkte-unfall-werkstatt-600.jpg" srcset="assets/img/144-schwerpunkte-unfall-werkstatt-600.jpg 600w, assets/img/144-schwerpunkte-unfall-werkstatt-800.jpg 800w, assets/img/144-schwerpunkte-unfall-werkstatt-1200.jpg 1200w" sizes="(max-width: 560px) calc(100vw - 32px), (max-width: 1100px) calc((100vw - 32px) / 3), 200px" width="600" height="400" loading="lazy" decoding="async" alt=""></picture></div>
+        <div class="lk__body">
+          <h3><span class="lk__ico" aria-hidden="true"><svg viewBox="0 0 24 24"><use href="#i-auto"/></svg></span>Unfallinstandsetzung</h3>
+          <dl class="lk__rows"><div><dt>Was</dt><dd>Reparatur nach dem Unfall inkl. Schadenaufnahme, Gutachten und Versicherungsabwicklung.</dd></div><div><dt>Warum</dt><dd>Herstellergerechte Reparatur erhält Sicherheit und Wert – und Sie haben nur einen Ansprechpartner.</dd></div><div><dt>Buchen</dt><dd>Schaden telefonisch oder per Formular melden, auf Wunsch mit Hol- und Bringservice.</dd></div></dl>
+          <div class="lk__actions"><a class="btn btn--small" href="unfallinstandsetzung.html">Mehr erfahren</a><button class="btn btn--line btn--small" type="button" data-open-contact data-anliegen="unfall" aria-haspopup="dialog" aria-controls="kontaktformular">Termin anfragen</button></div>
         </div>
       </article>
-      <article class="svc svc--link">
-        <div class="svc__media"><span class="wm" aria-hidden="true"></span>
-          <picture class="svc__img"><source type="image/webp" srcset="assets/img/21-service-wohnmobil-322.webp 322w" sizes="(max-width: 560px) calc(100vw - 32px), (max-width: 1100px) calc((100vw - 54px) / 2), 284px"><img src="assets/img/21-service-wohnmobil-322.jpg" srcset="assets/img/21-service-wohnmobil-322.jpg 322w" sizes="(max-width: 560px) calc(100vw - 32px), (max-width: 1100px) calc((100vw - 54px) / 2), 284px" width="322" height="367" loading="lazy" decoding="async" alt="Wohnmobil an einem See"></picture>
-          <div class="glass-tile">
-            <span class="glass-tile__ico" aria-hidden="true"><svg viewBox="0 0 24 24"><use href="#i-caravan"/></svg></span>
-            <h3 id="lst-4">Wohnmobil &amp; Caravan</h3>
-            <a class="btn btn--glass btn--small" href="wohnmobil-service.html" aria-describedby="lst-4">Mehr erfahren</a>
-          </div>
+      <article class="lk">
+        <div class="lk__img"><picture><source type="image/webp" srcset="assets/img/147-schwerpunkte-wohnmobil-see-600.webp 600w, assets/img/147-schwerpunkte-wohnmobil-see-800.webp 800w, assets/img/147-schwerpunkte-wohnmobil-see-1200.webp 1200w" sizes="(max-width: 560px) calc(100vw - 32px), (max-width: 1100px) calc((100vw - 32px) / 3), 200px"><img src="assets/img/147-schwerpunkte-wohnmobil-see-600.jpg" srcset="assets/img/147-schwerpunkte-wohnmobil-see-600.jpg 600w, assets/img/147-schwerpunkte-wohnmobil-see-800.jpg 800w, assets/img/147-schwerpunkte-wohnmobil-see-1200.jpg 1200w" sizes="(max-width: 560px) calc(100vw - 32px), (max-width: 1100px) calc((100vw - 32px) / 3), 200px" width="600" height="400" loading="lazy" decoding="async" alt=""></picture></div>
+        <div class="lk__body">
+          <h3><span class="lk__ico" aria-hidden="true"><svg viewBox="0 0 24 24"><use href="#i-caravan"/></svg></span>Wohnmobil &amp; Caravan</h3>
+          <dl class="lk__rows"><div><dt>Was</dt><dd>GFK- und Strukturblech-Reparatur, Hagel- und Unfallschäden, Lackierung.</dd></div><div><dt>Warum</dt><dd>Kleine Risse lassen Feuchtigkeit in den Aufbau – frühzeitig reparieren verhindert teure Folgeschäden.</dd></div><div><dt>Buchen</dt><dd>Termin anfragen und Fotos vom Schaden mitsenden.</dd></div></dl>
+          <div class="lk__actions"><a class="btn btn--small" href="wohnmobil-service.html">Mehr erfahren</a><button class="btn btn--line btn--small" type="button" data-open-contact data-anliegen="caravan" aria-haspopup="dialog" aria-controls="kontaktformular">Termin anfragen</button></div>
         </div>
       </article>
-      <article class="svc svc--link">
-        <div class="svc__media"><span class="wm" aria-hidden="true"></span>
-          <picture class="svc__img"><source type="image/webp" srcset="assets/img/20-service-oldtimer-600.webp 600w, assets/img/20-service-oldtimer-764.webp 764w" sizes="(max-width: 560px) calc(100vw - 32px), (max-width: 1100px) calc((100vw - 54px) / 2), 284px"><img src="assets/img/20-service-oldtimer-600.jpg" srcset="assets/img/20-service-oldtimer-600.jpg 600w, assets/img/20-service-oldtimer-764.jpg 764w" sizes="(max-width: 560px) calc(100vw - 32px), (max-width: 1100px) calc((100vw - 54px) / 2), 284px" width="600" height="594" loading="lazy" decoding="async" alt="Grundierter Ferrari in der Lackierkabine"></picture>
-          <div class="glass-tile">
-            <span class="glass-tile__ico" aria-hidden="true"><svg viewBox="0 0 24 24"><use href="#i-klassik"/></svg></span>
-            <h3 id="lst-5">Classic Cars&nbsp;– Oldtimer-Restauration</h3>
-            <a class="btn btn--glass btn--small" href="oldtimerlackierung.html" aria-describedby="lst-5">Mehr erfahren</a>
-          </div>
+      <article class="lk">
+        <div class="lk__img"><picture><source type="image/webp" srcset="assets/img/148-schwerpunkte-oldtimer-hebebuehne-600.webp 600w, assets/img/148-schwerpunkte-oldtimer-hebebuehne-800.webp 800w, assets/img/148-schwerpunkte-oldtimer-hebebuehne-1200.webp 1200w" sizes="(max-width: 560px) calc(100vw - 32px), (max-width: 1100px) calc((100vw - 32px) / 3), 200px"><img src="assets/img/148-schwerpunkte-oldtimer-hebebuehne-600.jpg" srcset="assets/img/148-schwerpunkte-oldtimer-hebebuehne-600.jpg 600w, assets/img/148-schwerpunkte-oldtimer-hebebuehne-800.jpg 800w, assets/img/148-schwerpunkte-oldtimer-hebebuehne-1200.jpg 1200w" sizes="(max-width: 560px) calc(100vw - 32px), (max-width: 1100px) calc((100vw - 32px) / 3), 200px" width="600" height="400" loading="lazy" decoding="async" alt=""></picture></div>
+        <div class="lk__body">
+          <h3><span class="lk__ico" aria-hidden="true"><svg viewBox="0 0 24 24"><use href="#i-klassik"/></svg></span>Classic Cars – Oldtimer</h3>
+          <dl class="lk__rows"><div><dt>Was</dt><dd>Restauration, Karosserie- und Lackarbeiten an Old- und Youngtimern.</dd></div><div><dt>Warum</dt><dd>Originalgetreue Arbeit bewahrt den Charakter und den Wert Ihres Klassikers.</dd></div><div><dt>Buchen</dt><dd>Beratungstermin vereinbaren – am besten mit dem Fahrzeug bei uns vor Ort.</dd></div></dl>
+          <div class="lk__actions"><a class="btn btn--small" href="oldtimerlackierung.html">Mehr erfahren</a><button class="btn btn--line btn--small" type="button" data-open-contact data-anliegen="classic" aria-haspopup="dialog" aria-controls="kontaktformular">Termin anfragen</button></div>
         </div>
       </article>
-      <article class="svc svc--link">
-        <div class="svc__media"><span class="wm" aria-hidden="true"></span>
-          <picture class="svc__img"><source type="image/webp" srcset="assets/img/19-social-facebook-1000.webp 1000w" sizes="(max-width: 560px) calc(100vw - 32px), (max-width: 1100px) calc((100vw - 54px) / 2), 284px"><img src="assets/img/19-social-facebook-1000.jpg" srcset="assets/img/19-social-facebook-1000.jpg 1000w" sizes="(max-width: 560px) calc(100vw - 32px), (max-width: 1100px) calc((100vw - 54px) / 2), 284px" width="1000" height="750" loading="lazy" decoding="async" alt="Werkstatthalle von Lackiertechnik Igelbrink mit Oldtimer auf dem Hof"></picture>
-          <div class="glass-tile">
-            <span class="glass-tile__ico" aria-hidden="true"><svg viewBox="0 0 24 24"><use href="#i-schild"/></svg></span>
-            <h3 id="lst-6">Glas-Service</h3>
-            <a class="btn btn--glass btn--small" href="glas-service.html" aria-describedby="lst-6">Mehr erfahren</a>
-          </div>
+      <article class="lk">
+        <div class="lk__img"><picture><source type="image/webp" srcset="assets/img/156-leistungen-windschutzscheibe-600.webp 600w, assets/img/156-leistungen-windschutzscheibe-800.webp 800w, assets/img/156-leistungen-windschutzscheibe-1200.webp 1200w" sizes="(max-width: 560px) calc(100vw - 32px), (max-width: 1100px) calc((100vw - 32px) / 3), 200px"><img src="assets/img/156-leistungen-windschutzscheibe-600.jpg" srcset="assets/img/156-leistungen-windschutzscheibe-600.jpg 600w, assets/img/156-leistungen-windschutzscheibe-800.jpg 800w, assets/img/156-leistungen-windschutzscheibe-1200.jpg 1200w" sizes="(max-width: 560px) calc(100vw - 32px), (max-width: 1100px) calc((100vw - 32px) / 3), 200px" width="600" height="400" loading="lazy" decoding="async" alt=""></picture></div>
+        <div class="lk__body">
+          <h3><span class="lk__ico" aria-hidden="true"><svg viewBox="0 0 24 24"><use href="#i-glas"/></svg></span>Glas-Service</h3>
+          <!-- OFFEN: Text vom Kunden bestätigen -->
+          <dl class="lk__rows"><div><dt>Was</dt><dd>Steinschlagreparatur und Austausch von Fahrzeugscheiben.</dd></div><div><dt>Warum</dt><dd>Ein Steinschlag kann sich zum Riss ausweiten und die Sicht beeinträchtigen.</dd></div><div><dt>Buchen</dt><dd>Termin anfragen – bei Kaskoschäden klären wir die Abwicklung mit.</dd></div></dl>
+          <div class="lk__actions"><a class="btn btn--small" href="glas-service.html">Mehr erfahren</a><button class="btn btn--line btn--small" type="button" data-open-contact data-anliegen="glas" aria-haspopup="dialog" aria-controls="kontaktformular">Termin anfragen</button></div>
         </div>
       </article>
-      <article class="svc svc--link">
-        <div class="svc__media"><span class="wm" aria-hidden="true"></span>
-          <picture class="svc__img"><source type="image/webp" srcset="assets/img/134-karriere-lackierpistole-600.webp 600w, assets/img/134-karriere-lackierpistole-1147.webp 1147w" sizes="(max-width: 560px) calc(100vw - 32px), (max-width: 1100px) calc((100vw - 54px) / 2), 284px"><img src="assets/img/134-karriere-lackierpistole-600.jpg" srcset="assets/img/134-karriere-lackierpistole-600.jpg 600w, assets/img/134-karriere-lackierpistole-1147.jpg 1147w" sizes="(max-width: 560px) calc(100vw - 32px), (max-width: 1100px) calc((100vw - 54px) / 2), 284px" width="600" height="717" loading="lazy" decoding="async" alt="Lackierpistole mit Igelbrink-Aufdruck im Einsatz"></picture>
-          <div class="glass-tile">
-            <span class="glass-tile__ico" aria-hidden="true"><svg viewBox="0 0 24 24"><use href="#i-schild"/></svg></span>
-            <h3 id="lst-7">Smart Repair</h3>
-            <a class="btn btn--glass btn--small" href="smart-repair.html" aria-describedby="lst-7">Mehr erfahren</a>
-          </div>
+      <article class="lk">
+        <div class="lk__img"><picture><source type="image/webp" srcset="assets/img/153-lack-politur-600.webp 600w, assets/img/153-lack-politur-800.webp 800w, assets/img/153-lack-politur-1200.webp 1200w" sizes="(max-width: 560px) calc(100vw - 32px), (max-width: 1100px) calc((100vw - 32px) / 3), 200px"><img src="assets/img/153-lack-politur-600.jpg" srcset="assets/img/153-lack-politur-600.jpg 600w, assets/img/153-lack-politur-800.jpg 800w, assets/img/153-lack-politur-1200.jpg 1200w" sizes="(max-width: 560px) calc(100vw - 32px), (max-width: 1100px) calc((100vw - 32px) / 3), 200px" width="600" height="398" loading="lazy" decoding="async" alt=""></picture></div>
+        <div class="lk__body">
+          <h3><span class="lk__ico" aria-hidden="true"><svg viewBox="0 0 24 24"><use href="#i-spot"/></svg></span>Smart Repair</h3>
+          <!-- OFFEN: Text vom Kunden bestätigen -->
+          <dl class="lk__rows"><div><dt>Was</dt><dd>Kleine Kratzer, Dellen und Lackschäden punktuell instand setzen.</dd></div><div><dt>Warum</dt><dd>Schneller und meist günstiger als eine Teillackierung.</dd></div><div><dt>Buchen</dt><dd>Foto schicken – wir sagen Ihnen, ob Smart Repair möglich ist.</dd></div></dl>
+          <div class="lk__actions"><a class="btn btn--small" href="smart-repair.html">Mehr erfahren</a><button class="btn btn--line btn--small" type="button" data-open-contact data-anliegen="smart" aria-haspopup="dialog" aria-controls="kontaktformular">Termin anfragen</button></div>
         </div>
       </article>
-      <article class="svc svc--link">
-        <div class="svc__media"><span class="wm" aria-hidden="true"></span>
-          <picture class="svc__img"><source type="image/webp" srcset="assets/img/23-service-unterbodenschutz-600.webp 600w, assets/img/23-service-unterbodenschutz-1200.webp 1200w" sizes="(max-width: 560px) calc(100vw - 32px), (max-width: 1100px) calc((100vw - 54px) / 2), 284px"><img src="assets/img/23-service-unterbodenschutz-600.jpg" srcset="assets/img/23-service-unterbodenschutz-600.jpg 600w, assets/img/23-service-unterbodenschutz-1200.jpg 1200w" sizes="(max-width: 560px) calc(100vw - 32px), (max-width: 1100px) calc((100vw - 54px) / 2), 284px" width="600" height="397" loading="lazy" decoding="async" alt="Unterboden und Auspuffanlage eines Autos"></picture>
-          <div class="glass-tile">
-            <span class="glass-tile__ico" aria-hidden="true"><svg viewBox="0 0 24 24"><use href="#i-schild"/></svg></span>
-            <h3 id="lst-8">Hohlraum&shy;konservierung und Unterboden&shy;schutz</h3>
-            <a class="btn btn--glass btn--small" href="unterbodenschutz.html" aria-describedby="lst-8">Mehr erfahren</a>
-          </div>
+      <article class="lk">
+        <div class="lk__img"><picture><source type="image/webp" srcset="assets/img/143-hero-werkstatthalle-hebebuehne-600.webp 600w, assets/img/143-hero-werkstatthalle-hebebuehne-800.webp 800w, assets/img/143-hero-werkstatthalle-hebebuehne-1200.webp 1200w" sizes="(max-width: 560px) calc(100vw - 32px), (max-width: 1100px) calc((100vw - 32px) / 3), 200px"><img src="assets/img/143-hero-werkstatthalle-hebebuehne-600.jpg" srcset="assets/img/143-hero-werkstatthalle-hebebuehne-600.jpg 600w, assets/img/143-hero-werkstatthalle-hebebuehne-800.jpg 800w, assets/img/143-hero-werkstatthalle-hebebuehne-1200.jpg 1200w" sizes="(max-width: 560px) calc(100vw - 32px), (max-width: 1100px) calc((100vw - 32px) / 3), 200px" width="600" height="400" loading="lazy" decoding="async" alt=""></picture></div>
+        <div class="lk__body">
+          <h3><span class="lk__ico" aria-hidden="true"><svg viewBox="0 0 24 24"><use href="#i-schild"/></svg></span>Hohlraum&shy;konservierung &amp; Unterbodenschutz</h3>
+          <dl class="lk__rows"><div><dt>Was</dt><dd>Konservierung der Hohlräume und Schutzschicht für den Unterboden.</dd></div><div><dt>Warum</dt><dd>Schützt vor Rost durch Feuchtigkeit und Streusalz – ideal vor dem Winter.</dd></div><div><dt>Buchen</dt><dd>Termin anfragen, am besten im Herbst.</dd></div></dl>
+          <div class="lk__actions"><a class="btn btn--small" href="unterbodenschutz.html">Mehr erfahren</a><button class="btn btn--line btn--small" type="button" data-open-contact data-anliegen="unterboden" aria-haspopup="dialog" aria-controls="kontaktformular">Termin anfragen</button></div>
         </div>
       </article>
     </div>
@@ -348,7 +339,7 @@
     <p class="eyebrow">Anfrage</p>
     <h2 class="contact__title" id="kontakt-title">Anfrage stellen</h2>
     <p class="contact__lead">Schildern Sie uns kurz Ihr Anliegen. Wir melden uns bei Ihnen.</p>
-    <p class="contact__hint">Pflichtangaben: Name, Anliegen und Telefon oder E-Mail.</p>
+    <p class="contact__hint">Pflichtangaben: Name, mindestens eine Leistung und Telefon oder E-Mail.</p>
 
     <form class="form" id="kontakt-form" action="#" method="post" data-kanal>
       <!-- TODO: Formular-Versand anbinden (serverseitig, mit Spam-Schutz) -->
@@ -366,25 +357,25 @@
       </div>
       <p class="field--full field__hint" id="kf-kanal-hint">Telefon oder E-Mail – eines von beiden reicht.</p>
       <p class="field--full field__error" id="kf-kanal-error" data-kanal-error hidden>Bitte geben Sie eine Telefonnummer oder eine E-Mail-Adresse an.</p>
-      <div class="field">
-        <label for="kf-anliegen">Anliegen</label>
-        <span class="field__select">
-          <!-- value = Kurzname; Auslöser mit data-anliegen="unfall" (usw.) wählen die Option beim Öffnen vor (js/main.js) -->
-          <select id="kf-anliegen" name="anliegen" autocomplete="off" required>
-            <option value="">Bitte wählen</option>
-            <option value="karosserie">Karosseriebau</option>
-            <option value="lack">Fahrzeuglackierung</option>
-            <option value="unfall">Unfallinstandsetzung / Versicherungsschaden</option>
-            <option value="caravan">Wohnmobil &amp; Caravan</option>
-            <option value="classic">Oldtimer-Restauration</option>
-            <option value="glas">Glas-Service</option>
-            <option value="smart">Smart Repair</option>
-            <option value="unterboden">Hohlraumkonservierung und Unterbodenschutz</option>
-            <option value="geschaeft">Geschäftskunden / Flotte</option>
-            <option value="sonstiges">Sonstiges</option>
-          </select>
-        </span>
-      </div>
+      <!-- Gewünschte Leistungen: Mehrfachauswahl, mindestens eine Pflicht (eigene Prüfung in js/main.js, data-leistungen).
+           value = Kurzname; Auslöser mit data-anliegen="unfall" (usw.) haken die passende Leistung beim Öffnen an. -->
+      <fieldset class="field field--full chips" id="kf-leistungen" data-leistungen aria-describedby="kf-leistungen-hint kf-leistungen-error">
+        <legend>Gewünschte Leistungen</legend>
+        <p class="chips__hint" id="kf-leistungen-hint">Mehrfachauswahl möglich – bitte mindestens eine Leistung wählen.</p>
+        <div class="chips__grid">
+          <label class="chip-opt"><input type="checkbox" name="leistungen[]" value="karosserie" id="kf-karosserie"><span>Karosseriebau</span></label>
+          <label class="chip-opt"><input type="checkbox" name="leistungen[]" value="lack" id="kf-lack"><span>Fahrzeuglackierung</span></label>
+          <label class="chip-opt"><input type="checkbox" name="leistungen[]" value="unfall" id="kf-unfall"><span>Unfallinstandsetzung / Versicherungsschaden</span></label>
+          <label class="chip-opt"><input type="checkbox" name="leistungen[]" value="caravan" id="kf-caravan"><span>Wohnmobil &amp; Caravan</span></label>
+          <label class="chip-opt"><input type="checkbox" name="leistungen[]" value="classic" id="kf-classic"><span>Oldtimer-Restauration</span></label>
+          <label class="chip-opt"><input type="checkbox" name="leistungen[]" value="glas" id="kf-glas"><span>Glas-Service</span></label>
+          <label class="chip-opt"><input type="checkbox" name="leistungen[]" value="smart" id="kf-smart"><span>Smart Repair</span></label>
+          <label class="chip-opt"><input type="checkbox" name="leistungen[]" value="unterboden" id="kf-unterboden"><span>Hohlraum&shy;konservierung / Unterbodenschutz</span></label>
+          <label class="chip-opt"><input type="checkbox" name="leistungen[]" value="geschaeft" id="kf-geschaeft"><span>Geschäftskunden / Flotte</span></label>
+          <label class="chip-opt"><input type="checkbox" name="leistungen[]" value="sonstiges" id="kf-sonstiges"><span>Sonstiges</span></label>
+        </div>
+        <p class="field__error" id="kf-leistungen-error" data-leistungen-error hidden>Bitte wählen Sie mindestens eine Leistung aus.</p>
+      </fieldset>
       <div class="field">
         <label for="kf-termin">Wunschtermin (freiwillig)</label>
         <input id="kf-termin" name="wunschtermin" type="date" autocomplete="off">
@@ -464,6 +455,6 @@
 <!-- /DIALOG -->
 
 
-<script src="js/main.js?v=202611060314" defer></script>
+<script src="js/main.js?v=202611092240" defer></script>
 </body>
 </html>

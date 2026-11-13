@@ -9,10 +9,10 @@
 <link rel="canonical" href="https://lackiertechnik-igelbrink.de/ueber-uns">
 <link rel="icon" type="image/png" href="assets/img/13-favicon.png">
 <link rel="preload" href="assets/fonts/schibsted-grotesk-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="css/tokens.css?v=202611060553">
-<link rel="stylesheet" href="css/base.css?v=202611060553">
-<link rel="stylesheet" href="css/components.css?v=202611060553">
-<link rel="stylesheet" href="css/effects.css?v=202611060553">
+<link rel="stylesheet" href="css/tokens.css?v=202611092240">
+<link rel="stylesheet" href="css/base.css?v=202611092240">
+<link rel="stylesheet" href="css/components.css?v=202611092240">
+<link rel="stylesheet" href="css/effects.css?v=202611092240">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -151,7 +151,7 @@
     <div class="nav-actions">
       <a class="nav-tel" href="tel:+4925947843823" aria-label="Anrufen: 02594 7843823" title="02594 7843823"><svg aria-hidden="true"><use href="#i-tel"/></svg><span>Anrufen</span></a>
       <button class="btn btn--small" type="button" data-open-contact aria-haspopup="dialog" aria-controls="kontaktformular">Online-Termin</button>
-      <button class="burger" id="burger" type="button" aria-expanded="false" aria-controls="menu">Menü</button>
+      <button class="burger" id="burger" type="button" aria-expanded="false" aria-controls="menu" aria-label="Menü"><span class="burger__lines" aria-hidden="true"></span><span class="burger__txt">Menü</span></button>
     </div>
   </nav>
 </header>
@@ -162,11 +162,12 @@
   <!-- SEITENKOPF: Bild der Seite mit Verlauf, rutscht unter die Navigationspille (wie der Hero der Startseite) -->
   <section class="page-hero" aria-labelledby="seitenkopf-titel">
     <div class="page-hero__frame">
-      <picture class="page-hero__img"><source type="image/webp" srcset="assets/img/32-seitenkopf-lackierkabine-800.webp 800w, assets/img/32-seitenkopf-lackierkabine-1400.webp 1400w, assets/img/32-seitenkopf-lackierkabine-2400.webp 2400w" sizes="100vw"><img src="assets/img/32-seitenkopf-lackierkabine-800.jpg" srcset="assets/img/32-seitenkopf-lackierkabine-800.jpg 800w, assets/img/32-seitenkopf-lackierkabine-1400.jpg 1400w, assets/img/32-seitenkopf-lackierkabine-2400.jpg 2400w" sizes="100vw" data-px=".12" width="800" height="600" fetchpriority="high" decoding="async" alt=""></picture>
+      <picture class="page-hero__img"><source type="image/webp" srcset="assets/img/32-seitenkopf-lackierkabine-800.webp 800w, assets/img/32-seitenkopf-lackierkabine-1400.webp 1400w, assets/img/32-seitenkopf-lackierkabine-2400.webp 2400w" sizes="100vw"><img src="assets/img/32-seitenkopf-lackierkabine-800.jpg" srcset="assets/img/32-seitenkopf-lackierkabine-800.jpg 800w, assets/img/32-seitenkopf-lackierkabine-1400.jpg 1400w, assets/img/32-seitenkopf-lackierkabine-2400.jpg 2400w" sizes="100vw" width="800" height="600" fetchpriority="high" decoding="async" alt=""></picture>
       <div class="page-hero__body">
         <h1 id="seitenkopf-titel">Ihre Fachwerkstatt für Lackierung, Karosserie- und Unfallinstandsetzung in Dülmen</h1>
         <p class="page-hero__lead">Lackiertechnik Igelbrink – Ihre Fachwerkstatt für <strong>Lackierung, Karosserie- und Unfallinstandsetzung in Dülmen.<br></strong>Seit 2022 stehen wir in Dülmen für Qualität, Präzision und Zuverlässigkeit rund um <strong>Fahrzeuglackierung, Karosserie-Instandsetzung und Unfallreparatur.</strong></p>
       </div>
+      <a class="scroll-hint" href="#inhalt"><span class="scroll-hint__mouse" aria-hidden="true"></span><span>Scrollen<span class="visually-hidden"> zum Inhalt</span></span></a>
     </div>
   </section>
 
@@ -221,73 +222,30 @@
     <!-- OFFEN: Gemeinsames Foto der Inhaber folgt -->
   </section>
 
-  <!-- UNSER BETRIEB IN BILDERN: gleiche Bildkachel mit Glaskachel und Logo-Fuß. Vorerst vorhandene Werkstattbilder plus zwei neutrale Platzhalter. -->
+  <!-- UNSER BETRIEB IN BILDERN (Runde 7): waagerechte Galerie .hgal mit scroll-snap, Bildunterschrift als Glas-Leiste, Pfeile unter der Galerie (js/main.js).
+       Seit Runde 7b genau 6 Bilder in den Kategorien von vorher: Lackierkabine, Vorbereitung, Achsvermessung, Halle, Wartebereich, Büro: 2 eigene Werkstattfotos + 4 Stockfotos. Die Leiste lässt sich auch per Tastatur scrollen (fokussierbar, Pfeiltasten). -->
   <section class="zone" id="betrieb" aria-labelledby="betrieb-title">
     <div class="sec-head">
       <div class="sec-head__divider" aria-hidden="true"><span class="sec-head__ico"><svg viewBox="0 0 24 24"><use href="#i-pin"/></svg></span></div>
       <p class="eyebrow">Werkstatt</p>
       <h2 id="betrieb-title">Unser Betrieb in Bildern</h2>
     </div>
-    <div class="tiles tiles--3">
-      <article class="svc svc--link svc--pic">
-        <div class="svc__media"><span class="wm" aria-hidden="true"></span>
-          <picture class="svc__img"><source type="image/webp" srcset="assets/img/20-service-oldtimer-600.webp 600w, assets/img/20-service-oldtimer-764.webp 764w" sizes="(max-width: 640px) calc(100vw - 32px), (max-width: 980px) calc(50vw - 30px), 386px"><img src="assets/img/20-service-oldtimer-600.jpg" width="600" height="594" loading="lazy" decoding="async" alt="Grundierter Ferrari in der Lackierkabine"></picture>
-          <div class="glass-tile">
-            <span class="glass-tile__ico" aria-hidden="true"><svg viewBox="0 0 24 24"><use href="#i-klassik"/></svg></span>
-            <h3>Lackierkabine</h3>
-          </div>
-        </div>
-      </article>
-      <article class="svc svc--link svc--pic">
-        <div class="svc__media"><span class="wm" aria-hidden="true"></span>
-          <picture class="svc__img"><source type="image/webp" srcset="assets/img/24-service-galerie-abklebung-600.webp 600w, assets/img/24-service-galerie-abklebung-1200.webp 1200w" sizes="(max-width: 640px) calc(100vw - 32px), (max-width: 980px) calc(50vw - 30px), 386px"><img src="assets/img/24-service-galerie-abklebung-600.jpg" width="600" height="450" loading="lazy" decoding="async" alt="Abgeklebtes Fahrzeug, Detailansicht"></picture>
-          <div class="glass-tile">
-            <span class="glass-tile__ico" aria-hidden="true"><svg viewBox="0 0 24 24"><use href="#i-schild"/></svg></span>
-            <h3>Vorbereitung</h3>
-          </div>
-        </div>
-      </article>
-      <article class="svc svc--link svc--pic">
-        <div class="svc__media"><span class="wm" aria-hidden="true"></span>
-          <picture class="svc__img"><source type="image/webp" srcset="assets/img/22-service-unfallinstandsetzung-600.webp 600w, assets/img/22-service-unfallinstandsetzung-1200.webp 1200w" sizes="(max-width: 640px) calc(100vw - 32px), (max-width: 980px) calc(50vw - 30px), 386px"><img src="assets/img/22-service-unfallinstandsetzung-600.jpg" width="600" height="397" loading="lazy" decoding="async" alt="VW Golf bei der Achsvermessung in der Werkstatt"></picture>
-          <div class="glass-tile">
-            <span class="glass-tile__ico" aria-hidden="true"><svg viewBox="0 0 24 24"><use href="#i-auto"/></svg></span>
-            <h3>Achsvermessung</h3>
-          </div>
-        </div>
-      </article>
-      <article class="svc svc--link svc--pic">
-        <div class="svc__media"><span class="wm" aria-hidden="true"></span>
-          <picture class="svc__img"><source type="image/webp" srcset="assets/img/04-schwerpunkte-unfallinstandsetzung-600.webp 600w, assets/img/04-schwerpunkte-unfallinstandsetzung-1200.webp 1200w" sizes="(max-width: 640px) calc(100vw - 32px), (max-width: 980px) calc(50vw - 30px), 386px"><img src="assets/img/04-schwerpunkte-unfallinstandsetzung-600.jpg" width="600" height="450" loading="lazy" decoding="async" alt="Unfallschaden am Heck eines BMW in der Werkstatt"></picture>
-          <div class="glass-tile">
-            <span class="glass-tile__ico" aria-hidden="true"><svg viewBox="0 0 24 24"><use href="#i-auto"/></svg></span>
-            <h3>Halle</h3>
-          </div>
-        </div>
-      </article>
-      <article class="svc svc--link svc--pic">
-        <div class="svc__media svc__media--ph"><span class="wm" aria-hidden="true"></span>
-          <span class="svc__ph" aria-hidden="true"><svg viewBox="0 0 24 24"><use href="#i-uhr"/></svg></span>
-          <div class="glass-tile">
-            <span class="glass-tile__ico" aria-hidden="true"><svg viewBox="0 0 24 24"><use href="#i-uhr"/></svg></span>
-            <h3>Wartebereich</h3>
-            <!-- OFFEN: Foto folgt -->
-          </div>
-        </div>
-      </article>
-      <article class="svc svc--link svc--pic">
-        <div class="svc__media svc__media--ph"><span class="wm" aria-hidden="true"></span>
-          <span class="svc__ph" aria-hidden="true"><svg viewBox="0 0 24 24"><use href="#i-doc"/></svg></span>
-          <div class="glass-tile">
-            <span class="glass-tile__ico" aria-hidden="true"><svg viewBox="0 0 24 24"><use href="#i-doc"/></svg></span>
-            <h3>Büro</h3>
-            <!-- OFFEN: Foto folgt -->
-          </div>
-        </div>
-      </article>
+    <div class="hgal">
+      <div class="hgal__track" id="betrieb-galerie" tabindex="0" role="group" aria-label="Bilder aus dem Betrieb, waagerecht scrollbar">
+        <figure class="hgal__item"><picture><source type="image/webp" srcset="assets/img/20-service-oldtimer-600.webp 600w, assets/img/20-service-oldtimer-764.webp 764w" sizes="(max-width: 560px) 82vw, (max-width: 980px) calc((100vw - 50px) / 2.25), 340px"><img src="assets/img/20-service-oldtimer-600.jpg" width="600" height="594" loading="lazy" decoding="async" alt="Grundierter Ferrari in der Lackierkabine"></picture><figcaption>Lackierkabine</figcaption></figure>
+        <figure class="hgal__item"><picture><source type="image/webp" srcset="assets/img/24-service-galerie-abklebung-600.webp 600w, assets/img/24-service-galerie-abklebung-1200.webp 1200w" sizes="(max-width: 560px) 82vw, (max-width: 980px) calc((100vw - 50px) / 2.25), 340px"><img src="assets/img/24-service-galerie-abklebung-600.jpg" width="600" height="450" loading="lazy" decoding="async" alt="Abgeklebtes Fahrzeug, Detailansicht"></picture><figcaption>Vorbereitung</figcaption></figure>
+        <figure class="hgal__item"><picture><source type="image/webp" srcset="assets/img/158-achsvermessung-600.webp 600w, assets/img/158-achsvermessung-1200.webp 1200w" sizes="(max-width: 560px) 82vw, (max-width: 980px) calc((100vw - 50px) / 2.25), 340px"><img src="assets/img/158-achsvermessung-600.jpg" srcset="assets/img/158-achsvermessung-600.jpg 600w, assets/img/158-achsvermessung-1200.jpg 1200w" sizes="(max-width: 560px) 82vw, (max-width: 980px) calc((100vw - 50px) / 2.25), 340px" width="600" height="530" loading="lazy" decoding="async" alt="Fahrzeug bei der Achsvermessung mit Messköpfen an den Rädern"></picture><figcaption>Achsvermessung</figcaption></figure>
+        <figure class="hgal__item"><picture><source type="image/webp" srcset="assets/img/143-hero-werkstatthalle-hebebuehne-600.webp 600w, assets/img/143-hero-werkstatthalle-hebebuehne-800.webp 800w" sizes="(max-width: 560px) 82vw, (max-width: 980px) calc((100vw - 50px) / 2.25), 340px"><img src="assets/img/143-hero-werkstatthalle-hebebuehne-600.jpg" srcset="assets/img/143-hero-werkstatthalle-hebebuehne-600.jpg 600w, assets/img/143-hero-werkstatthalle-hebebuehne-800.jpg 800w" sizes="(max-width: 560px) 82vw, (max-width: 980px) calc((100vw - 50px) / 2.25), 340px" width="600" height="400" loading="lazy" decoding="async" alt="Helle Werkstatthalle mit Fahrzeug auf der Hebebühne"></picture><figcaption>Halle</figcaption></figure>
+        <figure class="hgal__item"><picture><source type="image/webp" srcset="assets/img/159-wartebereich-600.webp 600w, assets/img/159-wartebereich-1200.webp 1200w" sizes="(max-width: 560px) 82vw, (max-width: 980px) calc((100vw - 50px) / 2.25), 340px"><img src="assets/img/159-wartebereich-600.jpg" srcset="assets/img/159-wartebereich-600.jpg 600w, assets/img/159-wartebereich-1200.jpg 1200w" sizes="(max-width: 560px) 82vw, (max-width: 980px) calc((100vw - 50px) / 2.25), 340px" width="600" height="400" loading="lazy" decoding="async" alt="Wartebereich mit Sesseln und Tisch am hellen Fenster"></picture><figcaption>Wartebereich</figcaption></figure>
+        <figure class="hgal__item"><picture><source type="image/webp" srcset="assets/img/160-buero-empfang-600.webp 600w, assets/img/160-buero-empfang-1200.webp 1200w" sizes="(max-width: 560px) 82vw, (max-width: 980px) calc((100vw - 50px) / 2.25), 340px"><img src="assets/img/160-buero-empfang-600.jpg" srcset="assets/img/160-buero-empfang-600.jpg 600w, assets/img/160-buero-empfang-1200.jpg 1200w" sizes="(max-width: 560px) 82vw, (max-width: 980px) calc((100vw - 50px) / 2.25), 340px" width="600" height="428" loading="lazy" decoding="async" alt="Büro mit Empfangstresen und Arbeitsplatz"></picture><figcaption>Büro</figcaption></figure>
+      </div>
+      <div class="hgal__nav">
+        <button class="hgal__btn" type="button" data-dir="-1" aria-controls="betrieb-galerie" aria-label="Vorherige Bilder"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 5-7 7 7 7"/></svg></button>
+        <button class="hgal__btn" type="button" data-dir="1" aria-controls="betrieb-galerie" aria-label="Weitere Bilder"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 5 7 7-7 7"/></svg></button>
+      </div>
     </div>
-    <!-- OFFEN: Platzhalter: Fotos von Wartebereich, Büro, Spritzkabine und Halle folgen -->
-    <!-- OFFEN: Bildtitel (Lackierkabine, Vorbereitung, Achsvermessung, Halle) sind Vorschläge, bitte vom Kunden bestätigen -->
+    <!-- OFFEN: Halle, Wartebereich und Büro sind Stockfotos (Runde 7b) und sollen durch eigene Fotos ersetzt werden; Achsvermessung ebenfalls Stockfoto (eigenes Foto gern) -->
+    <!-- OFFEN: Bildtitel (Lackierkabine, Vorbereitung, Achsvermessung) sind Vorschläge, bitte vom Kunden bestätigen -->
   </section>
 
   <!-- WAS WIR ANBIETEN: dieselben Bildkacheln wie auf service.html (Bild, Glaskachel, „Mehr erfahren“) statt Textzeilen -->
@@ -336,7 +294,7 @@
           <picture class="svc__img"><source type="image/webp" srcset="assets/img/23-service-unterbodenschutz-600.webp 600w, assets/img/23-service-unterbodenschutz-1200.webp 1200w" sizes="(max-width: 640px) calc(100vw - 32px), (max-width: 1100px) calc(50vw - 30px), 290px"><img src="assets/img/23-service-unterbodenschutz-600.jpg" width="600" height="397" loading="lazy" decoding="async" alt="Unterboden und Auspuffanlage eines Autos"></picture>
           <div class="glass-tile">
             <span class="glass-tile__ico" aria-hidden="true"><svg viewBox="0 0 24 24"><use href="#i-schild"/></svg></span>
-            <h3 id="ang-4">Hohlraum&shy;konservierung und Unterbodenschutz</h3>
+            <h3 id="ang-4">Hohlraumkonservierung und Unterbodenschutz</h3>
             <p>Dauerhafter Schutz vor Rost.</p>
             <a class="btn btn--glass btn--small" href="unterbodenschutz.html" aria-describedby="ang-4">Mehr erfahren</a>
           </div>
@@ -557,7 +515,7 @@
     <p class="eyebrow">Anfrage</p>
     <h2 class="contact__title" id="kontakt-title">Anfrage stellen</h2>
     <p class="contact__lead">Schildern Sie uns kurz Ihr Anliegen. Wir melden uns bei Ihnen.</p>
-    <p class="contact__hint">Pflichtangaben: Name, Anliegen und Telefon oder E-Mail.</p>
+    <p class="contact__hint">Pflichtangaben: Name, mindestens eine Leistung und Telefon oder E-Mail.</p>
 
     <form class="form" id="kontakt-form" action="#" method="post" data-kanal>
       <!-- TODO: Formular-Versand anbinden (serverseitig, mit Spam-Schutz) -->
@@ -575,25 +533,25 @@
       </div>
       <p class="field--full field__hint" id="kf-kanal-hint">Telefon oder E-Mail – eines von beiden reicht.</p>
       <p class="field--full field__error" id="kf-kanal-error" data-kanal-error hidden>Bitte geben Sie eine Telefonnummer oder eine E-Mail-Adresse an.</p>
-      <div class="field">
-        <label for="kf-anliegen">Anliegen</label>
-        <span class="field__select">
-          <!-- value = Kurzname; Auslöser mit data-anliegen="unfall" (usw.) wählen die Option beim Öffnen vor (js/main.js) -->
-          <select id="kf-anliegen" name="anliegen" autocomplete="off" required>
-            <option value="">Bitte wählen</option>
-            <option value="karosserie">Karosseriebau</option>
-            <option value="lack">Fahrzeuglackierung</option>
-            <option value="unfall">Unfallinstandsetzung / Versicherungsschaden</option>
-            <option value="caravan">Wohnmobil &amp; Caravan</option>
-            <option value="classic">Oldtimer-Restauration</option>
-            <option value="glas">Glas-Service</option>
-            <option value="smart">Smart Repair</option>
-            <option value="unterboden">Hohlraumkonservierung und Unterbodenschutz</option>
-            <option value="geschaeft">Geschäftskunden / Flotte</option>
-            <option value="sonstiges">Sonstiges</option>
-          </select>
-        </span>
-      </div>
+      <!-- Gewünschte Leistungen: Mehrfachauswahl, mindestens eine Pflicht (eigene Prüfung in js/main.js, data-leistungen).
+           value = Kurzname; Auslöser mit data-anliegen="unfall" (usw.) haken die passende Leistung beim Öffnen an. -->
+      <fieldset class="field field--full chips" id="kf-leistungen" data-leistungen aria-describedby="kf-leistungen-hint kf-leistungen-error">
+        <legend>Gewünschte Leistungen</legend>
+        <p class="chips__hint" id="kf-leistungen-hint">Mehrfachauswahl möglich – bitte mindestens eine Leistung wählen.</p>
+        <div class="chips__grid">
+          <label class="chip-opt"><input type="checkbox" name="leistungen[]" value="karosserie" id="kf-karosserie"><span>Karosseriebau</span></label>
+          <label class="chip-opt"><input type="checkbox" name="leistungen[]" value="lack" id="kf-lack"><span>Fahrzeuglackierung</span></label>
+          <label class="chip-opt"><input type="checkbox" name="leistungen[]" value="unfall" id="kf-unfall"><span>Unfallinstandsetzung / Versicherungsschaden</span></label>
+          <label class="chip-opt"><input type="checkbox" name="leistungen[]" value="caravan" id="kf-caravan"><span>Wohnmobil &amp; Caravan</span></label>
+          <label class="chip-opt"><input type="checkbox" name="leistungen[]" value="classic" id="kf-classic"><span>Oldtimer-Restauration</span></label>
+          <label class="chip-opt"><input type="checkbox" name="leistungen[]" value="glas" id="kf-glas"><span>Glas-Service</span></label>
+          <label class="chip-opt"><input type="checkbox" name="leistungen[]" value="smart" id="kf-smart"><span>Smart Repair</span></label>
+          <label class="chip-opt"><input type="checkbox" name="leistungen[]" value="unterboden" id="kf-unterboden"><span>Hohlraum&shy;konservierung / Unterbodenschutz</span></label>
+          <label class="chip-opt"><input type="checkbox" name="leistungen[]" value="geschaeft" id="kf-geschaeft"><span>Geschäftskunden / Flotte</span></label>
+          <label class="chip-opt"><input type="checkbox" name="leistungen[]" value="sonstiges" id="kf-sonstiges"><span>Sonstiges</span></label>
+        </div>
+        <p class="field__error" id="kf-leistungen-error" data-leistungen-error hidden>Bitte wählen Sie mindestens eine Leistung aus.</p>
+      </fieldset>
       <div class="field">
         <label for="kf-termin">Wunschtermin (freiwillig)</label>
         <input id="kf-termin" name="wunschtermin" type="date" autocomplete="off">
@@ -673,6 +631,6 @@
 <!-- /DIALOG -->
 
 
-<script src="js/main.js?v=202611060314" defer></script>
+<script src="js/main.js?v=202611092240" defer></script>
 </body>
 </html>

@@ -27,6 +27,7 @@
   --fg-soft:#2e3952;
   --muted:#4a566e;
   --line:#d9dfe9;
+  --line-strong:#b9c1cf;     /* Rahmen des Linien-Buttons (Runde 7) */
   --white:#ffffff;
 
   /* Dunkle Bänder: Marken-Dunkelblau (IL Farbdefinition: HTML 1F2A44, RGB 31/42/68, Pantone 533) und Abstufungen im gleichen Farbton */
@@ -173,11 +174,18 @@
   --ease-out:cubic-bezier(.22,1,.36,1);   /* schneller Start, weiches Ende: wirkt direkt, ohne zu hängen */
   --t-hover:.22s;            /* Hover: Buttons, Kacheln, Zeilen */
   --t-split:.36s;            /* Aufklappen (Akkordeon .exp) */
-  --hero-zoom:1.08;          /* Slow Zoom Hero (Startseite): Endgröße */
-  --hero-zoom-dur:24s;       /* Slow Zoom Hero: Dauer, läuft einmal beim Laden und bleibt dann stehen */
+  --slide-ms:7000ms;         /* Hero-Slider (Startseite): Wechsel alle 7 s, so lange füllt sich auch die aktive Linie (js/main.js liest den Wert) */
+  --slide-fade:1.4s;         /* Hero-Slider: Überblendung */
+  --kb-dur:8.5s;             /* Ken-Burns-Zoom je Bild, läuft über die Überblendung hinaus */
+  --kb-scale:1.12;           /* Ken-Burns: ungerade Bilder 1 → 1,12, gerade 1,12 → 1 */
 
   /* Layout */
-  --wrap:1200px;
+  --wrap:1200px;             /* Breite der Navigationspille (.site-header) */
+  /* Runde 7b: Inhalte (main, Seitenköpfe, Karriere, Footer) dürfen die Hälfte des freien Rands neben der Pille mitnutzen:
+     1440 px Fenster → ca. 1320 px, 1920 px → ca. 1560 px; unter ca. 1232 px wie bisher volle Breite minus Rand.
+     --sbw = Breite eines klassischen Scrollbalkens (js/main.js misst, sonst 0), damit Kopf-Text und Inhalt auf derselben Kante liegen. */
+  --sbw:0px;
+  --wrap-wide:min(calc(100vw - var(--sbw) - 2 * var(--gutter)),calc((100vw - var(--sbw) + var(--wrap)) / 2));
   --gutter:16px;
   --section-gap:clamp(36px,6vw,80px);
   --section-gap-s:clamp(24px,4vw,48px);
@@ -207,7 +215,8 @@
   --grad-media:linear-gradient(0deg,rgba(17,23,38,.88) 0%,rgba(17,23,38,.35) 50%,rgba(17,23,38,.05) 100%);
 
   /* Unterseiten: Seitenkopf, Galerie mit Lightbox, Projekt-Kacheln, Rechtstexte */
-  --page-hero-h:clamp(380px,60vh,560px);    /* Höhe des Seitenkopfs (.page-hero) */
+  --page-hero-h:calc(100svh + 1px);         /* Höhe aller Köpfe (Hero, Seitenkopf, Karriere-Kopf): bildschirmfüllend (Runde 7), 100vh als Rückfall in components.css.
+                                            Runde 7b: + 1 px, WebKit rechnet 100svh sonst als 843,98 statt 844 px und unten bleibt ein Haarstrich frei */
   --grad-page-hero:linear-gradient(90deg,rgba(17,23,38,.9) 0%,rgba(17,23,38,.82) 50%,rgba(17,23,38,.45) 80%,rgba(17,23,38,.25) 100%),
                    linear-gradient(0deg,rgba(17,23,38,.7) 0%,rgba(17,23,38,0) 60%);   /* wie --grad-hero, aber dunkler: die Texte der Unterseiten sind länger */
   --grad-page-hero-narrow:linear-gradient(0deg,rgba(17,23,38,.9) 0%,rgba(17,23,38,.78) 55%,rgba(17,23,38,.6) 100%);   /* schmal: Text über die ganze Breite */
@@ -236,11 +245,43 @@
   --pnav-img-sm:96px;                       /* … auf dem Handy */
   --print-ink:#000;                         /* Textfarbe beim Drucken der Rechtstexte */
 
+  /* Runde 7b: Karten – gleiche Abstände je Komponente (Infoboxen, Prozess, Querkarten, Zertifikate, Bewertungen, Ablauf, Vor/Zurück).
+     Gleiche Höhen über CSS Subgrid: Symbol, Titel, Text und Button liegen in jeder Kartenreihe auf einer Linie (components.css). */
+  --card-gap:clamp(14px,1.6vw,18px);        /* Lücke zwischen den Karten */
+  --card-gap-s:12px;                        /* … bei kleinen Kacheln (Kennzahlen, Farbton-Schritte) */
+  --card-pad:clamp(20px,2vw,24px);          /* Innenabstand weißer Karten */
+  --card-ico-gap:14px;                      /* Symbol → Titel */
+  --card-title-gap:8px;                     /* Titel → Text */
+  --card-action-gap:16px;                   /* Text → Button am Kartenende (mindestens) */
+  --tile-est:180px;                         /* Bildkacheln: so weit ragt das Foto in die Glas-Kachel (typische Kachelhöhe), siehe .svc__media::before;
+                                            Über uns „Was wir anbieten“ (mit Kurztext) 255 px, Team-Porträts 160 px (components.css) */
+
   /* Feedback Meeting 1: Prozess-Karten, Hard Facts, Bilder „Über uns“, Floating-Bar mobil */
-  --process-gap:clamp(12px,1.6vw,18px);     /* Abstand der Prozess-Karten */
+  --process-gap:var(--card-gap);            /* Abstand der Prozess-Karten (seit Runde 7b = --card-gap) */
   --process-badge:46px;                     /* Nummernkreis auf den Prozess-Karten */
-  --grad-process-ph:linear-gradient(135deg,var(--accent-soft),var(--sk-1));   /* neutrale Fläche, solange das eigene Foto fehlt */
   --map-min-h:360px;                        /* Mindesthöhe der Karte im Kontakt-Bereich der Startseite */
   --fab-h:64px;                             /* Höhe der Floating-Bar unten (mobil) */
   --ab2-people-h:clamp(360px,34vw,470px);   /* Startseite Über uns: Höhe der Porträt-Reihe (Expand on Hover), bis 900 px siehe components.css */
+
+  /* Runde 7 */
+  --scrollbar-w:8px;                        /* dezente Scrollbar (base.css) */
+  --scrollbar-thumb:rgba(31,42,68,.22);     /* Daumen in Navy, halbtransparent */
+  --scrollbar-thumb-hover:rgba(31,42,68,.42);
+  --scrollbar-track:transparent;
+  --hero-pad-l:calc((100vw - var(--sbw) - var(--wrap-wide)) / 2);   /* Kopf-Text (Startseite und Seitenköpfe): linke Kante = Inhaltskante (Runde 7b, vorher clamp(20px,5.5vw,96px)) */
+  --hero-pad-r:clamp(20px,4vw,64px);
+  --hint-gap:clamp(18px,4vh,36px);          /* Scroll-Hinweis: Abstand zum unteren Rand des Kopfs */
+  --hint-room:clamp(96px,16vh,150px);       /* Platz unter dem Kopf-Text für den Scroll-Hinweis */
+  --head-pad-t:calc(var(--hdr) + var(--hero-top-gap));   /* Runde 7b, alle Köpfe: Text beginnt frühestens unter der Navigation … */
+  --head-pad-b:var(--hint-room);                          /* … und endet spätestens über dem Scroll-Hinweis (mobil siehe components.css) */
+  --head-rows:minmax(0,45fr) auto minmax(0,55fr);         /* freier Platz 45 : 55 über/unter dem Text: optisch leicht über der Mitte */
+  --hint-wheel-dur:1.8s;
+  --chip-check:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'%3E%3Cpath d='M2.5 6.2 5 8.6l4.6-5' fill='none' stroke='%23fff' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");   /* Haken im angehakten Chip */
+  --hgal-gap:18px;                         /* Galerie „Betrieb in Bildern“: Abstand der Bilder */
+  --glass-caption:rgba(22,30,49,.55);       /* Glas-Leiste der Bildunterschrift (weiße Schrift) */
+  --lb-pad-y:clamp(56px,8vh,80px);         /* Lightbox: Abstand oben/unten, das Bild ist höchstens Fensterhöhe minus 2 × diesen Wert */
+  --tap:44px;                              /* Mindestgröße für Tap-Flächen (Hamburger, Route-Auswahl) */
+  --burger-bg:rgba(22,30,49,.06);          /* Hamburger-Button: leichte Fläche in der Pille */
+  --grad-mbanner:linear-gradient(90deg,rgba(14,20,36,.95) 0%,rgba(14,20,36,.82) 45%,rgba(14,20,36,.25) 100%);   /* Banner Marko: links dunkel für den Text */
+  --grad-mbanner-narrow:linear-gradient(180deg,rgba(14,20,36,.92) 0%,rgba(14,20,36,.88) 55%,rgba(14,20,36,.55) 100%);   /* … schmal: Text oben über ganzer Breite */                    /* Rad im Maus-Symbol: eine Bewegung */
 }

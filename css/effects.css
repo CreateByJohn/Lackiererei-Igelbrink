@@ -147,12 +147,18 @@ a.kx__row:hover b,a.kx__row:hover address{color:var(--accent-strong)}
   .ab2__people .ab2__person:hover{flex-grow:1.45}
 }
 
-/* ---------- Hero (nur Startseite): Slow Zoom ----------
-   Zoomt einmal beim Laden langsam von 1 auf --hero-zoom und bleibt dann stehen. Über die eigene Eigenschaft „scale“, nicht transform,
-   damit der Parallax (translate über --py, js/main.js) weiterläuft. Drehpunkt passend zur object-position. Keine Seitenköpfe der Unterseiten. */
+/* ---------- Hero-Slider (nur Startseite, Runde 7): Überblendung, Ken-Burns-Zoom, Fortschrittslinien ----------
+   Ungerade Bilder zoomen von 1 auf --kb-scale, gerade zurück (bei 1440 px Breite ca. 20 px/s). Das ausblendende Bild (.is-leaving) zoomt weiter.
+   Die aktive Linie füllt sich in --slide-ms. Bei reduzierter Bewegung: kein Zoom, kein Überblenden, kein Autoplay (js/main.js). */
 @media (prefers-reduced-motion:no-preference){
-  @keyframes hero-zoom{from{scale:1}to{scale:var(--hero-zoom)}}
-  .hero__img{transform-origin:50% 45%;animation:hero-zoom var(--hero-zoom-dur) cubic-bezier(.22,.6,.36,1) both}
+  .hero__slide{transition:opacity var(--slide-fade) ease-in-out}
+  @keyframes kb-in{from{transform:scale(1)}to{transform:scale(var(--kb-scale))}}
+  @keyframes kb-out{from{transform:scale(var(--kb-scale))}to{transform:scale(1)}}
+  .hero__slide.is-active .hero__img,.hero__slide.is-leaving .hero__img{animation:kb-in var(--kb-dur) linear both}
+  .hero__slide:nth-child(even).is-active .hero__img,.hero__slide:nth-child(even).is-leaving .hero__img{animation-name:kb-out}
+  @keyframes dot-fill{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+  .hero__dot.is-active::after{animation:dot-fill var(--slide-ms) linear both}
+  .hero__dots.is-paused .hero__dot::after{animation-play-state:paused}
 }
 
 /* ---------- Einblenden beim Scrollen ----------
@@ -181,7 +187,6 @@ a.kx__row:hover b,a.kx__row:hover address{color:var(--accent-strong)}
   .svc:hover .svc__img img{transform:none}
   .bt--eco:hover .bt__seal{rotate:-2deg;scale:none}
   .bt--logo .glass-in::after{display:none}
-  [data-px]{translate:none!important}
   .sm-tile:hover,.mq-item:hover .mq-item__tile,.mq-item:focus-within .mq-item__tile{transform:none}
   .process__step:hover .process__media img{transform:none}
   .marquee{overflow-x:auto;-webkit-mask-image:none;mask-image:none}
@@ -259,4 +264,33 @@ a.kx__row:hover b,a.kx__row:hover address{color:var(--accent-strong)}
   .steps--rail .steps__item{transform:none!important;opacity:1!important;transition:none}
   .rail__fill{height:var(--rail-len,0px)}
   .rail__drop{display:none}
+}
+
+/* ---------- Scroll-Hinweis (Runde 7): Rad im Maus-Symbol läuft nach unten, Hinweis blendet nach 60 px Scrollen aus ---------- */
+.scroll-hint{transition:opacity .3s var(--ease-out),visibility .3s}
+.is-scrolled .scroll-hint{opacity:0;visibility:hidden;pointer-events:none}
+@media (prefers-reduced-motion:no-preference){
+  @keyframes hint-wheel{0%{opacity:0;transform:translateY(-3px)}30%{opacity:1}70%{opacity:1;transform:translateY(9px)}100%{opacity:0;transform:translateY(12px)}}
+  .scroll-hint__mouse::after{animation:hint-wheel var(--hint-wheel-dur) cubic-bezier(.5,0,.3,1) infinite}
+}
+
+/* ---------- Leistungskarten .lk (Runde 7): Bild zoomt beim Hover leicht, Linien-Button färbt sich orange ---------- */
+.lk__img img{transition:transform .6s var(--ease-out)}
+.btn--line:hover{color:var(--accent-strong);box-shadow:inset 0 0 0 1.5px var(--accent-strong)}
+@media (hover:hover) and (prefers-reduced-motion:no-preference){.lk:hover .lk__img img{transform:scale(1.05)}}
+
+/* ---------- Checkbox-Chips (Runde 7) ---------- */
+.chip-opt span,.chip-opt span::before{transition:background-color .2s var(--ease-out),border-color .2s var(--ease-out)}
+.chip-opt:hover span{border-color:var(--accent-strong)}
+
+/* ---------- Galerie „Betrieb in Bildern“ (Runde 7): Bild zoomt beim Hover leicht, Pfeil-Buttons färben sich ---------- */
+.hgal__item img{transition:transform .7s var(--ease-out)}
+.hgal__btn{transition:border-color .2s var(--ease-out),color .2s var(--ease-out)}
+.hgal__btn:not(:disabled):hover{border-color:var(--accent-strong);color:var(--accent-strong)}
+@media (hover:hover) and (prefers-reduced-motion:no-preference){.hgal__item:hover img{transform:scale(1.05)}}
+
+/* ---------- Hamburger (Runde 7, bis 760 px): Striche drehen sich zum X ---------- */
+@media (prefers-reduced-motion:no-preference){
+  .burger__lines{transition:background-color .2s var(--ease-out)}
+  .burger__lines::before,.burger__lines::after{transition:top .25s var(--ease-out),transform .3s var(--ease-out)}
 }

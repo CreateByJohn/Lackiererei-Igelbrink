@@ -54,43 +54,6 @@
   });
 })();
 
-// Leistungs-Karten: equalize() sorgt dafür, dass Glas-Kacheln und Listen nebeneinander gleich hoch sind.
-(function () {
-  var grid = document.querySelector('.cards');
-  if (!grid) return;
-  var wide = window.matchMedia('(min-width: 981px)');
-
-  // Macht alle passenden Elemente so hoch wie das höchste (über min-height).
-  // Vorher zurücksetzen, sonst misst man die alte, angeglichene Höhe.
-  // Mit active = false wird nur zurückgesetzt (z. B. Listen, wenn die Karten untereinander stehen).
-  function equalize(selector, active) {
-    var els = grid.querySelectorAll(selector);
-    els.forEach(function (el) { el.style.minHeight = ''; });
-    if (!active) return;
-    var max = 0;
-    els.forEach(function (el) { max = Math.max(max, el.getBoundingClientRect().height); });
-    els.forEach(function (el) { el.style.minHeight = max + 'px'; });
-  }
-
-  // Kacheln immer gleich hoch, Listen nur nebeneinander (ab 981 px).
-  function update() {
-    equalize('.glass-tile', true);
-    equalize('.svc__list', wide.matches);
-  }
-
-  // Neu messen, sobald die Schriften geladen sind (Text wird dadurch oft höher)
-  // und wenn sich die Breite ändert (reine Höhenänderungen lösen keine neue Messung aus).
-  // Der ResizeObserver misst außerdem sofort einmal beim Start.
-  document.fonts.ready.then(update);
-  var lastWidth = 0;
-  new ResizeObserver(function (entries) {
-    var w = Math.round(entries[0].contentRect.width);
-    if (w === lastWidth) return;
-    lastWidth = w;
-    update();
-  }).observe(grid);
-})();
-
 // Höhen von Header und Footer als CSS-Variablen am <html>, damit das CSS damit rechnen kann.
 // --hdr: Header samt Abstand oben. Um so viel rutscht der Hero unter die schwebende Navigation.
 // --fh:  Footer-Höhe. Auf großen Bildschirmen liegt der Footer hinter dem Inhalt, .page lässt unten so viel Platz frei.
@@ -105,8 +68,24 @@
     }).observe(el);
   }
 
+  // --sbw: Breite eines klassischen Scrollbalkens (Runde 7b). Die Köpfe sind 100vw breit (inklusive Balken), der Inhalt nicht;
+  // mit --sbw rechnet tokens.css die Kopf-Textkante genau auf die Inhaltskante. Überlagernde Balken (macOS-Standard) = 0.
+  // Gemessen beim Start, nach dem Laden und bei Fenstergrößenänderung, gesetzt nur bei Änderung. Bewusst kein ResizeObserver auf <html>/<body>:
+  // der stößt mit dem --hdr-Beobachter (ändert die Seitenhöhe) zusammen, WebKit meldet dann „ResizeObserver loop completed …“.
+  var sbw = 0;
+  function measureSbw() {
+    var v = Math.max(0, window.innerWidth - root.clientWidth);
+    if (v === sbw) return;
+    sbw = v;
+    root.style.setProperty('--sbw', v + 'px');
+  }
+  measureSbw();
+  window.addEventListener('load', measureSbw);
+  window.addEventListener('resize', measureSbw);
   watch(document.querySelector('.site-header'), '--hdr', function (el) {
-    return el.offsetHeight + (parseFloat(getComputedStyle(el).marginTop) || 0);
+    // Ohne Rundung (Runde 7b): offsetHeight liefert ganze Pixel, die Pille ist aber z. B. 72,45 px hoch.
+    // Sonst endet der Kopf einen halben Pixel über der Fensterkante und unten blitzt ein heller Strich.
+    return el.getBoundingClientRect().height + (parseFloat(getComputedStyle(el).marginTop) || 0);
   });
   watch(document.querySelector('.site-footer'), '--fh', function (el) {
     // Passt der Footer nicht ganz ins Fenster, wird er nicht freigelegt, sondern scrollt normal mit (.footer-static).
@@ -166,12 +145,11 @@
 
 // Kontaktformular: alle Elemente mit data-open-contact öffnen das <dialog> per showModal().
 // Schließen per X, Escape (nativ) oder Klick auf den Hintergrund; der Fokus geht zurück an den Auslöser.
-// Ein Auslöser mit data-anliegen="unfall" (Wert einer Option) wählt das Anliegen beim Öffnen vor („Schaden melden“).
+// Ein Auslöser mit data-anliegen="unfall" (Wert einer Leistung) hakt diese Leistung beim Öffnen an („Schaden melden“); andere Häkchen bleiben.
 (function () {
   var dialog = document.getElementById('kontaktformular');
   if (!dialog || typeof dialog.showModal !== 'function') return;
   var form = dialog.querySelector('form');
-  var topic = dialog.querySelector('#kf-anliegen');
   var opener = null;
 
   document.addEventListener('click', function (e) {
@@ -180,7 +158,8 @@
     e.preventDefault();
     opener = trigger;
     var pre = trigger.getAttribute('data-anliegen');
-    if (pre && topic) topic.value = pre;
+    var box = pre && dialog.querySelector('[data-leistungen] input[value="' + pre + '"]');
+    if (box) { box.checked = true; box.dispatchEvent(new Event('change', { bubbles: true })); }
     if (!dialog.open) dialog.showModal();
   });
 
@@ -271,6 +250,65 @@
   });
 })();
 
+// Gewünschte Leistungen (fieldset[data-leistungen], Kontaktformular im Dialog und online-termin.html): mindestens ein Häkchen.
+// Wie bei data-kanal: Der Fehler ([data-leistungen-error], per aria-describedby am fieldset) erscheint erst nach dem ersten Absenden,
+// setCustomValidity an der ersten Checkbox stoppt das Absenden; ist sie das erste ungültige Feld, setzt der Browser dorthin den Fokus.
+(function () {
+  document.querySelectorAll('fieldset[data-leistungen]').forEach(function (set) {
+    var form = set.closest('form');
+    var boxes = Array.prototype.slice.call(set.querySelectorAll('input[type="checkbox"]'));
+    var error = set.querySelector('[data-leistungen-error]');
+    var submit = form && form.querySelector('[type="submit"]');
+    if (!boxes.length || !error || !submit) return;
+    var checked = false;
+    function check() {
+      var missing = !boxes.some(function (b) { return b.checked; });
+      var show = missing && checked;
+      boxes[0].setCustomValidity(missing ? error.textContent : '');
+      error.hidden = !show;
+      set.setAttribute('aria-invalid', show ? 'true' : 'false');
+    }
+    set.addEventListener('change', check);
+    submit.addEventListener('click', function () { checked = true; check(); });
+    // Kein eigener Fehler-Tooltip des Browsers zusätzlich zur sichtbaren Meldung: nur Fokus setzen
+    boxes[0].addEventListener('invalid', function (e) { e.preventDefault(); checked = true; check(); boxes[0].focus(); });
+    check();
+  });
+})();
+
+// Galerie „Betrieb in Bildern“ (.hgal): Pfeile scrollen um ein Bild weiter (weich, bei reduzierter Bewegung sofort),
+// am Anfang bzw. Ende ist der jeweilige Pfeil deaktiviert. Passt alles ins Fenster, werden die Pfeile ausgeblendet.
+(function () {
+  var smooth = !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  document.querySelectorAll('.hgal').forEach(function (g) {
+    var track = g.querySelector('.hgal__track');
+    var prev = g.querySelector('[data-dir="-1"]'), next = g.querySelector('[data-dir="1"]');
+    if (!track || !prev || !next) return;
+    function update() {
+      var max = track.scrollWidth - track.clientWidth;
+      prev.disabled = track.scrollLeft < 4;
+      next.disabled = track.scrollLeft > max - 4;
+      prev.hidden = next.hidden = max < 4;
+    }
+    function go(dir) {
+      var item = track.querySelector('.hgal__item');
+      var step = item.offsetWidth + (parseFloat(getComputedStyle(track).columnGap) || 0);
+      track.scrollBy({ left: step * dir, behavior: smooth ? 'smooth' : 'auto' });
+    }
+    [prev, next].forEach(function (b) {
+      b.addEventListener('click', function () { go(+b.getAttribute('data-dir')); });
+    });
+    // Tastatur auf der fokussierten Leiste: ←/→ ein Bild weiter (mit scroll-snap sonst nur wenige Pixel), Pos1/Ende an den Anfang/das Ende
+    track.addEventListener('keydown', function (e) {
+      if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') { e.preventDefault(); go(e.key === 'ArrowRight' ? 1 : -1); }
+      else if (e.key === 'Home' || e.key === 'End') { e.preventDefault(); track.scrollTo({ left: e.key === 'Home' ? 0 : track.scrollWidth, behavior: smooth ? 'smooth' : 'auto' }); }
+    });
+    track.addEventListener('scroll', update, { passive: true });
+    if ('ResizeObserver' in window) new ResizeObserver(update).observe(track);
+    update();
+  });
+})();
+
 // Unsere Expertise: Zeilen einzeln aufklappen (Akkordeon).
 (function () {
   document.querySelectorAll('.exp__head').forEach(function (head) {
@@ -283,39 +321,135 @@
   });
 })();
 
-// Parallax: Bilder mit data-px verschieben sich beim Scrollen leicht gegen die Scrollrichtung.
-// Der Hero bewegt sich mit der Scrollposition, alle anderen Bilder relativ zur Fenstermitte,
-// begrenzt auf den Überstand des Bildes über seinen Rahmen (kein sichtbarer Rand).
-// Nur mit requestAnimationFrame und nur für Bilder im Fenster; aus bei reduzierter Bewegung.
+// Parallax: Bilder verschieben sich beim Scrollen leicht gegen die Scrollrichtung, weich nachgezogen (Lerp).
+// Köpfe (Hero-Slider, Seitenköpfe, Karriere-Kopf) bewegen sich mit der Scrollposition (Faktor .2),
+// Bilder im Inhalt (Bänder, Banner, Fachwissen, Karriere-Banner der Startseite) relativ zur Fenstermitte (Faktor .1, max. ±50 px
+// und nie mehr als der Überstand des Bildes über seinen Rahmen, damit kein Rand sichtbar wird).
+// Der Rahmen wird über closest() bestimmt (nicht parentElement: das ist oft <picture> mit Höhe 0).
+// Ein requestAnimationFrame-Loop läuft nur, solange sich etwas bewegt; gerechnet wird nur für Rahmen im Fenster (IntersectionObserver).
+// Ausgegeben wird --py, das CSS setzt es als transform: translate3d(). Aus bei reduzierter Bewegung.
 (function () {
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-  var els = Array.prototype.slice.call(document.querySelectorAll('[data-px]'));
-  if (!els.length) return;
-  var ticking = false;
+  var FRAME = '.hero__frame, .page-hero__frame, .career, .band, .mbanner, .know__media';
+  var HEAD = '.hero__frame, .page-hero__frame, .career--head';
+  var items = [];
+  document.querySelectorAll('.hero__slides, .page-hero__img img, .career__img img, .band__img img, .mbanner__bg img, .know__media img').forEach(function (el) {
+    var frame = el.closest(FRAME);
+    if (!frame) return;
+    var head = frame.matches(HEAD);
+    items.push({ el: el, frame: frame, head: head, speed: head ? 0.2 : 0.1, cur: 0, on: false });
+  });
+  if (!items.length) return;
+  var running = false;
 
-  function update() {
-    ticking = false;
-    var vh = window.innerHeight;
-    els.forEach(function (img) {
-      var speed = parseFloat(img.getAttribute('data-px')) || 0;
-      var box = img.parentElement.getBoundingClientRect();
-      if (box.bottom < -100 || box.top > vh + 100 || box.height === 0) return;
-      var y;
-      if (img.classList.contains('hero__img')) {
-        y = Math.max(0, -box.top) * speed;
-      } else {
-        var room = Math.max(0, (img.offsetHeight - box.height) / 2);
-        y = -(box.top + box.height / 2 - vh / 2) * speed;
-        y = Math.max(-room, Math.min(room, y));
-      }
-      img.style.setProperty('--py', y.toFixed(1) + 'px');
-    });
+  function target(o) {
+    var box = o.frame.getBoundingClientRect();
+    if (o.head) return Math.max(0, -box.top) * o.speed;
+    var room = Math.max(0, (o.el.offsetHeight - box.height) / 2);
+    var max = Math.min(50, room);
+    var y = -(box.top + box.height / 2 - window.innerHeight / 2) * o.speed;
+    return Math.max(-max, Math.min(max, y));
   }
-  function request() { if (!ticking) { ticking = true; requestAnimationFrame(update); } }
-  window.addEventListener('scroll', request, { passive: true });
-  window.addEventListener('resize', request);
-  window.addEventListener('load', request);
-  update();
+
+  function frame() {
+    var moving = false;
+    items.forEach(function (o) {
+      if (!o.on) return;
+      var t = target(o);
+      o.cur += (t - o.cur) * 0.12;
+      if (Math.abs(t - o.cur) < 0.05) o.cur = t; else moving = true;
+      o.el.style.setProperty('--py', o.cur.toFixed(2) + 'px');
+    });
+    running = moving;
+    if (moving) requestAnimationFrame(frame);
+  }
+  function kick() { if (!running) { running = true; requestAnimationFrame(frame); } }
+
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        items.forEach(function (o) { if (o.frame === e.target) o.on = e.isIntersecting; });
+      });
+      kick();
+    }, { rootMargin: '100px 0px' });
+    items.forEach(function (o) { io.observe(o.frame); });
+  } else {
+    items.forEach(function (o) { o.on = true; });
+  }
+  window.addEventListener('scroll', kick, { passive: true });
+  window.addEventListener('resize', kick);
+  window.addEventListener('load', kick);
+  kick();
+})();
+
+// Hero-Slider (Startseite): Überblendung alle --slide-ms (7 s), Ken-Burns-Zoom und Fortschrittslinien über CSS (effects.css).
+// Das ausblendende Bild behält .is-leaving, damit sein Zoom während der Überblendung weiterläuft. Klick auf eine Linie springt zum Bild.
+// Pausiert bei verstecktem Tab (startet beim Zurückkommen das aktuelle Bild neu). Reduzierte Bewegung: kein Autoplay, Linien springen nur.
+(function () {
+  var box = document.querySelector('.hero__slides');
+  var dotsBox = document.querySelector('.hero__dots');
+  if (!box || !dotsBox) return;
+  var slides = Array.prototype.slice.call(box.children);
+  var dots = Array.prototype.slice.call(dotsBox.children);
+  if (slides.length < 2) return;
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var MS = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--slide-ms')) || 7000;
+  var i = 0, timer = 0;
+  dotsBox.hidden = false;
+
+  // Animation eines Elements neu starten (Klasse kurz entfernen, Reflow erzwingen)
+  function restart(el, cls) { el.classList.remove(cls); void el.offsetWidth; el.classList.add(cls); }
+
+  function go(n) {
+    var prev = slides[i];
+    i = (n + slides.length) % slides.length;
+    slides.forEach(function (s) { s.classList.remove('is-leaving'); });
+    if (prev !== slides[i]) { prev.classList.remove('is-active'); prev.classList.add('is-leaving'); }
+    restart(slides[i], 'is-active');
+    dots.forEach(function (d, k) {
+      d.classList.toggle('is-done', k < i);
+      d.classList.remove('is-active');
+      if (k === i) d.setAttribute('aria-current', 'true'); else d.removeAttribute('aria-current');
+    });
+    restart(dots[i], 'is-active');
+    clearTimeout(timer);
+    if (!reduce && !document.hidden) timer = setTimeout(function () { go(i + 1); }, MS);
+  }
+
+  dots.forEach(function (d, k) { d.addEventListener('click', function () { go(k); }); });
+  document.addEventListener('visibilitychange', function () {
+    if (document.hidden) { clearTimeout(timer); dotsBox.classList.add('is-paused'); }
+    else { dotsBox.classList.remove('is-paused'); go(i); }
+  });
+  go(0);
+})();
+
+// Scroll-Hinweis in den Köpfen: Klick scrollt weich bis knapp unter den Kopf (abzüglich der schwebenden Navigation, --hdr)
+// und setzt den Fokus auf den ersten Abschnitt danach (Tastatur). html.is-scrolled blendet den Hinweis ab 60 px Scrollen aus (effects.css).
+(function () {
+  var root = document.documentElement;
+  function scrolled() { root.classList.toggle('is-scrolled', window.scrollY > 60); }
+  window.addEventListener('scroll', scrolled, { passive: true });
+  scrolled();
+  document.querySelectorAll('.scroll-hint').forEach(function (a) {
+    a.addEventListener('click', function (e) {
+      var frame = a.closest('.hero__frame, .page-hero__frame, .career--head');
+      if (!frame) return;
+      e.preventDefault();
+      var hdr = parseFloat(getComputedStyle(root).getPropertyValue('--hdr')) || 78;
+      var top = frame.getBoundingClientRect().bottom + window.scrollY - hdr;
+      var smooth = !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      window.scrollTo({ top: top, behavior: smooth ? 'smooth' : 'auto' });
+      var head = frame.closest('section') || frame;
+      var next = head.nextElementSibling;
+      while (next && next.offsetParent === null) next = next.nextElementSibling;
+      if (!next && head.nextElementSibling === null) next = document.getElementById('inhalt');
+      if (next) {
+        if (!next.hasAttribute('tabindex')) next.setAttribute('tabindex', '-1');
+        next.focus({ preventScroll: true });
+      }
+    });
+  });
 })();
 
 // Info-Leiste: erscheint nach dem ersten Bildschirm und verschwindet, sobald der echte Footer ins Bild kommt.
@@ -338,6 +472,68 @@
   window.addEventListener('scroll', request, { passive: true });
   window.addEventListener('resize', request);
   update();
+})();
+
+// Route: Alle Links auf google.com/maps/dir (Footer, Info-Leiste, Startseite, Kontaktseite) öffnen eine kleine Auswahl
+// „Route öffnen mit: Google Maps / Apple Karten“ (mobil als Leiste unten). Ohne JS bleibt der direkte Google-Link.
+// Escape, Klick außerhalb oder Tab aus der Auswahl heraus schließt sie; Escape setzt den Fokus zurück auf den Link.
+(function () {
+  var links = document.querySelectorAll('a[href*="google.com/maps/dir"]');
+  if (!links.length) return;
+  var APPLE = 'https://maps.apple.com/?daddr=Telgenkamp+31,+48249+D%C3%BClmen&dirflg=d';
+  var PIN = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-6.5-6.1-6.5-11a6.5 6.5 0 0 1 13 0c0 4.9-6.5 11-6.5 11z"/><circle cx="12" cy="10" r="2.3"/></svg>';
+  var MAP = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.5 6.5 9 4l6 2.5 5.5-2.5v13.5L15 20l-6-2.5-5.5 2.5z"/><path d="M9 4v13.5M15 6.5V20"/></svg>';
+  var box = document.createElement('div');
+  box.className = 'route-menu';
+  box.id = 'route-menu';
+  box.hidden = true;
+  box.setAttribute('role', 'dialog');
+  box.setAttribute('aria-labelledby', 'route-menu-title');
+  box.innerHTML = '<p class="route-menu__title" id="route-menu-title">Route öffnen mit</p>' +
+    '<a data-route="google" target="_blank" rel="noopener">' + PIN + 'Google Maps</a>' +
+    '<a href="' + APPLE + '" target="_blank" rel="noopener">' + MAP + 'Apple Karten</a>';
+  document.body.appendChild(box);
+  var google = box.querySelector('[data-route="google"]');
+  var mobile = window.matchMedia('(max-width: 760px)');
+  var opener = null;
+
+  function close(refocus) {
+    if (box.hidden) return;
+    box.hidden = true;
+    if (opener) { opener.setAttribute('aria-expanded', 'false'); if (refocus) opener.focus(); }
+    opener = null;
+  }
+  function open(a) {
+    opener = a;
+    google.href = a.href;
+    a.setAttribute('aria-expanded', 'true');
+    box.hidden = false;
+    if (!mobile.matches) {
+      var r = a.getBoundingClientRect(), w = box.offsetWidth, h = box.offsetHeight;
+      var top = r.bottom + 8;
+      if (top + h > window.innerHeight - 8) top = Math.max(8, r.top - h - 8);
+      box.style.left = Math.max(8, Math.min(window.innerWidth - w - 8, r.left)) + 'px';
+      box.style.top = top + 'px';
+    }
+    google.focus();
+  }
+
+  links.forEach(function (a) {
+    a.setAttribute('aria-haspopup', 'dialog');
+    a.setAttribute('aria-expanded', 'false');
+    a.setAttribute('aria-controls', 'route-menu');
+    a.addEventListener('click', function (e) {
+      e.preventDefault();
+      e.stopPropagation();
+      if (opener === a) close(false); else { close(false); open(a); }
+    });
+  });
+  box.querySelectorAll('a').forEach(function (l) { l.addEventListener('click', function () { close(false); }); });
+  document.addEventListener('click', function (e) { if (!box.contains(e.target)) close(false); });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !box.hidden) { e.preventDefault(); close(true); } });
+  box.addEventListener('focusout', function (e) { if (e.relatedTarget && !box.contains(e.relatedTarget)) close(false); });
+  window.addEventListener('scroll', function () { if (!mobile.matches) close(false); }, { passive: true });
+  window.addEventListener('resize', function () { close(false); });
 })();
 
 // Kontaktseite, Karte: Google Maps lädt erst nach Klick (Zwei-Klick-Lösung, DSGVO).
@@ -480,12 +676,12 @@
   relayout();
 })();
 
-// Lightbox (natives <dialog>) für die Galerie .steps und die Zertifikate im Karussell (.mq-item__open).
+// Lightbox (natives <dialog>) für die Galerie .steps, die Zertifikate im Karussell (.mq-item__open) und die Zertifikat-Karten (.cert, fahrzeuglackierung.html).
 // Klick oder Enter öffnet das Bild groß. Pfeile und Tastatur ←/→ blättern innerhalb derselben Gruppe, Escape schließt (nativ),
-// danach geht der Fokus zurück an das angeklickte Bild bzw. die Kachel. Kopien im Karussell (aria-hidden) zählen nicht mit,
+// danach geht der Fokus zurück an das angeklickte Bild bzw. die Kachel. Klick aufs Bild vergrößert es (Hinweis oben). Kopien im Karussell (aria-hidden) zählen nicht mit,
 // ein Klick darauf öffnet das passende Original. Läuft nur, wenn es etwas zu öffnen gibt; das <dialog> wird hier erzeugt.
 (function () {
-  var SEL = '.steps__open, .mq-item__open';
+  var SEL = '.steps__open, .mq-item__open, .cert';
   if (!document.querySelector(SEL)) return;
   var openers = [];
   var ARROW = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">';
@@ -493,7 +689,8 @@
   box.className = 'lightbox';
   box.setAttribute('aria-label', 'Bildansicht');
   box.innerHTML =
-    '<div class="lightbox__stage"><img alt=""></div>' +
+    '<div class="lightbox__stage"><button class="lightbox__zoom" type="button" aria-pressed="false"><img alt=""></button></div>' +
+    '<p class="lightbox__tip"></p>' +
     '<button class="lightbox__btn lightbox__prev" type="button" aria-label="Vorheriges Bild">' + ARROW + '<path d="m15 5-7 7 7 7"/></svg></button>' +
     '<button class="lightbox__btn lightbox__next" type="button" aria-label="Nächstes Bild">' + ARROW + '<path d="m9 5 7 7-7 7"/></svg></button>' +
     '<button class="lightbox__btn lightbox__close" type="button" aria-label="Bildansicht schließen">' + ARROW + '<path d="M6 6l12 12M18 6 6 18"/></svg></button>' +
@@ -501,18 +698,31 @@
   document.body.appendChild(box);
   var img = box.querySelector('img');
   var count = box.querySelector('.lightbox__count');
+  var zoomBtn = box.querySelector('.lightbox__zoom');
+  var tip = box.querySelector('.lightbox__tip');
+  var stage = box.querySelector('.lightbox__stage');
+
+  // Vergrößern: Klick aufs Bild schaltet um (max. 1200 px breit, Bühne scrollbar). Zurückgesetzt bei Bildwechsel und Schließen.
+  function zoom(on) {
+    box.classList.toggle('is-zoom', on);
+    zoomBtn.setAttribute('aria-pressed', on ? 'true' : 'false');
+    tip.textContent = on ? 'Scrollen zum Lesen · Klicken zum Verkleinern' : 'Klicken zum Vergrößern';
+    if (!on) stage.scrollTop = 0;
+  }
+  zoomBtn.addEventListener('click', function (e) { e.stopPropagation(); zoom(!box.classList.contains('is-zoom')); });
   var webp = document.createElement('canvas').toDataURL('image/webp').indexOf('data:image/webp') === 0;
   var index = 0, opener = null;
 
   function show(i) {
     index = (i + openers.length) % openers.length;
+    zoom(false);
     var b = openers[index];
     img.classList.remove('is-new');
     img.src = (webp && b.getAttribute('data-full-webp')) || b.getAttribute('data-full');
     img.alt = (b.querySelector('img:not([alt=""])') || {}).alt || '';   // Karussell: das scharfe Bild, nicht den unscharfen Hintergrund
     void img.offsetWidth;   // Animation bei jedem Wechsel neu starten
     img.classList.add('is-new');
-    count.textContent = (b.classList.contains('mq-item__open') ? 'Zertifikat ' : 'Bild ') + (index + 1) + ' von ' + openers.length;
+    count.textContent = (b.matches('.mq-item__open, .cert') ? 'Zertifikat ' : 'Bild ') + (index + 1) + ' von ' + openers.length;
     // Nachbarbilder vorladen, damit das Blättern ohne Wartezeit klappt
     [index + 1, index - 1].forEach(function (n) {
       var nb = openers[(n + openers.length) % openers.length];
@@ -522,7 +732,7 @@
 
   // Alle Bilder derselben Art auf der Seite bilden eine Gruppe (ohne Karussell-Kopien)
   function group(b) {
-    var sel = b.classList.contains('mq-item__open') ? '.mq-item__open' : '.steps__open';
+    var sel = b.classList.contains('mq-item__open') ? '.mq-item__open' : b.classList.contains('cert') ? '.cert' : '.steps__open';
     return Array.prototype.slice.call(document.querySelectorAll(sel)).filter(function (el) { return !el.closest('[aria-hidden="true"]'); });
   }
 
@@ -549,6 +759,7 @@
     if (e.target === box || e.target.classList.contains('lightbox__stage')) box.close();
   });
   box.addEventListener('close', function () {
+    zoom(false);
     if (opener) opener.focus({ preventScroll: true });   // Fokus zurück an das angeklickte Bild (ohne das Karussell zu verschieben)
   });
 })();
